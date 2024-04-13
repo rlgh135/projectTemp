@@ -99,7 +99,7 @@ public class InsertDummy {
 		}
 		
 		//group_user
-//		for(int i=0; i<100000; i++) {
+//		for(int i=0; i<10000; i++) {
 //			GroupUserDTO gu = new GroupUserDTO();
 //			int groupnum = (int)(Math.random() * 300 + 1);
 //			gu.setGroupnum(groupnum);
@@ -109,7 +109,7 @@ public class InsertDummy {
 //		}
 
 		//groupimg
-		for(int i=1; i<100000; i++) {
+		for(int i=1; i<10000; i++) {
 			GroupimgDTO gi = new GroupimgDTO();
 			gi.setGroupnum(i);
 			gi.setImgorgname("abc"+(i)+".jpg");
