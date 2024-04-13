@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Groupimg">
+	<insert id="insert" parameterType="groupimgdto">
+		insert into groupimg(groupnum,imgorgname,imgsysname)
+		values(#{groupnum},#{imgorgname},#{imgsysname})
+	</insert>
+	
+	<select id="getImgName" parameterType="long" resultType="groupimgdto">
+    	select * from groupimg where groupnum = #{groupnum}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+

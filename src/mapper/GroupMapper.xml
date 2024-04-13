@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Group">
+	<insert id="insert" parameterType="groupdto">
+		insert into `group`(groupaddr, groupname, groupcategory, groupmaster, groupcontents)
+		values(#{groupaddr},#{groupname},#{groupcategory},#{groupmaster},#{groupcontents})
+	</insert>
+	<select id="findGroupByNum" parameterType="long" resultType="groupdto">
+		select * from `group` where groupnum = #{groupnum}
+	</select>
+	<select id="getUserCntInGroup" parameterType="long" resultType="long">
+		select count(userid) from `group_user` where groupnum=#{groupnum}
+	</select>
+	<select id="getMainList" parameterType="string" resultType="groupdto">
+    	select g.*, top_groups.groupusercnt from `group` g 
+    	join (select gu.groupnum, count(gu.userid) groupusercnt from group_user gu 
+    	join `group` g on gu.groupnum = g.groupnum 
+    	where g.groupaddr = #{useraddrgu} 
+    	group by gu.groupnum 
+    	order by count(gu.userid) desc 
+    	limit 5) 
+    	as top_groups on g.groupnum = top_groups.groupnum
+	</select>
+	
+	<select id="getAddrHobbyGroupList" parameterType="hashmap" resultType="groupdto">
+		select g.*, top_groups.groupusercnt from `group` g 
+    	join (select gu.groupnum, count(gu.userid) groupusercnt from group_user gu 
+    	join `group` g on gu.groupnum = g.groupnum 
+    	where g.groupaddr = #{useraddrgu} and g.groupcategory = #{hobbykeyword} 
+    	group by gu.groupnum 
+    	order by count(gu.userid) desc 
+    	limit 5) 
+    	as top_groups on g.groupnum = top_groups.groupnum
+	</select>
+	
+	<select id="getHobbyGroupList" parameterType="hashmap" resultType="groupdto">
+		select g.*, top_groups.groupusercnt from `group` g 
+    	join (select gu.groupnum, count(gu.userid) groupusercnt from group_user gu 
+    	join `group` g on gu.groupnum = g.groupnum 
+    	where g.groupaddr = #{useraddrgu} and g.groupcategory = #{hobby} 
+    	group by gu.groupnum 
+    	order by count(gu.userid) desc 
+    	limit 4) 
+    	as top_groups on g.groupnum = top_groups.groupnum
+	</select>
+	
+	<select id="getGroupcnt" parameterType="hashmap" resultType="int">
+		select count(*) from `group` where groupaddr = #{useraddrgu} and groupcategory = #{hobbykeyword}	
+	</select>
+
+	<select id="getGroupcntWithKey" parameterType="hashmap" resultType="int">
+		select count(*) from `group` where groupaddr = #{useraddrgu} and groupcategory = #{hobbykeyword} 
+		and (groupname like ('%${keyword}%') or groupcontents like ('%${keyword}%'))
+	</select>
+	
+	<select id="getHobbyList" parameterType="hashmap" resultType="groupdto">
+		select * from `group` where groupaddr = #{useraddrgu} and groupcategory = #{hobbykeyword} 
+		order by groupregdate desc limit #{startRow},#{pageSize};
+	</select>
+
+	<select id="getHobbyListWithKey" parameterType="hashmap" resultType="groupdto">
+		select count(*) from `group` where groupaddr = #{useraddrgu} and groupcategory = #{hobbykeyword} 
+		and (groupname like ('%${keyword}%') or groupcontents like ('%${keyword}%'))
+		order by groupregdate desc limit #{startRow},#{pageSize};
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

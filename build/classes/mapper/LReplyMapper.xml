@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LReply">
+	<insert id="insert" parameterType="lreplydto">
+		insert into lreply (lreplycontents,userid,lpostnum)
+		values(#{lreplycontents},#{userid},#{lpostnum})
+	</insert>
+	<select id="getReplies" parameterType="long" resultType="lreplydto">
+		select * from lreply where lpostnum=#{lpostnum}
+	</select>
+	<select id="getReplyCnt" parameterType="long" resultType="int">
+		select count(*) from lreply where lpostnum=#{lpostnum}
+	</select>
+	<select id="getRecentReplyCnt" parameterType="long" resultType="int">
+		<![CDATA[
+			select count(*) from lreply where lpostnum=#{lpostnum} and timestampdiff(HOUR,lpostregdate,now())<1
+		]]>
+	</select>
+	<delete id="delete" parameterType="long">
+		delete from lreply where lreplynum=#{lreplynum}
+	</delete>
+	<update id="update" parameterType="lreplydto">
+		update lreply
+		set lreplycontents=#{lreplycontents},updatechk='o'
+		where lreplynum=#{lreplynum}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+

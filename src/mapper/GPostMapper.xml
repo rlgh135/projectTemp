@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GPost">
+	<insert id="insert" parameterType="gpostdto">
+		insert into gpost(groupnum, gposttitle, userid, gpostcontents)
+		values(#{groupnum},#{gposttitle},#{userid},#{gpostcontents})
+	</insert>
+	<select id="selectListByGroupnum" parameterType="long" resultType="gpostdto">
+		select * from gpost where groupnum = #{groupnum}
+	</select>
+	<select id="getPostCnt" parameterType="long" resultType="long">
+		select count(*) from gpost where groupnum = #{groupnum}
+	</select>
+	<select id="getPostCntWithKey" parameterType="hashmap" resultType="long">
+		select count(*) from gpost where groupnum = #{groupnum} and gpostcontents like "%${keyword}%"
+	</select>
+	<select id="getList" resultType="gpostdto" parameterType="hashmap">
+		select * from gpost where groupnum = #{groupnum}
+		order by gpostnum desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getListWithKeyword" resultType="gpostdto" parameterType="hashmap">
+		select * from gpost where groupnum = #{groupnum} and
+		gpostcontents like "%${keyword}%"
+		order by gpostnum desc limit #{startRow},#{pageSize}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
