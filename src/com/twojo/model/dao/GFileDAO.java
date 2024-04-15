@@ -31,7 +31,7 @@ public class GFileDAO {
 		return ss.insert("GFile.insert", gfdto)==1;
 	}
 
-	public void deleteFile(String systemname) {
-		ss.delete("GFile.delete", systemname);
+	public boolean deleteFile(String systemname) {
+		return ss.delete("GFile.delete", systemname)==1;
 	}
 }

@@ -204,9 +204,9 @@
 														</div>
 														<c:if test="${gpost.userid == loginUser}">
 															<div style="display:inline-block; margin-left:210px;">
-					                                        	<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm(${gpostnum})">
+					                                        	<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm(${gpost.gpostnum})">
 					                                        	<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost()">
-					                                        	<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost()">
+					                                        	<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost(${gpost.gpostnum}, ${group.groupnum});">
 					                                        </div>
 														</c:if>
 														</div>
@@ -563,8 +563,8 @@
 					    if(gpost.userid===loginUser){
                       	  newLi.innerHTML +='<div style="display:inline-block; margin-left:210px;">'+
                       	  '<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm('+gpost.gpostnum+')">'+
-                      	  '<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost('+gpost.gpostnum+')">'+
-                      	  '<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost('+gpost.gpostnum+')">'+
+                      	  '<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost('+gpost.gpostnum+', ${group.groupnum})">'+
+                      	  '<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost('+gpost.gpostnum+', ${group.groupnum})">'+
                       	  '</div>';
                         }
 					    
@@ -686,11 +686,6 @@
 <script>
     //파일부분
 	let i = 0;
-	/* function sendit(){
-		const writeForm = document.writeForm;
-		//유효성 검사
-		writeForm.submit();
-	} */
 	function upload(num){
 		$("#writefile"+num).click();
 	}
@@ -757,6 +752,13 @@
         
         console.log(modal);
         modal.classList.toggle("replyHide");
+	}
+	function deleteGPost(gpostnum, groupnum) {
+		if(confirm("정말 삭제하시겠어요?")){
+			location.href =cp+"/gpostdelete.gp?groupnum="+groupnum+"&gpostnum="+gpostnum;
+		} else {
+			return;
+		}
 	}
 </script>
 </html>

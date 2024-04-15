@@ -57,7 +57,7 @@ public class GPostDAO {
 		return ss.selectOne("GPost.getLastNum", userid);
 	}
 
-	public void deleteGPost(long gpostnum) {
-		ss.delete("GPost.deleteGPost", gpostnum);
+	public boolean deleteGPost(long gpostnum) {
+		return ss.delete("GPost.deleteGPost", gpostnum)==1;
 	}
 }

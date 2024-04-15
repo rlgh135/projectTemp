@@ -11,7 +11,7 @@
 <body class="login">
 	<h2>hi</h2>
 	<a href="/groupinner.gp?groupnum=1">그룹 포스트로 넘어가기</a>
-	<a href="${cp}/groupList.gr?userid=abc100">그룹 리스트로 넘어가기</a>
+	<a href="${cp}/groupList.gr?userid=abc1">그룹 리스트로 넘어가기</a>
 	<%-- <c:if test="${not empty cookie.joinid.value}">
 		<script>
 			alert("${cookie.joinid.value}님 가입을 환영합니다~");

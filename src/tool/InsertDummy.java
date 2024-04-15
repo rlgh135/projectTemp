@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.twojo.model.dto.GPReplyDTO;
 import com.twojo.model.dto.GPostDTO;
 import com.twojo.model.dto.GroupDTO;
+import com.twojo.model.dto.GroupUserDTO;
 import com.twojo.model.dto.GroupimgDTO;
 import com.twojo.model.dto.LPostDTO;
 import com.twojo.model.dto.UserDTO;
@@ -43,7 +44,7 @@ public class InsertDummy {
 //			System.out.println(user.getUserhobby());
 //			ss.insert("User.insert",user);
 //		}
-//		
+		
 //		//lboard
 //		for(int i=0; i<3000; i++) {
 //			LPostDTO lpost = new LPostDTO();
@@ -59,7 +60,7 @@ public class InsertDummy {
 //			ss.insert("LPost.insert", lpost);
 //		}
 //		
-//		//group
+		//group
 //		for(int i=0; i<3000; i++) {
 //			GroupDTO group = new GroupDTO();
 //			hobidx = (int)(Math.random()*10);
@@ -74,7 +75,7 @@ public class InsertDummy {
 //			ss.insert("Group.insert", group);
 //		}
 		
-		//gpost
+//		//gpost
 //		for(int i=0; i<45; i++) {
 //			GPostDTO gpost = new GPostDTO();
 //			gpost.setGroupnum(1);
@@ -85,20 +86,20 @@ public class InsertDummy {
 //			ss.insert("GPost.insert", gpost);
 //		}
 		
-		//greply
-		for(int i=0; i<45; i++) {
-			int useridx = (int)(Math.random()*5);
-			for (int j = 0; j < useridx; j++) {
-				GPReplyDTO gpreply = new GPReplyDTO();
-				gpreply.setGpostnum(i+1);
-				gpreply.setUserid("abc"+j);
-				gpreply.setGprcontents("댓글내용 j:"+j+" i:"+i);
-				
-				ss.insert("GPReply.insert", gpreply);
-			}
-		}
+//		//greply
+//		for(int i=0; i<45; i++) {
+//			int useridx = (int)(Math.random()*5);
+//			for (int j = 0; j < useridx; j++) {
+//				GPReplyDTO gpreply = new GPReplyDTO();
+//				gpreply.setGpostnum(i+1);
+//				gpreply.setUserid("abc"+j);
+//				gpreply.setGprcontents("댓글내용 j:"+j+" i:"+i);
+//				
+//				ss.insert("GPReply.insert", gpreply);
+//			}
+//		}
 		
-		//group_user
+//		//group_user
 //		for(int i=0; i<10000; i++) {
 //			GroupUserDTO gu = new GroupUserDTO();
 //			int groupnum = (int)(Math.random() * 300 + 1);

@@ -78,6 +78,13 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/gpwrite.gp : "+e);
 			}
 			break;
+		case "/gpostdelete.gp":
+			try {
+				transfer = new GPDeleteOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/gpostdelete.gp : "+e);
+			}
+			break;
 		}
 		
 		if (transfer != null) {
