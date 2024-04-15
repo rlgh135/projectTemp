@@ -112,28 +112,32 @@
 									<input type="button" value="글 쓰기" onclick="showWrite(${gpost.gpostnum})"> 
 								</div>
 							<div class="writeform" id="writeForm" style="display: none;">
-								<form id="writeform">
-									<ul>
-										<li>
-											<h3>글쓰기</h3>
-										</li>
-										<li>
-											<label for="writetit"></label>
-											<input type="text" id="writetit" placeholder="제목을 입력해주세요.">
-										</li>
-										<li>
-											<label for="writebox"></label>
-											<textarea name="글 쓰기" id="writebox" cols="30" rows="10" placeholder="새로운 소식을 남겨보세요"></textarea>
-										</li>
-										<li>
-											<label for="writefile"></label>
-											<input type="file" id="writefile">
-										</li>
-										<li>
-											<input type="button" id="writesubmit" value="제출하기">
-										</li>
-									</ul>
-								</form>
+								<form id="writeform" method="post" action="/gpwrite.gp">
+							        <ul>
+							            <li>
+							                <h3>글쓰기</h3>
+							                <input type="hidden" name="userid" value="${loginUser}">
+							            </li>
+							            <li>
+							                <label for="writetit"></label>
+							                <input type="text" name="gptitle" id="writetit" placeholder="제목을 입력해주세요.">
+							            </li>
+							            <li>
+							                <label for="writebox"></label>
+							                <textarea name="글 쓰기" name="gpcontents" id="writebox" cols="30" rows="10" placeholder="새로운 소식을 남겨보세요"></textarea>
+							            </li>
+							            <li class="uploadarea0" style="display: flex; padding-left: 10px">
+							                    <a href="javascript:upload(0)" class="cFile" style="margin-left: -10px;">파일 선택</a>
+							                    <input type="file" name="writefile0" id="writefile0" style="display:none">
+							                    <span id="writefile0name" style="margin-left: 10px;">선택된 파일 없음</span>
+							                    <a href="javascript:cancelFile(0)" class="dFile" style="margin-left: auto;">첨부 삭제</a>
+							            </li>
+							            <li>
+							                <input type="button" id="writesubmit" style="clear:both;" onclick="sendit()" value="제출하기">
+							            </li>
+							        </ul>
+							    </form>
+								
 							</div>
 						</li>
                     	<c:choose>
@@ -644,7 +648,7 @@
           }
         });
 
-    	//글쓰기 폼 나오는 기능 
+    //글쓰기 폼 나오는 기능 
 
     function showWrite() {
         var writeForm = document.getElementById("writeForm");
@@ -654,12 +658,71 @@
             writeForm.style.display = "none"; // 감춤
         }
     }
-    	
-    $('textarea').each(function () {
-    	this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    	}).on('input', function () {
-    	this.style.height = 'auto';
-    	this.style.height = (this.scrollHeight) + 'px';
-    });
+    
+    //파일부분
+	let i = 0;
+	function sendit(){
+		const writeForm = document.writeForm;
+		//유효성 검사
+		writeForm.submit();
+	}
+	function upload(num){
+		$("#writefile"+num).click();
+	}
+	$("[type=file]").change(function(e){
+		const fileTag = e.target;
+		console.log(fileTag);
+		const file = fileTag.files[0];
+		console.log(file);
+		
+		if(file == undefined){
+			cancelFile(fileTag.id.split("e").pop());
+		}
+		else{
+			console.log(fileTag.id);
+			$("#"+fileTag.id+"name").text(file.name);
+			
+			//마지막파일
+			if(fileTag.id == "writefile"+i){
+				const cloneElement = $(".uploadarea"+i).clone(true);
+				i++;
+				cloneElement.attr("class","uploadarea"+i);
+				
+				cloneElement.find("input[type='file']").attr("name","writefile"+i);
+				cloneElement.find("input[type='file']").attr("id","writefile0"+i);
+				cloneElement.find("input[type='file']").val("");
+				
+				cloneElement.find("span").attr("id","writefile"+i+"name");
+				cloneElement.find("span").text("선택된 파일 없음");
+				
+				cloneElement.find("a")[0].href = "javascript:upload("+i+")";
+				cloneElement.find("a")[1].href = "javascript:cancelFile("+i+")";
+				
+				$(".uploadarea"+(i-1)).after(cloneElement);
+			}
+		}
+	})
+	function cancelFile(num){
+		num = Number(num);
+		
+		//가장 마지막 [첨부 삭제] 버튼을 누른 경우
+		if(num == i){ return; }
+		$(".uploadarea"+num).remove();
+		for(let j=num+1;j<=i;j++){
+			console.log(j);
+			const el = $("#writeform ul .uploadarea"+j);
+			el.attr("class","uploadarea"+(j-1));
+			
+			el.find("input[type=file]").attr("name","writefile"+(j-1));
+			el.find("input[type=file]").attr("id","writefile"+(j-1));
+			
+			el.find("span").attr("id","writefile"+(j-1)+"name");
+			
+			el.find("a")[0].href = "javascript:upload("+(j-1)+")";
+			el.find("a")[1].href = "javascript:cancelFile("+(j-1)+")";
+		}
+		i--;
+	}
+    
 </script>
 </html>
