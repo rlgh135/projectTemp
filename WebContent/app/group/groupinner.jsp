@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${cp}/css/groupinnerstyle.css" id="basic" rel="stylesheet">
+<link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
 <style>
+
 	.replyHide{
 	display: none;
 	}
@@ -140,16 +141,34 @@
 						</div>
 					</div>
                     <ul class="gpostList" id="gpList">
-                    	
                     	<c:choose>
                     		<c:when test="${list != null and list.size()>0}">
                     			<c:forEach var="i" begin="0" end="${list.size() -1}">
                     				<c:set var="gpost" value="${list[i]}"/>
                     					<li class="gpostListwrap">
 				                            <div class="gpostHead default-group-Head">
-				                                <div class="badgeimg">
-				                                    <input type="button" value="버튼" id="profilebtn" onclick="showprofile(true)">
-				                                </div>
+				                            	<button class="badgeimg modalOpenBtn" id="modalOpenBtn${gpost.gpostnum}" onclick="modalClk(${gpost.gpostnum})">★</button>
+			                                    <div id="modalContainer${gpost.gpostnum}" class="modalContainer replyHide">
+				                                    <div id="modalContent${gpost.gpostnum}" class="modalContent">
+					                                    <div id="modalinner${gpost.gpostnum}" class="modalinner" style="width: 177px;">
+						                                    <button id="modalCloseBtn${gpost.gpostnum}" class="modalCloseBtn" onclick="">
+						                                    	<img src="../../image/x.webp" style="width: 10px; height: 10px; border: none;">
+						                                    </button>
+						                                    <div class="imgid">
+							                                    <div class="mbadgeimg">
+							                                    	<img src="" alt="">
+							                                    </div>
+							                                    <p id="gpostuserid">${gpost.userid}</p>
+						                                    </div>
+						                                    <div><p>${user.userhobby}</p></div>
+						                                    <div><p>${user.gender}</p></div>
+						                                    <div><p>${user.userpoint}</p></div>
+						                                    <div><p>쪽지보내기</p></div>
+						                                    <div><p>작성글보기</p></div>
+					                                    </div>
+				                                    </div>
+			                                    </div>
+					                                
 				                                <div class="writerinfo badgeimg-right-info">
 				                                    <p>
 				                                        <a href="" class="usernamelink">${gpost.userid}</a>
@@ -158,18 +177,7 @@
 				                                    <p class="regtime">${gpost.gpostregdate}</p>
 				                                </div>
 				                            </div>
-				                            <div class="profile_wrap">
-												<div class="profile_container" id="profile_container" style="display: none;">
-													<div class="design1"></div>
-													<!-- <img src="" id="profileimg"> -->
-													<button type="button"><img src="../../images/x.webp" style="width: 15px; height: 15px;" alt="나가기" id="quitimg" onclick="quitprofile(true)"></button>
-													<p>내가보이니?</p>
-													<p>${user.userid}</p>
-													<p>${user.userhobby}</p>
-													<p>${user.gender}</p>
-													<p>${user.userpoint}</p>
-												</div>
-											</div>
+				                           
 				                            <div class="gpostContents">
 				                                <div>
 				                                    <p>
@@ -492,52 +500,66 @@
 					    newLi.className = 'gpostListwrap';
 					    
 					    newLi.innerHTML = '<div class="gpostHead default-group-Head">' +
-					    '<div class="badgeimg">' +
-					    '<input type="button" value="버튼" id="profilebtn" onclick="showprofile(true)">' +
-					    '</div>' +
-					    '<div class="writerinfo badgeimg-right-info">' +
-					    '<p>' +
-					    '<a href="" class="usernamelink">' + gpost.userid + '</a>' +
-					    '<span>이런사람이에요</span>' +
-					    '</p>' +
-					    '<p class="regtime">' + gpost.gpostregdate + '</p>' +
-					    '</div>' +
-					    '</div>' +
-					    '<div class="profile_wrap">' +
-					    '<div class="profile_container" id="profile_container" style="display: none;">' +
-					    '<div class="design1"></div>' +
-					    '<button type="button"><img src="../../images/x.webp" style="width: 15px; height: 15px;" alt="나가기" id="quitimg" onclick="quitprofile(true)"></button>' +
-					    '<p>내가보이니?</p>' +
-					    '<p>user.user.userid' + + '</p>' +
-					    '<p>user.user.userhobby' + + '</p>' +
-					    '<p>user.user.userid' + + '</p>' +
-					    '<p>user.user.userpoint' + + '</p>' +
-					    '</div>' +
-					    '</div>' +
-					    '<div class="gpostContents">' +
-					    '<div>' +
-					    '<p>' +
-					    '<textarea class="GPCIN gpostConetentsIn' + gpost.gpostcontents + '" style="width: 100%; height: 100%">' +
-					    gpost.gpostcontents +
-					    '</textarea>' +
-					    '</p>' +
-					    '<div>' +
-					    '<input type="button" value="첨부파일" onclick="showFiles(' + gpost.gpostnum + ')">' +
-					    '</div>' +
-					    '<div class="gpostfile' + gpost.gpostnum + ' replyHide">' +
-					    '<ul class="gfileList' + gpost.gpostnum + '"></ul>' +
-					    '</div>' +
-					    '<div class="likereply">' +
-					    '<img id="likeButton" class="like-button" src="' + cp + '/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
-					    '<div class="point-area showreplyBtn">' +
-					    '<div style="display: inline-block;">' +
-					    '<input type="button" value="좋아요 i개">' +
-					    '</div>' +
-					    '<div style="display: inline-block;">' +
-					    '<input type="button" value="댓글  i개" onclick="showReply('+gpost.gpostnum+')" ' +
-					    'style="cursor: pointer;">' +
-					    '</div>';
-					    
+                        '<button class="badgeimg modalOpenBtn" id="modalOpenBtn'+gpost.gpostnum+'" onclick="modalClk('+gpost.gpostnum+')">★</button>' +
+                        '<div id="modalContainer'+gpost.gpostnum+'" class="modalContainer replyHide">' +
+                        '<div id="modalContent'+gpost.gpostnum+'" class="modalContent">' +
+                        '<div id="modalinner'+gpost.gpostnum+'" class="modalinner" style="width: 177px;">' +
+                        '<button id="modalCloseBtn'+gpost.gpostnum+'" class="modalCloseBtn" onclick="">' +
+                        '<img src="../../image/x.webp" style="width: 10px; height: 10px; border: none;">' +
+                        '</button>' +
+                        '<div class="imgid">' +
+                        '<div class="mbadgeimg">' +
+                        '<img src="" alt="">' +
+                        '</div>' +
+                        '<p id="gpostuserid">'+gpost.userid+'</p>' +
+                        '</div>' +
+                        '<div><p>${user.userhobby}</p></div>' +
+                        '<div><p>${user.gender}</p></div>' +
+                        '<div><p>${user.userpoint}</p></div>' +
+                        '<div><p><a>쪽지보내기</a></p></div>' +
+                        '<div><p><a>작성글보기</a></p></div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="writerinfo badgeimg-right-info">' +
+                        '<p>' +
+                        '<a href="" class="usernamelink">'+gpost.userid+'</a>' +
+                        '<span>이런사람이에요</span>' +
+                        '</p>' +
+                        '<p class="regtime">'+gpost.gpostregdate+'</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="gpostContents">' +
+                        '<div>' +
+                        '<p>' +
+                        '<textarea class="GPCIN gpostConetentsIn'+gpost.gpostnum+'" style="width: 100%; height: 100%">' +gpost.gpostcontents+
+                        '</textarea>' +
+                        '</p>' +
+                        '<div>' +
+                        '<input type="button" value="첨부파일" onclick="showFiles('+gpost.gpostnum+')">' +
+                        '</div>' +
+                        '<div class="gpostfile'+gpost.gpostnum+' replyHide">' +
+                        '<ul class="gfileList'+gpost.gpostnum+'"></ul>' +
+                        '</div>' +
+                        '<div class="likereply">' +
+                        '<img id="likeButton" class="like-button" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
+                        '<div class="point-area showreplyBtn">' +
+                        '<div style="display: inline-block;">' +
+                        '<input type="button" value="좋아요 i개">' +
+                        '</div>' +
+                        '<div style="display: inline-block;">' +
+                        '<input type="button" value="댓글  ${reply_cnt_list[i]}개" onclick="showReply('+gpost.gpostnum+')" style="cursor: pointer;">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="gpostReply'+gpost.gpostnum+' replyHide">' +
+                        '<div class="inputGPR reply'+gpost.gpostnum+' replyHide">' +
+                        '</div>' +
+                        '<ul class="greplyList'+gpost.gpostnum+'"></ul>' +
+                        '</div>';
+					    console.log(gpost.gpostcontents);
 					    if(gpost.userid===loginUser){
                       	  newLi.innerHTML +='<div style="display:inline-block; margin-left:210px;">'+
                       	  '<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm('+gpost.gpostnum+')">'+
@@ -727,5 +749,14 @@
 		i--;
 	}
     
+	function modalClk(gpostnum){
+		const modalOpenBtn = document.getElementById('modalOpenBtn'+gpostnum);
+		const modalCloseBtn = document.getElementById('modalCloseBtn'+gpostnum);
+		const modal = document.getElementById('modalContainer'+gpostnum);
+		const modalContent = document.getElementById('modalContent'+gpostnum);
+        
+        console.log(modal);
+        modal.classList.toggle("replyHide");
+	}
 </script>
 </html>
