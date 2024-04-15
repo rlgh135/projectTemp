@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
+<link href="${cp}/css/groupinnerstyle.css" id="basic" rel="stylesheet">
 <style>
 	.replyHide{
 	display: none;
@@ -24,12 +24,29 @@
     .gpostContents > div > p{
     	min-height: 80px;
     }
+    button{
+    	cursor: pointer;
+    }
+    .GPCIN{
+    	border: none; 
+    	background: transparent;
+    	overflow: hidden;
+    	resize: none;
+    	min-height: 132px;
+    	min-width: 470px;
+    }
+    .GPCIN:focus{
+    	outline: none;
+    }
+  
 </style>
 </head>
 <body>
-<!-- 세션검사 
-<c.set var="loginUser" value="${session.loginUser}"/>
--->
+<!-- 
+ -->
+	<c:if test="${empty loginUser}">
+		<c:set var="loginUser" value="${null}"/>
+	</c:if>
 	<c:set var="page" value="${pararm.page}"/>
 	<c:choose>
 		<c:when test="${empty page or param.page <= 0}">
@@ -151,7 +168,9 @@
 				                            <div class="gpostContents">
 				                                <div>
 				                                    <p>
+				                                    	<textarea class="GPCIN gpostConetentsIn${gpost.gpostcontents}" style="width: 100%; height: 100%">
 				                                    	${gpost.gpostcontents}
+				                                    	</textarea>
 				                                    </p>
 				                                    <div>
 				                                    	<input type="button" value="첨부파일" onclick="showFiles(${gpost.gpostnum})">
@@ -163,30 +182,26 @@
 														<img id="likeButton" class="like-button" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">
 														<div class="point-area showreplyBtn">
 														<div style="display: inline-block;">
-															<input type="button" value="좋아요 3개">
+															<input type="button" value="좋아요 i개">
 														</div>
 														<div style="display: inline-block;">
 															<input type="button" value="댓글  ${reply_cnt_list[i]}개"
 																onclick="showReply(${gpost.gpostnum})"
 																style="cursor: pointer;">
 														</div>
-														<!-- 여기로 수정/삭제 
-				                                        <c:if test="${loginUser == gpost.userid}">
-					                                        <div style="display:inline-block; margin-left:210px;">
-					                                        	<input type="button" class="replyHide" value="수정" style="width:70px; text-align:right;" onclick="showUpdateForm(${gpostnum})">
-					                                        	<input type="button"  value="수정완료" style="width:70px; text-align:right;" onclick="updateGPost()">
-					                                        	<input type="button" value="삭제" style="width:50px; text-align:right;" onclick="deleteGPost()">
+														<c:if test="${gpost.userid == loginUser}">
+															<div style="display:inline-block; margin-left:210px;">
+					                                        	<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm(${gpostnum})">
+					                                        	<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost()">
+					                                        	<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost()">
 					                                        </div>
-				                                        </c:if>
-				                                        -->
+														</c:if>
 														</div>
 													</div>
 				                                </div>
 				                            </div>
 				                            <div class="gpostReply${gpost.gpostnum} replyHide">
-				                            	<div class="inputGPR reply${gpost.gpostnum} replyHide">
-				                            		
-				                            	</div>
+				                            	<div class="inputGPR reply${gpost.gpostnum} replyHide"></div>
 				                                <ul class="greplyList${gpost.gpostnum}"></ul>
 				                            </div>
 				                        </li>
@@ -303,6 +318,7 @@
     let page = '${page}';
     let keyword = '${keyword}';
 	const groupnum = '${gpost.groupnum}';
+	const loginUser = '${loginUser}';	
 </script>
 <script>
     let lastScroll = 0;
@@ -469,68 +485,73 @@
 					for(let gpost of datas){
 						let newLi = document.createElement('li');
 					    newLi.className = 'gpostListwrap';
-
+					    
 					    newLi.innerHTML = '<div class="gpostHead default-group-Head">' +
-					                          '<div class="badgeimg">' +
-					                              '<img src="">' +
-					                          '</div>' +
-					                          '<div class="writerinfo badgeimg-right-info">' +
-					                              '<p>' +
-					                                  '<a href="" class="usernamelink">'+gpost.userid+'</a>' +
-					                                  '<span>이런사람이에요</span>' +
-					                              '</p>' +
-					                              '<p class="regtime">'+gpost.gpostregdate+'</p>' +
-					                          '</div>' +
-					                      '</div>' +
-					                      '<div class="gpostContents">' +
-					                          '<div>' +
-					                              '<p>' +
-					                              gpost.gpostcontents+
-					                              '</p>' +
-					                              '<div>'+
-			                                    	'<input type="button" value="첨부파일" onclick="showFiles('+gpost.gpostnum+')">'+
-			                                    '</div>'+
-							                    '<div class="gpostfile'+gpost.gpostnum+' replyHide">'+
-							                    	'<ul class="gfileList'+gpost.gpostnum+'"></ul>'+
-							                    '</div>'+
-					                              '<div>' +
-					                                  '<input type="button" value="굿">' +
-					                                  '<input type="button" value="배드">' +
-					                              '</div>' +
-					                              '<div class="point-area showreplyBtn">' +
-					                                  '<div style="display: inline-block;">' +
-					                                      '<input type="button" value="좋아요 3개">' +
-					                                  '</div>' +
-					                                  '<div style="display: inline-block;">' +
-					                                      '<input type="button" value="댓글  +'${reply_cnt_list[i]}+'개" onclick="showReply('+gpost.gpostnum+')" style="cursor: pointer;">' +
-					                                  '</div>' +
-					                              '</div>' +
-					                          '</div>' +
-					                      '</div>' +
-					                      '<div class="gpostReply'+gpost.gpostnum+' replyHide">' +
-					                          '<div class="inputGPR reply'+gpost.gpostnum+' replyHide">' +
-					                          '</div>' +
-					                          '<ul class="greplyList">' +
-					                              '<li class="greplyListwrap default-group-Head">' +
-					                                  '<div class="badgeimg">' +
-					                                      '<img src="">' +
-					                                  '</div>' +
-					                                  '<div class="badgeimg-right-info">' +
-					                                      '<p class="replywriter">' +
-					                                          '블루' +
-					                                      '</p>' +
-					                                      '<p class="replycontents">' +
-					                                          '댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용<br>댓글내용<br>댓글내용<br>' +
-					                                      '</p>' +
-					                                      '<p class="gprregdate">2시간전</p>' +
-					                                  '</div>' +
-					                              '</li>' +
-					                          '</ul>' +
-					                      '</div>';
+					    '<div class="badgeimg">' +
+					    '<input type="button" value="버튼" id="profilebtn" onclick="showprofile(true)">' +
+					    '</div>' +
+					    '<div class="writerinfo badgeimg-right-info">' +
+					    '<p>' +
+					    '<a href="" class="usernamelink">' + gpost.userid + '</a>' +
+					    '<span>이런사람이에요</span>' +
+					    '</p>' +
+					    '<p class="regtime">' + gpost.gpostregdate + '</p>' +
+					    '</div>' +
+					    '</div>' +
+					    '<div class="profile_wrap">' +
+					    '<div class="profile_container" id="profile_container" style="display: none;">' +
+					    '<div class="design1"></div>' +
+					    '<button type="button"><img src="../../images/x.webp" style="width: 15px; height: 15px;" alt="나가기" id="quitimg" onclick="quitprofile(true)"></button>' +
+					    '<p>내가보이니?</p>' +
+					    '<p>user.user.userid' + + '</p>' +
+					    '<p>user.user.userhobby' + + '</p>' +
+					    '<p>user.user.userid' + + '</p>' +
+					    '<p>user.user.userpoint' + + '</p>' +
+					    '</div>' +
+					    '</div>' +
+					    '<div class="gpostContents">' +
+					    '<div>' +
+					    '<p>' +
+					    '<textarea class="GPCIN gpostConetentsIn' + gpost.gpostcontents + '" style="width: 100%; height: 100%">' +
+					    gpost.gpostcontents +
+					    '</textarea>' +
+					    '</p>' +
+					    '<div>' +
+					    '<input type="button" value="첨부파일" onclick="showFiles(' + gpost.gpostnum + ')">' +
+					    '</div>' +
+					    '<div class="gpostfile' + gpost.gpostnum + ' replyHide">' +
+					    '<ul class="gfileList' + gpost.gpostnum + '"></ul>' +
+					    '</div>' +
+					    '<div class="likereply">' +
+					    '<img id="likeButton" class="like-button" src="' + cp + '/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
+					    '<div class="point-area showreplyBtn">' +
+					    '<div style="display: inline-block;">' +
+					    '<input type="button" value="좋아요 i개">' +
+					    '</div>' +
+					    '<div style="display: inline-block;">' +
+					    '<input type="button" value="댓글  i개" onclick="showReply('+gpost.gpostnum+')" ' +
+					    'style="cursor: pointer;">' +
+					    '</div>';
+					    
+					    if(gpost.userid===loginUser){
+                      	  newLi.innerHTML +='<div style="display:inline-block; margin-left:210px;">'+
+                      	  '<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm('+gpost.gpostnum+')">'+
+                      	  '<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost('+gpost.gpostnum+')">'+
+                      	  '<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost('+gpost.gpostnum+')">'+
+                      	  '</div>';
+                        }
+					    
+					    newLi.innerHTML += '</div>' +
+					    '</div>' +
+					    '</div>' +
+					    '</div>' +
+					    '<div class="gpostReply' + gpost.gpostnum + ' replyHide">' +
+					    '<div class="inputGPR reply' + gpost.gpostnum + ' replyHide">' +
+					    '</div>' +
+					    '<ul class="greplyList' + gpost.gpostnum + '"></ul>';
 
 						parentnode.appendChild(newLi);
 					}
-					
 				}
 			}
 		}
@@ -633,5 +654,12 @@
             writeForm.style.display = "none"; // 감춤
         }
     }
+    	
+    $('textarea').each(function () {
+    	this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+    	}).on('input', function () {
+    	this.style.height = 'auto';
+    	this.style.height = (this.scrollHeight) + 'px';
+    });
 </script>
 </html>
