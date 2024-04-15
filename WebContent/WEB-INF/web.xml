@@ -41,4 +41,12 @@
   	<servlet-name>GPostFrontController</servlet-name>
   	<url-pattern>*.gp</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>ReplyFrontController</servlet-name>
+  	<servlet-class>com.twojo.app.reply.ReplyFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ReplyFrontController</servlet-name>
+  	<url-pattern>*.rp</url-pattern>
+  </servlet-mapping>
 </web-app>

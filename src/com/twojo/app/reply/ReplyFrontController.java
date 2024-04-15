@@ -31,10 +31,10 @@ public class ReplyFrontController extends HttpServlet {
 	}
 	
 	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//길 나누는 코드
 		String requestURI = req.getRequestURI();// ???/userjoin.us
 		String contextPath = req.getContextPath(); // ???
 		String command = requestURI.substring(contextPath.length());
+		System.out.println("컨트롤러 들어옴");
 		
 		System.out.println(command);
 
@@ -48,14 +48,15 @@ public class ReplyFrontController extends HttpServlet {
 				System.out.println("/replywrite.rp : "+e);
 			}
 			break;
-//		case "/replydelete.rp":
-//			try {
-//				new ReplyDeleteOkAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println("/replydelete.rp : "+e);
-//			}
-//			break;
-		case "/replyupdate.rp":
+		case "/replydelete.rp":
+			try {
+				System.out.println("/replydelete.rp: " + command);
+				new ReplyDeleteOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/replydelete.rp : "+e);
+			}
+			break;
+		case "/lreplyupdate.rp":
 			try {
 				new ReplyUpdateOkAction().execute(req,resp);
 			} catch (Exception e) {

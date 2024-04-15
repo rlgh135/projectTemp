@@ -45,11 +45,11 @@ public class LReplyDTO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public long getBoardnum() {
+	public long getLpostnum() {
 		return lpostnum;
 	}
-	public void setBoardnum(long boardnum) {
-		this.lpostnum = boardnum;
+	public void setLpostnum(long lpostnum) {
+		this.lpostnum = lpostnum;
 	}
 	
 	

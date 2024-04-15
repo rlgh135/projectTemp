@@ -15,16 +15,18 @@ public class ReplyUpdateOkAction implements Action{
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String i = req.getParameter("i");
 		System.out.println(i);
-		System.out.println(req.getParameter("replynum"));
-		long lreplynum = Long.parseLong(req.getParameter("replynum"));
-//		long boardnum = Long.parseLong(req.getParameter("boardnum"));
+		System.out.println(req.getParameter("lreplynum"));
+		long lreplynum = Long.parseLong(req.getParameter("lreplynum"));
+		long boardnum = Long.parseLong(req.getParameter("boardnum"));
 		String keyword = req.getParameter("keyword");
 		String page = req.getParameter("page");
 		
+		System.out.println(req.getParameter("lreply"));
 		String lreplycontents = req.getParameter("lreply"+i);
 		
 		LReplyDTO lreply = new LReplyDTO();
 		lreply.setLreplycontents(lreplycontents);
+		System.out.println(lreplycontents);
 		lreply.setLreplynum(lreplynum);
 		
 		LReplyDAO rdao = new LReplyDAO();
@@ -40,8 +42,8 @@ public class ReplyUpdateOkAction implements Action{
 			out.print("alert('댓글 수정 실패!');");
 		}
 		//location.replace('/boardview.bo?boardnum=1&keyword=지우개&page=1')
-		String format = String.format("location.replace('%s/boardview.bo?lreplynum=%s&keyword=%s&page=%s')",
-				req.getContextPath(),lreplynum+"",keyword,page);
+		String format = String.format("location.replace('%s/boardview.bo?lpostnum=%s&keyword=%s&page=%s')",
+				req.getContextPath(),boardnum+"",keyword,page);
 		out.print(format);
 		out.print("</script>");
 		return null;

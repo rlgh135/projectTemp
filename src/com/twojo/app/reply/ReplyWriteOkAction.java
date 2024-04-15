@@ -21,14 +21,11 @@ public class ReplyWriteOkAction implements Action{
 		String keyword = req.getParameter("keyword");
 		
 		LReplyDTO lreply = new LReplyDTO();
-		lreply.setBoardnum(lpostnum);
+		lreply.setLpostnum(lpostnum);
 		lreply.setLreplycontents(lreplycontents);
 		lreply.setUserid(userid);
 		
 		LReplyDAO rdao = new LReplyDAO();
-//		Transfer transfer = new Transfer();
-//		transfer.setRedirect(true);
-//		transfer.setPath(req.getContextPath()+"/boardview.bo?boardnum=");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
@@ -40,7 +37,6 @@ public class ReplyWriteOkAction implements Action{
 		else {
 			out.print("alert('댓글 등록 실패!');");
 		}
-		//location.replace('/boardview.bo?boardnum=1&keyword=지우개&page=1')
 		String format = String.format("location.replace('%s/boardview.bo?lpostnum=%s&keyword=%s&page=%s')",
 				req.getContextPath(),lpostnum+"",keyword,page);
 		out.print(format);

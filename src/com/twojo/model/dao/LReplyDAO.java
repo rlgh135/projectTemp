@@ -8,7 +8,7 @@ import com.twojo.model.dto.LReplyDTO;
 import com.twojo.mybatis.SQLMapConfig;
 
 public class LReplyDAO {
-	private SqlSession ss;
+private SqlSession ss;
 	
 	public LReplyDAO() {
 		ss = SQLMapConfig.getFactory().openSession(true);
