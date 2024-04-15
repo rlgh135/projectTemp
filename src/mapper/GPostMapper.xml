@@ -25,6 +25,12 @@
 		gpostcontents like "%${keyword}%"
 		order by gpostnum desc limit #{startRow},#{pageSize}
 	</select>
+	<select id="getLastNum" parameterType="string" resultType="long">
+		select max(gpostnum) from gpost where userid=#{userid}
+	</select>
+	<delete id="deleteGPost" parameterType="long">
+		delete from gpost where gpostnum=#{gpostnum}
+	</delete>
 </mapper>
 
 

@@ -49,4 +49,15 @@ public class GPostDAO {
 		System.out.println(list.get(2).getGpostcontents());
 		return list;
 	}
+	public boolean insertGPost(GPostDTO gpost) {
+		return ss.insert("GPost.insert", gpost)==1;
+	}
+
+	public long getLastNum(String userid) {
+		return ss.selectOne("GPost.getLastNum", userid);
+	}
+
+	public void deleteGPost(long gpostnum) {
+		ss.delete("GPost.deleteGPost", gpostnum);
+	}
 }

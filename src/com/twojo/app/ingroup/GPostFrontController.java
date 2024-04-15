@@ -71,6 +71,13 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/filedownload.gp : "+e);
 			}
 			break;
+		case "/gpwrite.gp":
+			try {
+				transfer = new GPWriteOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/gpwrite.gp : "+e);
+			}
+			break;
 		}
 		
 		if (transfer != null) {

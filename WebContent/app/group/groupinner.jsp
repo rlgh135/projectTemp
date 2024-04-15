@@ -104,42 +104,43 @@
                     <div class="searchBtnBox">
                         <input type="button" value="검색" onclick="makeDOMKeyword()">
                     </div>
+                    <div class="write_btn">
+						<input type="button" value="글 쓰기" onclick="showWrite(${gpost.gpostnum})"> 
+					</div>
                 </div>
                 <div id="gpost" class="postsection">
+	                <div class="write_wrap">
+		                <div class="writeform" id="writeForm" style="display: none;">
+							<form id="writeform" method="post" action="/gpwrite.gp" enctype="multipart/form-data">
+								<ul>
+									<li>
+										<h3>글쓰기</h3>
+										<input type="hidden" name="userid" value="${loginUser}">
+										<input type="hidden" name="groupnum" value="${group.groupnum}">
+									</li>
+									<li>
+										<label for="writetit"></label>
+										<input type="text" name="gptitle" id="writetit" placeholder="제목을 입력해주세요.">
+									</li>
+									<li>
+										<label for="writebox"></label>
+										<textarea name="gpcontents" id="writebox" cols="30" rows="10" placeholder="새로운 소식을 남겨보세요"></textarea>
+									</li>
+									<li class="uploadarea0" style="display: flex; padding-left: 10px">
+										<a href="javascript:upload(0)" class="cFile" style="margin-left: -10px;">파일 선택</a>
+										<input type="file" name="writefile0" id="writefile0" style="display:none">
+										<span id="writefile0name" style="margin-left: 10px;">선택된 파일 없음</span>
+										<a href="javascript:cancelFile(0)" class="dFile" style="margin-left: auto;">첨부 삭제</a>
+									</li>
+									<li>
+										<input type="submit" id="writesubmit" value="제출하기"> 
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>
                     <ul class="gpostList" id="gpList">
-                    	<li class="write_wrap">
-								<div class="write_btn">
-									<input type="button" value="글 쓰기" onclick="showWrite(${gpost.gpostnum})"> 
-								</div>
-							<div class="writeform" id="writeForm" style="display: none;">
-								<form id="writeform" method="post" action="/gpwrite.gp">
-							        <ul>
-							            <li>
-							                <h3>글쓰기</h3>
-							                <input type="hidden" name="userid" value="${loginUser}">
-							            </li>
-							            <li>
-							                <label for="writetit"></label>
-							                <input type="text" name="gptitle" id="writetit" placeholder="제목을 입력해주세요.">
-							            </li>
-							            <li>
-							                <label for="writebox"></label>
-							                <textarea name="글 쓰기" name="gpcontents" id="writebox" cols="30" rows="10" placeholder="새로운 소식을 남겨보세요"></textarea>
-							            </li>
-							            <li class="uploadarea0" style="display: flex; padding-left: 10px">
-							                    <a href="javascript:upload(0)" class="cFile" style="margin-left: -10px;">파일 선택</a>
-							                    <input type="file" name="writefile0" id="writefile0" style="display:none">
-							                    <span id="writefile0name" style="margin-left: 10px;">선택된 파일 없음</span>
-							                    <a href="javascript:cancelFile(0)" class="dFile" style="margin-left: auto;">첨부 삭제</a>
-							            </li>
-							            <li>
-							                <input type="button" id="writesubmit" style="clear:both;" onclick="sendit()" value="제출하기">
-							            </li>
-							        </ul>
-							    </form>
-								
-							</div>
-						</li>
+                    	
                     	<c:choose>
                     		<c:when test="${list != null and list.size()>0}">
                     			<c:forEach var="i" begin="0" end="${list.size() -1}">
@@ -658,14 +659,16 @@
             writeForm.style.display = "none"; // 감춤
         }
     }
-    
+</script>
+
+<script>
     //파일부분
 	let i = 0;
-	function sendit(){
+	/* function sendit(){
 		const writeForm = document.writeForm;
 		//유효성 검사
 		writeForm.submit();
-	}
+	} */
 	function upload(num){
 		$("#writefile"+num).click();
 	}

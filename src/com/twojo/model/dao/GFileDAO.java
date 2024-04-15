@@ -26,4 +26,12 @@ public class GFileDAO {
 	public List<GFileDTO> getGFiles(long gpostnum){
 		return ss.selectList("GFile.getGFiles", gpostnum);
 	}
+
+	public boolean insertFile(GFileDTO gfdto) {
+		return ss.insert("GFile.insert", gfdto)==1;
+	}
+
+	public void deleteFile(String systemname) {
+		ss.delete("GFile.delete", systemname);
+	}
 }
