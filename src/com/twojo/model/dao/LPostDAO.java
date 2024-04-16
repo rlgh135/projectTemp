@@ -67,4 +67,7 @@ private SqlSession ss;
 		return ss.update("LPost.update",board) == 1;
 	}
 
+	public List<LPostDTO> getboardinfoList(String userid) {
+		return ss.selectList("LPost.getUserList", userid);
+	}
 }

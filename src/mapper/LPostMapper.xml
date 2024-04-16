@@ -53,6 +53,10 @@
       set readcount = readcount+1
       where lpostnum = #{lpostnum}
    </update>
+   
+   <select id="getUserList" parameterType="String" resultType="lpostdto">
+   		select * from lpost where userid = #{userid}
+   </select>
 </mapper>
 
 

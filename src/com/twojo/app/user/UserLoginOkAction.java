@@ -31,7 +31,7 @@ public class UserLoginOkAction implements Action{
 			out.print("alert('"+userid+"님 어서오세요~!');");
 			//		   location.replace('            day10       /app/board/main.jsp')
 //			out.print("location.replace('"+req.getContextPath()+"/app/board/main.jsp')");
-			out.print("location.replace('"+req.getContextPath()+"/boardlist.bo')");
+			out.print("location.replace('"+req.getContextPath()+"/myinfo.bo')");
 			out.print("</script>");
 		}
 		else {

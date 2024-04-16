@@ -8,32 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.twojo.model.dao.UserDAO;
+import com.twojo.model.dto.LPostDTO;
 import com.twojo.model.dto.MyinfoDTO;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
+import com.twojo.model.dao.LPostDAO;
 import com.twojo.model.dao.MyinfoDAO;
 
 public class MyinfoOkAction implements Action {
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		
-		String userid = req.getParameter("userid");
-		
-		MyinfoDAO mdao = new MyinfoDAO();
-		UserDAO udao = new UserDAO();
-		
-		List<Map<String, Object>> myinfo = mdao.getTitleAndLikeCountList();
-		req.setAttribute("addboard", myinfo);
-//		
-//		List<MyObject> myObjects = MyinfoDAO.getAllObjects(); // 데이터베이스에서 객체 목록을 가져옴
-//
-//		request.setAttribute("myObjects", myObjects); // JSP로 객체 목록 전달
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("myPage.jsp");
-//		dispatcher.forward(request, response);
 
-		
-		Transfer transfer = new Transfer();
-		transfer.setRedirect(false);
-		transfer.setPath("/app/user/myinfo.jsp");
-		return transfer;
+    	String userid = (String)req.getSession().getAttribute("loginUser");
+//        String lposttitle = req.getParameter("lposttitle");
+//        String lpostlikecntStr = req.getParameter("lpostlikecnt");
+        
+//        int lpostlikecnt = Integer.parseInt(lpostlikecntStr); // 수정된 부분
+        
+        LPostDAO lpdao = new LPostDAO();
+        List<LPostDTO> temp = lpdao.getboardinfoList(userid);
+        
+        req.setAttribute("lpost", temp);
+        
+        Transfer transfer = new Transfer();
+        transfer.setRedirect(false);
+        transfer.setPath("/app/user/myinfo.jsp");
+        return transfer;
 	}
 }

@@ -218,6 +218,8 @@
                     				<c:set var="gpost" value="${list[i]}"/>
                     					<li class="gpostListwrap">
 				                            <div class="gpostHead default-group-Head">
+				                            
+				                            	<%-- 프로필 펼치기 --%>
 				                            	<button class="badgeimg modalOpenBtn" id="modalOpenBtn${gpost.gpostnum}" onclick="modalClk(${gpost.gpostnum})">★</button>
 			                                    <div id="modalContainer${gpost.gpostnum}" class="modalContainer replyHide">
 				                                    <div id="modalContent${gpost.gpostnum}" class="modalContent">
@@ -235,6 +237,8 @@
 														   <div class="profilemenu"><p>${user.gender}</p></div>
 														   <div class="profilemenu"><p>${user.userpoint}</p></div> --%>
 														   <div class="profilemenu">
+													 
+													 <%--쪽지 보내기 --%>
 													 <img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
 													 <p>쪽지보내기</p>
 												  </div>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.twojo.app.board.BoardDeleteOkAction;
+import com.twojo.app.user.MyinfoOkAction;
 //import com.kh.app.board.ParticipationAction;
 import com.mysql.cj.Session;
 import com.twojo.action.Transfer;
@@ -36,6 +37,14 @@ public class BoardFrontController extends HttpServlet {
 
 		Transfer transfer = null;
 		switch(command) {
+		case "/myinfo.bo":
+			try {
+				System.out.println("try진입");
+				transfer = new MyinfoOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/myinfo.bo : "+e);
+			}
+			break;
 		case "/boardlist.bo":
 			try {
 				System.out.println("try진입");
