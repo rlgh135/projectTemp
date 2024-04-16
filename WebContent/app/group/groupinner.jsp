@@ -39,10 +39,72 @@
     .GPCIN:focus{
     	outline: none;
     }
-  
+	.sujung{
+            position:absolute;
+            display:none;
+            
+            justify-content: center;
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+            background-color: rgba(0,0,0,0.4);
+			z-index: 10;
+    }
+	.sujung_body{
+            position:absolute;
+            top:50%; 
+        
+
+            width:700px; 
+            height:600px; 
+
+            padding:40px;  
+
+            text-align: center;
+
+            background-color: rgb(255,255,255);
+            border-radius:10px;
+            box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
+
+            transform:translateY(-50%);
+			z-index: 10;
+        }
 </style>
 </head>
 <body>
+	<div class="sujung">
+        <div class="sujung_body">
+            <div style="display: flex;">
+            	<p style="margin-left: 10px;">
+					<h3>글 수정</h3>
+				</p>
+				<img src="../../images/x.webp" alt="" onclick="clkSujungCBtn()" style="width: 30px; height: 30px; margin-left: auto; cursor: pointer;">
+			</div>
+			<Form method="post" action="/modifygp.gp?groupnum=${group.groupnum}" name="sujungForm">
+				<input type="text" name="userid" value="${loginUser}" readonly>
+				<input type="hidden" name="gposttitle" value="">
+				<input type="hidden" name="gpostnum" value="">
+				<input type="hidden" name="groupnum" value="">
+				<input type="hidden" name="gpostregdate" value="">
+				<textarea name="gpostcontents" id="sujungpost" cols="30" rows="10"></textarea>
+				<ul>					
+					<li class="uploadarea10000" style="display: flex; padding-left: 10px">
+						<a href="javascript:upload(10000)" class="cFile" style="margin-left: -10px;">파일 선택</a>
+						<input type="file" name="writefile10000" id="writefile10000" style="display:none">
+						<span id="writefile10000name" style="margin-left: 10px;">선택된 파일 없음</span>
+						<a href="javascript:cancelFile(10000)" class="dFile" style="margin-left: auto;">첨부 삭제</a>
+					</li>
+				</ul>
+				<div>
+					<a href="javascript:modifyOk()">수정완료</a>
+				</div>
+			</Form>
+        </div>
+    </div>
+    <button class="btn-open-sujung" id="sujungBtn" style="display: none;">Modal열기</button>
+    <button class="btn-close-sujung" id="sujungCBtn" style="display: none;">Modal닫기</button>
 <!-- 
  -->
 	<c:if test="${empty loginUser}">
@@ -181,7 +243,7 @@
 				                            <div class="gpostContents">
 				                                <div>
 				                                    <p>
-				                                    	<textarea class="GPCIN gpostConetentsIn${gpost.gpostcontents}" style="width: 100%; height: 100%">
+				                                    	<textarea class="GPCIN gpostConetentsIn${gpost.gpostnum}" style="width: 100%; height: 100%">
 				                                    	${gpost.gpostcontents}
 				                                    	</textarea>
 				                                    </p>
@@ -192,7 +254,7 @@
 								                    	<ul class="gfileList${gpost.gpostnum}"></ul>
 								                    </div>
 								                    <div class="likereply">
-														<img id="likeButton" class="like-button" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">
+														<img id="likeButton" onclick="pressLike(${gpost.gpostnum})" class="like-button likeButton${gpost.gpostnum}" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">
 														<div class="point-area showreplyBtn">
 														<div style="display: inline-block;">
 															<input type="button" value="좋아요 i개">
@@ -204,7 +266,7 @@
 														</div>
 														<c:if test="${gpost.userid == loginUser}">
 															<div style="display:inline-block; margin-left:210px;">
-					                                        	<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm(${gpost.gpostnum})">
+																<input type="button" class="replyHide modify${gpost.gpostnum}" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm(${gpost.gpostnum}, ${group.groupnum})">															
 					                                        	<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost()">
 					                                        	<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost(${gpost.gpostnum}, ${group.groupnum});">
 					                                        </div>
@@ -214,7 +276,18 @@
 				                                </div>
 				                            </div>
 				                            <div class="gpostReply${gpost.gpostnum} replyHide">
-				                            	<div class="inputGPR reply${gpost.gpostnum} replyHide"></div>
+				                            	<div class="reply${gpost.gpostnum}">
+													<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${gpost.gpostnum}&?groupnum=${group.groupnum}" name="writeRPForm${gpost.gpostnum}">
+														<div class="badgeimg"><img src=""></div>
+														<div class="badgeimg-right-info">
+															<p class="replywriter">${loginUser}</p>
+															<textarea name="gprcontents" id="" cols="30" rows="10"></textarea>
+														</div>
+														<div>
+															<input type="submit" value="등록">
+														</div>
+													</Form>
+												</div>
 				                                <ul class="greplyList${gpost.gpostnum}"></ul>
 				                            </div>
 				                        </li>
@@ -542,7 +615,7 @@
                         '<ul class="gfileList'+gpost.gpostnum+'"></ul>' +
                         '</div>' +
                         '<div class="likereply">' +
-                        '<img id="likeButton" class="like-button" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
+                        '<img id="likeButton" onclick="pressLike('+gpost.gpostnum+')" class="like-button likeButton'+gpost.gpostnum+'" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
                         '<div class="point-area showreplyBtn">' +
                         '<div style="display: inline-block;">' +
                         '<input type="button" value="좋아요 i개">' +
@@ -553,29 +626,38 @@
                         '</div>' +
                         '</div>' +
                         '</div>' +
-                        '</div>' +
-                        '<div class="gpostReply'+gpost.gpostnum+' replyHide">' +
-                        '<div class="inputGPR reply'+gpost.gpostnum+' replyHide">' +
-                        '</div>' +
-                        '<ul class="greplyList'+gpost.gpostnum+'"></ul>' +
                         '</div>';
+                        // '<div class="gpostReply'+gpost.gpostnum+' replyHide">' +
+                        // // '<div class="inputGPR reply'+gpost.gpostnum+' replyHide">' +
+                        // // '</div>' +
+                        // '<ul class="greplyList'+gpost.gpostnum+'"></ul>' +
+                        // '</div>';
 					    console.log(gpost.gpostcontents);
 					    if(gpost.userid===loginUser){
                       	  newLi.innerHTML +='<div style="display:inline-block; margin-left:210px;">'+
-                      	  '<input type="button" class="replyHide" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm('+gpost.gpostnum+')">'+
+                      	  '<input type="button" class="replyHide modify'+gpost.gpostnum+'" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm('+gpost.gpostnum+', ${group.groupnum})">'+
                       	  '<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost('+gpost.gpostnum+', ${group.groupnum})">'+
                       	  '<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost('+gpost.gpostnum+', ${group.groupnum})">'+
                       	  '</div>';
                         }
 					    
-					    newLi.innerHTML += '</div>' +
+					    newLi.innerHTML +='</div>' +
 					    '</div>' +
 					    '</div>' +
+					    '</div>';
+						newLi.innerHTML +='<div class="gpostReply' + gpost.gpostnum + ' replyHide">' +
+					    '<div class="reply' + gpost.gpostnum + '">' +
+							'<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=' + gpost.gpostnum + '&?groupnum=${group.groupnum}" name="writeRPForm' + gpost.gpostnum + '">' +
+								'<div class="badgeimg"><img src=""></div>'+
+								'<div class="badgeimg-right-info">'+
+									'<p class="replywriter">${loginUser}</p>'+
+									'<textarea name="gprcontents" id="" cols="30" rows="10"></textarea>'+
+								'</div>'+
+								'<div><input type="submit" value="등록"></div>'+
+							'</Form>'+
 					    '</div>' +
-					    '<div class="gpostReply' + gpost.gpostnum + ' replyHide">' +
-					    '<div class="inputGPR reply' + gpost.gpostnum + ' replyHide">' +
-					    '</div>' +
-					    '<ul class="greplyList' + gpost.gpostnum + '"></ul>';
+					    '<ul class="greplyList' + gpost.gpostnum + '"></ul>' +
+					    '</div>'; 
 
 						parentnode.appendChild(newLi);
 					}
@@ -656,20 +738,22 @@
         const profileContainer = document.getElementById("profile_container");
         profileContainer.style.display = "none";
     }
-      //좋아요 기능 
+    //좋아요 기능 
 
-      const likeButton = document.getElementById("likeButton");
-        let isLiked = false;
-
-        likeButton.addEventListener("click", function() {
-          if (isLiked) {
-            likeButton.src = "${cp}./images/redheart.webp"; // 원래 이미지로 변경
-            isLiked = false;
-          } else {
-            likeButton.src = "${cp}./images/whiteheart.webp"; // 새로운 이미지로 변경
-            isLiked = true;
-          }
-        });
+	function pressLike(gpostnum){
+		const likeButton = document.getElementsByClassName("likeButton")[0];
+		let isLiked = false;
+	
+		likeButton.addEventListener("click", function() {
+			if (isLiked) {
+				likeButton.src = "${cp}./images/redheart.webp"; // 원래 이미지로 변경
+				isLiked = false;
+			} else {
+				likeButton.src = "${cp}./images/whiteheart.webp"; // 새로운 이미지로 변경
+				isLiked = true;
+			}
+		});
+	}
 
     //글쓰기 폼 나오는 기능 
 
@@ -745,10 +829,7 @@
 	}
     
 	function modalClk(gpostnum){
-		const modalOpenBtn = document.getElementById('modalOpenBtn'+gpostnum);
-		const modalCloseBtn = document.getElementById('modalCloseBtn'+gpostnum);
 		const modal = document.getElementById('modalContainer'+gpostnum);
-		const modalContent = document.getElementById('modalContent'+gpostnum);
         
         console.log(modal);
         modal.classList.toggle("replyHide");
@@ -759,6 +840,42 @@
 		} else {
 			return;
 		}
+	}
+	const sujung = document.querySelector('.sujung');
+	const btnOpensujung = document.querySelector('.btn-open-sujung');
+	const btnClosesujung = document.querySelector('.btn-close-sujung');
+
+	btnOpensujung.addEventListener("click", e=>{
+		sujung.style.display="flex";
+	});
+	btnClosesujung.addEventListener("click", e=>{
+    	sujung.style.display ="none";
+	});
+	function clkSujungBtn(){
+		btnOpensujung.click();
+	}
+	function clkSujungCBtn(){
+		btnClosesujung.click();
+	}
+	function showUpdateForm(gpostnum, groupnum) {
+		clkSujungBtn();
+		const sujungForm = document.sujungForm;
+		let today = new Date();   		
+		let year = today.getFullYear();
+		let month = today.getMonth() + 1;
+		let date = today.getDate();
+		let hours = today.getHours();
+		let minutes = today.getMinutes();
+		let seconds = today.getSeconds(); 
+		sujungForm.gpostnum.value = gpostnum
+		sujungForm.gpostregdate.value =  year+'-'+month+'-'+date+' '+hours+':'+minutes+':'+ seconds; 
+		sujungForm.gpostcontents.textContent = document.getElementsByClassName("gpostConetentsIn"+gpostnum)[0].textContent;
+	}
+</script>
+<script>
+	function modifyOk() {
+		const sujung = document.sujungForm;
+		sujung.submit();
 	}
 </script>
 </html>
