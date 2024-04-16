@@ -72,6 +72,7 @@ CREATE TABLE `group` (
   `grouplikecnt` int default 0
 );
 select count(*) from `group`;
+select * from `group` where groupnum=1;
 create table board_user(
 	boardnum bigint,
     userid varchar(300)

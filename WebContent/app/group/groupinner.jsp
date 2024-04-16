@@ -128,7 +128,7 @@
         <div class="group-inner contents" id="group_inner_container">
             <div id="groupinfobox" class="infobox">
                 <div class="groupimg imgbox">
-                    <img>
+                    <img src="../../file/groupimg/abcd25.jpg" style="background-size: cover; width: 100%; height: auto;">
                 </div>
                 <div class="groupinfobox-inner">
                     <p id="groupname">${group.groupname}</p>
@@ -136,6 +136,15 @@
                         <span class="gmem">멤버: ${usercnt}</span>
                         <span class="glead">리더: ${group.groupmaster}</span>
                     </p>
+					<p>${group.groupcontents}</p>
+					<ul class="grouptaglist">
+						<li class="groupaddrinfo circle-list-btn">
+							 <a href="#">${group.groupaddr}</a>
+						</li>
+						<li class="groupcategoryinfo circle-list-btn">
+							 <a href="">${group.groupcategory}</a>
+						</li> 
+					 </ul>
                     <div>
                         <div class="group-btn-box btnBox">
                                 <input type="button" value="모임 가입하기">
@@ -260,7 +269,7 @@
 															<input type="button" value="좋아요 i개">
 														</div>
 														<div style="display: inline-block;">
-															<input type="button" value="댓글  ${reply_cnt_list[i]}개"
+															<input type="button" class="showrpcnt${gpost.gpostnum}" value=""
 																onclick="showReply(${gpost.gpostnum})"
 																style="cursor: pointer;">
 														</div>
@@ -500,6 +509,7 @@
     	if(rpage>1){
     		curPage = rpage;
     	}
+		const showcntnode = document.getEl
 	    const parentRnode = document.getElementsByClassName("greplyList"+gpostnum)[0];
 	    const xhr = new XMLHttpRequest();
 	    	
@@ -511,7 +521,8 @@
 	    			const datas = obj.datas;
 	    			console.log(datas);
 	    			console.log(datas.length);
-	    				
+	    			let repcnt = 0;
+
 	    			if(datas.length===0){
 	    				if(curPage>1){
 	    					return;
@@ -618,20 +629,16 @@
                         '<img id="likeButton" onclick="pressLike('+gpost.gpostnum+')" class="like-button likeButton'+gpost.gpostnum+'" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
                         '<div class="point-area showreplyBtn">' +
                         '<div style="display: inline-block;">' +
-                        '<input type="button" value="좋아요 i개">' +
+                        '<input type="button" class="showlikecnt'+gpost.gpostnum+'" value="" onclick="pressLike('+gpost.gpostnum+')">' +
                         '</div>' +
                         '<div style="display: inline-block;">' +
-                        '<input type="button" value="댓글  ${reply_cnt_list[i]}개" onclick="showReply('+gpost.gpostnum+')" style="cursor: pointer;">' +
+                        '<input type="button" class="showrpcnt'+gpost.gpostnum+'" value="" onclick="showReply('+gpost.gpostnum+')" style="cursor: pointer;">' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>';
-                        // '<div class="gpostReply'+gpost.gpostnum+' replyHide">' +
-                        // // '<div class="inputGPR reply'+gpost.gpostnum+' replyHide">' +
-                        // // '</div>' +
-                        // '<ul class="greplyList'+gpost.gpostnum+'"></ul>' +
-                        // '</div>';
+                        
 					    console.log(gpost.gpostcontents);
 					    if(gpost.userid===loginUser){
                       	  newLi.innerHTML +='<div style="display:inline-block; margin-left:210px;">'+

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 *{
-    background-color: white;
+    /* background-color: #ECEEEF; */
     margin: 0; padding: 0;
     box-sizing: border-box;
     /* background-color: rgba(0, 0, 0, 0.01); */
@@ -19,6 +19,7 @@ textarea{font-style: normal; border: none; resize: none;}
 #group_inner_wrap{
     min-width: 1300px;
     background-color: white
+    
 }
 #group_inner_contents{
     margin: 0 auto;
@@ -42,6 +43,7 @@ textarea{font-style: normal; border: none; resize: none;}
 .summary{
     margin-top: -10px;
     background-color: white;
+    border: 1px solid #ccc;
 }
 #group_inner_container {
     display: flex;
@@ -68,18 +70,19 @@ textarea{font-style: normal; border: none; resize: none;}
     background-color: white;
 }
 .gpostListwrap{
-    margin-top: 10px;
+    margin-top: 30px;
     border: 1px solid #ccc;
     position: relative;
+    border-radius: 10px;
 }
 .gpostListwrap:first-child{
     margin-top: 0px;
 }
 .gpostContents > div {
-    padding: 0px 22px 17px;
+    padding: 19px 23px 4px;
 }
 .default-group-Head {
-    padding: 17px 22px 17px;
+    padding: 18px 23px 4px;
     display: flex;
 }
 .badgeimg-right-info{
@@ -108,57 +111,116 @@ textarea{font-style: normal; border: none; resize: none;}
     align-items: center;
     position: absolute;
   }
-  .modalContainer *{
-  	border: 1px solid red;
-  }
   
-  .modalContent {
-    position: absolute; 
-    /*background-color: #ffffff; */
+  /* .modalContent {
+    position: absolute;
+   
     width: 200px;
-    height: 300px;
-    padding: 15px;
+    height: 266px;
+    padding: 14px 10px 14px 10px;
     left: 50px;
-    bottom: -157px;
-    border: 1px solid black;
+    bottom: -266px;
     z-index: 20;
     border-radius: 10px;
-    align-items: center;  
+    align-items: center; 
+    background-image: url(../images/strongyellowmarble.jpg);
+} */
+  .modalContent {
+    position: absolute;
+   
+    width: 200px;
+    height: 266px;
+    padding: 14px 10px 14px 10px;
+    left: 50px;
+    bottom: -266px;
+    border: 2px solid #ECEEEF;
+    z-index: 20;
+    border-radius: 10px;
+    align-items: center; 
+    background-color: #ffffff;
 }
-  .modalinner {
-    width: 180px;
-    height: 280px;
-    border: 1px solid deeppink;
-    z-index: 25;
+/* .modalinner {
+    width: 164px;
+    height: 235px;
+    border: 1px solid #ffffff;
+   
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+  } */
+.modalinner {
+    width: 164px;
+    height: 235px;
+    border: 1px solid #ffffff;
+   
+    border-radius: 10px;
+    background-color:#ffffff;
+    padding: 10px;
   }
   
   .modalContainer.hidden {
     display: none;
   }
-  .modalContent > div {
+  /* .modalContent > div {
   width: 150px;
   border: 1px solid deeppink;
   border-radius: 10px;
   z-index:20;
-  }
+  } */
 .imgid{
     display: flex;
     position: relative;
+    background: transparent;
+    border-radius: 50px;
+    border: .5px solid rgba(255, 255, 255);
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 0 4px 25px 0 rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+    text-align: right;
+    background-image: url(../images/yellowmarble.jpg);
+    background-size: cover;
+}
+
+
+    .profilemenu {
+        box-shadow: 0 4px 25px 0 rgba(0,0,0,.05);
+        color: black;
+        z-index: 2;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 56px;
+        border: .5px solid rgba(255, 255, 255);
+        box-shadow: 0 4px 25px 0 rgba(0,0,0,0.05);
+        margin-bottom: 5px;
+        background-color: #dfe1e2;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    .profilemenu img {
+      margin-right: 10px;
+    }
+
+.profilemenu div p{
+    background: transparent;
+    z-index: 2;
 }
 #gpostuserid{
     font-size: 20px;
     font-weight: bold;
-    color: rgb(238, 206, 63);
+    color: white;
     position: absolute;
     top: 10px;
     left: 60px;
+    background: transparent;
  }
  .mbadgeimg{
     width: 50px;
     height: 50px;   
     border: 1px dotted black;
     border-radius: 50%;
-    margin-right: 20px;
+    margin-right: 30px;
  }
 
 #grouprightsection{
@@ -204,6 +266,7 @@ text-align: center;
 background-color: rgb(238, 206, 63);
 font-weight: bold;
 padding: 3px;
+color: white;
 } 
 
 /*지역 그룹 소개 박스 */
@@ -211,6 +274,7 @@ padding: 3px;
 .summary{
     padding: 5px;
     background-color: white;
+    border-radius: 10px;
 }
 .summarytitle{
     border-bottom: 2px solid white;
@@ -240,7 +304,7 @@ padding: 3px;
 }
 .gpostHead{
     /* border: 1px solid blue; */
-    height: 65px;
+    height: 77px;
 
 }
 .usernamelink {
@@ -260,7 +324,7 @@ padding: 3px;
     height: 500px;
     position: absolute;
     z-index: 999;
-	border-radius: 20px;
+   border-radius: 20px;
     position: relative;
 }
 .design1{
@@ -329,6 +393,13 @@ padding: 3px;
   }
   
   /* 내용 입력 필드 스타일 */
+
+  .writeform{
+    border: 1px solid #ccc;
+    margin: 10px 0px;
+    width: 550px;
+
+  }
   .writeform #writebox {
     width: 100%;
     padding: 8px;
@@ -407,16 +478,21 @@ padding: 3px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
     height: 25px;
+    color: white;
 }
 
 .writeform{
 background-color: white;
 /* border: 1px solid red; */
-padding: 12px;
+padding: 14px;
 }
 
 .writerinfo a{
     font-weight: bold;
     color:rgb(238, 206, 63);
     font-size: 20px;
+}
+.writerinfo span{
+    color:black;
+    font-size: 15px;
 }
