@@ -1,5 +1,8 @@
 package com.twojo.app.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,7 +11,9 @@ import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
 //import com.twojo.model.dao.FileDAO;
 import com.twojo.model.dao.LReplyDAO;
+import com.twojo.model.dao.Lpost_UserDAO;
 import com.twojo.model.dto.LPostDTO;
+import com.twojo.model.dto.Lpost_UserDTO;
 
 public class BoardViewOkAction implements Action{
 	@Override
@@ -28,12 +33,27 @@ public class BoardViewOkAction implements Action{
 			bdao.updateReadCount(boardnum);
 			board.setReadcount(board.getReadcount()+1);
 		}
-//		FileDAO fdao = new FileDAO();
+
 		LReplyDAO rdao = new LReplyDAO();
+		Lpost_UserDTO ludto = new Lpost_UserDTO();
+		Lpost_UserDAO ludao = new Lpost_UserDAO();
 		
+		ludto.setUserid(loginUser);
+		ludto.setBoardnum(boardnum);
+		
+
 		req.setAttribute("board", board);
-//		req.setAttribute("files", fdao.getFiles(boardnum));
 		req.setAttribute("replies", rdao.getReplies(boardnum));
+		req.setAttribute("checkUser", ludao.checkUser(ludto));
+
+		String userId = "";
+		for (String userID : ludao.getUserList(boardnum)) {
+            userId += (userID + "<br>");
+            
+            req.setAttribute("message", req.getAttribute("message"));
+        }
+		req.setAttribute("lpost_user_list", userId);
+		
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);

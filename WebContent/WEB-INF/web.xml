@@ -49,4 +49,12 @@
   	<servlet-name>ReplyFrontController</servlet-name>
   	<url-pattern>*.rp</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>Lpost_UserFrontController</servlet-name>
+  	<servlet-class>com.twojo.app.lpost_user.Lpost_UserFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Lpost_UserFrontController</servlet-name>
+  	<url-pattern>*.lu</url-pattern>
+  </servlet-mapping>
 </web-app>

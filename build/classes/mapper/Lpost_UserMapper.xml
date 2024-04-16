@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Lpost_User">
+
+
+	<insert id="adduser" parameterType="ludto">
+		insert into lpost_user (userid,boardnum)
+		values(#{userid},#{boardnum})
+	</insert>
+	<!-- <select id="getReplies" parameterType="long" resultType="lreplydto">
+		select * from lreply where lpostnum=#{lpostnum}
+	</select> -->
+	
+	<select id="getUserCount" parameterType="long" resultType="long">
+		SELECT COUNT(*) FROM lpost_user WHERE boardnum = #{boardnum};
+	</select>
+	
+	<select id="checkUser" parameterType="ludto" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM lpost_user 
+	    WHERE userid = #{userid} AND boardnum = #{boardnum}
+	</select>
+	
+	<select id="getUserList" parameterType="long" resultType="String">
+	    select userid from lpost_user where boardnum = #{boardnum} ORDER BY userid;
+	</select>
+	
+	<delete id="deluser" parameterType="ludto">
+		DELETE FROM lpost_user
+        WHERE userid = #{userid} AND boardnum = #{boardnum}
+	</delete>
+
+		
+	
+</mapper>

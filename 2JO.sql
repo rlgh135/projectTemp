@@ -28,7 +28,8 @@ CREATE TABLE `lpost` (
   `imageCount` int default 0,
   `lpostaddr` varchar(1000)
 );
-select * from lpost where userid='abc1';
+select * from lpost where userid = 'abc1';
+select count(*) from lpost where lpostaddr='관악구';
 drop table lpost;
 select * from lpost limit 0, 3000;
 
@@ -37,7 +38,8 @@ create table lpost_user(
    boardnum bigint,
    userid varchar(300)
 );
-
+/*0416 ALTER문 액션(Ctrl+Enter) 해줘야함*/
+ALTER TABLE lpost_user ADD CONSTRAINT LUP UNIQUE(boardnum, userid);
 CREATE TABLE `lfile` (
   `lfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
   `lpostnum` bigint,
@@ -97,10 +99,12 @@ CREATE TABLE `gpost` (
   `userid` varchar(300),
   `gpostcontents` text,
   `gpostlike` int default 0,
+  `gprcnt` int default 0,
   `gpostgongji` int default 0,
   `gpostregdate` datetime default now()
 );
 select * from `gpost`;
+update `gpost` set gprcnt = 0 where gpostnum=1;
 select * from gpost;
 select * from gpost where gpostcontents like "%내용%";
 select count(*) from gpost where groupnum = 1;
