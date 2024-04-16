@@ -221,23 +221,29 @@
 				                            	<button class="badgeimg modalOpenBtn" id="modalOpenBtn${gpost.gpostnum}" onclick="modalClk(${gpost.gpostnum})">★</button>
 			                                    <div id="modalContainer${gpost.gpostnum}" class="modalContainer replyHide">
 				                                    <div id="modalContent${gpost.gpostnum}" class="modalContent">
-					                                    <div id="modalinner${gpost.gpostnum}" class="modalinner" style="width: 177px;">
-						                                    <button id="modalCloseBtn${gpost.gpostnum}" class="modalCloseBtn" onclick="">
-						                                    	<img src="../../image/x.webp" style="width: 10px; height: 10px; border: none;">
-						                                    </button>
-						                                    <div class="imgid">
-							                                    <div class="mbadgeimg">
-							                                    	<img src="" alt="">
-							                                    </div>
-							                                    <p id="gpostuserid">${gpost.userid}</p>
-						                                    </div>
-						                                    <div><p>${user.userhobby}</p></div>
-						                                    <div><p>${user.gender}</p></div>
-						                                    <div><p>${user.userpoint}</p></div>
-						                                    <div><p>쪽지보내기</p></div>
-						                                    <div><p>작성글보기</p></div>
-					                                    </div>
-				                                    </div>
+														<div id="modalinner${gpost.gpostnum}" class="modalinner" style="width: 177px;">
+														   <button id="modalCloseBtn${gpost.gpostnum}" class="modalCloseBtn" onclick="modalClose(${gpost.gpostnum})">
+															  <img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">
+														   </button>
+														   <div class="imgid">
+															  <div class="mbadgeimg">
+																 <img src="" alt="">
+															  </div>
+															  <p id="gpostuserid">${gpost.userid}</p>
+														   </div>
+														   <%-- <div class="profilemenu"><p>${user.userhobby}</p></div>
+														   <div class="profilemenu"><p>${user.gender}</p></div>
+														   <div class="profilemenu"><p>${user.userpoint}</p></div> --%>
+														   <div class="profilemenu">
+													 <img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
+													 <p>쪽지보내기</p>
+												  </div>
+											 <div class="profilemenu">
+												<img src="../../images/write.png" style="width: 18px; height: 18px;">
+												<p>작성글보기</p>
+											</div>
+														</div>
+													 </div>
 			                                    </div>
 					                                
 				                                <div class="writerinfo badgeimg-right-info">
@@ -269,7 +275,7 @@
 															<input type="button" value="좋아요 i개">
 														</div>
 														<div style="display: inline-block;">
-															<input type="button" class="showrpcnt${gpost.gpostnum}" value=""
+															<input type="button" class="showrpcnt${gpost.gpostnum}" value="댓글 ${gpost.gprcnt}개"
 																onclick="showReply(${gpost.gpostnum})"
 																style="cursor: pointer;">
 														</div>
@@ -509,7 +515,6 @@
     	if(rpage>1){
     		curPage = rpage;
     	}
-		const showcntnode = document.getEl
 	    const parentRnode = document.getElementsByClassName("greplyList"+gpostnum)[0];
 	    const xhr = new XMLHttpRequest();
 	    	
@@ -521,7 +526,7 @@
 	    			const datas = obj.datas;
 	    			console.log(datas);
 	    			console.log(datas.length);
-	    			let repcnt = 0;
+	    			
 
 	    			if(datas.length===0){
 	    				if(curPage>1){
@@ -589,7 +594,7 @@
                         '<div id="modalContent'+gpost.gpostnum+'" class="modalContent">' +
                         '<div id="modalinner'+gpost.gpostnum+'" class="modalinner" style="width: 177px;">' +
                         '<button id="modalCloseBtn'+gpost.gpostnum+'" class="modalCloseBtn" onclick="">' +
-                        '<img src="../../image/x.webp" style="width: 10px; height: 10px; border: none;">' +
+                        '<img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">' +
                         '</button>' +
                         '<div class="imgid">' +
                         '<div class="mbadgeimg">' +
@@ -597,11 +602,21 @@
                         '</div>' +
                         '<p id="gpostuserid">'+gpost.userid+'</p>' +
                         '</div>' +
-                        '<div><p>${user.userhobby}</p></div>' +
-                        '<div><p>${user.gender}</p></div>' +
-                        '<div><p>${user.userpoint}</p></div>' +
-                        '<div><p><a>쪽지보내기</a></p></div>' +
-                        '<div><p><a>작성글보기</a></p></div>' +
+                        '<div class="profilemenu"><p>${user.userhobby}</p></div>' +
+                        '<div class="profilemenu"><p>${user.gender}</p></div>' +
+                        '<div class="profilemenu"><p>${user.userpoint}</p></div>' +
+                        '<div class="profilemenu">' +
+						'<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">' +
+						'<p>'+
+						'<a>쪽지보내기</a>'+
+						'</p>'+
+						'</div>' +
+						'<div class="profilemenu">' +
+						'<img src="../../images/write.png" style="width: 20px; height: 20px;">' +
+						'<p>'+
+						'<a>작성글보기</a>'+
+						'</p>'+
+                     	'</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
@@ -629,10 +644,10 @@
                         '<img id="likeButton" onclick="pressLike('+gpost.gpostnum+')" class="like-button likeButton'+gpost.gpostnum+'" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
                         '<div class="point-area showreplyBtn">' +
                         '<div style="display: inline-block;">' +
-                        '<input type="button" class="showlikecnt'+gpost.gpostnum+'" value="" onclick="pressLike('+gpost.gpostnum+')">' +
+                        '<input type="button" class="showlikecnt'+gpost.gpostnum+'" value="개" onclick="pressLike('+gpost.gpostnum+')">' +
                         '</div>' +
                         '<div style="display: inline-block;">' +
-                        '<input type="button" class="showrpcnt'+gpost.gpostnum+'" value="" onclick="showReply('+gpost.gpostnum+')" style="cursor: pointer;">' +
+                        '<input type="button" class="showrpcnt'+gpost.gpostnum+'" value="댓글 '+gpost.gprcnt+'개" onclick="showReply('+gpost.gpostnum+')" style="cursor: pointer;">' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
@@ -658,6 +673,7 @@
 								'<div class="badgeimg"><img src=""></div>'+
 								'<div class="badgeimg-right-info">'+
 									'<p class="replywriter">${loginUser}</p>'+
+									'<input type="hidden" name="userid" value="${loginUser}">'+
 									'<textarea name="gprcontents" id="" cols="30" rows="10"></textarea>'+
 								'</div>'+
 								'<div><input type="submit" value="등록"></div>'+
@@ -840,6 +856,10 @@
         
         console.log(modal);
         modal.classList.toggle("replyHide");
+	}
+	function modalClose(gpostnum){
+		const modal = document.getElementById('modalContainer'+gpostnum);
+	    modal.classList.toggle("replyHide");
 	}
 	function deleteGPost(gpostnum, groupnum) {
 		if(confirm("정말 삭제하시겠어요?")){

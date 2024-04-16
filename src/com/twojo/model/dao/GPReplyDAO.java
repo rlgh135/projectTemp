@@ -32,6 +32,10 @@ public class GPReplyDAO {
 		datas.put("pageSize", pageSize);
 		return ss.selectList("GPReply.getListByPage", datas);
 	}
+
+	public boolean insert(GPReplyDTO gpreply) {
+		return ss.insert("GPReply.insert", gpreply)==1;
+	}
 	
 	
 }

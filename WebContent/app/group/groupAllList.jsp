@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="${cp}/css/group/grouplist.css">
 </head>
 <body>
-	<div class="cursor" style="z-index:-3;">
+	<!-- <div class="cursor" style="z-index:-3;">
     <img src="https://www.selecto.co.kr/assets/images/main/mouse-cursor.png">
-	</div>
+	</div> -->
 	<!-- 탑 해더 부분 -->
     <div id="top_wrap">
         <div class="gnb">
@@ -29,19 +29,27 @@
                 </ul>
                 <ul class="gnb_menu_1">
                     <li>
-                        <a href="">게시판</a>
+                        <a href="/boardlist.bo">게시판</a>
                     </li>
                 </ul>
                 <ul class="gnb_menu_1">
                     <li>
-                        <a href="">모임</a>
+                        <a href="/groupList.gr?userid=${user.userid}">모임</a>
                     </li>
                 </ul>
             </nav>
-            <div class="search">
+            <div class="user_gnb">
                 <div>
-                    <input type="text" class="keyword">
-                    <input type="button" value="" class="search_box">
+                    <a class="btn" href="${cp}/myinfolist.mc">
+                    	<div id="userinfo_gnb">
+                    	<img alt="" src="${cp}/images/myinfo_icon.png">
+                    	</div>
+                    </a>
+                    <a class="btn" href="${cp}/userlogout.us">
+                    	<div id="logout_gnb">
+                    	<img alt="" src="${cp}/images/logout_icon.png">
+                    	</div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -233,7 +241,7 @@
 
         window.scrollTo({top:0, behavior:"smooth"})
     })
-    
+   /*  
     
     document.addEventListener('mousemove', (e) => {
     let mouseX = e.pageX; // document의 x좌표값
@@ -242,6 +250,6 @@
     let cursor = document.querySelector('.cursor');
     cursor.style.left = mouseX + 'px';
     cursor.style.top = mouseY + 'px';
-	})
+	}) */
 </script>
 </html>

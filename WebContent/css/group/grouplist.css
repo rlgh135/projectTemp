@@ -37,8 +37,8 @@ table, tr, th, td{
 .logo{
     width: 120px;
     height: 80px;
-    background: url(../../images/logo.gif) no-repeat center;
-    background-size: 150%;
+    background: url("../../images/logo.png") no-repeat center;
+    background-size: 100%;
 }
 .gnb_menu{
     /* 위 메뉴 추가할때 너비 바꿔주기 */
@@ -68,35 +68,43 @@ table, tr, th, td{
     width: 60px;
 }
 
-.search{
+.user_gnb{
     margin-top: 25px;
-    width: 200px;
-    height: 30px;
+    width: 120px;
+    height: 50px;
     float: right;
-    background-color: rgb(230, 230, 230);
-    border-radius: 15px;
 }
-.keyword{
-    padding-left: 10px;
-    width: 165px;
-    border-radius: 15px;
-    height: 30px;
-    border: none;
-    background-color: rgb(230, 230, 230);
-    outline: none;
-    font-size: 15px;
-    float: left;
+
+#userinfo_gnb, #logout_gnb{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	float: left;
+	margin-right:20px;
 }
-.search_box{
-    border: none;
-    height: 30px;
-    width: 20px;
-    background: url(../../images/zoom_glass_magnifier_icon.png) no-repeat center;
-    background-size: 100%;
-    float: right;
-    margin-right: 10px;
-    cursor: pointer;
+#userinfo_gnb{
+	padding-top: 2.5px;
 }
+
+#logout_gnb{
+	margin-right:0px;
+}
+
+#userinfo_gnb > img, #logout_gnb > img{
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+}
+
+#userinfo_gnb > img{
+	width: 45px;
+	height: 45px;
+}
+
+.user_gnb a:hover #userinfo_gnb, .user_gnb a:hover #logout_gnb{
+	filter: invert(53%) sepia(67%) saturate(3188%) hue-rotate(347deg) brightness(102%) contrast(101%);
+}
+
 
 
 

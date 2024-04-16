@@ -46,22 +46,22 @@ public class GPostInnerOkAction {
 		req.setAttribute("page", page);
 		req.setAttribute("keyword", keyword);
 		
-		GPReplyDAO gprdao = new GPReplyDAO();
-		ArrayList<Integer> reply_cnt_list = new ArrayList<Integer>();
-		ArrayList<String> hot_board = new ArrayList<String>();
-		for(GPostDTO gpost : list) {
-			reply_cnt_list.add(gprdao.getReplyCnt(gpost.getGpostnum()));
-			int cnt = gprdao.getRecentReplyCnt(gpost.getGpostnum());
-			if(cnt < 5) {
-				hot_board.add("X");
-			}
-			else {
-				hot_board.add("O");
-			}
-		}
-		
-		req.setAttribute("reply_cnt_list", reply_cnt_list);
-		req.setAttribute("hot_board", hot_board);
+//		GPReplyDAO gprdao = new GPReplyDAO();
+//		ArrayList<Integer> reply_cnt_list = new ArrayList<Integer>();
+//		ArrayList<String> hot_board = new ArrayList<String>();
+//		for(GPostDTO gpost : list) {
+//			reply_cnt_list.add(gprdao.getReplyCnt(gpost.getGpostnum()));
+//			int cnt = gprdao.getRecentReplyCnt(gpost.getGpostnum());
+//			if(cnt < 5) {
+//				hot_board.add("X");
+//			}
+//			else {
+//				hot_board.add("O");
+//			}
+//		}
+//		
+//		req.setAttribute("reply_cnt_list", reply_cnt_list);
+//		req.setAttribute("hot_board", hot_board);
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);

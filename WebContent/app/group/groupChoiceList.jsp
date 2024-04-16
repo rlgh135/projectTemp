@@ -10,10 +10,49 @@
     <link rel="stylesheet" href="${cp}/css/group/grouplist.css">
 </head>
 <body>
+	<!-- 탑 해더 부분 -->
     <div id="top_wrap">
-
+        <div class="gnb">
+            <div class="logo_box">
+                <a href="">
+                    <div class="logo"></div>
+                </a>
+            </div>
+            <nav class="gnb_menu">
+                <ul class="gnb_menu_1">
+                    <li>
+                        <a href="">내모임</a>
+                    </li>
+                </ul>
+                <ul class="gnb_menu_1">
+                    <li>
+                        <a href="/boardlist.bo">게시판</a>
+                    </li>
+                </ul>
+                <ul class="gnb_menu_1">
+                    <li>
+                        <a href="/groupList.gr?userid=${user.userid}">모임</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user_gnb">
+                <div>
+                    <a class="btn" href="${cp}/myinfolist.mc">
+                    	<div id="userinfo_gnb">
+                    	<img alt="" src="${cp}/images/myinfo_icon.png">
+                    	</div>
+                    </a>
+                    <a class="btn" href="${cp}/userlogout.us">
+                    	<div id="logout_gnb">
+                    	<img alt="" src="${cp}/images/logout_icon.png">
+                    	</div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
+
     <div id="wrap">
         <div id="top_tit">
             <h1>내 삶에 가장 가까운 모임</h1>

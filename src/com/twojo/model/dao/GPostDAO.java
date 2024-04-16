@@ -60,4 +60,11 @@ public class GPostDAO {
 	public boolean deleteGPost(long gpostnum) {
 		return ss.delete("GPost.deleteGPost", gpostnum)==1;
 	}
+
+	public void addReplyCnt(long gpostnum) {
+		ss.update("GPost.addReplyCnt", gpostnum);
+	}
+	public void addLikeCnt(long gpostnum) {
+		ss.update("GPost.addLikeCnt", gpostnum);
+	}
 }
