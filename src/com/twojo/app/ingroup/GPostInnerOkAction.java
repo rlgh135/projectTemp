@@ -46,6 +46,11 @@ public class GPostInnerOkAction {
 		req.setAttribute("page", page);
 		req.setAttribute("keyword", keyword);
 		
+		GPostDTO gongji = gpdao.getGongji(groupnum);
+		GPostDTO ingi = gpdao.getIngi(groupnum).get(0);
+		
+		req.setAttribute("gongji", gongji);
+		req.setAttribute("ingi", ingi);
 //		GPReplyDAO gprdao = new GPReplyDAO();
 //		ArrayList<Integer> reply_cnt_list = new ArrayList<Integer>();
 //		ArrayList<String> hot_board = new ArrayList<String>();

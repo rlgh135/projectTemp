@@ -160,21 +160,114 @@
                 </div>
             </div>
             <div id="gpostsection">
-                <div class="summary">
-                    <div class="summarytitle">
-                        <p>그룹 소개</p>
-                    </div>
-                    <div class="summaryinfo">
-                        <p>${group.groupcontents}</p>
-                        <ul class="grouptaglist">
-                           <li class="groupaddrinfo circle-list-btn">
-                                <a href="#">${group.groupaddr}</a>
-                           </li>
-                           <li class="groupcategoryinfo circle-list-btn">
-                                <a href="">${group.groupcategory}</a>
-                           </li> 
-                        </ul>
-                    </div>
+                <div class="summary" style="border: none; background:none;">
+					<div style="margin: 10px 0px 10px 10px;">
+						<p><h2>${group.groupname} 이번 주 인기글</h2></p>
+					</div>
+
+					<ul class="gpostList">
+					
+						<li class="gpostListwrap">
+							<div class="gpostHead default-group-Head">
+					
+								<%-- 프로필 펼치기 --%>
+									<button class="badgeimg modalOpenBtn" id="modalOpenBtn${ingi.gpostnum+10000}"
+										onclick="modalClk(${ingi.gpostnum+10000})">★</button>
+									<div id="modalContainer${ingi.gpostnum+10000}" class="modalContainer replyHide">
+										<div id="modalContent${ingi.gpostnum+10000}" class="modalContent">
+											<div id="modalinner${ingi.gpostnum+10000}" class="modalinner" style="width: 177px;">
+												<button id="modalCloseBtn${ingi.gpostnum+10000}" class="modalCloseBtn"
+													onclick="modalClose(${ingi.gpostnum+10000})">
+													<img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">
+												</button>
+												<div class="imgid">
+													<div class="mbadgeimg">
+														<img src="" alt="">
+													</div>
+													<p>${ingi.userid}</p>
+												</div>
+												<%-- <div class="profilemenu">
+													<p>${user.userhobby}</p>
+											</div>
+											<div class="profilemenu">
+												<p>${user.gender}</p>
+											</div>
+											<div class="profilemenu">
+												<p>${user.userpoint}</p>
+											</div> --%>
+											<div class="profilemenu">
+					
+												<%--쪽지 보내기 --%>
+													<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
+													<p>쪽지보내기</p>
+											</div>
+											<div class="profilemenu">
+												<img src="../../images/write.png" style="width: 18px; height: 18px;">
+												<p>작성글보기</p>
+											</div>
+										</div>
+									</div>
+							</div>
+					
+							<div class="writerinfo badgeimg-right-info">
+								<p>
+									<a href="" class="usernamelink">${ingi.userid}</a>
+									<span>인기쟁이에요</span>
+								</p>
+								<p class="regtime">${ingi.gpostregdate}</p>
+							</div>
+							</div>
+					
+							<div class="gpostContents">
+								<div>
+									<p>
+										<textarea class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}" style="width: 100%; height: 100%">${ingi.gpostcontents}</textarea>
+									</p>
+									<div>
+										<input type="button" style="cursor: pointer;" value="첨부파일" onclick="showFiles(${ingi.gpostnum+10000})">
+									</div>
+									<div class="gpostfile${ingi.gpostnum+10000} replyHide">
+										<ul class="gfileList${ingi.gpostnum+10000}"></ul>
+									</div>
+									<div class="likereply">
+										<img id="likeButton" onclick="pressLike(${ingi.gpostnum+10000})"
+											class="like-button likeButton${ingi.gpostnum+10000}" src="${cp}/images/redheart.webp" alt="좋아요"
+											style="width: 15px; height: 15px;">
+										<div class="point-area showreplyBtn">
+											<div style="display: inline-block;">
+												<input type="button" value="좋아요 i개">
+											</div>
+											<div style="display: inline-block;">
+												<input type="button" class="showrpcnt${ingi.gpostnum+10000}" value="댓글 ${ingi.gprcnt}개"
+													onclick="showReply(${ingi.gpostnum+10000})" style="cursor: pointer;">
+											</div>
+					
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="gpostReply${ingi.gpostnum+10000} replyHide">
+								<div class="repForm reply${ingi.gpostnum+10000}">
+									<Form method="post" class="inputGPR"
+										action="writegpreply.gp?gpostnum=${ingi.gpostnum}&?groupnum=${group.groupnum}"
+										name="writeRPForm${ingi.gpostnum}">
+										<div class="badgeimg"><img src=""></div>
+										<div class="badgeimg-right-info">
+											<p class="replywriter">${loginUser}HiImTester</p>
+											<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
+										</div>
+										<div>
+											<input type="submit" value="등록">
+										</div>
+									</Form>
+								</div>
+								<ul class="greplyList${ingi.gpostnum+10000}"></ul>
+							</div>
+						</li>
+					
+					</ul>
+                    
+				
                 </div>
                 <div class="groupsearch searchArea">
                     <div class="searchBox" style="margin-bottom: 2px; margin-left: 5px;">
@@ -304,13 +397,14 @@
 				                            </div>
 				                            <div class="gpostReply${gpost.gpostnum} replyHide">
 				                            	<div class="repForm reply${gpost.gpostnum}">
-													<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${gpost.gpostnum}&?groupnum=${group.groupnum}" name="writeRPForm${gpost.gpostnum}">
+													<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${gpost.gpostnum}&groupnum=${group.groupnum}" name="writeRPForm${gpost.gpostnum}">
 														<div class="badgeimg"><img src=""></div>
 														<div class="badgeimg-right-info">
 															<p class="replywriter">${loginUser}HiImTester</p>
 															<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
 														</div>
 														<div>
+															<input type="hidden" name="userid" value="${loginUser}">
 															<input type="submit" value="등록">
 														</div>
 													</Form>
@@ -331,8 +425,8 @@
             </div>
             <div id="grouprightsection">
                 <div id="gannounce">
-                    <p>공지사항</p>
-                    <ul class="gpostList" id="gpGongji">
+                    <p><h2>최신 공지사항</h2></p>
+                    <ul class="gpostList" id="gpGongji" style="margin-top: 10px;">
                         <li class="gpostListwrap">
                             <div class="gpostHead default-group-Head">
                                 <div class="badgeimg">
@@ -340,87 +434,23 @@
                                 </div>
                                 <div class="writerinfo badgeimg-right-info">
                                     <p>
-                                        <a href="" class="usernamelink">블루</a>
-                                        <span>이런사람이에요</span>
+                                        <a href="" class="usernamelink">${gongji.userid}</a>
+                                        <span>공지에요</span>
                                     </p>
-                                    <p class="regtime">2시간전</p>
+                                    <p class="regtime">${gongji.gpostregdate}</p>
                                 </div>
                             </div>
                             <div class="gpostContents">
                                 <div>
                                     <p>
-                                        내용이에요
-                                        내용내용
-                                        
-                                        내용용내용
-                                        <br><br><br><br><br><br><br><br>
-                                    </p>
-                                    <div>
-                                        <input type="button" value="굿">
-                                        <input type="button" value="배드">
-                                    </div>
-                                    <div class="point-area showreplyBtn">
-                                        <div style="display: inline-block;">
-                                            <input type="button" value="좋아요 3개">
-                                        </div>
-                                        <div style="display: inline-block;">
-                                            <input type="button" value="댓글 3개">
-                                        </div>
-                                    </div>
-                                    
+										<textarea class="GPCIN gpostConetentsIn${gongji.gpostnum}" style="width: 100%; height: 100%">${gongji.gpostcontents}
+										</textarea>
+									</p>
                                 </div>
-                            </div>
-                            <div class="gpostReply">
-                                <ul class="greplyList"></ul>
                             </div>
                         </li>
                     </ul>
                 </div>
-               <div id="grouppopular">
-                    <p>이번 주 인기글!</p>
-                    <ul class="gpostList" id="gpPopular">
-                        <li class="gpostListwrap">
-                            <div class="gpostHead default-group-Head">
-                                <div class="badgeimg">
-                                    <img src="">
-                                </div>
-                                <div class="writerinfo badgeimg-right-info">
-                                    <p>
-                                        <a href="" class="usernamelink">블루</a>
-                                        <span>이런사람이에요</span>
-                                    </p>
-                                    <p class="regtime">2시간전</p>
-                                </div>
-                            </div>
-                            <div class="gpostContents">
-                                <div>
-                                    <p>
-                                        내용이에요
-                                        내용내용
-                                        
-                                        내용용내용
-                                        <br><br><br><br><br><br><br><br>
-                                    </p>
-                                    <div>
-                                        <input type="button" value="굿">
-                                        <input type="button" value="배드">
-                                    </div>
-                                    <div class="point-area showreplyBtn">
-                                        <div style="display: inline-block;">
-                                            <input type="button" value="좋아요 3개">
-                                        </div>
-                                        <div style="display: inline-block;">
-                                            <input type="button" value="댓글 3개">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gpostReply">
-                                <ul class="greplyList"></ul>
-                            </div>
-                        </li>
-                    </ul>
-               </div> 
             </div>
         </div>
     </div>
@@ -577,7 +607,11 @@
 	    		}
 	    	}
 	    }
-	    	
+	    
+		if(gpostnum>10000){
+			var temp = gpostnum-10000
+			xhr.open("GET", cp+"/groupreply.gp?gpostnum="+temp+"&page="+curRPage);
+		}
 	    xhr.open("GET", cp+"/groupreply.gp?gpostnum="+gpostnum+"&page="+curRPage);
 	    xhr.send();
     }
@@ -684,7 +718,7 @@
 					    '</div>';
 						newLi.innerHTML +='<div class="gpostReply' + gpost.gpostnum + ' replyHide">' +
 					    '<div class="repForm reply' + gpost.gpostnum + '">' +
-							'<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=' + gpost.gpostnum + '&?groupnum=${group.groupnum}" name="writeRPForm' + gpost.gpostnum + '">' +
+							'<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=' + gpost.gpostnum + '&groupnum=${group.groupnum}" name="writeRPForm' + gpost.gpostnum + '">' +
 								'<div class="badgeimg"><img src=""></div>'+
 								'<div class="badgeimg-right-info">'+
 									'<p class="replywriter">${loginUser}&nbsp;</p>'+
@@ -868,7 +902,7 @@
     
 	function modalClk(gpostnum){
 		const modal = document.getElementById('modalContainer'+gpostnum);
-        
+
         console.log(modal);
         modal.classList.toggle("replyHide");
 	}

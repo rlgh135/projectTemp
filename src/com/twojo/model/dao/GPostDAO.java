@@ -67,4 +67,12 @@ public class GPostDAO {
 	public void addLikeCnt(long gpostnum) {
 		ss.update("GPost.addLikeCnt", gpostnum);
 	}
+
+	public List<GPostDTO> getIngi(long groupnum) {
+		return ss.selectList("GPost.getIngi", groupnum);
+	}
+
+	public GPostDTO getGongji(long groupnum) {
+		return ss.selectOne("GPost.getGongji", groupnum);
+	}
 }

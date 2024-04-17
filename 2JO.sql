@@ -38,6 +38,7 @@ create table lpost_user(
    boardnum bigint,
    userid varchar(300)
 );
+select * from lpost_user;
 /*0416 ALTER문 액션(Ctrl+Enter) 해줘야함*/
 ALTER TABLE lpost_user ADD CONSTRAINT LUP UNIQUE(boardnum, userid);
 CREATE TABLE `lfile` (
@@ -104,6 +105,10 @@ CREATE TABLE `gpost` (
   `gpostregdate` datetime default now()
 );
 select * from `gpost`;
+select * from `gpost` where groupnum=1 and gpostgongji=1;
+update gpost set gpostgongji=0 where gpostnum=2;
+update gpost set gpostlike=(gpostlike+1) where gpostnum=2;
+SELECT * FROM gpost WHERE groupnum=1 and gpostlike = (SELECT MAX(gpostlike) FROM gpost) order by gpostnum desc;
 update `gpost` set gprcnt = 0 where gpostnum=1;
 select * from gpost;
 select * from gpost where gpostcontents like "%내용%";

@@ -37,6 +37,12 @@
 	<update id="addLikdCnt" parameterType="long">
 		update `gpost` set gpostlike = gpostlike+1 where gpostnum=#{gpostnum}
 	</update>
+	<select id="getGongji" parameterType="long" resultType="gpostdto">
+		select * from `gpost` where groupnum=#{groupnum} and gpostgongji=1;
+	</select>
+	<select id="getIngi" parameterType="long" resultType="gpostdto">
+		SELECT * FROM gpost WHERE groupnum=#{groupnum} and gpostlike = (SELECT MAX(gpostlike) FROM gpost) order by gpostnum desc;
+	</select>
 </mapper>
 
 

@@ -25,7 +25,9 @@ li{list-style: none;}
 textarea{font-style: normal; border: none; resize: none;}
 
 body{
-    background-color: rgb(252, 252, 241);
+    /* background-color: rgb(252, 252, 241); */
+    background: url(../images/group/baegyungreverse.png);
+    background-size: 100%;
 }
 header{
     width: 100%;
@@ -40,7 +42,7 @@ header{
     padding-top: 10px;
     padding-bottom: 10px;
     height: 60px;
-    border-bottom: 1px solid rgb(252, 252, 241);
+    /* border-bottom: 1px solid rgb(252, 252, 241); */
 }
 .logoimg{
     margin-left: 20px;
@@ -68,7 +70,7 @@ header{
 /*body*/
 #group_inner_wrap{
     min-width: 1300px;
-    background-color: rgb(252, 252, 241);
+    /* background-color: rgb(252, 252, 241); */
 }
 
 .infobox{
@@ -79,7 +81,7 @@ header{
     margin-left: 320px;
     width: 550px;
     padding-top: 10px;
-    background-color: rgb(252, 252, 241);
+    /* background-color: rgb(252, 252, 241); */
 }
 .summary{
     margin-top: -10px;
@@ -93,7 +95,7 @@ header{
     margin: 0 auto;
     padding: 20px 0 0;
     align-items: flex-start;
-    background-color: rgb(252, 252, 241);
+    /* background-color: rgb(252, 252, 241); */
 }
 .searchArea{
     margin-top: 20px;
@@ -104,7 +106,7 @@ header{
 
 #gpost{
     margin-top: 20px;
-    background-color: rgb(252, 252, 241);
+    /* background-color: rgb(252, 252, 241); */
 }
 .gpostListwrap{
     margin-top: 30px;
@@ -273,7 +275,7 @@ header{
 /* 모임가입하기 박스 */
  #groupinfobox{
     color: black;
-    background-color: rgb(252, 252, 241);
+    /* background-color: rgb(252, 252, 241); */
     padding: 15px;
     padding-top: 0px;
     position: fixed;
@@ -309,7 +311,7 @@ color: white;
 
 .summary{
     padding: 5px;
-    background-color: white;
+    /* background-color: white; */
     border-radius: 10px;
 }
 .summarytitle{
@@ -333,7 +335,7 @@ color: white;
 
 /* 게시글 박스 */
 .postsection{
-    background-color: white;
+    /* background-color: white; */
 }
 .gpostListwrap{
     background-color: white;
@@ -586,3 +588,62 @@ header{
 .greplyListwrap{
     border-bottom: 2px solid #ECEEEF;
 }
+.ingiListWrap{
+    margin-top: 0px;
+}
+/*
+<%-- <div class="summarytitle">
+                        <p><h2>이번 주 인기글</h2></p>
+                    </div>
+                    <div class="summaryinfo">
+                        <p>${ingi.userid}</p>
+                        <ul class="grouptaglist">
+                           <li class="groupaddrinfo circle-list-btn">
+                                <a href="#">${group.groupaddr}</a>
+                           </li>
+                           <li class="groupcategoryinfo circle-list-btn">
+                                <a href="">${group.groupcategory}</a>
+                           </li>
+						   <li>
+								<div class="gpostContents ingi">
+									<div>
+										<p>
+											<textarea class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}" style="width: 100%; height: 100%">${ingi.gpostcontents}
+											</textarea>
+										</p>
+										<div class="likereply">
+											<img id="likeButton" onclick="pressLike(${ingi.gpostnum})" class="like-button likeButton${ingi.gpostnum+10000}" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">
+											<div class="point-area showreplyBtn">
+												<div style="display: inline-block;">
+													<p>인기글</p>
+												</div>
+												<div style="display: inline-block;">
+													<input type="button" class="showrpcnt${ingi.gpostnum+10000}" value="댓글 ${ingi.gprcnt}개"
+														onclick="showReply(${ingi.gpostnum}+10000)"
+														style="cursor: pointer;">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<li class="gpostListwrap ingiListWrap">
+									<div class="gpostReply${ingi.gpostnum+10000} replyHide">
+										<div class="repForm reply${ingi.gpostnum+10000}">
+											<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${ingi.gpostnum+10000}&?groupnum=${group.groupnum}" name="writeRPForm${ingi.gpostnum+10000}">
+												<div class="badgeimg"><img src=""></div>
+												<div class="badgeimg-right-info">
+													<p class="replywriter">${loginUser}HiImTester</p>
+													<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
+												</div>
+												<div>
+													<input type="submit" value="등록">
+												</div>
+											</Form>
+										</div>
+										<ul class="greplyList${ingi.gpostnum+10000}"></ul>
+									</div>
+								</li>
+							</li>	
+                        </ul>
+                    </div> --%>
+                    */
