@@ -19,7 +19,8 @@ public class GroupHobbyListOkAction implements Action {
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-		String userid = req.getParameter("userid");
+//		String userid = req.getParameter("userid");
+		String userid = (String)req.getSession().getAttribute("loginUser");
 		String hobbykeyword = req.getParameter("hobbykeyword");
 		String temp = req.getParameter("page");
 		int page = temp == null || temp.equals("") ? 1 : Integer.parseInt(temp);

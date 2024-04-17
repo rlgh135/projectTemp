@@ -106,7 +106,7 @@ CREATE TABLE `gpost` (
 );
 select * from `gpost`;
 select * from `gpost` where groupnum=1 and gpostgongji=1;
-update gpost set gpostgongji=0 where gpostnum=2;
+update gpost set gpostgongji=1 where gpostnum=2;
 update gpost set gpostlike=(gpostlike+1) where gpostnum=2;
 SELECT * FROM gpost WHERE groupnum=1 and gpostlike = (SELECT MAX(gpostlike) FROM gpost) order by gpostnum desc;
 update `gpost` set gprcnt = 0 where gpostnum=1;
@@ -149,6 +149,16 @@ CREATE TABLE `gprfile` (
   `gprnum` bigint,
   `gprfileorgname` varchar(1000),
   `gprfilesysname` varchar(1000)
+);
+
+/*0417 추가*/
+create table message(
+messagenum bigint PRIMARY KEY AUTO_INCREMENT,
+sendid varchar(300),
+receiveid varchar(300),
+msgcontent varchar(3000),
+msregdate datetime default now(),
+msgcheck int
 );
 
 CREATE TABLE `warning` (

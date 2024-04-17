@@ -15,7 +15,7 @@ table, tr, th, td{
 }
 
 body{
-	width: 2000px;
+	width: 100%;
 }
 /* 해더부분 */
 
@@ -25,7 +25,6 @@ body{
     margin-top: 20px;
     width: 100%;
     height: 80px;
-    position: 
     z-index: 100;
     transition: all 0s;
     /* background-color: #ff6d1d; */
@@ -145,19 +144,23 @@ body{
 }
 
 #img_box1{
-    width: 100%;
+    width: 50%;
     height: 900px;
     margin-top: 100px;
     background: url(../../images/36163483.jpg) no-repeat;
-    background-size: 50%;
+    background-size: cover;
     float: left;
+    z-index: -1;
 }
 
 #content1{
+	width: 45%;
+	padding-top:400px;
     text-align: left;
-    margin: 300px 0 0 1100px;
+    margin-left:5%;
+    float: right;
     font-size: 80px;
-    font-weight: bolder;
+    font-weight: bold;
     text-shadow: 0 0 10px #ffffff9a;
     line-height: 100px;
     animation: fadeIn 2s ease-in-out;
@@ -186,6 +189,7 @@ body{
     opacity: 0;
     transition: all 3s;
     position: relative;
+    z-index: -1;
     /* background-color: aqua; */
 }
 

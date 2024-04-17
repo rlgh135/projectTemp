@@ -57,4 +57,12 @@
   	<servlet-name>Lpost_UserFrontController</servlet-name>
   	<url-pattern>*.lu</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>MessageFrontController</servlet-name>
+  	<servlet-class>com.twojo.app.message.MessageFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MessageFrontController</servlet-name>
+  	<url-pattern>*.ms</url-pattern>
+  </servlet-mapping>
 </web-app>

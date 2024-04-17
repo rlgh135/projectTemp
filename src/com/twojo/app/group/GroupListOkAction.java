@@ -19,9 +19,9 @@ public class GroupListOkAction implements Action {
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 //		나중에 로그인 세션에 유저 아이디가 담겨있을때 활성화
-//		String userid = (String)req.getSession().getAttribute("loginUser");
+		String userid = (String)req.getSession().getAttribute("loginUser");
 		
-		String userid = req.getParameter("userid");
+//		String userid = req.getParameter("userid");
 		
 		
 		GroupDAO gdao = new GroupDAO();

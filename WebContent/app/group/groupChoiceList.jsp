@@ -9,49 +9,10 @@
     <title>groupchoicelist</title>
     <link rel="stylesheet" href="${cp}/css/group/grouplist.css">
 </head>
+<header>
+	<jsp:include page="${cp}/app/header.jsp"></jsp:include>
+</header>
 <body>
-	<!-- 탑 해더 부분 -->
-    <div id="top_wrap">
-        <div class="gnb">
-            <div class="logo_box">
-                <a href="">
-                    <div class="logo"></div>
-                </a>
-            </div>
-            <nav class="gnb_menu">
-                <ul class="gnb_menu_1">
-                    <li>
-                        <a href="">내모임</a>
-                    </li>
-                </ul>
-                <ul class="gnb_menu_1">
-                    <li>
-                        <a href="/boardlist.bo">게시판</a>
-                    </li>
-                </ul>
-                <ul class="gnb_menu_1">
-                    <li>
-                        <a href="/groupList.gr?userid=${user.userid}">모임</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="user_gnb">
-                <div>
-                    <a class="btn" href="${cp}/myinfolist.mc">
-                    	<div id="userinfo_gnb">
-                    	<img alt="" src="${cp}/images/myinfo_icon.png">
-                    	</div>
-                    </a>
-                    <a class="btn" href="${cp}/userlogout.us">
-                    	<div id="logout_gnb">
-                    	<img alt="" src="${cp}/images/logout_icon.png">
-                    	</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div id="wrap">
         <div id="top_tit">
@@ -102,7 +63,7 @@
         			<c:forEach var="i" begin="0" end="${addrlist.size() -1}">
         				<c:set var="group" value="${addrlist[i]}"/>
         				<c:set var="groupHBI" value="${groupHobbyBestImg[i]}"/>
-				            <a href="#">
+				            <a href="${cp}/groupinner.gp?groupnum=${group.groupnum}">
 				                <div class="group">
 				                    <c:choose>
 					                	<c:when test="${not empty groupHBI}">
@@ -143,7 +104,14 @@
             <div class="HB_choice_group">
                 <div class="HB_choice_group_1">
                     <div id="HB_choice_group_1_tit">
-                        <p>최근 등록된 ${param.hobbykeyword} 모임</p>
+                    	<c:choose>
+                    		<c:when test="${list != null and list.size()>0}">
+	                        	<p>최근 등록된 ${param.hobbykeyword} 모임</p>
+                    		</c:when>
+                    		<c:otherwise>
+                    			
+                    		</c:otherwise>
+                    	</c:choose>
                     </div>
                     <c:choose>
 		        		<c:when test="${list != null and list.size()>0}">
@@ -151,7 +119,7 @@
 		        				<c:set var="group" value="${list[i]}"/>
 		        				<c:set var="groupHLI" value="${groupHobbyListImg[i]}"/>
 						            <div class="HB_choice_group_box">
-				                        <a href="">
+				                        <a href="${cp}/groupinner.gp?groupnum=${group.groupnum}">
 				                            <div class="HBC_img">
 				                           		<c:choose>
 								                	<c:when test="${not empty groupHLI}">
@@ -173,6 +141,7 @@
 		        			</c:forEach>
 		        		</c:when>
 		        		<c:otherwise>
+		        			
 		        		</c:otherwise>
 		        	</c:choose>
                 </div>

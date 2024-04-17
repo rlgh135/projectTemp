@@ -9,6 +9,7 @@
 </head>
 <body>
 	<header>
+		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
 		<div id="top_tit">
 			<h1>내 More</h1>
 		</div>

@@ -78,6 +78,7 @@
 </head>
 <body>
 	<c:if test="${empty isInGroup}"></c:if>
+	<jsp:include page="${cp}/app/message/sendmessage.jsp"></jsp:include>
 	<div class="sujung">
         <div class="sujung_body">
             <div style="display: flex;">
@@ -203,7 +204,7 @@
 					
 												<%--쪽지 보내기 --%>
 													<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
-													<p>쪽지보내기</p>
+													<button type="button" class="msg_send" onclick="sendMessage()" style="cursor: pointer;">쪽지보내기</button>
 											</div>
 											<div class="profilemenu">
 												<img src="../../images/write.png" style="width: 18px; height: 18px;">
@@ -346,7 +347,7 @@
 													 
 													 <%--쪽지 보내기 --%>
 													 <img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
-													 <p>쪽지보내기</p>
+													 <button type="button" class="msg_send" onclick="sendMessage()">쪽지보내기</button>
 												  </div>
 											 <div class="profilemenu">
 												<img src="../../images/write.png" style="width: 18px; height: 18px;">
@@ -960,5 +961,8 @@
 	function joinMoim(groupnum, loginUser) {
 		location.href="/joinmoim.gp?groupnum="+groupnum;
 	}
+	function sendMessage(){
+    	document.querySelector('.ms_modal_btn').click();
+    }
 </script>
 </html>
