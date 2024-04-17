@@ -160,7 +160,7 @@ msgcontent varchar(3000),
 msregdate datetime default now(),
 msgcheck int
 );
-
+select * from message;
 CREATE TABLE `warning` (
   `warningnum` int PRIMARY KEY AUTO_INCREMENT,
   `reason` text

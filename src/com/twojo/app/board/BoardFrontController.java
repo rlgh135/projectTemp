@@ -48,6 +48,7 @@ public class BoardFrontController extends HttpServlet {
 		case "/boardlist.bo":
 			try {
 				System.out.println("try진입");
+				System.out.println("세션?"+req.getSession().getAttribute("loginUser"));
 				transfer = new BoardListOkAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println("/boardlist.bo : "+e);
@@ -62,7 +63,8 @@ public class BoardFrontController extends HttpServlet {
 		case "/boardwrite.bo":
 			transfer = new Transfer();
 			transfer.setRedirect(false);
-			transfer.setPath("/app/board/write.jsp");
+			transfer.setPath(req.getContextPath()+"/app/board/write.jsp");
+			System.out.println("세션? boardwrite.bo: "+req.getSession().getAttribute("loginUser"));
 			break;
 		case "/boardwriteok.bo":
 			try {

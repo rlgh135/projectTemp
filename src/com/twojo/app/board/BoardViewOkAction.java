@@ -25,6 +25,7 @@ public class BoardViewOkAction implements Action{
 		    System.out.println(boardnum + "viewokaction");
 		}
 		String loginUser = (String)req.getSession().getAttribute("loginUser");
+		System.out.println("bordviewok"+loginUser);
 		
 		LPostDAO bdao = new LPostDAO();
 		
@@ -57,7 +58,7 @@ public class BoardViewOkAction implements Action{
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/board/get.jsp");
+		transfer.setPath(req.getContextPath()+"/app/board/get.jsp");
 		return transfer;
 	}
 }

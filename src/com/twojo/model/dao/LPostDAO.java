@@ -63,11 +63,15 @@ private SqlSession ss;
 		return ss.selectOne("LPost.getLastNum",userid);
 	}
 
+	public List<LPostDTO> getboardinfoList(String userid) {
+		return ss.selectList("LPost.getUserList", userid);
+	}
+	
 	public boolean updateBoard(LPostDTO board) {
 		return ss.update("LPost.update",board) == 1;
 	}
-
-	public List<LPostDTO> getboardinfoList(String userid) {
-		return ss.selectList("LPost.getUserList", userid);
+	
+	public List<LPostDTO> getListWithAddr(String loginUserAddr) {
+		return ss.selectList("LPost.getListWithAddr",loginUserAddr);
 	}
 }

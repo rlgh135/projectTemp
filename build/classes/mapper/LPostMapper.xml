@@ -47,16 +47,20 @@
 	<delete id="delete" parameterType="long">
 		delete from lpost where lpostnum=#{lpostnum}
 	</delete>
-	
-	<update id="updateReadCount" parameterType="long">
-      update lpost
-      set readcount = readcount+1
-      where lpostnum = #{lpostnum}
-   </update>
    
    <select id="getUserList" parameterType="String" resultType="lpostdto">
    		select * from lpost where userid = #{userid}
    </select>
+   
+   <update id="updateReadCount" parameterType="long">
+		update lpost
+		set readcount = readcount+1
+		where lpostnum = #{lpostnum}
+	</update>
+
+	<select id="getListWithAddr" resultType="lpostdto" parameterType="String">
+		select * from lpost where lpostaddr like ('%${keyword}%')
+	</select>
 </mapper>
 
 

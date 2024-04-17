@@ -19,6 +19,8 @@ public class MyinfoOkAction implements Action {
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
     	String userid = (String)req.getSession().getAttribute("loginUser");
+//    	String userid = (String)req.getParameter("loginUser");
+    	System.out.println(userid);
 //        String lposttitle = req.getParameter("lposttitle");
 //        String lpostlikecntStr = req.getParameter("lpostlikecnt");
         
@@ -31,7 +33,7 @@ public class MyinfoOkAction implements Action {
         
         Transfer transfer = new Transfer();
         transfer.setRedirect(false);
-        transfer.setPath("/app/user/myinfo.jsp");
+        transfer.setPath(req.getContextPath()+"/app/user/myinfo.jsp");
         return transfer;
 	}
 }

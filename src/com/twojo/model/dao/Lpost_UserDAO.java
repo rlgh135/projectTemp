@@ -45,5 +45,10 @@ public class Lpost_UserDAO {
 	    catch (PersistenceException e) {return false;}
 	}
 
+	public boolean setimageCount(Lpost_UserDTO ludto) {
+		return ss.update("Lpost_User.setimageCount", ludto) == 1;
+		
+	}
+
 
 }

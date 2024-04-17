@@ -10,17 +10,35 @@ import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
 import com.twojo.model.dao.LReplyDAO;
+import com.twojo.model.dao.UserDAO;
 import com.twojo.model.dto.LPostDTO;
 import com.twojo.model.dto.LReplyDTO;
+import com.twojo.model.dto.Lpost_UserDTO;
+import com.twojo.model.dto.UserDTO;
 
 public class BoardListOkAction implements Action{
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
 		String temp = req.getParameter("page");
 		int page = temp == null || temp.equals("") ? 1 : Integer.parseInt(temp);
 		String keyword = req.getParameter("keyword");
 		
+		UserDAO udao = new UserDAO();
+		String LoginUser = "";
+		
+		try {
+			LoginUser = (String)req.getSession().getAttribute("loginUser");
+			System.out.println("처음 LoginUser: " + LoginUser);
+		} catch (Exception e) {
+			LoginUser = udao.getUserById(req.getParameter("sessionId")).getUseraddr();
+			System.out.println("파라미터 LoginUser: " + LoginUser);
+		}
+		
 		LPostDAO bdao = new LPostDAO();
+		Lpost_UserDTO ludto = new Lpost_UserDTO();
+		
+		
 		//전체 게시글의 개수
 		long totalCnt = 0;
 		if(keyword == null || keyword.equals("")) {
@@ -51,12 +69,14 @@ public class BoardListOkAction implements Action{
 		
 		int startRow = (page-1)*pageSize;
 		List<LPostDTO> list = null;
-		if(keyword == null || keyword.equals("")) {
+		
+		if(keyword == null || keyword.equals(""))
 			list = bdao.getList(startRow,pageSize);
-		}
-		else {
+		else 
 			list = bdao.getList(startRow,pageSize,keyword);
-		}
+		
+		
+		//String loginUserAddr = findLoginUser(LoginUser);
 		
 		req.setAttribute("list", list);
 		req.setAttribute("totalPage", totalPage);
@@ -65,6 +85,10 @@ public class BoardListOkAction implements Action{
 		req.setAttribute("endPage", endPage);
 		req.setAttribute("page", page);
 		req.setAttribute("keyword", keyword);
+		req.setAttribute("loginUserAddr", LoginUser);
+		req.setAttribute("loginUserAddrList", findLoginUserList(LoginUser));
+
+		
 		
 		LReplyDAO rdao = new LReplyDAO();
 		ArrayList<Integer> reply_cnt_list = new ArrayList<Integer>();
@@ -81,13 +105,35 @@ public class BoardListOkAction implements Action{
 		}
 		
 		req.setAttribute("reply_cnt_list", reply_cnt_list);
-//		req.setAttribute("hot_board", hot_board);
-		
+
+		System.out.println("세션: boardlistokaction: "+req.getSession().getAttribute("loginUser"));
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/board/list1.jsp");
+		transfer.setPath(req.getContextPath()+"/app/board/list1.jsp");
 		return transfer;
 	}
+	
+	
+	//유저의 지역 리스트 추출 후 리턴
+	private List<LPostDTO> findLoginUserList(String loginUserAddr) {
+		LPostDAO bdao = new LPostDAO();
+		List<LPostDTO> loginUserList = null;
+		loginUserList = bdao.getListWithAddr(loginUserAddr);
+		
+		return loginUserList;
+	}
+
+	//유저의 주소 추출 후 리턴
+	private String findLoginUser(String sessionId) {
+		UserDTO udto = new UserDTO();
+		UserDAO udao = new UserDAO();
+		System.out.println("findLoginUser 들어옴");
+		udto = udao.getUserById(sessionId);
+		System.out.println(udto.getUseraddr() + " :userAddr");
+		return udto.getUseraddr();
+		
+	}
+	
 }
 
 

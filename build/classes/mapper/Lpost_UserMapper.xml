@@ -32,6 +32,10 @@
         WHERE userid = #{userid} AND boardnum = #{boardnum}
 	</delete>
 
-		
+	<update id="setimageCount" parameterType="ludto">
+		UPDATE lpost
+		SET imageCount =  (SELECT COUNT(*) FROM lpost_user WHERE boardnum = #{boardnum})
+		WHERE lpostnum = #{boardnum};
+	</update>
 	
 </mapper>

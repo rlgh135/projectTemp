@@ -26,6 +26,7 @@ public class UserLoginOkAction implements Action{
 		PrintWriter out = resp.getWriter();
 		if(temp != null && temp.getUserpw().equals(userpw)) {
 			req.getSession().setAttribute("loginUser", userid);
+			
 			//메인으로 이동
 			out.print("<script>");
 			out.print("alert('"+userid+"님 어서오세요~!');");
