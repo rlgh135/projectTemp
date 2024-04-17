@@ -40,7 +40,7 @@
     	outline: none;
     }
 	.sujung{
-            position:absolute;
+            position:fixed;
             display:none;
             
             justify-content: center;
@@ -51,6 +51,9 @@
             height:100%;
             background-color: rgba(0,0,0,0.4);
 			z-index: 10;
+			left: 50%;
+		    top: 50%;
+		    transform: translate(-50%, -50%);
     }
 	.sujung_body{
             position:absolute;
@@ -74,6 +77,7 @@
 </style>
 </head>
 <body>
+	<c:if test="${empty isInGroup}"></c:if>
 	<div class="sujung">
         <div class="sujung_body">
             <div style="display: flex;">
@@ -154,7 +158,7 @@
 					 </ul>
                     <div>
                         <div class="group-btn-box btnBox">
-                                <input type="button" value="모임 가입하기">
+                                <input type="button" value="모임 가입하기" class="joinMoim" onclick="javascript:joinMoim(${group.groupnum}, ${loginUser})">
                         </div>
                     </div>
                 </div>
@@ -272,7 +276,7 @@
                 <div class="groupsearch searchArea">
                     <div class="searchBox" style="margin-bottom: 2px; margin-left: 5px;">
 						<div>
-							<input type="text" name="groupsearch" id="gpsearch" style="border: none; outline: none;">
+							<input type="text" name="groupsearch" id="gpsearch" style="border: none; outline: none; background-color:transparent;">
 						</div>
 						<div class="searchBtnBox">
 							<input type="button" value="" onclick="makeDOMKeyword()" style="cursor: pointer; display: block; width: 28px; height: 28px;">
@@ -952,6 +956,9 @@
 	function modifyOk() {
 		const sujung = document.sujungForm;
 		sujung.submit();
+	}
+	function joinMoim(groupnum, loginUser) {
+		location.href="/joinmoim.gp?groupnum="+groupnum;
 	}
 </script>
 </html>
