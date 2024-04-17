@@ -121,8 +121,15 @@
 	</c:choose>
 	<div id="group_inner_wrap">
         <header>
-            <nav>
-
+            <nav class="groupinnernav">
+				<div class="logoimg"><a href=""><img src="../../images/logo.png" alt="" style="background-repeat: no-repeat; display: block; width: auto; height: 40px;"></a></div>
+				<div class="widgetarea">
+					<ul class="widgetlist">
+						<li class="widgetitem alert" style="padding-top: 6px; padding-left: 20px;"><a href=""><img src="../../images/group/bell-3913239.png" style="background-size: cover; display: block; width:25px; height: auto;"></a></li>
+						<li class="widgetitem jjok" style="padding-top: 6px; padding-left: 20px;"><a href=""><img src="../../images/group/bubble-151798.png" style="background-size: cover; display: block; width:25px; height: auto;"></a></li>
+						<li class="widgetitem profile-badge-btn"><a href=""><img src="../../images/group/basicuser-1946429.png" style="background-size: cover; display: block; width:auto; height: 35px;"></a></li>
+					</ul>
+				</div>
             </nav>
         </header>
         <div class="group-inner contents" id="group_inner_container">
@@ -170,14 +177,16 @@
                     </div>
                 </div>
                 <div class="groupsearch searchArea">
-                    <div class="searchBox">
-                        <input type="text" name="groupsearch" id="gpsearch">
-                    </div>
-                    <div class="searchBtnBox">
-                        <input type="button" value="검색" onclick="makeDOMKeyword()">
+                    <div class="searchBox" style="margin-bottom: 2px; margin-left: 5px;">
+						<div>
+							<input type="text" name="groupsearch" id="gpsearch" style="border: none; outline: none;">
+						</div>
+						<div class="searchBtnBox">
+							<input type="button" value="" onclick="makeDOMKeyword()" style="cursor: pointer; display: block; width: 28px; height: 28px;">
+						</div>
                     </div>
                     <div class="write_btn">
-						<input type="button" value="글 쓰기" onclick="showWrite(${gpost.gpostnum})"> 
+						<input type="button" value="글쓰기" onclick="showWrite(${gpost.gpostnum})"> 
 					</div>
                 </div>
                 <div id="gpost" class="postsection">
@@ -262,12 +271,11 @@
 				                            <div class="gpostContents">
 				                                <div>
 				                                    <p>
-				                                    	<textarea class="GPCIN gpostConetentsIn${gpost.gpostnum}" style="width: 100%; height: 100%">
-				                                    	${gpost.gpostcontents}
+				                                    	<textarea class="GPCIN gpostConetentsIn${gpost.gpostnum}" style="width: 100%; height: 100%">${gpost.gpostcontents}
 				                                    	</textarea>
 				                                    </p>
 				                                    <div>
-				                                    	<input type="button" value="첨부파일" onclick="showFiles(${gpost.gpostnum})">
+				                                    	<input type="button" style="cursor: pointer;" value="첨부파일" onclick="showFiles(${gpost.gpostnum})">
 				                                    </div>
 								                    <div class="gpostfile${gpost.gpostnum} replyHide">
 								                    	<ul class="gfileList${gpost.gpostnum}"></ul>
@@ -295,12 +303,12 @@
 				                                </div>
 				                            </div>
 				                            <div class="gpostReply${gpost.gpostnum} replyHide">
-				                            	<div class="reply${gpost.gpostnum}">
+				                            	<div class="repForm reply${gpost.gpostnum}">
 													<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${gpost.gpostnum}&?groupnum=${group.groupnum}" name="writeRPForm${gpost.gpostnum}">
 														<div class="badgeimg"><img src=""></div>
 														<div class="badgeimg-right-info">
-															<p class="replywriter">${loginUser}</p>
-															<textarea name="gprcontents" id="" cols="30" rows="10"></textarea>
+															<p class="replywriter">${loginUser}HiImTester</p>
+															<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
 														</div>
 														<div>
 															<input type="submit" value="등록">
@@ -466,7 +474,10 @@
 	    				let newLi = document.createElement('li');
 	    				newLi.className = 'gfileli';
 	    				    
-	    				newLi.innerHTML='<p>파일이 없습니다.</p>';
+	    				newLi.innerHTML='<div class="fileIcon">' +
+			                 '<img src="../../images/groupinnerfileimg.png">' +
+			                 '</div>' +
+			                 '<p style="color:red">파일이 없습니다</p>';
 	    				    
 	    				parentFnode.appendChild(newLi);
 	    			} else {
@@ -553,7 +564,7 @@
 							'    <img src="">' +
 							'</div>' +
 							'<div class="badgeimg-right-info">' +
-							'    <p class="replywriter">블루</p>' +
+							'    <p class="replywriter">'+greply.userid+'</p>' +
 							'    <p class="replycontents">' +greply.gprcontents+
 							'    </p>' +
 							'    <p class="gprregdate">'+greply.gprregdate+'</p>' +
@@ -639,7 +650,7 @@
                         '</textarea>' +
                         '</p>' +
                         '<div>' +
-                        '<input type="button" value="첨부파일" onclick="showFiles('+gpost.gpostnum+')">' +
+                        '<input type="button" style="cursor: pointer;" value="첨부파일" onclick="showFiles('+gpost.gpostnum+')">' +
                         '</div>' +
                         '<div class="gpostfile'+gpost.gpostnum+' replyHide">' +
                         '<ul class="gfileList'+gpost.gpostnum+'"></ul>' +
@@ -672,13 +683,13 @@
 					    '</div>' +
 					    '</div>';
 						newLi.innerHTML +='<div class="gpostReply' + gpost.gpostnum + ' replyHide">' +
-					    '<div class="reply' + gpost.gpostnum + '">' +
+					    '<div class="repForm reply' + gpost.gpostnum + '">' +
 							'<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=' + gpost.gpostnum + '&?groupnum=${group.groupnum}" name="writeRPForm' + gpost.gpostnum + '">' +
 								'<div class="badgeimg"><img src=""></div>'+
 								'<div class="badgeimg-right-info">'+
-									'<p class="replywriter">${loginUser}</p>'+
+									'<p class="replywriter">${loginUser}&nbsp;</p>'+
 									'<input type="hidden" name="userid" value="${loginUser}">'+
-									'<textarea name="gprcontents" id="" cols="30" rows="10"></textarea>'+
+									'<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>'+
 								'</div>'+
 								'<div><input type="submit" value="등록"></div>'+
 							'</Form>'+

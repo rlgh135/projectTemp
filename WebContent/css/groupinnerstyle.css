@@ -6,7 +6,15 @@
     /* background-color: rgba(0, 0, 0, 0.01); */
     /* border: 1px solid black; */
 }
-
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+*{
+    font-family: 'SUITE-Regular';
+}
 a{color: black;}
 a:link{text-decoration: none;}
 a:visited,a:active{color: black;}
@@ -16,29 +24,62 @@ input[type = button]{
 li{list-style: none;}
 textarea{font-style: normal; border: none; resize: none;}
 
+body{
+    background-color: rgb(252, 252, 241);
+}
+header{
+    width: 100%;
+    min-width: 1300px;
+    height: 60px;
+    background-color: bisque;
+}
+.groupinnernav{
+    display: flex;
+    width: 1300px;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 60px;
+    border-bottom: 1px solid rgb(252, 252, 241);
+}
+.logoimg{
+    margin-left: 20px;
+    width: 200px;
+    height: 40px;
+}
+.widgetarea{
+    margin-left: auto;
+    margin-right: 10px;
+}
+.widgetlist{
+    display: flex;
+    padding-left: 10px;
+}
+.widgetitem{
+    height: 40px;
+    width: 50px;
+    align-items: end;
+}
+.widgetitem:last-child{
+    width: 70px;
+    padding-left: 20px;
+}
+
+/*body*/
 #group_inner_wrap{
     min-width: 1300px;
-    background-color: white
-    
+    background-color: rgb(252, 252, 241);
 }
-#group_inner_contents{
-    margin: 0 auto;
-    display: flex;
-}
-#group_inner_contents div{
-    margin: 0 auto;
-    display: flex;
-    background-color: #ECEEEF;
-}
+
 .infobox{
     width: 300px;
     min-width: 300px;
 }
 #gpostsection{
-    margin-left: 20px;
+    margin-left: 320px;
     width: 550px;
     padding-top: 10px;
-    background-color: white;
+    background-color: rgb(252, 252, 241);
 }
 .summary{
     margin-top: -10px;
@@ -47,33 +88,33 @@ textarea{font-style: normal; border: none; resize: none;}
 }
 #group_inner_container {
     display: flex;
-    flex: 1 1 auto;
     position: relative;
     width: 1280px;
     margin: 0 auto;
-    padding: 70px 0 0;
+    padding: 20px 0 0;
     align-items: flex-start;
-    background-color: white;
+    background-color: rgb(252, 252, 241);
 }
 .searchArea{
     margin-top: 20px;
-    margin-bottom: -10px;
-    padding: 17px px 17px;
+    /* margin-bottom: -10px; */
     display: flex;
     height: 30px;
 }
-.searchBox{
-    height: 28px;
-}
+
 #gpost{
     margin-top: 20px;
-    background-color: white;
+    background-color: rgb(252, 252, 241);
 }
 .gpostListwrap{
     margin-top: 30px;
     border: 1px solid #ccc;
     position: relative;
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.gpostListwrap:hover{
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 .gpostListwrap:first-child{
     margin-top: 0px;
@@ -139,15 +180,7 @@ textarea{font-style: normal; border: none; resize: none;}
     align-items: center; 
     background-color: #ffffff;
 }
-/* .modalinner {
-    width: 164px;
-    height: 235px;
-    border: 1px solid #ffffff;
-   
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-  } */
+
 .modalinner {
     width: 164px;
     height: 235px;
@@ -225,22 +258,25 @@ textarea{font-style: normal; border: none; resize: none;}
 
 #grouprightsection{
     width: 400px;
-    margin-left: 10px;
-    min-width: 400px
+    margin-left: 880px;
+    min-width: 400px;
+    position: fixed;
 }
 #gannounce{
     padding: 17px 22px 17px;
 }
 #grouppopular{
+    padding: 17px 22px 17px;
     margin-top: 10px;
 }
 
 /* 모임가입하기 박스 */
  #groupinfobox{
     color: black;
-    background-color: white;
+    background-color: rgb(252, 252, 241);
     padding: 15px;
-    border: 1px solid #ccc;
+    padding-top: 0px;
+    position: fixed;
 }
 #groupname{
     font-weight: bold;
@@ -457,11 +493,26 @@ color: white;
     display: flex;
 }
 .searchBox {
-    margin-right: 10px; /* 검색 상자 사이 여백 */
-    
+    display: flex;
+    width: 230px;
+    height: 28px;
+    background-color: rgb(255, 255, 255, 0.8);
+    border: 3px solid #ccc;
+    border-radius: 25px;
+}
+.searchBox > div:first-child{
+    width: 200px;
+    height: 28px;
+    padding-left: 7px;
+    padding-bottom: 5px;
 }
 .searchBtnBox{
-    margin-right: 200px;
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+    background-image: url(../images/group/search-4460336.png);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
 }
 
 .write_btn { 
@@ -495,4 +546,43 @@ padding: 14px;
 .writerinfo span{
     color:black;
     font-size: 15px;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.badgeimg{
+    border: 1px solid red;
+}
+.inputGPR{
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.inputGPR > .badgeimg-right-info{
+    width: 390px;
+}
+.inputGPR > .badgeimg-right-info > textarea{
+    margin-top: 10px;
+    border: 1px solid black;  
+    
+}
+.inputGPR > div:first-child{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.inputGPR > div:last-child{
+    width: 60px;
+}
+.inputGPR > div:last-child > input{
+    display: block;
+    width: 55px;
+    height: 50px;
+    margin-top: 31px;
+    cursor: pointer;
+}
+.greplyListwrap{
+    border-bottom: 2px solid #ECEEEF;
 }
