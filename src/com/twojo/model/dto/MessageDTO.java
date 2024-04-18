@@ -6,10 +6,15 @@ public class MessageDTO {
 	private String receiveid;
 	private String msgcontent;
 	private String msregdate;
+	private String linkstring;
 	private int msgcheck;
 	
-	
-	
+	public String getLinkstring() {
+		return linkstring;
+	}
+	public void setLinkstring(String linkstring) {
+		this.linkstring = linkstring;
+	}
 	public int getMsgcheck() {
 		return msgcheck;
 	}

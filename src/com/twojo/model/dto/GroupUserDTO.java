@@ -1,13 +1,13 @@
 package com.twojo.model.dto;
 
 public class GroupUserDTO {
-	private int groupnum;
+	private long groupnum;
 	private String userid;
 	
-	public int getGroupnum() {
+	public long getGroupnum() {
 		return groupnum;
 	}
-	public void setGroupnum(int groupnum) {
+	public void setGroupnum(long groupnum) {
 		this.groupnum = groupnum;
 	}
 	public String getUserid() {

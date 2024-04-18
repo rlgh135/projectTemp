@@ -47,27 +47,17 @@ public class GPostInnerOkAction {
 		req.setAttribute("keyword", keyword);
 		
 		GPostDTO gongji = gpdao.getGongji(groupnum);
-		GPostDTO ingi = gpdao.getIngi(groupnum).get(0);
+		List<GPostDTO> ingiList = gpdao.getIngi(groupnum);
+		GPostDTO ingi;
+		
+		try {
+			ingi = ingiList.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			ingi = null;
+		}
 		
 		req.setAttribute("gongji", gongji);
 		req.setAttribute("ingi", ingi);
-//		GPReplyDAO gprdao = new GPReplyDAO();
-//		ArrayList<Integer> reply_cnt_list = new ArrayList<Integer>();
-//		ArrayList<String> hot_board = new ArrayList<String>();
-//		for(GPostDTO gpost : list) {
-//			reply_cnt_list.add(gprdao.getReplyCnt(gpost.getGpostnum()));
-//			int cnt = gprdao.getRecentReplyCnt(gpost.getGpostnum());
-//			if(cnt < 5) {
-//				hot_board.add("X");
-//			}
-//			else {
-//				hot_board.add("O");
-//			}
-//		}
-//		
-//		req.setAttribute("reply_cnt_list", reply_cnt_list);
-//		req.setAttribute("hot_board", hot_board);
-		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);
 		transfer.setPath("/app/group/groupinner.jsp?groupnum="+groupnum);

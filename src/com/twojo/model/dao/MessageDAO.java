@@ -14,6 +14,7 @@ public class MessageDAO {
 	public boolean insertMSG(MessageDTO msg) {
 		return ss.insert("Message.insert", msg) == 1;
 	}
-	
-	
+	public boolean systemMessage(MessageDTO msg) {
+		return ss.insert("Message.systemMessage", msg) == 1;
+	}
 }

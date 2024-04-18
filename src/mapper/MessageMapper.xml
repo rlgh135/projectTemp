@@ -8,7 +8,10 @@
 		values(#{sendid},#{receiveid},#{msgcontent},#{msgcheck})
 	</insert>
 		
-	
+	<insert id="systemMessage" parameterType="messagedto">
+		insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
+		values(#{sendid},#{receiveid},#{msgcontent},#{msgcheck},#{linkstring})
+	</insert>
 </mapper>
 
 

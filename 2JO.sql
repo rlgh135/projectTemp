@@ -14,7 +14,10 @@ CREATE TABLE user (
   userpoint int default 0,
   warningcnt int default 0
 );
-select * from user;
+select * from user where userid='abc320';
+select * from user where userid='abc772';
+insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
+value('abc772', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;
 CREATE TABLE `lpost` (
   lpostnum bigint PRIMARY KEY AUTO_INCREMENT,
@@ -72,10 +75,12 @@ CREATE TABLE `group` (
   `groupmaster` varchar(300),
   `groupregdate` datetime default now(),
   `groupcontents` text,
-  `grouplikecnt` int default 0
+  `grouplikecnt` int default 0,
+  `groupledaer` varchar(300) default null
 );
+select * from `group`;
 select count(*) from `group`;
-select * from `group` where groupnum=1;
+select * from `group` where groupnum=2;
 create table board_user(
 	boardnum bigint,
     userid varchar(300)
@@ -85,7 +90,8 @@ create table group_user(
 	groupnum bigint,
     userid varchar(300)
 );
-
+delete from group_user where userid='abc3';
+select * from group_user where userid='abc3';
 CREATE TABLE `groupimg` (
   `imgnum` bigint PRIMARY KEY AUTO_INCREMENT,
   `groupnum` bigint,
@@ -105,7 +111,8 @@ CREATE TABLE `gpost` (
   `gpostregdate` datetime default now()
 );
 select * from `gpost`;
-select * from `gpost` where groupnum=1 and gpostgongji=1;
+insert into gpost(groupnum, gposttitle, userid, gpostcontents) value(2, 'd', 'abc3', '그룹2내용');
+select * from `gpost` where groupnum=2 and gpostgongji=1;
 update gpost set gpostgongji=1 where gpostnum=2;
 update gpost set gpostlike=(gpostlike+1) where gpostnum=2;
 SELECT * FROM gpost WHERE groupnum=1 and gpostlike = (SELECT MAX(gpostlike) FROM gpost) order by gpostnum desc;
@@ -151,16 +158,40 @@ CREATE TABLE `gprfile` (
   `gprfilesysname` varchar(1000)
 );
 
+create table reqlist(
+	groupnum bigint,
+    userid varchar(300) default null,
+    leaderid varchar(300) default null,
+    question varchar(3000) default '§',
+    answer varchar(6000) default null,
+    autoreg int default 0
+);
+drop table reqlist;
+
+delete from reqlist where userid='abc3';
+delete from reqlist where leaderid='abc320';
+select * from reqlist;
+select * from reqlist where (groupnum=1 and leaderid is null);
+select * from reqlist where (groupnum=2 and autoreg=1);
+insert into reqlist(groupnum, leaderid, question) value(1, 'abc320', '1번 질문 입니다§2번 질문 입니다§3번 질문 입니다§4번 질문 입니다§');
+insert into reqlist(groupnum, leaderid, autoreg) value(2, 'abc772', 1);
+insert into reqlist(groupnum, userid, answer) value(1, 'abc1', '답1-1§답2-1§답3-1§답4-1§');
 /*0417 추가*/
+
+
 create table message(
 messagenum bigint PRIMARY KEY AUTO_INCREMENT,
 sendid varchar(300),
 receiveid varchar(300),
 msgcontent varchar(3000),
 msregdate datetime default now(),
+linkstring varchar(3000) default null,
 msgcheck int
 );
+insert into message (sendid, receiveid, msgcontent, msgcheck, url)
+		values('system','abc320','가입',0,'/groupinner.gp?groupnum=1');
 select * from message;
+drop table message;
 CREATE TABLE `warning` (
   `warningnum` int PRIMARY KEY AUTO_INCREMENT,
   `reason` text

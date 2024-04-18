@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReqList">
+	<insert id="makeQuestion" parameterType="reqlistdto">
+		insert into reqlist(`groupnum`, `leaderid`, `question`) 
+		values(#{groupnum},#{leaderid},#{qusetion})
+	</insert>
+	<insert id="makeAutoQuestion" parameterType="reqlistdto">
+		insert into reqlist(groupnum, leaderid, autoreg) 
+		value(#{groupnum}, #{leaderid}, #{autoreg})
+	</insert>
+	<insert id="makeAnswer" parameterType="reqlistdto">
+		insert into reqlist(groupnum, userid, answer) 
+		value(#{groupnum}, #{userid}, #{answer})
+	</insert>
+	<delete id="delete" parameterType="reqlistdto">
+		delete from reqlist where (groupnum=#{groupnum} and userid=#{userid})
+	</delete>
+	<delete id="deleteQuestion" parameterType="string">
+		delete from reqlist where leaderid=#{leaderid}
+	</delete>
+	<select id="getAnswerList" parameterType="long" resultType="reqlistdto">
+		select * from reqlist where (groupnum=#{groupnum} and leaderid is null)
+	</select>
+	<select id="getQuestionList" parameterType="long" resultType="reqlistdto">
+		select * from reqlist where (groupnum=#{groupnum} and userid is null)
+	</select> 
+</mapper>

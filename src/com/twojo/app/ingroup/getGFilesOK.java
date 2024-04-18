@@ -13,7 +13,7 @@ import com.twojo.action.Transfer;
 import com.twojo.model.dao.GFileDAO;
 import com.twojo.model.dto.GFileDTO;
 
-public class getGFilesOK implements Action{
+public class GetGFilesOK implements Action{
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		long gpostnum = Long.parseLong(req.getParameter("gpostnum"));

@@ -34,6 +34,7 @@ public class GPostFrontController extends HttpServlet{
 		switch(command) {
 		case "/groupinner.gp":
 			try {
+				System.out.println(1);
 				transfer = new GPostInnerOkAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println("/groupinner.gp : "+e);
@@ -57,7 +58,7 @@ public class GPostFrontController extends HttpServlet{
 			break;
 		case "/getgfile.gp":
 			try {
-				transfer = new getGFilesOK().execute(req, resp);
+				transfer = new GetGFilesOK().execute(req, resp);
 				transfer = null;
 			} catch (Exception e) {
 				System.out.println("/getgfile.gp : "+e);
@@ -94,9 +95,23 @@ public class GPostFrontController extends HttpServlet{
 			break;
 		case "/joinmoim.gp":
 			try {
-				transfer = new WriteGPReplyOKAction().execute(req,resp);
+				transfer = new joinMoimAction().execute(req,resp);
 			} catch (Exception e) {
-				System.out.println("/writegpreply.gp : "+e);
+				System.out.println("/joinmoim.gp : "+e);
+			}
+			break;
+		case "/joinmoimok.gp":
+			try {
+				transfer = new JoinMoimOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/joinmoimok.gp : "+e);
+			}
+			break;
+		case "/checkmoim.gp":
+			try {
+				transfer = new CheckMoimAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/checkmoim.gp : "+e);
 			}
 			break;
 		}

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>groupInner</title>
 <link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
 <style>
 
@@ -78,6 +78,9 @@
 </head>
 <body>
 	<c:if test="${empty isInGroup}"></c:if>
+	<c:if test="${empty loginUser}">
+		<c:set var="loginUser" value="${null}"/>
+	</c:if>
 	<jsp:include page="${cp}/app/message/sendmessage.jsp"></jsp:include>
 	<div class="sujung">
         <div class="sujung_body">
@@ -112,9 +115,6 @@
     <button class="btn-close-sujung" id="sujungCBtn" style="display: none;">Modal닫기</button>
 <!-- 
  -->
-	<c:if test="${empty loginUser}">
-		<c:set var="loginUser" value="${null}"/>
-	</c:if>
 	<c:set var="page" value="${pararm.page}"/>
 	<c:choose>
 		<c:when test="${empty page or param.page <= 0}">
@@ -143,7 +143,15 @@
                     <img src="../../file/groupimg/abcd25.jpg" style="background-size: cover; width: 100%; height: auto;">
                 </div>
                 <div class="groupinfobox-inner">
-                    <p id="groupname">${group.groupname}</p>
+                    <div id="groupname">
+                    	<span>${group.groupname}</span>
+                    	<c:if test="${loginUser == group.groupmaster}">
+                    		<div class="moimcontroll">
+                    			<div class="alertsign-red"></div>
+                    			<a href="${cp}/checkmoim.gp?groupnum=${group.groupnum}">가입관리</a>
+                    		</div>                    	
+                    	</c:if>
+                    </div>
                     <p id="groupinfo">
                         <span class="gmem">멤버: ${usercnt}</span>
                         <span class="glead">리더: ${group.groupmaster}</span>
@@ -159,121 +167,125 @@
 					 </ul>
                     <div>
                         <div class="group-btn-box btnBox">
-                                <input type="button" value="모임 가입하기" class="joinMoim" onclick="javascript:joinMoim(${group.groupnum}, ${loginUser})">
+                                <input type="button" value="모임 가입하기" class="joinMoim" onclick="joinMoim(${group.groupnum})">
                         </div>
                     </div>
                 </div>
             </div>
             <div id="gpostsection">
-                <div class="summary" style="border: none; background:none;">
-					<div style="margin: 10px 0px 10px 10px;">
-						<p><h2>${group.groupname} 이번 주 인기글</h2></p>
-					</div>
-
-					<ul class="gpostList">
-					
-						<li class="gpostListwrap">
-							<div class="gpostHead default-group-Head">
-					
-								<%-- 프로필 펼치기 --%>
-									<button class="badgeimg modalOpenBtn" id="modalOpenBtn${ingi.gpostnum+10000}"
-										onclick="modalClk(${ingi.gpostnum+10000})">★</button>
-									<div id="modalContainer${ingi.gpostnum+10000}" class="modalContainer replyHide">
-										<div id="modalContent${ingi.gpostnum+10000}" class="modalContent">
-											<div id="modalinner${ingi.gpostnum+10000}" class="modalinner" style="width: 177px;">
-												<button id="modalCloseBtn${ingi.gpostnum+10000}" class="modalCloseBtn"
-													onclick="modalClose(${ingi.gpostnum+10000})">
-													<img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">
-												</button>
-												<div class="imgid">
-													<div class="mbadgeimg">
-														<img src="" alt="">
+            	<c:choose>
+            		<c:when test="${empty ingi}">
+            			<div class="summary" style="border: none; background:none;">
+							<div style="margin: 10px 0px 10px 10px;">
+								<p><h2>인기글이 없어요</h2></p>
+							</div>
+							<ul class="gpostList">
+								<li class="gpostListwrap">
+									<div class="gpostHead default-group-Head">
+									</div>
+								</li>
+							</ul>
+						</div>
+            		</c:when>
+            		<c:otherwise>
+		                <div class="summary" style="border: none; background:none;">
+							<div style="margin: 10px 0px 10px 10px;">
+								<p><h2>${group.groupname} 이번 주 인기글</h2></p>
+							</div>
+							<ul class="gpostList">
+								<li class="gpostListwrap">
+									<div class="gpostHead default-group-Head">
+										<%-- 프로필 펼치기 --%>
+											<button class="badgeimg modalOpenBtn" id="modalOpenBtn${ingi.gpostnum+10000}"
+												onclick="modalClk(${ingi.gpostnum+10000})">★</button>
+											<div id="modalContainer${ingi.gpostnum+10000}" class="modalContainer replyHide">
+												<div id="modalContent${ingi.gpostnum+10000}" class="modalContent">
+													<div id="modalinner${ingi.gpostnum+10000}" class="modalinner" style="width: 177px;">
+														<button id="modalCloseBtn${ingi.gpostnum+10000}" class="modalCloseBtn"
+															onclick="modalClose(${ingi.gpostnum+10000})">
+															<img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">
+														</button>
+														<div class="imgid">
+															<div class="mbadgeimg">
+																<img src="" alt="">
+															</div>
+															<p>${ingi.userid}</p>
+														</div>
+														
+													<div class="profilemenu">
+							
+														<%--쪽지 보내기 --%>
+															<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
+															<button type="button" class="msg_send" onclick="sendMessage()" style="cursor: pointer;">쪽지보내기</button>
 													</div>
-													<p>${ingi.userid}</p>
+													<div class="profilemenu">
+														<img src="../../images/write.png" style="width: 18px; height: 18px;">
+														<p>작성글보기</p>
+													</div>
 												</div>
-												<%-- <div class="profilemenu">
-													<p>${user.userhobby}</p>
 											</div>
-											<div class="profilemenu">
-												<p>${user.gender}</p>
-											</div>
-											<div class="profilemenu">
-												<p>${user.userpoint}</p>
-											</div> --%>
-											<div class="profilemenu">
-					
-												<%--쪽지 보내기 --%>
-													<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
-													<button type="button" class="msg_send" onclick="sendMessage()" style="cursor: pointer;">쪽지보내기</button>
-											</div>
-											<div class="profilemenu">
-												<img src="../../images/write.png" style="width: 18px; height: 18px;">
-												<p>작성글보기</p>
-											</div>
-										</div>
 									</div>
-							</div>
-					
-							<div class="writerinfo badgeimg-right-info">
-								<p>
-									<a href="" class="usernamelink">${ingi.userid}</a>
-									<span>인기쟁이에요</span>
-								</p>
-								<p class="regtime">${ingi.gpostregdate}</p>
-							</div>
-							</div>
-					
-							<div class="gpostContents">
-								<div>
-									<p>
-										<textarea class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}" style="width: 100%; height: 100%">${ingi.gpostcontents}</textarea>
-									</p>
-									<div>
-										<input type="button" style="cursor: pointer;" value="첨부파일" onclick="showFiles(${ingi.gpostnum+10000})">
+							
+									<div class="writerinfo badgeimg-right-info">
+										<p>
+											<a href="" class="usernamelink">${ingi.userid}</a>
+											<span>인기쟁이에요</span>
+										</p>
+										<p class="regtime">${ingi.gpostregdate}</p>
 									</div>
-									<div class="gpostfile${ingi.gpostnum+10000} replyHide">
-										<ul class="gfileList${ingi.gpostnum+10000}"></ul>
 									</div>
-									<div class="likereply">
-										<img id="likeButton" onclick="pressLike(${ingi.gpostnum+10000})"
-											class="like-button likeButton${ingi.gpostnum+10000}" src="${cp}/images/redheart.webp" alt="좋아요"
-											style="width: 15px; height: 15px;">
-										<div class="point-area showreplyBtn">
-											<div style="display: inline-block;">
-												<input type="button" value="좋아요 i개">
-											</div>
-											<div style="display: inline-block;">
-												<input type="button" class="showrpcnt${ingi.gpostnum+10000}" value="댓글 ${ingi.gprcnt}개"
-													onclick="showReply(${ingi.gpostnum+10000})" style="cursor: pointer;">
-											</div>
-					
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="gpostReply${ingi.gpostnum+10000} replyHide">
-								<div class="repForm reply${ingi.gpostnum+10000}">
-									<Form method="post" class="inputGPR"
-										action="writegpreply.gp?gpostnum=${ingi.gpostnum}&?groupnum=${group.groupnum}"
-										name="writeRPForm${ingi.gpostnum}">
-										<div class="badgeimg"><img src=""></div>
-										<div class="badgeimg-right-info">
-											<p class="replywriter">${loginUser}HiImTester</p>
-											<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
-										</div>
+							
+									<div class="gpostContents">
 										<div>
-											<input type="submit" value="등록">
+											<p>
+												<textarea class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}" style="width: 100%; height: 100%">${ingi.gpostcontents}</textarea>
+											</p>
+											<div>
+												<input type="button" style="cursor: pointer;" value="첨부파일" onclick="showFiles(${ingi.gpostnum+10000})">
+											</div>
+											<div class="gpostfile${ingi.gpostnum+10000} replyHide">
+												<ul class="gfileList${ingi.gpostnum+10000}"></ul>
+											</div>
+											<div class="likereply">
+												<img id="likeButton" onclick="pressLike(${ingi.gpostnum+10000})"
+													class="like-button likeButton${ingi.gpostnum+10000}" src="${cp}/images/redheart.webp" alt="좋아요"
+													style="width: 15px; height: 15px;">
+												<div class="point-area showreplyBtn">
+													<div style="display: inline-block;">
+														<input type="button" value="좋아요 i개">
+													</div>
+													<div style="display: inline-block;">
+														<input type="button" class="showrpcnt${ingi.gpostnum+10000}" value="댓글 ${ingi.gprcnt}개"
+															onclick="showReply(${ingi.gpostnum+10000})" style="cursor: pointer;">
+													</div>
+							
+												</div>
+											</div>
 										</div>
-									</Form>
-								</div>
-								<ul class="greplyList${ingi.gpostnum+10000}"></ul>
-							</div>
-						</li>
-					
-					</ul>
-                    
-				
-                </div>
+									</div>
+									<div class="gpostReply${ingi.gpostnum+10000} replyHide">
+										<div class="repForm reply${ingi.gpostnum+10000}">
+											<Form method="post" class="inputGPR"
+												action="writegpreply.gp?gpostnum=${ingi.gpostnum}&?groupnum=${group.groupnum}"
+												name="writeRPForm${ingi.gpostnum}">
+												<div class="badgeimg"><img src=""></div>
+												<div class="badgeimg-right-info">
+													<p class="replywriter">${loginUser}HiImTester</p>
+													<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
+												</div>
+												<div>
+													<input type="submit" value="등록">
+												</div>
+											</Form>
+										</div>
+										<ul class="greplyList${ingi.gpostnum+10000}"></ul>
+									</div>
+								</li>
+							
+							</ul>
+		                </div>
+            		</c:otherwise>
+            	</c:choose>
                 <div class="groupsearch searchArea">
                     <div class="searchBox" style="margin-bottom: 2px; margin-left: 5px;">
 						<div>
@@ -432,28 +444,56 @@
                 <div id="gannounce">
                     <p><h2>최신 공지사항</h2></p>
                     <ul class="gpostList" id="gpGongji" style="margin-top: 10px;">
-                        <li class="gpostListwrap">
-                            <div class="gpostHead default-group-Head">
-                                <div class="badgeimg">
-                                    <img src="">
-                                </div>
-                                <div class="writerinfo badgeimg-right-info">
-                                    <p>
-                                        <a href="" class="usernamelink">${gongji.userid}</a>
-                                        <span>공지에요</span>
-                                    </p>
-                                    <p class="regtime">${gongji.gpostregdate}</p>
-                                </div>
-                            </div>
-                            <div class="gpostContents">
-                                <div>
-                                    <p>
-										<textarea class="GPCIN gpostConetentsIn${gongji.gpostnum}" style="width: 100%; height: 100%">${gongji.gpostcontents}
-										</textarea>
-									</p>
-                                </div>
-                            </div>
-                        </li>
+                    	<c:choose>
+                    		<c:when test="${empty gongji}">
+                    			<li class="gpostListwrap">
+		                            <div class="gpostHead default-group-Head">
+		                                <div class="badgeimg">
+		                                    <img src="">
+		                                </div>
+		                                <div class="writerinfo badgeimg-right-info">
+		                                    <p>
+		                                        <a href="" class="usernamelink"></a>
+		                                        <span></span>
+		                                    </p>
+		                                    <p class="regtime"></p>
+		                                </div>
+		                            </div>
+		                            <div class="gpostContents">
+		                                <div>
+		                                    <p>
+												<textarea class="GPCIN gpostConetentsInNo" style="width: 100%; height: 100%">공지가 없어요
+												</textarea>
+											</p>
+		                                </div>
+		                            </div>
+		                        </li>
+                    		</c:when>
+                    		<c:otherwise>
+		                        <li class="gpostListwrap">
+		                            <div class="gpostHead default-group-Head">
+		                                <div class="badgeimg">
+		                                    <img src="">
+		                                </div>
+		                                <div class="writerinfo badgeimg-right-info">
+		                                    <p>
+		                                        <a href="" class="usernamelink">${gongji.userid}</a>
+		                                        <span>공지에요</span>
+		                                    </p>
+		                                    <p class="regtime">${gongji.gpostregdate}</p>
+		                                </div>
+		                            </div>
+		                            <div class="gpostContents">
+		                                <div>
+		                                    <p>
+												<textarea class="GPCIN gpostConetentsIn${gongji.gpostnum}" style="width: 100%; height: 100%">${gongji.gpostcontents}
+												</textarea>
+											</p>
+		                                </div>
+		                            </div>
+		                        </li>
+                    		</c:otherwise>
+                    	</c:choose>
                     </ul>
                 </div>
             </div>
