@@ -75,16 +75,16 @@ public class InsertDummy {
 //			ss.insert("Group.insert", group);
 //		}
 		
-		//gpost
-		for(int i=0; i<45; i++) {
-			GPostDTO gpost = new GPostDTO();
-			gpost.setGroupnum(1);
-			gpost.setGposttitle("제목"+(i+1));
-			gpost.setUserid("a"+(i+1));
-			gpost.setGpostcontents("내용\n"+(i+1)+"번\n내용\n내용\n내용\n내용\n");
-			
-			ss.insert("GPost.insert", gpost);
-		}
+//		//gpost
+//		for(int i=0; i<45; i++) {
+//			GPostDTO gpost = new GPostDTO();
+//			gpost.setGroupnum(1);
+//			gpost.setGposttitle("제목"+(i+1));
+//			gpost.setUserid("a"+(i+1));
+//			gpost.setGpostcontents("내용\n"+(i+1)+"번\n내용\n내용\n내용\n내용\n");
+//			
+//			ss.insert("GPost.insert", gpost);
+//		}
 		
 //		//greply
 //		for(int i=0; i<45; i++) {
@@ -99,18 +99,18 @@ public class InsertDummy {
 //			}
 //		}
 		
-//		//group_user
-//		for(int i=0; i<10000; i++) {
-//			GroupUserDTO gu = new GroupUserDTO();
-//			int groupnum = (int)(Math.random() * 300 + 1);
-//			gu.setGroupnum(groupnum);
-//			gu.setUserid("abc"+(i+1));
-//			
-//			ss.insert("GroupUser.insert", gu);
-//		}
+		//group_user
+		for(int i=0; i<1000; i++) {
+			GroupUserDTO gu = new GroupUserDTO();
+			int groupnum = (int)(Math.random() * 300 + 1);
+			gu.setGroupnum(groupnum);
+			gu.setUserid("abc"+(i+1));
+			
+			ss.insert("GroupUser.insert", gu);
+		}
 
 //		//groupimg
-//		for(int i=1; i<10000; i++) {
+//		for(int i=1; i<1000; i++) {
 //			GroupimgDTO gi = new GroupimgDTO();
 //			gi.setGroupnum(i);
 //			gi.setImgorgname("abc"+(i)+".jpg");

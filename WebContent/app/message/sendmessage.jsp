@@ -76,9 +76,9 @@
     <div id="index_top_wrap">
         <div class="login">
             <div>
-            	<main>
-                    <section>
-                        <button type="button" class="ms_modal_btn"></button>
+            	<main style="display: hidden;">
+                    <section style="display: hidden;">
+                        <button type="button" class="ms_modal_btn" style="display: hidden;"></button>
                     </section>
                 </main>
                 <!--모달 팝업-->

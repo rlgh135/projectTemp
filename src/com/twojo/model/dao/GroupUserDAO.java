@@ -13,9 +13,9 @@ public class GroupUserDAO {
 	}
 	
 	public boolean insert(GroupUserDTO groupuser) {
-		System.out.println(groupuser.getUserid());
-		System.out.println(groupuser.getGroupnum());
-		return ss.insert("GroupUser.delete", groupuser) ==1;
+		System.out.println("다오"+groupuser.getUserid());
+		System.out.println("다오"+groupuser.getGroupnum());
+		return ss.insert("GroupUser.insert", groupuser)==1;
 	}
 	
 	public boolean delete(GroupUserDTO groupuser) {

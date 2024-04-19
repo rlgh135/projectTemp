@@ -86,12 +86,22 @@ create table board_user(
     userid varchar(300)
 );
 select count(*) from `group_user`;
+
 create table group_user(
 	groupnum bigint,
     userid varchar(300)
 );
-delete from group_user where userid='abc3';
+drop table group_user;
+insert into group_user(groupnum, userid) value(2, 'abc3');
+delete from group_user where userid='abc3' and groupnum=2;
 select * from group_user where userid='abc3';
+SELECT * FROM information_schema.INNODB_LOCKS;
+SELECT * FROM information_schema.INNODB_LOCK_WAITS;
+select * from INFORMATION_SCHEMA.INNODB_TRX;
+KILL 480;
+SHOW processlist;
+SELECT * FROM information_schema.processlist;
+select * from group_user;
 CREATE TABLE `groupimg` (
   `imgnum` bigint PRIMARY KEY AUTO_INCREMENT,
   `groupnum` bigint,
