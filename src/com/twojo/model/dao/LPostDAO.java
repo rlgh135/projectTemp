@@ -74,4 +74,8 @@ private SqlSession ss;
 	public List<LPostDTO> getListWithAddr(String loginUserAddr) {
 		return ss.selectList("LPost.getListWithAddr",loginUserAddr);
 	}
+	public List<LPostDTO> getUserAddrList(String userAddr) {
+		return ss.selectList("LPost.getUserAddrList", userAddr);
+	}
+
 }

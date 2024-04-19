@@ -33,6 +33,7 @@ public class Lpost_UserAddAction implements Action{
 		
 		
 		if(lpdao.addUser(ludto)) {
+			lpdao.setimageCount(ludto);
 			System.out.println("참여성공");
 		} else {
 			System.out.print("이미 신청이 완료되었습니다.");

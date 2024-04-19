@@ -10,7 +10,7 @@
 		delete from `group_user` where (groupnum=#{groupnum} and userid=#{userid})
 	</delete>
 	<delete id="selectList" parameterType="long">
-		select * from `group_user` where (groupnum=#{groupnum})
+		select * from `group_user` where (groupnum=#{groupn	um})
 	</delete>
 </mapper>
 

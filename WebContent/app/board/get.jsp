@@ -83,6 +83,7 @@
 			<tr>
 				<th>내용</th>
 				<td>
+				   <div><p>지도</p></div>
 					<textarea name="boardcontents" readonly>${board.lpostcontents}</textarea>
 				</td>
 			</tr>

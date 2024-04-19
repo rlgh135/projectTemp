@@ -59,6 +59,20 @@ public class InsertDummy {
 //			
 //			ss.insert("LPost.insert", lpost);
 //		}
+		//lboard
+		for(int i=0; i<10; i++) {
+			LPostDTO lpost = new LPostDTO();
+			hobidx = (int)(Math.random()*10);
+			hobby = hobbies[hobidx];
+			lpost.setLpostcategory(hobby);
+			lpost.setUserid("abc"+(i%2+1));
+			regidx = (int)(Math.random()*5);
+			lpost.setLpostaddr("강남구");
+			lpost.setLposttitle("강남구게시글"+(i+1));
+			lpost.setLpostcontents("강남구게시글"+(i+1));
+			
+			ss.insert("LPost.insert", lpost);
+		}
 		
 //		group
 //		for(int i=0; i<3000; i++) {

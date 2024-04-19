@@ -34,6 +34,8 @@ CREATE TABLE `lpost` (
 select * from lpost;
 select count(*) from lpost where lpostaddr='관악구';
 drop table lpost;
+delete from lpost
+where lpostaddr='강남구';
 select * from lpost limit 0, 3000;
 
 /*0415추가*/
@@ -93,11 +95,11 @@ create table `group_user`(
     joindate datetime default now()
 );
 drop table group_user;
-insert into group_user(groupnum, userid) value(2, 'abc1');
+insert into group_user(groupnum, userid) value(2, 'abc231');
 delete from group_user where userid='abc1' and groupnum=2;
 select * from group_user where userid='abc1';
 select * from group_user where groupnum=2;
-select * from group_user where groupnum=2 order by userid desc limit 5;
+select * from group_user where groupnum=2 order by joindate desc limit 5;
 SELECT * FROM information_schema.INNODB_LOCKS;
 SELECT * FROM information_schema.INNODB_LOCK_WAITS;
 select * from INFORMATION_SCHEMA.INNODB_TRX;

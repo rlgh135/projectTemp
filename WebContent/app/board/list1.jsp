@@ -17,88 +17,107 @@
     <header>
 
     </header>
-    <div id="wrap">
-        <h2 id="title">${loginUserAddr}의 최근 게시글!</h2>
-        <%-- <c:set var="address" value="${list.lpostaddr}"/> --%>
-        <div class="firstpost">
-        	<c:forEach begin="0" end="3">
-        		<%-- <c:set var="loginUser" value="${loginUserAddrList[i]}"/> --%>
-	            <div class="postbox">
-	                <div class="title"></div>
-	                <div class="content"></div>
-	
-	                <div class="adgory">
-	                    <div class="addr">${loginUserAddr}</div>
-	                    <div class="category"></div>
-	                </div>
-	                <div class="img">
-	                    <c:if test="">
-						    <c:forEach var="j" begin="0" end="">
-						        <img src="./image/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원"
-						             style="width: 25px; height: 25px;">
-						    </c:forEach>
-						</c:if>
-						<c:if test="">
+	<div id="wrap">
+		<h2 id="title">${loginUserAddr}의 최근 게시글!</h2>
+		<div class="firstpost">
+			<c:forEach var="i" begin="0" end="3">
+				<c:if test="${not empty LPlist and i < LPlist.size()}">
+				<c:set var="LPlisti" value="${LPlist[i]}"/>
+					<div class="postbox">
+						<div class="title">
+							<a class="ttitle" href="${cp}/boardview.bo?lpostnum=${LPlisti.getLpostnum()}&page=${page}&keyword=${keyword}">
+								${LPlisti.getLposttitle()}
+								<span id="reply_cnt">[${reply_cnt_list[i] != null ? reply_cnt_list[i] : ""}]</span>
+							</a>
+						</div>   
+						<div class="content">${LPlisti.getLpostcontents()}</div>
+						<div class="adgory">
+							<div class="addr">${loginUserAddr}</div>
+							<div class="category">${LPlisti.getLpostcategory()}</div>
+						</div>
+						<div class="img">
+						<c:choose>
+						<c:when test="${LPlisti.getImageCount()!=0}">
+						<p>${LPlisti.getImageCount()}</p>
+							<c:forEach var="j" begin="0" end="${LPlisti.getImageCount()-1}">
+							        <img src="./images/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원"
+							             style="width: 25px; height: 25px;">
+							    </c:forEach>
+						</c:when>
+						<c:otherwise>
 							아직 아무도 참여하지 않았어요
-						</c:if>
-	                </div>
-	                <div class="regcnt">
-	                    <div class="regdate"></div>
-	                </div>
-	            </div>
-            </c:forEach>
-        </div>
-        <div class="townboard">
-            <div class="tbtop">
-                <h2 id="title">전체 게시글</h2>
-                <input type="text" placeholder="검색어 입력" id="keyword">
-                <input type="button" value="검색" onclick="search()"> 
-            </div>
+						</c:otherwise>	
+	
+						</c:choose>
+						</div>
+						<div class="regcnt">
+							<div class="regdate">${LPlisti.getLpostregdate()}</div>
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>        
+		
+		<div class="townboard">
+			<div class="tbtop">
+				<h2 id="title">전체 게시글</h2>
+					<!-- <select id="searchMenu">
+					    <option value="" selected>전체</option>
+					    <option value="lposttitle">제목</option>	
+					    <option value="lpostcategory">카테고리</option>
+					    <option value="userid">작성자</option>
+					</select> -->
+				<input type="text" placeholder="검색어 입력" id="keyword">
+				<input class="search_btn" type="button" value="검색" onclick="search()"> 
+			</div>
+		</div>
+
 <!-- 반복할 영역 -->
-		<c:choose>
-			<c:when test="${list != null and list.size() > 0}">
-            <c:forEach var="i" begin="0" end="${list.size() - 1}">
-               <c:set var="board" value="${list[i]}"/>
-                     <div class="secondpost">
-                         <div class="tpostbox">
-                         
+		<div class="secondpostbox">
+			<c:choose>
+				<c:when test="${list != null and list.size() > 0}">
+	            <c:forEach var="i" begin="0" end="${list.size() - 1}">
+	               <c:set var="board" value="${list[i]}"/>
+	           			<div class="secondpost">
+	                         <div class="tpostbox">
 								<div>
 								    <a class="ttitle" href="${cp}/boardview.bo?lpostnum=${board.lpostnum}&page=${page}&keyword=${keyword}">
 								        ${board.lposttitle != null ? board.lposttitle : ""} 
 								        <span id="reply_cnt">[${reply_cnt_list[i] != null ? reply_cnt_list[i] : ""}]</span>
 								    </a>
 								</div>
-                             <div class="tcontent">${board.lpostcontents}</div>
-             
-                             <div class="tadgory">
-                                 <div class="taddr">${board.lpostaddr}</div>
-                                 <div class="tcategory">${board.lpostcategory }</div>
-                             </div>
-                             <div class="timg">
-				                <!-- 이미지 카운트에 따라 이미지 생성 
-				                	forEach는 무조건 한 번은 실행이 되어서 if문을 추가했습니다.-->
-				                <c:if test="${board.imageCount > 0}">
-								    <c:forEach var="j" begin="0" end="${board.imageCount-1}">
-								        <img src="./image/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원"
-								             style="width: 25px; height: 25px;">
-								    </c:forEach>
-								</c:if>
-								<c:if test="${board.imageCount == 0}">
-									아직 아무도 참여하지 않았어요
-								</c:if>
-				            </div>
-                             <div class="tregcnt">
-                                 <div class="tregdate">${board.lpostregdate }</div>
-                                 <div class="tlikecnt">
-                                     <p class="tlike_cnt">${board.lpostaddr }</p>
-                                     <!-- <img class="theart" src="./image/like.webp" alt="좋아요수" style="width: 15px; height: 15px;"> -->
-
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                  </c:forEach>
-               </c:when>
+	                             <div class="tcontent">${board.lpostcontents}</div>
+	             
+	                             <div class="tadgory">
+	                                 <div class="taddr">${board.lpostaddr}</div>
+	                                 <div class="tcategory">${board.lpostcategory }</div>
+	                             </div>
+	                             <div class="timg">
+					                <!-- 이미지 카운트에 따라 이미지 생성 
+					                	forEach는 무조건 한 번은 실행이 되어서 if문을 추가했습니다.-->
+					                	<c:choose>
+					                		<c:when test="${board.imageCount > 0}">
+											    <c:forEach var="j" begin="0" end="${board.imageCount-1}">
+											        <img src="./image/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원" style="width: 25px; height: 25px;">
+											    </c:forEach>
+					                		</c:when>
+					                		<c:otherwise>
+												아직 아무도 참여하지 않았어요
+					                		</c:otherwise>
+					                	</c:choose>
+					            </div>
+	                             <div class="tregcnt">
+	                                 <div class="tregdate">${board.lpostregdate }</div>
+	                                 <div class="tlikecnt">
+	                                     <p class="tlike_cnt">${board.lpostaddr }</p>
+	                                     <!-- <img class="theart" src="./image/like.webp" alt="좋아요수" style="width: 15px; height: 15px;"> -->
+	
+	                                 </div>
+	                             </div>
+	                         </div>
+	                     </div>
+	                  </c:forEach>
+	            </c:when>
             </c:choose>
         </div>
         
@@ -164,12 +183,14 @@
         }
     };
 
-    function search(){
+    function search() {
         console.log("로그 들어옴");
         const keyword = document.getElementById("keyword").value;
-        console.log(keyword);
-        //유효성 검사
-        location.replace("${cp}/boardlist.bo?keyword="+keyword);
+        /* const searchMenu = document.getElementById("searchMenu").value; */
+        //console.log(keyword, searchMenu);
+        /* location.replace("${cp}/boardlist.bo?keyword=" + keyword + "&searchMenu=" + searchMenu); */
+        location.replace("${cp}/boardlist.bo?keyword=" + keyword);
     }
+
 </script>
 </html>

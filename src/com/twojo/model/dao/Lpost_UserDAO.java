@@ -17,7 +17,10 @@ public class Lpost_UserDAO {
 	
 	
 	public boolean addUser(Lpost_UserDTO ludto) {
-	    try {return ss.insert("Lpost_User.adduser", ludto) == 1;}
+	    try {
+	    	System.out.println(ludto.getUserid());
+	    	System.out.println(ludto.getBoardnum());
+	    	return ss.insert("Lpost_User.adduser", ludto) == 1;}
 	    catch (PersistenceException e) {return false;}
 	}
 
@@ -47,6 +50,5 @@ public class Lpost_UserDAO {
 		return ss.update("Lpost_User.setimageCount", ludto) == 1;
 		
 	}
-
 
 }

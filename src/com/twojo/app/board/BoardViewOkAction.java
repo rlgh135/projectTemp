@@ -58,7 +58,7 @@ public class BoardViewOkAction implements Action{
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);
-		transfer.setPath(req.getContextPath()+"/app/board/get.jsp");
+		transfer.setPath("/app/board/get.jsp");
 		return transfer;
 	}
 }
