@@ -10,7 +10,10 @@
 </head>
 <body>
 	<c:if test="${empty loginUser}">
-		<c:set var="loginUser" value="${null}"/>
+		<script>
+			alert("돌아가");
+			location.href = "/";
+		</script>
 	</c:if>
 	<div id="group_inner_wrap">
         <header>
@@ -55,20 +58,26 @@
             		<div id="gpostsection">
                 		<div id="gpost" class="postsection">
 	                		<div class="gpostListwrap">
-	                			<form action="/joinmoimok.gp?groupnum=${group.groupnum}" method="post">
+	                			<form action="/joinmoimok.gp?groupnum=${group.groupnum}" method="post" name="qlistForm">
 			                		<c:choose>
 			                			<c:when test="${autoreg == 1}">
 			                				<div>
 			                					<p>${group.groupname}은 자동 가입 모임이에요</p>
-			                					<p>정말 가입하시겠어요?</p>
+			                					<p><a href="javascript:changeAuto(1)">가입 방식 변경하기</a></p>
 			                					<input type="hidden" name="auto" value="auto">
+			                				</div>
+			                				<div>
+			                					<p>${group.groupname}에 가입 신청이 있어요</p>
+			                					<ul>
+			                						<c:forEach var="i" begin="0" end="${an }"></c:forEach>
+			                					</ul>
 			                				</div>			                				
 			                				<div><input type="submit" value="가입신청" style="cursor: pointer;"></div>
 			                			</c:when>
 			                			<c:otherwise>
 			                				<div>
-			                					<p>${group.groupname}의 가입 양식이에요</p>
-			                					<p>질문에 답변해 주세요</p>
+			                					<p>${group.groupname}의 가입 양식이에요<span><a href="">편집</a></span></p>
+			                					<p><a href="javascript:changeAuto(0)">자동 가입으로 변경하기</a></p>
 			                					<input type="hidden" name="auto" value="no">
 			                				</div>
 			                				<ul class="qListWrap">

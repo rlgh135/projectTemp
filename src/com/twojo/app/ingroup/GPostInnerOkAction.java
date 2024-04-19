@@ -1,14 +1,11 @@
 package com.twojo.app.ingroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.twojo.action.Transfer;
-import com.twojo.model.dao.GFileDAO;
-import com.twojo.model.dao.GPReplyDAO;
 import com.twojo.model.dao.GPostDAO;
 import com.twojo.model.dao.GroupDAO;
 import com.twojo.model.dto.GPostDTO;

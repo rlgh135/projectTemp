@@ -89,19 +89,22 @@ select count(*) from `group_user`;
 
 create table `group_user`(
 	groupnum bigint,
-    userid varchar(300)
+    userid varchar(300),
+    joindate datetime default now()
 );
 drop table group_user;
-insert into group_user(groupnum, userid) value(2, 'abc3');
-delete from group_user where userid='abc3' and groupnum=2;
+insert into group_user(groupnum, userid) value(2, 'abc1');
+delete from group_user where userid='abc1' and groupnum=2;
 select * from group_user where userid='abc1';
+select * from group_user where groupnum=2;
+select * from group_user where groupnum=2 order by userid desc limit 5;
 SELECT * FROM information_schema.INNODB_LOCKS;
 SELECT * FROM information_schema.INNODB_LOCK_WAITS;
 select * from INFORMATION_SCHEMA.INNODB_TRX;
-KILL 35;
+KILL 46;
 SHOW processlist;
 SELECT * FROM information_schema.processlist;
-select * from group_user;
+select * from group_user ;
 CREATE TABLE `groupimg` (
   `imgnum` bigint PRIMARY KEY AUTO_INCREMENT,
   `groupnum` bigint,

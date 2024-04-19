@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
+import com.twojo.model.dao.GroupUserDAO;
 import com.twojo.model.dao.ReqListDAO;
+import com.twojo.model.dto.GroupUserDTO;
 import com.twojo.model.dto.ReqListDTO;
 
 public class CheckMoimAction implements Action{
@@ -18,7 +20,8 @@ public class CheckMoimAction implements Action{
 		ReqListDAO reqdao = new ReqListDAO();
 		List<ReqListDTO> anstemp = reqdao.getAnswerList(groupnum);
 		ArrayList<ArrayList<String>> answer = new ArrayList<ArrayList<String>>();
-		
+		GroupUserDAO gudao = new GroupUserDAO();
+		List<GroupUserDTO> guser = gudao.selectList(groupnum);
 		try {
 			for (int i = 0; i < anstemp.size(); i++) {
 				String ansbase = anstemp.get(i).getAnswer();

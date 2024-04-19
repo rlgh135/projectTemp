@@ -34,7 +34,6 @@ public class GPostFrontController extends HttpServlet{
 		switch(command) {
 		case "/groupinner.gp":
 			try {
-				System.out.println(1);
 				transfer = new GPostInnerOkAction().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println("/groupinner.gp : "+e);

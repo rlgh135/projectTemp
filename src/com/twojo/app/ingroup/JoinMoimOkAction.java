@@ -37,14 +37,11 @@ public class JoinMoimOkAction implements Action{
 			groupuser.setUserid(userid);
 			groupuser.setGroupnum(groupnum);
 			
-			if (gudao.insert(groupuser)) {
-				System.out.println("들어옴"+2);				
-			}
+			gudao.insert(groupuser);
 			message.setMsgcontent(userid+"님이 "+groupname+"에 새로 가입했어요");
 		
 		} else {
 			index = Integer.parseInt(req.getParameter("index"));
-			System.out.println(2);
 			for (int i = 0; i < (index+1); i++) {
 				answer += req.getParameter("answer"+i);
 				answer += "§";

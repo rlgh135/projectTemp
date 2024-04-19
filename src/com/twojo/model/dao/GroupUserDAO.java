@@ -1,5 +1,7 @@
 package com.twojo.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.twojo.model.dto.GroupUserDTO;
@@ -20,5 +22,9 @@ public class GroupUserDAO {
 	
 	public boolean delete(GroupUserDTO groupuser) {
 		return ss.delete("GroupUser.delete", groupuser)==1;
+	}
+
+	public List<GroupUserDTO> selectList(long groupnum) {
+		return ss.selectList("GroupUser.selectList", groupnum);
 	}
 }
