@@ -21,7 +21,7 @@ public class BoardUpdateAction implements Action{
 
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);
-		transfer.setPath("/app/board/modify.jsp");
+		transfer.setPath("/app/board/modify.jsp?boardnum");
 		return transfer;
 	}
 }

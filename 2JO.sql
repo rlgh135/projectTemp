@@ -6,18 +6,20 @@ CREATE TABLE user (
   userpw varchar(300) NOT NULL,
   username varchar(300) NOT NULL,
   useraddr varchar(1000),
-  addrdetail varchar(1000) default '집',
-  useraddretc varchar(1000),
+  useraddrdetail varchar(1000) default '집',
+  useraddretc varchar(1000) default null,
   useraddrgu varchar(1000),
   userhobby varchar(1000),
   gender varchar(300) default '남자',
+  userzipcode varchar(1000),
   userpoint int default 0,
   warningcnt int default 0
 );
+
 select * from user;
 select * from user where userid='abc567';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
-value('abc567', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
+value('abc796', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;
 CREATE TABLE `lpost` (
   lpostnum bigint PRIMARY KEY AUTO_INCREMENT,

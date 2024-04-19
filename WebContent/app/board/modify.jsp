@@ -9,19 +9,10 @@
 <link href="${cp}/css/style.css" rel="stylesheet">
 </head>
 <body class="modify">
+	<header>
+		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
+	</header>
 	<div id="wrap" class="modify">
-		<div></div>
-		<!-- 로그아웃 버튼 배치할 테이블 -->
-		<table class="header_area">
-			<tbody>
-				<tr>
-					<td>
-						<span>${loginUser}님 환영합니다.</span>
-						<a class="btn" href="${cp}/userlogout.us">로그아웃</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
 		<!-- 타이틀 띄워주는 테이블 -->
 		<table class="title">
 			<tbody>

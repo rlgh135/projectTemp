@@ -63,10 +63,6 @@ private SqlSession ss;
 		return ss.selectOne("LPost.getLastNum",userid);
 	}
 
-	public List<LPostDTO> getboardinfoList(String userid) {
-		return ss.selectList("LPost.getUserList", userid);
-	}
-	
 	public boolean updateBoard(LPostDTO board) {
 		return ss.update("LPost.update",board) == 1;
 	}
@@ -78,4 +74,7 @@ private SqlSession ss;
 		return ss.selectList("LPost.getUserAddrList", userAddr);
 	}
 
+	public List<LPostDTO> getboardinfoList(String userid) {
+		return ss.selectList("LPost.getUserList", userid);
+	}
 }

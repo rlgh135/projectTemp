@@ -65,6 +65,18 @@
 		and (groupname like ('%${keyword}%') or groupcontents like ('%${keyword}%'))
 		order by groupregdate desc limit #{startRow},#{pageSize};
 	</select>
+	
+	<select id="getMyinfoList" parameterType="long" resultType="groupdto">
+		 select groupname, groupcategory, groupmaster, grouplikecnt
+		from `group`
+		where groupnum = #{groupnum};		
+		
+	</select>
+	<select id="findGroupnum" parameterType="String" resultType="int">
+		select groupnum
+		from `group_user`
+		where userid = #{userid};
+	</select>
 </mapper>
 
 

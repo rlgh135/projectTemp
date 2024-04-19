@@ -1,39 +1,87 @@
 package com.twojo.app.user;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.twojo.model.dao.UserDAO;
+import com.twojo.model.dao.GroupDAO;
+import com.twojo.model.dao.GroupimgDAO;
+import com.twojo.model.dao.LPostDAO;
+import com.twojo.model.dto.GroupDTO;
+import com.twojo.model.dto.GroupimgDTO;
 import com.twojo.model.dto.LPostDTO;
-import com.twojo.model.dto.MyinfoDTO;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
-import com.twojo.model.dao.LPostDAO;
-import com.twojo.model.dao.MyinfoDAO;
 
 public class MyinfoOkAction implements Action {
-	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
-    	String userid = (String)req.getSession().getAttribute("loginUser");
-//    	String userid = (String)req.getParameter("loginUser");
-    	System.out.println(userid);
-//        String lposttitle = req.getParameter("lposttitle");
-//        String lpostlikecntStr = req.getParameter("lpostlikecnt");
-        
-//        int lpostlikecnt = Integer.parseInt(lpostlikecntStr); // 수정된 부분
-        
-        LPostDAO lpdao = new LPostDAO();
-        List<LPostDTO> temp = lpdao.getboardinfoList(userid);
-        
-        req.setAttribute("lpost", temp);
-        
+	@Override
+    public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Transfer transfer = new Transfer();
-        transfer.setRedirect(false);
-        transfer.setPath(req.getContextPath()+"/app/user/myinfo.jsp");
+       
+            String userid = (String)req.getSession().getAttribute("loginUser");
+            
+            
+            // 사용자 아이디가 null이면 로그인 페이지로 리다이렉트
+            if (userid == null) {
+                transfer.setRedirect(true);
+                transfer.setPath("/");
+                return transfer;
+            }
+
+            LPostDAO lpdao = new LPostDAO();
+            
+            GroupDAO gdao = new GroupDAO();
+            GroupimgDAO gidao = new GroupimgDAO();
+            // gdto가 null이면 로그인 페이지로 리다이렉트
+            
+            List<LPostDTO> temp = lpdao.getboardinfoList(userid);
+            //session에 들어간 userid와 groupnum을 대조해 groupnum을 찾는다
+         // 사용자의 그룹번호 배열 가져오기
+            if(gdao.getfindgroupnum(userid) == null) {
+            	System.out.println("하이");
+            }
+            else {
+            	System.out.println("김일환");
+            }
+            List<Integer> groupnums = gdao.getfindgroupnum(userid);
+
+            // 각 그룹에 대한 정보를 저장할 리스트
+            List<GroupDTO> gboardList = new ArrayList<>();
+            List<GroupimgDTO> giboardList = new ArrayList<>();
+
+            // 각 그룹번호에 해당하는 정보 가져오기
+           	
+				for (long groupnum : groupnums) {
+					// GroupDTO 가져오기
+					GroupDTO gboard = gdao.getGroupByMyinfoList(groupnum);
+					if (gboard != null) {
+						gboardList.add(gboard);
+						
+					}
+
+					// GroupimgDTO 가져오기
+					GroupimgDTO giboard = gidao.getGroupimgList(groupnum);
+					if (giboard != null) {
+						giboardList.add(giboard);
+						
+					}
+				}
+				
+			
+            
+
+            // 결과 리스트에 정보가 담겨있음
+            req.setAttribute("group", gboardList);
+            req.setAttribute("groupimg", giboardList);
+            req.setAttribute("lpost", temp);
+            
+            transfer.setRedirect(false);
+            transfer.setPath("/app/user/myinfo.jsp");
+        
+            
+       
         return transfer;
-	}
+    }
 }

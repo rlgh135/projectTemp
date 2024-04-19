@@ -72,4 +72,11 @@ public class GroupDAO {
 		datas.put("pageSize", pageSize);
 		return ss.selectList("Group.getHobbyListWithKey", datas);
 	}
+	public List<Integer> getfindgroupnum(String userid) {
+		return ss.selectList("Group.findGroupnum", userid);
+	}
+	
+	public GroupDTO getGroupByMyinfoList(long groupnum){
+		return ss.selectOne("Group.getMyinfoList", groupnum);	
+	} 
 }

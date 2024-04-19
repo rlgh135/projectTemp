@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="${cp}/css/style.css">
 </head>
 <body>
+<%--
+<header>
+<jsp:include page="${cp}/app/header.jsp"></jsp:include>
+</header>	
+ --%>
     <div id="wrap" class="join">
         <form action="${cp}/userjoinok.us" method="post" name="joinForm">
             <table>
@@ -35,11 +40,11 @@
                     <tr>
                     	<th colspan="2">
                     		<div class="pw_check">
-                    			<span>영어 대문자, 소문자, 숫자, 특수문자(~,?,!,@,-)를 모두 하나 이상 포함해야 해요 😀</span>
+                    		 	<span>영어 대문자, 소문자, 숫자, 특수문자(~,?,!,@,-)를 모두 하나 이상 포함해야 해요 😀</span>
                     			<span>최소 8자 이상의 비밀번호가 보안에 안전해요 😄</span>
                     			<span>같은 문자가 연속해서 사용되지 않았어요 😆</span>
                     			<span>사용할 수 없는 문자가 포함되지 않았어요 😊</span>
-                    			<span>비밀번호 확인이 완료되었어요! 🤗</span>
+                    			<span>비밀번호 확인이 완료되었어요! 🤗</span>                    		
                     		</div>
                     	</th>
                     </tr>
@@ -80,19 +85,19 @@
                     <tr class="addr_area">
                         <th>주소</th>
                         <td>
-                            <input type="text" name="addr" id="addr" placeholder="주소" readonly>
+                            <input type="text" name="useraddr" id="useraddr" placeholder="주소" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th>상세주소</th>
                         <td>
-                            <input type="text" name="addrdetail" id="addrdetail" placeholder="상세주소">
+                            <input type="text" name="addrdetail" id="useraddrdetail" placeholder="상세주소">
                         </td>
                     </tr>
                     <tr>
                         <th>참고항목</th>
                         <td>
-                            <input type="text" name="addretc" id="addretc" placeholder="참고항목" readonly>
+                            <input type="text" name="useraddrgu" id="useraddrgu" placeholder="참고항목" readonly>
                         </td>
                     </tr>
                     <tr class="hobby_area">
@@ -100,11 +105,11 @@
                         <td>
                             <div>
                             	<div class="hobby_input">
-                            		<input type="text" id="receive_hobby"  readonly onclick="addHobby();">
-                            		<input type="button" value="취미" onclick="addHobby();">
+                            		<input type="text" id="receive_hobby"  readonly onclick="createHobby();">
+                            		<input type="button" value="추가" onclick="addHobby();">
+                            		<div class="hobby_list"></div>
+                            		<input type="hidden" value="" name="userhobby">
                             	</div>
-                            	<div class="hobby_list"></div>
-                            	<input type="hidden" value="" name="userhobby">
                             </div>
                         </td>
                     </tr>

@@ -15,8 +15,8 @@
 
 <body>
     <header>
-
-    </header>
+		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
+	</header>
 	<div id="wrap">
 		<h2 id="title">${loginUserAddr}의 최근 게시글!</h2>
 		<div class="firstpost">

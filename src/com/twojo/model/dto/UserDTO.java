@@ -4,6 +4,7 @@ public class UserDTO {
 	private String userid;
 	private String userpw;
 	private String username;
+	private String userzipcode;
 	private String useraddr;
 	private String useraddrdetail;
 	private String useraddretc;
@@ -18,6 +19,12 @@ public class UserDTO {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getUserzipcode() {
+		return userzipcode;
+	}
+	public void setUserzipcode(String userzipcode) {
+		this.userzipcode = userzipcode;
 	}
 	public String getUserpw() {
 		return userpw;

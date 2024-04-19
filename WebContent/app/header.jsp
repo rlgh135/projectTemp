@@ -6,8 +6,8 @@
     <div id="top_wrap">
         <div class="gnb">
             <div class="logo_box">
-                <a href="">
-                    <div class="logo"></div>
+                <a href="${cp}/myinfo.bo">
+                    <img class="logo">
                 </a>
             </div>
             <nav class="gnb_menu">
@@ -31,17 +31,17 @@
                 <div>
                     <a class="btn" href="${cp}/myinfolist.mc">
                     	<div id="userinfo_gnb">
-                    	<img alt="" src="${cp}/images/myinfo_icon.png">
+                    		<img alt="" src="${cp}/images/myinfo_icon.png">
                     	</div>
                     </a>
                     <a class="btn" href="${cp}/getmessage.ms">
                     	<div id="usermsg_gnb">
-                    	<img alt="" src="${cp}/images/msg_icon.png">
+                    		<img alt="" src="${cp}/images/msg_icon.png">
                     	</div>
                     </a>
                     <a class="btn" href="${cp}/userlogout.us">
                     	<div id="logout_gnb">
-                    	<img alt="" src="${cp}/images/logout_icon.png">
+                    		<img alt="" src="${cp}/images/logout_icon.png">
                     	</div>
                     </a>
                 </div>

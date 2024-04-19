@@ -18,12 +18,12 @@ public class UserJoinOkAction implements Action{
 		user.setUserpw(req.getParameter("userpw"));
 		user.setUsername(req.getParameter("username"));
 		user.setGender(req.getParameter("usergender")+"-"+req.getParameter("foreigner"));//W-K
-//		user.setZipcode(req.getParameter("zipcode"));
-		user.setUseraddr(req.getParameter("addr"));
+		user.setUserzipcode(req.getParameter("zipcode"));
+		user.setUseraddr(req.getParameter("useraddr"));
+		user.setUseraddrgu(req.getParameter("useraddrgu"));
 		user.setUseraddrdetail(req.getParameter("addrdetail"));
 		user.setUseraddretc(req.getParameter("addretc"));
 		user.setUserhobby(req.getParameter("userhobby"));
-		//구 넣기
 		
 		UserDAO udao = new UserDAO();
 		if(udao.insertUser(user)) {
