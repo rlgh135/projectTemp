@@ -37,19 +37,27 @@ public class MessageFrontController extends HttpServlet {
 		case "/sendmessage.ms":
 			try {
 				System.out.println("/sendmessage.ms");
-				transfer = new SendMesaageOkAction().execute(req,resp);
+				transfer = new MesaageSendOkAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println("/SendOkAction : "+e);
 			}
 			break;
-//		case "/getmessage.ms":
-//			try {
-//				System.out.println("/userloginok.us");
-//				transfer = new GetMesaageOkAction().execute(req,resp);
-//			} catch (Exception e) {
-//				System.out.println("/userloginok : "+e);
-//			}
-//			break;
+		case "/getmessage.ms":
+			try {
+				System.out.println("/getmessage.ms");
+				transfer = new MesaageGetListOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/GetMesaageOkAction : "+e);
+			}
+			break;
+		case "/deletemessage.ms":
+			try {
+				System.out.println("/deletemessage.ms");
+				transfer = new MesaageDeleteOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/MesaageDeleteOkAction : "+e);
+			}
+			break;
 		}
 		
 		if(transfer != null) {

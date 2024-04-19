@@ -76,9 +76,9 @@
     <div id="index_top_wrap">
         <div class="login">
             <div>
-            	<main style="display: hidden;">
-                    <section style="display: hidden;">
-                        <button type="button" class="ms_modal_btn" style="display: hidden;"></button>
+            	<main>
+                    <section>
+                        <button type="button" class="ms_modal_btn"></button>
                     </section>
                 </main>
                 <!--모달 팝업-->
@@ -99,10 +99,10 @@
                                             <td>
                                                 <c:choose>
                                                 	<c:when test="not empty ${gpost.userid}">
-		                                                <input type="text" name="receiveid" value="${gpost.userid}">
+		                                                <input class="rcvid" type="text" name="receiveid" value="${gpost.userid}">
                                                 	</c:when>
                                                 	<c:otherwise>
-		                                                <input type="text" name="receiveid" value="${lpost.userid}">
+		                                                <input class="rcvid" type="text" name="receiveid" value="${lpost.userid}">
                                                 	</c:otherwise>
                                                 </c:choose>
                                             </td>
@@ -171,11 +171,13 @@
     				let txt = xhr.responseText.trim();
     				if(txt == "O"){
     					alert("메세지 보내기를 성공했습니다.");
-    					document.joinForm.userpw.focus();
+    					receiveid.value = "";
+    					msgcontent.value = "";
     				}
     				else{
     					alert("실패하였습니다. 다시 시도해주세요");;
-    					message.value = "";
+    					receiveid.value = "";
+    					msgcontent.value = "";
     				}
     			}
     		}

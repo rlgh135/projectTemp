@@ -1,6 +1,8 @@
 package com.twojo.model.dao;
 
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.twojo.model.dto.MessageDTO;
@@ -14,7 +16,16 @@ public class MessageDAO {
 	public boolean insertMSG(MessageDTO msg) {
 		return ss.insert("Message.insert", msg) == 1;
 	}
-	public boolean systemMessage(MessageDTO msg) {
-		return ss.insert("Message.systemMessage", msg) == 1;
+	public List<MessageDTO> getMSGList(String userid) {
+		return ss.selectList("Message.getmsg", userid);
+	}
+	public List<MessageDTO> getSysMSGList(String userid) {
+		return ss.selectList("Message.getsysmsg", userid);
+	}
+	public boolean deleteMSG(int messagenum) {
+		return ss.delete("Message.delete", messagenum) == 1;
+	}
+	public void systemMessage(MessageDTO message) {
+		ss.insert("Message.systemMessage", message);
 	}
 }

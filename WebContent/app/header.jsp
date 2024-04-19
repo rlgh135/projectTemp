@@ -34,6 +34,11 @@
                     	<img alt="" src="${cp}/images/myinfo_icon.png">
                     	</div>
                     </a>
+                    <a class="btn" href="${cp}/getmessage.ms">
+                    	<div id="usermsg_gnb">
+                    	<img alt="" src="${cp}/images/msg_icon.png">
+                    	</div>
+                    </a>
                     <a class="btn" href="${cp}/userlogout.us">
                     	<div id="logout_gnb">
                     	<img alt="" src="${cp}/images/logout_icon.png">

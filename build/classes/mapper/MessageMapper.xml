@@ -8,6 +8,19 @@
 		values(#{sendid},#{receiveid},#{msgcontent},#{msgcheck})
 	</insert>
 		
+	<select id="getsysmsg" parameterType="String" resultType="messagedto">
+		select messagenum, sendid, receiveid, msgcontent, date_format(msregdate, '%Y-%m-%d %H:%i') as msregdate, msgcheck 
+		from message where receiveid = #{userid} and sendid = 'system' order by msregdate desc;
+	</select>
+	
+	<select id="getmsg" parameterType="String" resultType="messagedto">
+		select messagenum, sendid, receiveid, msgcontent, date_format(msregdate, '%Y-%m-%d %H:%i') as msregdate, msgcheck 
+		from message where receiveid = #{userid} and sendid != 'system' order by msregdate desc;
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from message where messagenum = #{messagenum}
+	</delete>
 	<insert id="systemMessage" parameterType="messagedto">
 		insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
 		values(#{sendid},#{receiveid},#{msgcontent},#{msgcheck},#{linkstring})

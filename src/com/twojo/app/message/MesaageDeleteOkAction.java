@@ -1,5 +1,8 @@
 package com.twojo.app.message;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,25 +11,18 @@ import com.twojo.action.Transfer;
 import com.twojo.model.dao.MessageDAO;
 import com.twojo.model.dto.MessageDTO;
 
-import java.io.PrintWriter;
-
-public class SendMesaageOkAction implements Action {
-
+public class MesaageDeleteOkAction implements Action {
+	
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		int checknum = Integer.parseInt(req.getParameter("msgcheck"));
-		
-		MessageDTO msg = new MessageDTO();
-		msg.setSendid(req.getParameter("sendid"));
-		msg.setReceiveid(req.getParameter("receiveid"));
-		msg.setMsgcontent(req.getParameter("msgcontent"));
-		msg.setMsgcheck(checknum);
+		int messagenum = Integer.parseInt(req.getParameter("messagenum"));
 		
 		MessageDAO mdao = new MessageDAO();
+		MessageDTO msg = new MessageDTO();
 		
 		PrintWriter out = resp.getWriter();
-		if(mdao.insertMSG(msg)) {
+		if(mdao.deleteMSG(messagenum)) {
 			out.print("O");
 		}
 		else {

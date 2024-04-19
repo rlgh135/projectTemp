@@ -66,9 +66,8 @@
     <div id="index_body_wrap">
         <div id="index_body_box">
             <div class="index_box_1">
-                <div id="img_box1">
-                    <p id="content1">더 나은 삶을 만드는<br>공간 <span>"모아"</span></p>
-                </div>
+                <div id="img_box1"></div>
+                <p id="content1">더 나은 삶을 만드는<br>공간 <span>"모아"</span></p>
             </div>
             
             <div class="index_box_2">

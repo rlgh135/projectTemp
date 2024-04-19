@@ -8,6 +8,7 @@ import com.twojo.model.dto.GroupDTO;
 import com.twojo.model.dto.GroupUserDTO;
 import com.twojo.model.dto.GroupimgDTO;
 import com.twojo.model.dto.LPostDTO;
+import com.twojo.model.dto.MessageDTO;
 import com.twojo.model.dto.UserDTO;
 import com.twojo.mybatis.SQLMapConfig;
 
@@ -32,6 +33,7 @@ public class InsertDummy {
 //			user.setUsername("가명"+(i+1));
 //			regidx = (int)(Math.random()*5);
 //			user.setUseraddr(regions[regidx]);
+//			user.setUseraddrgu(regions[regidx]);
 //			hobbycnt = (int)(Math.random()*3)+1;
 //			System.out.println(hobbycnt);
 //			hobidx = (int)(Math.random()*4);
@@ -59,22 +61,8 @@ public class InsertDummy {
 //			
 //			ss.insert("LPost.insert", lpost);
 //		}
-		//lboard
-		for(int i=0; i<10; i++) {
-			LPostDTO lpost = new LPostDTO();
-			hobidx = (int)(Math.random()*10);
-			hobby = hobbies[hobidx];
-			lpost.setLpostcategory(hobby);
-			lpost.setUserid("abc"+(i%2+1));
-			regidx = (int)(Math.random()*5);
-			lpost.setLpostaddr("강남구");
-			lpost.setLposttitle("강남구게시글"+(i+1));
-			lpost.setLpostcontents("강남구게시글"+(i+1));
-			
-			ss.insert("LPost.insert", lpost);
-		}
-		
-//		group
+//		
+		//group
 //		for(int i=0; i<3000; i++) {
 //			GroupDTO group = new GroupDTO();
 //			hobidx = (int)(Math.random()*10);
@@ -89,7 +77,7 @@ public class InsertDummy {
 //			ss.insert("Group.insert", group);
 //		}
 		
-//		//gpost
+		//gpost
 //		for(int i=0; i<45; i++) {
 //			GPostDTO gpost = new GPostDTO();
 //			gpost.setGroupnum(1);
@@ -113,22 +101,23 @@ public class InsertDummy {
 //			}
 //		}
 		
-//		//group_user
-//		for(int i=0; i<1000; i++) {
-//			GroupUserDTO gu = new GroupUserDTO();
-//			int groupnum = (int)(Math.random() * 300 + 1);
-//			gu.setGroupnum(groupnum);
-//			gu.setUserid("abc"+(i+1));
-//			
-//			ss.insert("GroupUser.insert", gu);
-//		}
-
+		//group_user
+		for(int i=0; i<5000; i++) {
+			GroupUserDTO gu = new GroupUserDTO();
+			int groupnum = (int)(Math.random() * 300 + 1);
+			gu.setGroupnum(groupnum);
+			gu.setUserid("abc"+(i+1));
+			
+			ss.insert("GroupUser.insert", gu);
+		}
+		
+				
 //		//groupimg
-//		for(int i=1; i<1000; i++) {
+//		for(int i=1; i<5000; i++) {
 //			GroupimgDTO gi = new GroupimgDTO();
 //			gi.setGroupnum(i);
-//			gi.setImgorgname("abc"+(i)+".jpg");
-//			gi.setImgsysname("abcd"+(i)+".jpg");
+//			gi.setImgorgname("abcd"+(i)+".jpg");
+//			gi.setImgsysname("abcde"+(i)+".jpg");
 //			
 //			ss.insert("Groupimg.insert", gi);
 //		}

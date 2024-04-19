@@ -702,7 +702,7 @@
                         '<div class="profilemenu">' +
 						'<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">' +
 						'<p>'+
-						'<a>쪽지보내기</a>'+
+						'<button type="button" class="msg_send" onclick="sendMessage()" style="cursor: pointer;">쪽지보내기</button>'+
 						'</p>'+
 						'</div>' +
 						'<div class="profilemenu">' +

@@ -6,8 +6,8 @@ public class MessageDTO {
 	private String receiveid;
 	private String msgcontent;
 	private String msregdate;
-	private String linkstring;
 	private int msgcheck;
+	private String linkstring;
 	
 	public String getLinkstring() {
 		return linkstring;

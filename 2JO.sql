@@ -15,9 +15,9 @@ CREATE TABLE user (
   warningcnt int default 0
 );
 select * from user;
-select * from user where userid='abc772';
+select * from user where userid='abc567';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
-value('abc772', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
+value('abc567', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;
 CREATE TABLE `lpost` (
   lpostnum bigint PRIMARY KEY AUTO_INCREMENT,
@@ -43,6 +43,7 @@ create table lpost_user(
    boardnum bigint,
    userid varchar(300)
 );
+drop table lpost_user;
 select * from lpost_user;
 /*0416 ALTER문 액션(Ctrl+Enter) 해줘야함*/
 ALTER TABLE lpost_user ADD CONSTRAINT LUP UNIQUE(boardnum, userid);
@@ -81,19 +82,36 @@ CREATE TABLE `group` (
   `groupledaer` varchar(300) default null
 );
 select * from `group`;
+ SET SQL_SAFE_UPDATES = 0;
 select count(*) from `group`;
-select * from `group` where groupnum=2;
+select * from `group` where groupmaster='abc10';
+delete from `group` where groupmaster='abc10' and groupnum>1;
+update `group` 
+set groupmaster='abc10'
+where groupmaster='abc567';
 create table board_user(
 	boardnum bigint,
     userid varchar(300)
 );
 select count(*) from `group_user`;
 
+select g.*, top_groups.groupusercnt from `group` g 
+    	join (select gu.groupnum, count(gu.userid) groupusercnt from group_user gu 
+    	join `group` g on gu.groupnum = g.groupnum 
+    	where g.groupaddr = '용산구' 
+    	group by gu.groupnum 
+    	order by count(gu.userid) desc 
+    	limit 5) 
+    	as top_groups on g.groupnum = top_groups.groupnum;
+
+
+
 create table `group_user`(
 	groupnum bigint,
     userid varchar(300),
     joindate datetime default now()
 );
+select * from `group_user`;
 drop table group_user;
 insert into group_user(groupnum, userid) value(2, 'abc231');
 delete from group_user where userid='abc1' and groupnum=2;
@@ -203,8 +221,10 @@ msregdate datetime default now(),
 linkstring varchar(3000) default null,
 msgcheck int
 );
-insert into message (sendid, receiveid, msgcontent, msgcheck, url)
-		values('system','abc320','가입',0,'/groupinner.gp?groupnum=1');
+insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
+		values('system','abc567','가입',0,'/groupinner.gp?groupnum=1');
+        insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
+		values('abc100','abc1','가입',0,'/groupinner.gp?groupnum=1');
 select * from message;
 drop table message;
 CREATE TABLE `warning` (
