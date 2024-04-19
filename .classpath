@@ -14,11 +14,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/0900GB/api/mybatis-3.5.14/mybatis-3.5.14.jar"/>
-	<classpathentry kind="lib" path="C:/0900GB/api/gson/gson-2.10.jar"/>
-	<classpathentry kind="lib" path="C:/0900GB/api/jakarta_taglib/jstl.jar"/>
-	<classpathentry kind="lib" path="C:/0900GB/api/jakarta_taglib/standard.jar"/>
-	<classpathentry kind="lib" path="C:/0900GB/api/mySQL/mysql-connector-j-8.0.33.jar"/>
-	<classpathentry kind="lib" path="C:/0900GB/api/cos-22.05/lib/cos.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user1/Downloads/api/jakarta_taglib/standard.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user1/Downloads/api/gson/gson-2.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user1/Downloads/api/jakarta_taglib/jstl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user1/Downloads/api/mybatis-3.5.14/mybatis-3.5.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user1/Downloads/api/mySQL/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user1/Downloads/api/cos-22.05/lib/cos.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GPReply">
+	<insert id="insert" parameterType="gpreplydto">
+		insert into gpreply(gpostnum, userid, gprcontents) value (#{gpostnum}, #{userid}, #{gprcontents})
+	</insert>
+	<select id="getGPReply" parameterType="long" resultType="gpreplydto">
+		select * from gpreply where gpostnum=#{gpostnum}
+	</select>
+	<select id="getReplyCnt" parameterType="long" resultType="int">
+		select count(*) from gpreply where gpostnum=#{gpostnum}
+	</select>
+	<select id="getRecentReplyCnt" parameterType="long" resultType="int">
+		<![CDATA[
+			select count(*) from gpreply where gpostnum=#{gpostnum} and timestampdiff(HOUR,gprregdate,now())<1
+		]]>
+	</select>
+	<select id="getListByPage" parameterType="hashmap" resultType="gpreplydto">
+		select * from gpreply where gpostnum=#{gpostnum}
+		order by gprnum desc limit #{startRow},#{pageSize}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

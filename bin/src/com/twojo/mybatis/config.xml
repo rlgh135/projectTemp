@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+  	<typeAlias type="com.twojo.model.dto.UserDTO" alias="userdto"/>
+  	<typeAlias type="com.twojo.model.dto.LPostDTO" alias="lpostdto"/>
+  	<typeAlias type="com.twojo.model.dto.LReplyDTO" alias="lreplydto"/>
+  	<typeAlias type="com.twojo.model.dto.GroupDTO" alias="groupdto"/>
+  	<typeAlias type="com.twojo.model.dto.GPostDTO" alias="gpostdto"/>
+  	<typeAlias type="com.twojo.model.dto.GPReplyDTO" alias="gpreplydto"/>
+  	<typeAlias type="com.twojo.model.dto.GFileDTO" alias="gfiledto"/>
+  	<typeAlias type="com.twojo.model.dto.GroupUserDTO" alias="groupuserdto"/>
+  	<typeAlias type="com.twojo.model.dto.GroupimgDTO" alias="groupimgdto"/>
+  	<typeAlias type="com.twojo.model.dto.Lpost_UserDTO" alias="ludto"/>
+	<typeAlias type="com.twojo.model.dto.MessageDTO" alias="messagedto"/>  	
+	<typeAlias type="com.twojo.model.dto.ReqListDTO" alias="reqlistdto"/>  	
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/jspteam"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1234"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="mapper/UserMapper.xml"/>
+    <mapper resource="mapper/LPostMapper.xml"/>
+    <mapper resource="mapper/LReplyMapper.xml"/>
+    <mapper resource="mapper/GroupMapper.xml"/>
+    <mapper resource="mapper/GPostMapper.xml"/>
+    <mapper resource="mapper/GPReplyMapper.xml"/>
+    <mapper resource="mapper/GFileMapper.xml"/>
+    <mapper resource="mapper/GroupUserMapper.xml"/>
+    <mapper resource="mapper/GroupimgMapper.xml"/>
+    <mapper resource="mapper/Lpost_UserMapper.xml"/>
+    <mapper resource="mapper/MessageMapper.xml"/>
+    <mapper resource="mapper/ReqListMapper.xml"/>
+  </mappers>
+</configuration>
+
+

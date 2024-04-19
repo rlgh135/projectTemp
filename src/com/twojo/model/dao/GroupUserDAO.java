@@ -9,7 +9,7 @@ public class GroupUserDAO {
 	private SqlSession ss;
 	
 	public GroupUserDAO() {
-		ss = SQLMapConfig.getFactory().openSession();
+		ss = SQLMapConfig.getFactory().openSession(true);
 	}
 	
 	public boolean insert(GroupUserDTO groupuser) {

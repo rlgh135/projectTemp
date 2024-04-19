@@ -1,0 +1,650 @@
+@charset "UTF-8";
+*{
+    /* background-color: #ECEEEF; */
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    /* background-color: rgba(0, 0, 0, 0.01); */
+    /* border: 1px solid black; */
+}
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+*{
+    font-family: 'SUITE-Regular';
+}
+a{color: black;}
+a:link{text-decoration: none;}
+a:visited,a:active{color: black;}
+input[type = button]{
+    all: unset;
+}
+li{list-style: none;}
+textarea{font-style: normal; border: none; resize: none;}
+
+body{
+    /* background-color: rgb(252, 252, 241); */
+    background: url(../images/group/baegyungreverse.png);
+    background-size: 100%;
+}
+header{
+    width: 100%;
+    min-width: 1300px;
+    height: 60px;
+    background-color: bisque;
+}
+.groupinnernav{
+    display: flex;
+    width: 1300px;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 60px;
+    /* border-bottom: 1px solid rgb(252, 252, 241); */
+}
+.logoimg{
+    margin-left: 20px;
+    width: 200px;
+    height: 40px;
+}
+.widgetarea{
+    margin-left: auto;
+    margin-right: 10px;
+}
+.widgetlist{
+    display: flex;
+    padding-left: 10px;
+}
+.widgetitem{
+    height: 40px;
+    width: 50px;
+    align-items: end;
+}
+.widgetitem:last-child{
+    width: 70px;
+    padding-left: 20px;
+}
+
+/*body*/
+#group_inner_wrap{
+    min-width: 1300px;
+    /* background-color: rgb(252, 252, 241); */
+}
+
+.infobox{
+    width: 300px;
+    min-width: 300px;
+}
+#gpostsection{
+    margin-left: 320px;
+    width: 550px;
+    padding-top: 10px;
+    /* background-color: rgb(252, 252, 241); */
+}
+.summary{
+    margin-top: -10px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+#group_inner_container {
+    display: flex;
+    position: relative;
+    width: 1280px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    align-items: flex-start;
+    /* background-color: rgb(252, 252, 241); */
+}
+.searchArea{
+    margin-top: 20px;
+    /* margin-bottom: -10px; */
+    display: flex;
+    height: 30px;
+}
+
+#gpost{
+    margin-top: 20px;
+    /* background-color: rgb(252, 252, 241); */
+}
+.gpostListwrap{
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.gpostListwrap:hover{
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+.gpostListwrap:first-child{
+    margin-top: 0px;
+}
+.gpostContents > div {
+    padding: 19px 23px 4px;
+}
+.default-group-Head {
+    padding: 18px 23px 4px;
+    display: flex;
+}
+.badgeimg-right-info{
+    margin-left: 10px;
+}
+.badgeimg{
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 50px;
+}
+
+
+/* 유저정보 팝업창 */
+#modalOpenBtn, #modalCloseBtn {
+    cursor: pointer;
+    border: none;
+  }
+  
+  .modalContainer {
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  }
+  
+  /* .modalContent {
+    position: absolute;
+   
+    width: 200px;
+    height: 266px;
+    padding: 14px 10px 14px 10px;
+    left: 50px;
+    bottom: -266px;
+    z-index: 20;
+    border-radius: 10px;
+    align-items: center; 
+    background-image: url(../images/strongyellowmarble.jpg);
+} */
+  .modalContent {
+    position: absolute;
+   
+    width: 200px;
+    height: 266px;
+    padding: 14px 10px 14px 10px;
+    left: 50px;
+    bottom: -266px;
+    border: 2px solid #ECEEEF;
+    z-index: 20;
+    border-radius: 10px;
+    align-items: center; 
+    background-color: #ffffff;
+}
+
+.modalinner {
+    width: 164px;
+    height: 235px;
+    border: 1px solid #ffffff;
+   
+    border-radius: 10px;
+    background-color:#ffffff;
+    padding: 10px;
+  }
+  
+  .modalContainer.hidden {
+    display: none;
+  }
+  /* .modalContent > div {
+  width: 150px;
+  border: 1px solid deeppink;
+  border-radius: 10px;
+  z-index:20;
+  } */
+.imgid{
+    display: flex;
+    position: relative;
+    background: transparent;
+    border-radius: 50px;
+    border: .5px solid rgba(255, 255, 255);
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 0 4px 25px 0 rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+    text-align: right;
+    background-image: url(../images/yellowmarble.jpg);
+    background-size: cover;
+}
+
+
+    .profilemenu {
+        box-shadow: 0 4px 25px 0 rgba(0,0,0,.05);
+        color: black;
+        z-index: 2;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 56px;
+        border: .5px solid rgba(255, 255, 255);
+        box-shadow: 0 4px 25px 0 rgba(0,0,0,0.05);
+        margin-bottom: 5px;
+        background-color: #dfe1e2;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+    }
+    .profilemenu img {
+      margin-right: 10px;
+    }
+
+.profilemenu div p{
+    background: transparent;
+    z-index: 2;
+}
+#gpostuserid{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    background: transparent;
+ }
+ .mbadgeimg{
+    width: 50px;
+    height: 50px;   
+    border: 1px dotted black;
+    border-radius: 50%;
+    margin-right: 30px;
+ }
+
+#grouprightsection{
+    width: 400px;
+    margin-left: 880px;
+    min-width: 400px;
+    position: fixed;
+    
+}
+#gannounce{
+    padding: 17px 22px 17px;
+}
+#grouppopular{
+    padding: 17px 22px 17px;
+    margin-top: 10px;
+}
+
+/* 모임가입하기 박스 */
+ #groupinfobox{
+    color: black;
+    /* background-color: rgb(252, 252, 241); */
+    padding: 15px;
+    
+    position: fixed;
+}
+#groupname{
+    font-weight: bold;
+    color: rgb(238, 206, 63); ;
+}
+#groupinfo .gmem, .glead {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+#groupname{
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+#groupinfo{
+    margin-bottom: 10px;
+}
+.group-btn-box{
+width: 120px;
+height: 30px;
+border-radius: 10px;
+margin: 0 auto;
+text-align: center;
+background-color: rgb(238, 206, 63);
+font-weight: bold;
+padding: 3px;
+color: white;
+} 
+
+/*지역 그룹 소개 박스 */
+
+.summary{
+    padding: 5px;
+    /* background-color: white; */
+    border-radius: 10px;
+}
+.summarytitle{
+    border-bottom: 2px solid white;
+    margin-bottom: 10px;
+}
+.summarytitle > p{
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.summaryinfo > p {
+    margin-bottom: 10px;
+}
+
+.grouptaglist > li{
+    font-size: 14px;
+}
+
+
+/* 게시글 박스 */
+.postsection{
+    /* background-color: white; */
+}
+.gpostListwrap{
+    background-color: white;
+}
+.gpostHead{
+    /* border: 1px solid blue; */
+    height: 77px;
+
+}
+.usernamelink {
+    font-weight: bold;
+    font-size: 15px;
+}
+.regtime {
+    font-size: 12px;
+    color: #666;
+}
+.profile_wrap{
+    position: relative;
+}
+.profile_container{
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    z-index: 999;
+   border-radius: 20px;
+    position: relative;
+}
+.design1{
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 20px;
+}
+
+.gpostHead{
+    border-bottom: 2px solid #ECEEEF;
+    margin-bottom: 10px;
+    z-index: -1;
+}
+
+.gpostContents{
+    padding: 10px;
+    height: auto;
+    z-index: -1;
+}
+.gpostContents div p{
+    margin-bottom: 20px;
+}
+
+.point-area{
+    font-size: 12px;
+    color: #666;
+}
+
+
+/* 좋아요  */
+
+.likereply{
+    display: flex;
+    justify-content: left;
+    margin-right: 3px;
+}
+
+/* 글쓰기 제출 버튼 */
+#profilebtn {
+    cursor: pointer;
+}
+
+
+/* 테이블 스타일 */
+/* 폼 전체 스타일 */
+.writeform ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* 각 리스트 아이템 스타일 */
+  .writeform li {
+    margin-bottom: 10px;
+  }
+  
+  /* 제목 입력 필드 스타일 */
+  .writeform #writetit {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* 내용 입력 필드 스타일 */
+
+  .writeform{
+    border: 1px solid #ccc;
+    margin: 10px 0px;
+    width: 550px;
+
+  }
+  .writeform #writebox {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* 파일 첨부 입력 필드 스타일 */
+  .writeform #writefile {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* 제출 버튼 스타일 */
+  .writeform #writesubmit {
+    background-color: rgb(238, 206, 63);
+    border: none;
+    padding: 8px 17px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* 제출 버튼 호버 스타일 */
+  .writeform #writesubmit:hover {
+    background-color: rgb(219, 190, 59);
+  }
+  
+  .profile_container input[type = button]{
+    width: 15px;
+    height: 15px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 요소를 세로 중앙에 배치 */
+    padding: 10px;
+  
+}
+.searchwrite {
+    display: flex;
+    align-items: center; /* 내부 요소를 세로 중앙에 배치 */
+    margin-bottom: 10px;
+}
+.groupsearch {
+    display: flex;
+}
+.searchBox {
+    display: flex;
+    width: 230px;
+    height: 28px;
+    background-color: rgb(255, 255, 255, 0.8);
+    border: 3px solid #ccc;
+    border-radius: 25px;
+}
+.searchBox > div:first-child{
+    width: 200px;
+    height: 28px;
+    padding-left: 7px;
+    padding-bottom: 5px;
+}
+.searchBtnBox{
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+    background-image: url(../images/group/search-4460336.png);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+}
+
+.write_btn { 
+    margin-left: auto;
+    background-color: rgb(238, 206, 63);
+    border: none;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    height: 25px;
+    color: white;
+}
+
+.writeform{
+background-color: white;
+/* border: 1px solid red; */
+padding: 14px;
+}
+
+.writerinfo a{
+    font-weight: bold;
+    color:rgb(238, 206, 63);
+    font-size: 20px;
+}
+.writerinfo span{
+    color:black;
+    font-size: 15px;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.badgeimg{
+    border: 1px solid red;
+}
+.inputGPR{
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.inputGPR > .badgeimg-right-info{
+    width: 390px;
+}
+.inputGPR > .badgeimg-right-info > textarea{
+    margin-top: 10px;
+    border: 1px solid black;  
+    
+}
+.inputGPR > div:first-child{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.inputGPR > div:last-child{
+    width: 60px;
+}
+.inputGPR > div:last-child > input{
+    display: block;
+    width: 55px;
+    height: 50px;
+    margin-top: 31px;
+    cursor: pointer;
+}
+.greplyListwrap{
+    border-bottom: 2px solid #ECEEEF;
+}
+.ingiListWrap{
+    margin-top: 0px;
+}
+/*
+<%-- <div class="summarytitle">
+                        <p><h2>이번 주 인기글</h2></p>
+                    </div>
+                    <div class="summaryinfo">
+                        <p>${ingi.userid}</p>
+                        <ul class="grouptaglist">
+                           <li class="groupaddrinfo circle-list-btn">
+                                <a href="#">${group.groupaddr}</a>
+                           </li>
+                           <li class="groupcategoryinfo circle-list-btn">
+                                <a href="">${group.groupcategory}</a>
+                           </li>
+						   <li>
+								<div class="gpostContents ingi">
+									<div>
+										<p>
+											<textarea class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}" style="width: 100%; height: 100%">${ingi.gpostcontents}
+											</textarea>
+										</p>
+										<div class="likereply">
+											<img id="likeButton" onclick="pressLike(${ingi.gpostnum})" class="like-button likeButton${ingi.gpostnum+10000}" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">
+											<div class="point-area showreplyBtn">
+												<div style="display: inline-block;">
+													<p>인기글</p>
+												</div>
+												<div style="display: inline-block;">
+													<input type="button" class="showrpcnt${ingi.gpostnum+10000}" value="댓글 ${ingi.gprcnt}개"
+														onclick="showReply(${ingi.gpostnum}+10000)"
+														style="cursor: pointer;">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<li class="gpostListwrap ingiListWrap">
+									<div class="gpostReply${ingi.gpostnum+10000} replyHide">
+										<div class="repForm reply${ingi.gpostnum+10000}">
+											<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${ingi.gpostnum+10000}&?groupnum=${group.groupnum}" name="writeRPForm${ingi.gpostnum+10000}">
+												<div class="badgeimg"><img src=""></div>
+												<div class="badgeimg-right-info">
+													<p class="replywriter">${loginUser}HiImTester</p>
+													<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
+												</div>
+												<div>
+													<input type="submit" value="등록">
+												</div>
+											</Form>
+										</div>
+										<ul class="greplyList${ingi.gpostnum+10000}"></ul>
+									</div>
+								</li>
+							</li>	
+                        </ul>
+                    </div> --%>
+                    */

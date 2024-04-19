@@ -14,7 +14,7 @@ CREATE TABLE user (
   userpoint int default 0,
   warningcnt int default 0
 );
-select * from user where userid='abc320';
+select * from user;
 select * from user where userid='abc772';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
 value('abc772', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
@@ -31,7 +31,7 @@ CREATE TABLE `lpost` (
   `imageCount` int default 0,
   `lpostaddr` varchar(1000)
 );
-select * from lpost where userid = 'abc1';
+select * from lpost;
 select count(*) from lpost where lpostaddr='관악구';
 drop table lpost;
 select * from lpost limit 0, 3000;
@@ -87,18 +87,18 @@ create table board_user(
 );
 select count(*) from `group_user`;
 
-create table group_user(
+create table `group_user`(
 	groupnum bigint,
     userid varchar(300)
 );
 drop table group_user;
 insert into group_user(groupnum, userid) value(2, 'abc3');
 delete from group_user where userid='abc3' and groupnum=2;
-select * from group_user where userid='abc3';
+select * from group_user where userid='abc1';
 SELECT * FROM information_schema.INNODB_LOCKS;
 SELECT * FROM information_schema.INNODB_LOCK_WAITS;
 select * from INFORMATION_SCHEMA.INNODB_TRX;
-KILL 480;
+KILL 35;
 SHOW processlist;
 SELECT * FROM information_schema.processlist;
 select * from group_user;

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LPost">
+	<insert id="insert" parameterType="lpostdto">
+		insert into lpost(lpostcategory, userid, lposttitle, lpostcontents, lpostaddr)
+		values(#{lpostcategory},#{userid},#{lposttitle},#{lpostcontents}, #{lpostaddr})
+	</insert>
+	<select id="getBoardCnt" resultType="long">
+		select count(*) from lpost
+	</select>
+	
+	<select id="getTitleAndLikeCountList" resultType="lpostdto" parameterType="string">
+    	SELECT lposttitle, lpostlikecnt FROM lpost where userid=#{userid}
+	</select>
+
+	<select id="getBoardCntWithKey" resultType="long">
+		<!-- #{변수명}은 양 옆에 ' 를 붙여서 세팅해준다 -->
+		<!-- ${변수명}은 세팅을 할 때 양 옆에 ' 가 없이 세팅을 해준다. -->
+		select count(*) from lpost where lposttitle like ('%${keyword}%')
+	</select>
+	
+	<select id="getList" resultType="lpostdto" parameterType="hashmap">
+		select * from lpost order by lpostnum desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getListWithKey" resultType="lpostdto" parameterType="hashmap">
+		select * from lpost where lposttitle like ('%${keyword}%')
+		order by lpostnum desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="get" parameterType="long" resultType="lpostdto">
+		select * from lpost where lpostnum=#{boardnum}
+	</select>
+	
+	<select id="getLastNum" parameterType="string" resultType="long">
+		select max(lpostnum) from lpost where userid=#{userid}
+	</select>
+	
+	<update id="update" parameterType="lpostdto">
+		update lpost
+		set lposttitle=#{lposttitle}, lpostcontents=#{lpostcontents}, lpostregdate=now()
+		where lpostnum=#{lpostnum}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from lpost where lpostnum=#{lpostnum}
+	</delete>
+   
+   <select id="getUserList" parameterType="String" resultType="lpostdto">
+   		select * from lpost where userid = #{userid}
+   </select>
+   
+   <update id="updateReadCount" parameterType="long">
+		update lpost
+		set readcount = readcount+1
+		where lpostnum = #{lpostnum}
+	</update>
+
+	<select id="getListWithAddr" resultType="lpostdto" parameterType="String">
+		select * from lpost where lpostaddr like ('%${keyword}%')
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

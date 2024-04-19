@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GPost">
+	<insert id="insert" parameterType="gpostdto">
+		insert into gpost(groupnum, gposttitle, userid, gpostcontents)
+		values(#{groupnum},#{gposttitle},#{userid},#{gpostcontents})
+	</insert>
+	<select id="selectListByGroupnum" parameterType="long" resultType="gpostdto">
+		select * from gpost where groupnum = #{groupnum}
+	</select>
+	<select id="getPostCnt" parameterType="long" resultType="long">
+		select count(*) from gpost where groupnum = #{groupnum}
+	</select>
+	<select id="getPostCntWithKey" parameterType="hashmap" resultType="long">
+		select count(*) from gpost where groupnum = #{groupnum} and gpostcontents like "%${keyword}%"
+	</select>
+	<select id="getList" resultType="gpostdto" parameterType="hashmap">
+		select * from gpost where groupnum = #{groupnum}
+		order by gpostnum desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getListWithKeyword" resultType="gpostdto" parameterType="hashmap">
+		select * from gpost where groupnum = #{groupnum} and
+		gpostcontents like "%${keyword}%"
+		order by gpostnum desc limit #{startRow},#{pageSize}
+	</select>
+	<select id="getLastNum" parameterType="string" resultType="long">
+		select max(gpostnum) from gpost where userid=#{userid}
+	</select>
+	<delete id="deleteGPost" parameterType="long">
+		delete from gpost where gpostnum=#{gpostnum}
+	</delete>
+	<update id="addReplyCnt" parameterType="long">
+		update `gpost` set gprcnt = gprcnt+1 where gpostnum=#{gpostnum}
+	</update>
+	<update id="addLikdCnt" parameterType="long">
+		update `gpost` set gpostlike = gpostlike+1 where gpostnum=#{gpostnum}
+	</update>
+	<select id="getGongji" parameterType="long" resultType="gpostdto">
+		select * from `gpost` where groupnum=#{groupnum} and gpostgongji=1;
+	</select>
+	<select id="getIngi" parameterType="long" resultType="gpostdto">
+		SELECT * FROM gpost WHERE groupnum=#{groupnum} and gpostlike = (SELECT MAX(gpostlike) FROM gpost) order by gpostnum desc;
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

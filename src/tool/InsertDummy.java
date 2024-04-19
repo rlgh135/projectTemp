@@ -59,8 +59,8 @@ public class InsertDummy {
 //			
 //			ss.insert("LPost.insert", lpost);
 //		}
-//		
-		//group
+		
+//		group
 //		for(int i=0; i<3000; i++) {
 //			GroupDTO group = new GroupDTO();
 //			hobidx = (int)(Math.random()*10);
@@ -99,15 +99,15 @@ public class InsertDummy {
 //			}
 //		}
 		
-		//group_user
-		for(int i=0; i<1000; i++) {
-			GroupUserDTO gu = new GroupUserDTO();
-			int groupnum = (int)(Math.random() * 300 + 1);
-			gu.setGroupnum(groupnum);
-			gu.setUserid("abc"+(i+1));
-			
-			ss.insert("GroupUser.insert", gu);
-		}
+//		//group_user
+//		for(int i=0; i<1000; i++) {
+//			GroupUserDTO gu = new GroupUserDTO();
+//			int groupnum = (int)(Math.random() * 300 + 1);
+//			gu.setGroupnum(groupnum);
+//			gu.setUserid("abc"+(i+1));
+//			
+//			ss.insert("GroupUser.insert", gu);
+//		}
 
 //		//groupimg
 //		for(int i=1; i<1000; i++) {

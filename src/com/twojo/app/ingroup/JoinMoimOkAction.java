@@ -28,6 +28,7 @@ public class JoinMoimOkAction implements Action{
 		message.setSendid("system");
 		message.setReceiveid(groupmaster);
 		message.setLinkstring(req.getContextPath()+"/groupinner.gp?groupnum="+groupnum);
+		GroupUserDAO gudao = new GroupUserDAO();
 		
 		if (auto.equals("auto")) {
 			
@@ -35,8 +36,6 @@ public class JoinMoimOkAction implements Action{
 			GroupUserDTO groupuser = new GroupUserDTO();
 			groupuser.setUserid(userid);
 			groupuser.setGroupnum(groupnum);
-			
-			GroupUserDAO gudao = new GroupUserDAO();
 			
 			if (gudao.insert(groupuser)) {
 				System.out.println("들어옴"+2);				
