@@ -9,9 +9,12 @@
 	<delete id="delete" parameterType="groupuserdto">
 		delete from `group_user` where (groupnum=#{groupnum} and userid=#{userid})
 	</delete>
-	<delete id="selectList" parameterType="long">
-		select * from `group_user` where (groupnum=#{groupn	um})
-	</delete>
+	<select id="selectList" parameterType="long" resultType="groupuserdto">
+		select * from `group_user` where (groupnum=#{groupnum})
+	</select>
+	<select id="selectRecentList" parameterType="long" resultType="groupuserdto">
+		select * from `group_user` where (groupnum=#{groupnum}) order by joindate desc limit 4;
+	</select>
 </mapper>
 
 

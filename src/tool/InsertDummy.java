@@ -102,7 +102,7 @@ public class InsertDummy {
 //		}
 		
 		//group_user
-		for(int i=0; i<5000; i++) {
+		for(int i=0; i<1000; i++) {
 			GroupUserDTO gu = new GroupUserDTO();
 			int groupnum = (int)(Math.random() * 300 + 1);
 			gu.setGroupnum(groupnum);

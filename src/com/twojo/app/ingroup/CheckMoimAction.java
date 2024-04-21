@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
+import com.twojo.model.dao.GroupDAO;
 import com.twojo.model.dao.GroupUserDAO;
 import com.twojo.model.dao.ReqListDAO;
+import com.twojo.model.dto.GroupDTO;
 import com.twojo.model.dto.GroupUserDTO;
 import com.twojo.model.dto.ReqListDTO;
 
@@ -20,8 +22,16 @@ public class CheckMoimAction implements Action{
 		ReqListDAO reqdao = new ReqListDAO();
 		List<ReqListDTO> anstemp = reqdao.getAnswerList(groupnum);
 		ArrayList<ArrayList<String>> answer = new ArrayList<ArrayList<String>>();
+		
+		GroupDAO gdao = new GroupDAO();
+		GroupDTO group = gdao.findGroupByNum(groupnum);
+		
+		req.setAttribute("group", group);
+		
 		GroupUserDAO gudao = new GroupUserDAO();
-		List<GroupUserDTO> guser = gudao.selectList(groupnum);
+		List<GroupUserDTO> recentguser = gudao.selectRecentList(groupnum);
+		req.setAttribute("recentguser", recentguser);
+		
 		try {
 			for (int i = 0; i < anstemp.size(); i++) {
 				String ansbase = anstemp.get(i).getAnswer();
@@ -40,6 +50,18 @@ public class CheckMoimAction implements Action{
 		
 		req.setAttribute("answerlist", answer);
 		req.setAttribute("ansbaselist", anstemp);
+		
+		ReqListDTO question = reqdao.getQuestionList(groupnum);
+		String qusbase = question.getQuestion();
+		String[] questions = qusbase.split("§");
+		
+		ArrayList<String> questionlist = new ArrayList<String>();
+		for (int i = 0; i < questions.length; i++) {
+			questionlist.add(questions[i]);
+		}
+		
+		req.setAttribute("questionlist", questionlist);
+		req.setAttribute("autoreg", question.getAutoreg());
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);

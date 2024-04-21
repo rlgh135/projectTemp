@@ -27,4 +27,8 @@ public class GroupUserDAO {
 	public List<GroupUserDTO> selectList(long groupnum) {
 		return ss.selectList("GroupUser.selectList", groupnum);
 	}
+
+	public List<GroupUserDTO> selectRecentList(long groupnum) {
+		return ss.selectList("GroupUser.selectRecentList", groupnum);
+	}
 }
