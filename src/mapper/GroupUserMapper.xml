@@ -9,6 +9,9 @@
 	<delete id="delete" parameterType="groupuserdto">
 		delete from `group_user` where (groupnum=#{groupnum} and userid=#{userid})
 	</delete>
+	<delete id="deleteAnswer" parameterType="string">
+		delete from `group_user` where (groupnum=#{groupnum} and userid=#{userid})
+	</delete>
 	<select id="selectList" parameterType="long" resultType="groupuserdto">
 		select * from `group_user` where (groupnum=#{groupnum})
 	</select>

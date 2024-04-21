@@ -58,7 +58,6 @@
             		<div id="gpostsection">
                 		<div id="gpost" class="postsection">
 	                		<div class="gpostListwrap">
-	                			<form action="/joinmoimok.gp?groupnum=${group.groupnum}" method="post" name="qlistForm">
 			                		<c:choose>
 			                			<c:when test="${autoreg == 1}">
 			                				<div>
@@ -80,16 +79,16 @@
 			                						</c:if>
 			                					</ul>
 			                				</div>
-			                				<p><a href="javascript:changeAuto(1)">가입 방식 변경하기</a></p>	                				
+			                				<p><a href="javascript:changeAuto(1, ${group.groupnum})">가입 방식 변경하기</a></p>	                				
 			                			</c:when>
 			                			<c:otherwise>
 			                				<div>
-			                					<p>${group.groupname}의 가입 양식이에요<span><a href="">편집</a></span></p>
+			                					<p>${group.groupname}의 가입 양식이에요<span><a href="${cp}/setq.gp?groupnum=${group.groupnum}" style="cursor: pointer">편집</a></span></p>
 			                					<input type="hidden" name="auto" value="no">
 			                				</div>
 			                				<ul class="qListWrap">
 			                				<c:choose>
-			                				<c:when test="${questionlist.size() != 0}">
+			                				<c:when test="${not empty questionlist && questionlist.size() != 0}">
 				                				<c:forEach var="i" begin="0" end="${questionlist.size() -1}">
 			                    					<c:set var="index" value="${i}"/>
 			                    					<li class="qList">
@@ -120,7 +119,12 @@
 			                						<c:set var="ansbase" value="${ansbaselist[i]}"/>
 			                						<c:set var="answerlists" value="${answerlist[i]}"/>
 			                						<li>
-			                							<p>${ansbase.userid} 님의 답변 <input type="button" value="승인"><input type="button" value="거절"><input type="button" value="펼치기"></p>
+			                							<p>
+				                							${ansbase.userid} 님의 답변 
+				                							<input type="button" value="승인" onclick="acceptUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
+				                							<input type="button" value="거절" onclick="rejectUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
+				                							<input type="button" value="펼치기" style="cursor: pointer;">
+			                							</p>
 			                							<c:forEach var="j" begin="0" end="${answerlists.size() -1}">
 			                								<c:set var="answer" value="${answerlists[j]}"/>
 			                								<div>
@@ -133,10 +137,9 @@
 			                				</c:otherwise>
 			                				</c:choose>
 			                				</ul>			                				
-		                    				<p><a href="javascript:changeAuto(0)">자동 가입으로 변경하기</a></p>
+		                    				<p><a href="javascript:changeAuto(0, ${group.groupnum})">자동 가입으로 변경하기</a></p>
 			                			</c:otherwise>
 			                		</c:choose>
-								</form>
 							</div>
                 		</div>
             		</div>
@@ -145,8 +148,35 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+	const cp = '${cp}';
+</script>
+<script>
 	function backToMoim(groupnum){
-		location.href = "/groupinner.gp?groupnum="+groupnum;
+		location.href = cp+"/groupinner.gp?groupnum="+groupnum;
+	}
+	function acceptUser(userid, groupnum) {
+		alert("승인이 완료되었습니다.");
+		location.href = cp+"/checkmoimok.gp?ok=y&groupnum="+groupnum+"&userid="+userid;
+	}
+	function rejectUser(userid, groupnum) {
+		alert("거절이 완료되었습니다.");
+		location.href = cp+"/checkmoimok.gp?ok=f&groupnum="+groupnum+"&userid="+userid;
+	}
+	function changeAuto(autonum, groupnum){
+		if(autonum===1){
+			//수동으로 변경
+			if(confirm("가입 방식을 변경하시겠어요?")){
+				alert("변경되었어요");
+				location.href = cp+"/setq.gp?groupnum="+groupnum;
+			}
+		} else if (autonum===0){
+			//자동으로 변경
+			if(confirm("자동 가입으로 변경하시겠어요?")){
+				alert("변경되었어요");
+				location.href = cp+"/changeok.gp?groupnum="+groupnum+"&auto=1";
+			}
+			
+		}
 	}
 </script>
 </html>

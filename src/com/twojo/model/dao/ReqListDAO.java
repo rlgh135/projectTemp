@@ -1,5 +1,6 @@
 package com.twojo.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -35,4 +36,16 @@ public class ReqListDAO {
 	public ReqListDTO getQuestionList(long groupnum) {
 		return ss.selectOne("ReqList.getQuestionList", groupnum);
 	}
+
+	public boolean deleteQuestion(long groupnum) {
+		return ss.delete("ReqList.deleteQuestionByNum", groupnum)==1;
+	}
+
+	public boolean changeAuto(int autoreg, long groupnum) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("groupnum", groupnum);
+		datas.put("autoreg", autoreg);
+		return ss.update("ReqList.changeAuto", groupnum)==1;
+	}
+
 }

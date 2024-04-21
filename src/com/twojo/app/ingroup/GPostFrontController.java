@@ -113,6 +113,34 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/checkmoim.gp : "+e);
 			}
 			break;
+		case "/checkmoimok.gp":
+			try {
+				transfer = new CheckMoimOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/checkmoimok.gp : "+e);
+			}
+			break;
+		case "/setq.gp":
+			try {
+				transfer = new SetQAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/setq.gp : "+e);
+			}
+			break;
+		case "/setqok.gp":
+			try {
+				transfer = new SetQOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/setqok.gp : "+e);
+			}
+			break;
+		case "/changeok.gp":
+			try {
+				transfer = new ChangeOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/changeok.gp : "+e);
+			}
+			break;
 		}
 		
 		if (transfer != null) {

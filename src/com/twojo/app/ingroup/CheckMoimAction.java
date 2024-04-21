@@ -29,10 +29,10 @@ public class CheckMoimAction implements Action{
 		req.setAttribute("group", group);
 		
 		GroupUserDAO gudao = new GroupUserDAO();
-		List<GroupUserDTO> recentguser = gudao.selectRecentList(groupnum);
-		req.setAttribute("recentguser", recentguser);
 		
 		try {
+			List<GroupUserDTO> recentguser = gudao.selectRecentList(groupnum);
+			req.setAttribute("recentguser", recentguser);
 			for (int i = 0; i < anstemp.size(); i++) {
 				String ansbase = anstemp.get(i).getAnswer();
 				String[] anssplits = ansbase.split("§");
@@ -46,22 +46,26 @@ public class CheckMoimAction implements Action{
 			}
 		} catch (NumberFormatException e) {
 			answer = null;
+		} catch (NullPointerException e) {
+			answer = null;
 		}
 		
 		req.setAttribute("answerlist", answer);
 		req.setAttribute("ansbaselist", anstemp);
 		
+		
 		ReqListDTO question = reqdao.getQuestionList(groupnum);
-		String qusbase = question.getQuestion();
-		String[] questions = qusbase.split("§");
-		
-		ArrayList<String> questionlist = new ArrayList<String>();
-		for (int i = 0; i < questions.length; i++) {
-			questionlist.add(questions[i]);
+		if(question!=null) {
+			String qusbase = question.getQuestion();
+			String[] questions = qusbase.split("§");
+			
+			ArrayList<String> questionlist = new ArrayList<String>();
+			for (int i = 0; i < questions.length; i++) {
+				questionlist.add(questions[i]);
+			}
+			req.setAttribute("questionlist", questionlist);
+			req.setAttribute("autoreg", question.getAutoreg());			
 		}
-		
-		req.setAttribute("questionlist", questionlist);
-		req.setAttribute("autoreg", question.getAutoreg());
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);

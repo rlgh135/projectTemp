@@ -32,7 +32,6 @@ public class JoinMoimOkAction implements Action{
 		
 		if (auto.equals("auto")) {
 			
-			System.out.println("들어옴"+1);
 			GroupUserDTO groupuser = new GroupUserDTO();
 			groupuser.setUserid(userid);
 			groupuser.setGroupnum(groupnum);

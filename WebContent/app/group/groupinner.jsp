@@ -220,7 +220,7 @@
 													</div>
 													<div class="profilemenu">
 														<img src="../../images/write.png" style="width: 18px; height: 18px;">
-														<p>작성글보기</p>
+														<button type="button" class="msg_send" onclick="makeDOM()" style="cursor: pointer;">작성글보기</button>
 													</div>
 												</div>
 											</div>

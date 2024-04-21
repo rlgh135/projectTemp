@@ -5,7 +5,7 @@
 <mapper namespace="ReqList">
 	<insert id="makeQuestion" parameterType="reqlistdto">
 		insert into reqlist(`groupnum`, `leaderid`, `question`) 
-		values(#{groupnum},#{leaderid},#{qusetion})
+		values(#{groupnum},#{leaderid},#{question})
 	</insert>
 	<insert id="makeAutoQuestion" parameterType="reqlistdto">
 		insert into reqlist(groupnum, leaderid, autoreg) 
@@ -18,8 +18,11 @@
 	<delete id="delete" parameterType="reqlistdto">
 		delete from reqlist where (groupnum=#{groupnum} and userid=#{userid})
 	</delete>
-	<delete id="deleteQuestion" parameterType="string">
+	<delete id="deleteQuestion" parameterType="reqlistdto">
 		delete from reqlist where leaderid=#{leaderid}
+	</delete>
+	<delete id="deleteQuestionByNum" parameterType="long">
+		delete from reqlist where groupnum=#{groupnum}
 	</delete>
 	<select id="getAnswerList" parameterType="long" resultType="reqlistdto">
 		select * from reqlist where (groupnum=#{groupnum} and leaderid is null)
@@ -27,4 +30,7 @@
 	<select id="getQuestionList" parameterType="long" resultType="reqlistdto">
 		select * from reqlist where (groupnum=#{groupnum} and userid is null)
 	</select> 
+	<update id="changeAuto" parameterType="hashmap">
+		update reqlist set autoreg = #{autoreg} where (groupnum = #{groupnum} and userid is null)
+	</update>
 </mapper>
