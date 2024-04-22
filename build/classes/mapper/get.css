@@ -1,0 +1,221 @@
+@charset "UTF-8";* {
+    padding: 0;
+    margin: 0;
+
+}
+
+.btn {
+    display: block;
+}
+
+#wrap {
+    margin-right: 100px;
+    margin-left: 100px;
+    width: 1280px;
+    margin: 0 auto;
+}
+
+th{
+    display: none;
+}
+input[type=text], textarea{
+    border: none;
+    }
+
+.board_area{
+    width: 100%;
+}
+
+.tbtitle{
+    height: 130px;
+    border-top: 3px solid rgb(253, 202, 6);
+    border-bottom: 1px solid #cecdd4;
+    font-size: 18px;
+}
+.tbtitle input[type=text]{
+    font-size: 25px;
+    font-weight: 500;
+}
+.tbuserid{
+    height: 61px;
+    border-bottom: 1px solid #cecdd4;
+
+}
+
+.tbcategory{
+    border-bottom: 1px solid #cecdd4;
+    height: 3cqh;
+}
+
+.tbveiwcnt{
+    height: 31px;
+    border-bottom: 1px solid #cecdd4;
+    text-align: right;
+}
+.tbparti{
+    border-bottom: 1px solid #cecdd4;
+    height: 100px;
+
+}
+.tbcontent{
+    border-bottom: 1px solid #cecdd4;
+    height: auto;
+    height: 700px
+}
+.tbcontent textarea{
+    margin: 50px 0px;
+    font-size: 18px;
+    display: inline;
+    resize: none;
+}
+
+
+/* btn */
+
+.btns{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0px;
+}
+
+.listbtn{
+
+width: 300px;
+height: 80px;
+border: 0;
+border-radius: 5px;
+background-color: #cecdd4;
+overflow: hidden;
+line-height: 80px;
+color: white;
+display: inline-block;
+text-align: center;
+font-size: 18px;
+}
+
+    .cancelbtn{
+   
+    width: 300px;
+    height: 80px;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(253, 202, 6);
+    overflow: hidden;
+    line-height: 80px;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    }
+
+    .partibtn{
+        width: 300px;
+        height: 80px;
+        border: 0;
+        border-radius: 5px;
+        background-color: rgb(253, 202, 6);
+        overflow: hidden;
+        line-height: 80px;
+        color: white;
+        display: inline-block;
+        text-align: center;
+        font-size: 18px;
+        margin-right: 10px;
+        }
+
+
+   /* reply */
+
+   .replybox{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    margin-bottom: 50px;
+   }
+   #lreplycontents{ 
+    font-size: 14px;
+    width: 928px;
+    height: 110px;
+    border: 1px solid #999;
+    margin-top: -1px;
+    display: block;
+    float: left;
+    resize: none;
+   }
+   .replysub{
+    border: 1px solid rgb(17, 0, 255) ;
+  
+   }
+  a{
+    text-decoration: none;
+    cursor: pointer;
+   }
+   .replybtn{
+    width: 120px;
+    height: 114px;
+    background-color: rgb(253, 202, 6);
+    display: inline-block;
+    color: black;
+   
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    line-height: 114px;
+    border-radius: 0px 5px 5px 0px;
+   }
+
+   .replytxt{
+    width: 165px;
+    height: 110px;
+    background-color: white;
+    display: inline-block;
+    color: black;
+    
+    color: #999;
+    font-size: 16px;
+    text-align: center;
+    line-height: 112px;
+    border-radius: 5px 0px 0px 5px;
+    border: 1px solid #999;
+   }
+
+   .btn_area td{
+    width: 1200px;
+   }
+
+
+
+   /* 댓글 수정 삭제 css */
+.replytd{
+text-align: center;
+font-weight: 500;
+width: 150px;
+border: 1px solid #999;
+border-radius: 5px 0px 0px 5px;
+}
+
+.replycontents{
+    width: 928px;
+    line-height: 60px;
+    border: 1px solid #999;
+    resize: none;
+}
+
+.btn{
+    width: 120px;
+    height:60px;
+    border: 1px solid #888;
+    color: #888;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 5px;
+}
+
+
+.replaybtns{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}

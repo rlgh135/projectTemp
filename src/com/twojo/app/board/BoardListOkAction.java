@@ -26,17 +26,32 @@ public class BoardListOkAction implements Action{
 		String keyword = req.getParameter("keyword");
 		String searchMenu = req.getParameter("searchMenu");
 		
-		UserDAO udao = new UserDAO();
-		LPostDAO lpdao = new LPostDAO(); 
-		String LoginUser = (String)req.getSession().getAttribute("loginUser");
 		
-		String userAddr = (udao.getUserById(LoginUser)).getUseraddr();
-		List<LPostDTO> LPlist = new ArrayList<>();
-		for(LPostDTO lpost : lpdao.getUserAddrList(userAddr)) {
-			LPlist.add(lpost);
-		}
-		req.setAttribute("loginUserAddr", userAddr);
-		req.setAttribute("LPlist", LPlist);
+//		UserDAO udao = new UserDAO();
+//		LPostDAO lpdao = new LPostDAO(); 
+//		String LoginUser = (String)req.getSession().getAttribute("loginUser");
+//		
+//		String userAddr = udao.getUserById(LoginUser).getUseraddr();
+//		List<LPostDTO> LPlist = new ArrayList<>();
+//		for(LPostDTO lpost : lpdao.getUserAddrList(userAddr)) {
+//			LPlist.add(lpost);
+//		}
+//		
+//		String loginUserAddr = udao.getUserAddr(LoginUser);
+//		req.setAttribute("loginUser", userAddr);
+//		req.setAttribute("LPlist", LPlist);
+		
+		
+//		 public String yourHandlerMethod(Model model) {
+//		        // 여기서 roadAddress 변수를 어딘가에서 가져와서 설정합니다
+//		        String roadAddress = LoginUser; // 예시로 설정한 값입니다
+//		        // 모델에 roadAddress 변수를 추가합니다
+//		        model.addAttribute("roadAddress", roadAddress);
+//		        // 뷰 이름을 반환합니다
+//		        return "yourViewName";
+//		    }
+		
+		
 		
 
 		
@@ -87,6 +102,8 @@ public class BoardListOkAction implements Action{
 			list = bdao.getList(startRow,pageSize,keyword);
 		
 		
+		
+		
 		req.setAttribute("list", list);
 		System.out.println(list.size());
 		req.setAttribute("totalPage", totalPage);
@@ -95,6 +112,9 @@ public class BoardListOkAction implements Action{
 		req.setAttribute("endPage", endPage);
 		req.setAttribute("page", page);
 		req.setAttribute("keyword", keyword);
+		req.setAttribute("placeName", req.getAttribute("placeName"));
+		req.setAttribute("roadAddress", req.getAttribute("roadAddress"));
+		
 
 		
 		

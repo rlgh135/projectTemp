@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +16,11 @@
 </head>
 
 <body>
-    <header>
+    <%-- <header>
 		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
-	</header>
+	</header> --%>
 	<div id="wrap">
-		<h2 id="title">${loginUserAddr}의 최근 게시글!</h2>
+		<h2 id="title">${loginUser}의 최근 게시글!</h2>
 		<div class="firstpost">
 			<c:forEach var="i" begin="0" end="3">
 				<c:if test="${not empty LPlist and i < LPlist.size()}">
@@ -45,7 +47,7 @@
 							    </c:forEach>
 						</c:when>
 						<c:otherwise>
-							아직 아무도 참여하지 않았어요
+							<p>아직 아무도 참여하지 않았어요</p>
 						</c:otherwise>	
 	
 						</c:choose>

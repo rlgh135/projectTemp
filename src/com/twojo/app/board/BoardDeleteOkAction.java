@@ -12,6 +12,7 @@ import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
 //import com.twojo.model.dao.FileDAO;
 //import com.twojo.model.dto.FileDTO;
+import com.twojo.model.dao.Lpost_AddrDAO;
 
 public class BoardDeleteOkAction implements Action{
 	@Override
@@ -24,24 +25,17 @@ public class BoardDeleteOkAction implements Action{
 		keyword = URLEncoder.encode(keyword,"UTF-8");
 		
 		LPostDAO bdao = new LPostDAO();
+		Lpost_AddrDAO ladao= new Lpost_AddrDAO();
+		
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(true);
 
-//		String saveFolder = req.getServletContext().getRealPath("file");
-//		FileDAO fdao = new FileDAO();
-//		List<FileDTO> files = fdao.getFiles(boardnum);
 		
-		if(bdao.deleteBoard(boardnum)) {
-//			for(FileDTO fdto : files) {
-//				File file = new File(saveFolder,fdto.getSystemname());
-//				if(file.exists()) {
-//					fdao.deleteFile(fdto.getSystemname());
-//					file.delete();
-//				}
-//			}
-			
-			transfer.setPath(req.getContextPath()+"/boardlist.bo?page="+page+"&keyword="+keyword);
+		if(ladao.deleteBoard(boardnum)){
+			if(bdao.deleteBoard(boardnum)) {
+				transfer.setPath(req.getContextPath()+"/boardlist.bo?page="+page+"&keyword="+keyword);
+			}
 		}
 		else {
 			System.out.println("else진입");

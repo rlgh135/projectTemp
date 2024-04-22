@@ -6,9 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <title>write</title>
-    <link href="${cp}/css/style.css" rel="stylesheet">
+   <link href="${cp}/css/wirte/mapApi.css" rel="stylesheet">
+   <link href="${cp}/css/wirte/write.css" rel="stylesheet">
 </head>
 <body class="write">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b80d880bf487c48bfc24c5920bfb84f0&libraries=services"></script>
     <div id="wrap">
         <div></div>
         <table class="header_area">
@@ -73,7 +75,7 @@
 						<label for="myCheckbox11">종교/봉사</label>
 						<input type="checkbox" id="myCheckbox12" name="myCheckbox" value="#반려동물/동물">
 						<label for="myCheckbox12">반려동물/동물</label>
-						<input type="checkbox" id="myCheckbox"13 name="myCheckbox" value="#자연/귀농">
+						<input type="checkbox" id="myCheckbox13" name="myCheckbox" value="#자연/귀농">
 						<label for="myCheckbox">자연/귀농</label>
 						<input type="checkbox" id="myCheckbox14" name="myCheckbox" value="#게임">
 						<label for="myCheckbox14">게임</label>
@@ -94,8 +96,32 @@
                 <tr>
                     <th>주소</th>
                     <td>
-                        <input type="text" name="boardaddr" maxlength="50" placeholder="만날 지역을 입력하세요">
+	                   <div class="map_wrap">
+						    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+						    <div id="menu_wrap" class="bg_white">
+						        <div class="option">
+						            <div>
+						                <div class="search-form" onsubmit="searchPlaces(); return false;"
+						                style="display:inline">
+										    키워드 : <input type="text" value="검색어 입력" id="keyword" size="15"> 
+										    <button type="button" onclick="mapApi()">검색</button> 
+										</div>
+						            </div>
+						        </div>
+						        <hr>
+						        <ul id="placesList"></ul>
+						        <div id="pagination"></div>
+						    </div>
+						</div>
                     </td>
+                </tr>
+                <tr>
+                	<th>상세주소</th>
+                	<td id="map2">
+                		<!-- 장소 정보를 표시할 요소 -->
+					    <div id="placeInfo"></div>
+					    <input type="hidden" id="jsonDataInput" name="jsonData">
+                	</td>
                 </tr>
             </table>
         </form>
@@ -111,27 +137,35 @@
         </table>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>    
+<script src="${cp}/js/board_write/writeAddr.js"></script>
 <script>
-    window.setTimeout(function(){
-        document.querySelector("#wrap>div:nth-child(1)").style.display="none";
-    },1200)
+	window.setTimeout(function(){
+	    document.querySelector("#wrap>div:nth-child(1)").style.display="none";
+	},1200)
 
-    function sendit() {
-    const checkboxes = document.getElementsByName("myCheckbox");
-    const selectedCategories = [];
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            const hiddenInput = document.createElement('input');
-            hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'selectedCategories');
-            hiddenInput.setAttribute('value', checkbox.value);
-            document.getElementById("boardForm").appendChild(hiddenInput);
-        }
-    });
-    // 폼 전송
-    document.boardForm.submit();
-}
+	function sendit() {
+		const checkboxes = document.getElementsByName("myCheckbox");
+		const selectedCategories = [];
+		checkboxes.forEach(checkbox => {
+		    if (checkbox.checked) {
+		        const hiddenInput = document.createElement('input');
+		        hiddenInput.setAttribute('type', 'hidden');
+		        hiddenInput.setAttribute('name', 'selectedCategories');
+		        hiddenInput.setAttribute('value', checkbox.value);
+		        document.getElementById("boardForm").appendChild(hiddenInput);
+		    }
+		});
+		//주소정보(lpost_addr정보) 전송하는 함수 호출 
+		/* sendDataToServer(htmlString); */
+		// 폼 전송
+		document.boardForm.submit();
+		
+	}
+	
+	
+
+	   
 </script>
 </html>
 

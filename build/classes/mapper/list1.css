@@ -1,0 +1,235 @@
+* {
+            padding: 0;
+            margin: 0;
+
+        }
+        a {
+		    color: inherit; /* 링크의 색상을 부모 요소로부터 상속 */
+		    text-decoration: none; /* 텍스트에 밑줄 제거 */
+		}
+
+        #wrap {
+            margin-right: 100px;
+            margin-left: 100px;
+            width: 1400px;
+            margin: 0 auto;
+        }
+
+        .firstpost {
+            display: flex;
+            /* width: 70%; */
+            height: auto;
+            justify-content: space-around;
+        }
+
+        .postbox {
+            border: 1px solid rgb(214, 213, 213);
+            border-radius: 20px;
+            width: 310px;
+            height: 150px;
+            padding: 40px 18px 18px 18px;
+
+        }
+
+        .postbox:hover {
+            border: 1px solid rgb(253, 202, 6);
+            border-radius: 20px;
+            width: 298;
+            height: auto;
+        }
+
+        #title {
+            font-weight: bold;
+            margin-bottom: 60px;
+            margin-top: 60px;
+            margin-left: 46px;
+        }
+
+        input[type=text] {
+            margin: 65px 0px 40px 450px;
+            height: 25px;
+            width: 300px;
+        }
+        .secondpostbox{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .secondpost {
+            display: flex;
+            justify-content: space-around;
+            width: 500px;
+            height: auto;
+            flex-flow: wrap;
+        }
+
+        .tpostbox {
+            border: 1px solid rgb(214, 213, 213);
+            width: 100%;
+            margin-bottom: 60px;
+            border-radius: 20px;
+            color: #666666;
+            padding: 40px 18px 18px 18px;
+        }
+        
+        .tpostbox:nth-child(even){
+         margin-right: 30px ;
+        }
+ 
+        .tpostbox:hover {
+            border: 1px solid  rgb(253, 202, 6);
+            transform: scale(1.1);
+            margin-bottom: 60px;
+            border-radius: 20px;
+        }
+
+        .tbtop {
+            display: flex;
+            justify-content: left;
+            position: relative;
+        }
+        
+        .search_btn{
+            width: 50px;
+            height: 27px;
+            position: absolute;
+            top: 65px;
+            right: 376px;
+        }
+        /* postbox 占쏙옙 占쌔쏙옙트占쏙옙  */
+
+        .postbox .title {
+            font-weight: 500;
+            font-size: 20px;
+
+            margin-bottom: 7px;
+            color: #666666;
+
+        }
+
+        .postbox .content {
+            font-weight: 500;
+            font-size: 15px;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .postbox .addr {
+            font-weight: 700;
+            font-size: 15px;
+            margin-right: 170px;
+            color: #666666;
+        }
+
+        .postbox .category {
+            font-weight: 700;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .postbox .regdate {
+            font-weight: 300;
+            font-size: 12px;
+            color: rgb(53, 53, 53);
+        }
+
+        .postbox .img {
+            margin: 10px 80px 2px 80px;
+        }
+
+        .postbox .adgory {
+            width: 290px;
+            display: flex;
+        }
+
+        .postbox .regcnt {
+            width: 290px;
+            display: flex;
+        }
+
+        .likecnt {
+            display: flex;
+        }
+
+        .likecnt>p {
+            margin-left: 150px;
+        }
+
+        .heart {
+            margin-top: 3px;
+        }
+
+        
+        /* tpost 萸�  */
+
+        /* .tpostbox{
+            width: 49%;
+            height: 150px;
+
+        } */
+
+        .tpostbox .ttitle {
+            font-weight: 500;
+            font-size: 20px;
+
+            margin-bottom: 7px;
+            color: #666666;
+
+        }
+
+        .tpostbox .tcontent {
+            font-weight: 500;
+            font-size: 15px;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .tpostbox .taddr {
+            font-weight: 700;
+            font-size: 15px;
+            margin-right: 170px;
+            color: #666666;
+        }
+
+        .tpostbox .tcategory {
+            font-weight: 700;
+            font-size: 13px;
+            color: #666666;;
+        }
+
+        .tpostbox .tregdate {
+            font-weight: 300;
+            font-size: 12px;
+            color: rgb(53, 53, 53);
+        }
+
+        .tpostbox .timg {
+            margin: 10px 80px 2px 80px;
+        }
+
+        .tpostbox .tadgory {
+            width: 290px;
+            display: flex;
+        }
+
+        .tpostbox .tregcnt {
+            width: 290px;
+            display: flex;
+        }
+
+        .tlikecnt {
+            display: flex;
+        }
+
+        .tlikecnt > p {
+            margin-left: 150px;
+        }
+
+        .theart {
+            margin-top: 3px;
+        }
+
+        .postpage{
+            display: flex;
+            justify-content: center;
+        }
+

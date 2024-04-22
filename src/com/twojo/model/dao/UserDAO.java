@@ -22,4 +22,7 @@ public class UserDAO {
 	public UserDTO getUserById(String userid) {
 		return ss.selectOne("User.select",userid);
 	}
+	public String getUserAddr(String userid) {
+		return ss.selectOne("User.select", userid);
+	}
 }

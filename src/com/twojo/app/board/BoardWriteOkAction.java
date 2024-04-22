@@ -1,26 +1,42 @@
 package com.twojo.app.board;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
+import com.twojo.model.dao.Lpost_AddrDAO;
 //import com.twojo.model.dao.FileDAO;
 import com.twojo.model.dto.LPostDTO;
+import com.twojo.model.dto.Lpost_AddrDTO;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 //import com.twojo.model.dto.FileDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import org.json.simple.JSONObject;
 
 public class BoardWriteOkAction implements Action {
-	@Override
+	Lpost_AddrDTO ladto = new Lpost_AddrDTO(); 
+	@Override	
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		
 		
 		LPostDTO board = new LPostDTO();
 		String boardtitle = req.getParameter("boardtitle");
@@ -29,7 +45,8 @@ public class BoardWriteOkAction implements Action {
 		String boardaddr = req.getParameter("boardaddr");
 		String[] mycheckBox = req.getParameterValues("selectedCategories");
 		String boardcategory = "";
-		
+		String jsonDataInput = req.getParameter("jsonData"); 
+        
 		
 		System.out.println("선택된 카테고리: ");
         if (mycheckBox != null) {
@@ -46,10 +63,15 @@ public class BoardWriteOkAction implements Action {
 		board.setLpostcategory(boardcategory);
 		board.setLpostaddr(boardaddr);
 		
+		
 		System.out.println(boardtitle);
 		System.out.println(boardcontents);
 		System.out.println(userid);
 		System.out.println(boardaddr);
+		System.out.println("jsonData " + jsonDataInput);
+		
+		
+		
 		
 		LPostDAO bdao = new LPostDAO();
 		Transfer transfer = new Transfer();
@@ -58,6 +80,9 @@ public class BoardWriteOkAction implements Action {
 		
 		if(bdao.insertBoard(board)) {
 			long boardnum = bdao.getLastNum(userid);
+			setAddr(jsonDataInput, boardnum);
+			req.setAttribute("placeName", ladto.getPlaceName());
+			req.setAttribute("roadAddress", ladto.getRoadAddress());
 			transfer.setPath(req.getContextPath()+"/boardview.bo?lpostnum="+boardnum);
 		}else {
 			//list
@@ -68,9 +93,29 @@ public class BoardWriteOkAction implements Action {
 			transfer.setPath(req.getContextPath()+"/boardlist.bo");
 		}
 		return transfer;
-		
-
 	}
+	
+	
+	private Lpost_AddrDTO setAddr(String jsonDataInput, long boardnum) {
+		Lpost_AddrDAO ladao = new Lpost_AddrDAO();
+		Gson gson = new Gson();
+		JsonObject jsonobj = gson.fromJson(jsonDataInput, JsonObject.class);
+		String placeName = jsonobj.get("placeName").getAsString();
+		String roadAddress = jsonobj.get("roadAddress").getAsString();
+		String address = jsonobj.get("address").getAsString();
+		String phone = jsonobj.get("phone").getAsString();
+		
+		ladto.setPlaceName(placeName);
+		ladto.setRoadAddress(roadAddress);
+		ladto.setAddress(address);
+		ladto.setPhone(phone);
+		ladto.setLpostnum(boardnum);		
+		
+		ladao.insertAddr(ladto);
+
+		return ladto;
+	}
+ 
 }
 
 

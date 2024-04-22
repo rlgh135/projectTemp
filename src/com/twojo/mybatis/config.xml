@@ -17,6 +17,7 @@
 	<typeAlias type="com.twojo.model.dto.MessageDTO" alias="messagedto"/>  	
 	<typeAlias type="com.twojo.model.dto.ReqListDTO" alias="reqlistdto"/>  	
 	<typeAlias type="com.twojo.model.dto.GPostLikeDTO" alias="gpostlikedto"/>  	
+	<typeAlias type="com.twojo.model.dto.Lpost_AddrDTO" alias="ladto"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -43,6 +44,7 @@
     <mapper resource="mapper/MessageMapper.xml"/>
     <mapper resource="mapper/ReqListMapper.xml"/>
     <mapper resource="mapper/GPostLikeMapper.xml"/>
+    <mapper resource="mapper/Lpost_AddrMapper.xml"/>
   </mappers>
 </configuration>
 

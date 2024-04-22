@@ -49,6 +49,15 @@ drop table lpost_user;
 select * from lpost_user;
 /*0416 ALTER문 액션(Ctrl+Enter) 해줘야함*/
 ALTER TABLE lpost_user ADD CONSTRAINT LUP UNIQUE(boardnum, userid);
+CREATE TABLE lpost_addr(
+   lpostnum bigint,
+   placeName varchar(300),
+   roadAddress varchar(300),
+   address varchar(300),
+   phone varchar(300),
+    CONSTRAINT fk_lpostnum FOREIGN KEY (lpostnum) REFERENCES lpost(lpostnum)
+);
+select * from lpost_addr;
 CREATE TABLE `lfile` (
   `lfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
   `lpostnum` bigint,

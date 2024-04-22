@@ -11,8 +11,10 @@ import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
 //import com.twojo.model.dao.FileDAO;
 import com.twojo.model.dao.LReplyDAO;
+import com.twojo.model.dao.Lpost_AddrDAO;
 import com.twojo.model.dao.Lpost_UserDAO;
 import com.twojo.model.dto.LPostDTO;
+import com.twojo.model.dto.Lpost_AddrDTO;
 import com.twojo.model.dto.Lpost_UserDTO;
 
 public class BoardViewOkAction implements Action{
@@ -25,6 +27,8 @@ public class BoardViewOkAction implements Action{
 		    System.out.println(boardnum + "viewokaction");
 		}
 		String loginUser = (String)req.getSession().getAttribute("loginUser");
+		
+		
 		System.out.println("bordviewok"+loginUser);
 		
 		LPostDAO bdao = new LPostDAO();
@@ -35,9 +39,16 @@ public class BoardViewOkAction implements Action{
 			board.setReadcount(board.getReadcount()+1);
 		}
 
+		Lpost_AddrDAO ladao = new Lpost_AddrDAO();
+		Lpost_AddrDTO ladto = ladao.getAddr(boardnum);
+		
+		
+		
 		LReplyDAO rdao = new LReplyDAO();
 		Lpost_UserDTO ludto = new Lpost_UserDTO();
 		Lpost_UserDAO ludao = new Lpost_UserDAO();
+		
+		
 		
 		ludto.setUserid(loginUser);
 		ludto.setBoardnum(boardnum);
@@ -46,7 +57,14 @@ public class BoardViewOkAction implements Action{
 		req.setAttribute("board", board);
 		req.setAttribute("replies", rdao.getReplies(boardnum));
 		req.setAttribute("checkUser", ludao.checkUser(ludto));
-
+		
+		req.setAttribute("RoadAddress", ladto.getRoadAddress());
+		req.setAttribute("PlaceName", ladto.getPlaceName());
+		System.out.println("PlaceName: " + ladto.getPlaceName());
+		System.out.println("getRoadAddress: " + ladto.getRoadAddress());
+		
+		
+		
 		String userId = "";
 		for (String userID : ludao.getUserList(boardnum)) {
             userId += (userID + "<br>");
