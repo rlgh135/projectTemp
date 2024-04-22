@@ -25,6 +25,9 @@
 		insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
 		values(#{sendid},#{receiveid},#{msgcontent},#{msgcheck},#{linkstring})
 	</insert>
+	<update id="checkUpdate" parameterType="int">
+		update message set msgcheck = 1 where messagenum = #{messagenum}
+	</update>
 </mapper>
 
 

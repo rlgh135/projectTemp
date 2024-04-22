@@ -88,7 +88,7 @@
     	color : rgb(100,100,100);
     }
     
-    .usermsg_check_ok:hover, .usermsg_check_no:hover, .sysmsg_check_no:hover{
+    .usermsg_check_ok:hover, .usermsg_check_no:hover, .sysmsg_check_no:hover, .sysmsg_check_ok:hover{
     	font-weight: bold;
     }
     
@@ -99,7 +99,15 @@
     	color:chocolate;
     	text-align: center;
     }
+    .msg_check_ok_img{
+    	background : url("../../images/msg_ok.png") no-repeat center;
+    	background-size : 50%;
+    }
     
+    .msg_check_no_img{
+    	background : url("../../images/msg_no.png") no-repeat center;
+    	background-size : 50%;
+    }
     .msg_check_ok_img, .msg_check_no_img{
         width: 80px;
         height: 40px;
@@ -152,7 +160,9 @@
         height: 400px;
         box-shadow: 0 0px 5px rgba(0,0,0,0.8);
     }
-
+	#sysmsg_modalContent{
+		height: 280px;
+	}
     /* 모달 닫기 버튼 스타일 */
     .sysmsg_close {
         padding: 10px 20px;
@@ -172,6 +182,51 @@
         cursor: pointer;
     }
     
+    /* 모달 스타일 */
+    .usermsg_modal {
+        display: none; /* 모달 숨김 */
+        position: fixed; /* 고정 위치 */
+        z-index: 1000; /* 위에 표시 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* 스크롤 가능 */
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    /* 모달 내용 스타일 */
+    .usermsg_modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 중앙에 표시 */
+        padding: 20px;
+        border-radius: 10px; 
+        width: 400px;
+        height: 400px;
+        box-shadow: 0 0px 5px rgba(0,0,0,0.8);
+    }
+	#usermsg_modalContent{
+		height: 280px;
+	}
+    /* 모달 닫기 버튼 스타일 */
+    .usermsg_close {
+        padding: 10px 20px;
+	    background-color: rgb(253, 202, 6);
+	    color: rgb(50, 50, 50);
+        float: right;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.359);
+        
+    }
+    
+    .usermsg_close:hover,
+    .usermsg_close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
     
 </style>
 </head>
@@ -181,7 +236,7 @@
 <body>
 	<jsp:include page="${cp}/app/message/sendmessage.jsp"></jsp:include>
 	<c:choose>
-		<c:when test="${sysmsglist != null && usermsglist != null}">
+		<c:when test="${sysmsglist != null || usermsglist != null}">
 		    <div id="msgl_wrap">
 		        <div id="msgl_box">
 		            <table class="msg_list">
@@ -197,101 +252,112 @@
 		                </thead>
 		                	
 		                	<!-- 시스템 메세지  -->
-		                	<c:forEach var="i" begin="0" end="${sysmsglist.size() - 1}">
-		                		<c:set var="sys_msg" value="${sysmsglist[i]}"/>
-				                    <tr id="sys_msgview${i}">
-				                    	<c:choose>
-				                    		<c:when test="${sys_msg.msgcheck != 0}">
-						                        <td class="msgl_check msg_con">
-						                           	<img src=".${cp}/images/msg_ok.png" class="msg_check_ok_img">
-						                        </td>
-				                    		</c:when>
-				                    		<c:otherwise>
-				                    			<td class="msgl_check msg_con">
-						                           	<img src="${cp}/images/msg_no.png" class="msg_check_no_img">
-						                        </td>
-				                    		</c:otherwise>
-				                    	</c:choose>
-				                    	<c:choose>
-				                    		<c:when test="${sys_msg.msgcheck != 0}">
-						                        <td class="msgl_content msg_con" >
-						                        	<button class="sysmsg_check_ok sysmsg_button" onclick="openModal('${sys_msg.msgcontent}')">${sys_msg.msgcontent}</button>
-						                        </td>
-				                    		</c:when>
-				                    		<c:otherwise>
-				                    			<td class="msgl_content msg_con">
-				                    				<button class="sysmsg_check_no sysmsg_button" onclick="openModal('${sys_msg.msgcontent}')">${sys_msg.msgcontent}</button>
-						                        </td>
-				                    		</c:otherwise>
-				                    	</c:choose>
-				                    	
-				                    	<!-- 시스템메세지 모달부분  -->
-				                    	<div id="sysmsg_Modal" class="sysmsg_modal">
-										    <div class="sysmsg_modal-content">
-										    	<h4>메세지 내용 : </h4>
-										    	<br>
-										        <p id="sysmsg_modalContent"></p>
-										        <p id="linkaddr"></p>
-										        <button type="button" class="sysmsg_close" onclick="sysmsg_closeModal()">닫기</button>
-										        <!-- <span class="close" onclick="closeModal()">&times;</span> -->
-										    </div>
-										</div>
-						                        
-				                        <td class="msg_con"><input class="sys_sendid${i+1}" type="hidden" name="sys_sendid${i+1}" value="${sys_msg.sendid}">${sys_msg.sendid}</td>
-				                        <input class="sys_sendnum${i+1}" type="hidden" name="sys_sendnum${i+1}" value="${sys_msg.messagenum}">
-				                        <td class="msg_con">${sys_msg.msregdate}</td>
-				                        <td class="msg_con">
-				                        	<!-- 답장하기 관련해서 어디에 넣을기 고민  -->
-				                            <%-- <button type="button" class="msg_send msg_button" onclick="sys_sendMessage(${i+1})">-</button> --%>
-				                            -
-				                        </td>
-				                        <td class="msg_con">
-				                            <button type="button" class="msg_delete msg_button" onclick="sys_deleteMessage(${i+1})">삭제하기</button>
-				                        </td>
-				                    </tr>
-		                	</c:forEach>
+		                	<c:if test="${sysmsglist.size() > 0}">
+			                	<c:forEach var="i" begin="0" end="${sysmsglist.size() - 1}">
+			                		<c:set var="sys_msg" value="${sysmsglist[i]}"/>
+					                    <tr id="sys_msgview${i}">
+					                    	<c:choose>
+					                    		<c:when test="${sys_msg.msgcheck != 0}">
+							                        <td class="msgl_check msg_con">
+							                           	<div class="msg_check_ok_img"></div>
+							                        </td>
+					                    		</c:when>
+					                    		<c:otherwise>
+					                    			<td class="msgl_check msg_con">
+							                           	<div class="msg_check_no_img syscheckImg${i+1}"></div>
+							                        </td>
+					                    		</c:otherwise>
+					                    	</c:choose>
+					                    	<c:choose>
+					                    		<c:when test="${sys_msg.msgcheck != 0}">
+							                        <td class="msgl_content msg_con" >
+							                        	<button class="sysmsg_check_ok sysmsg_button" onclick="sysopenModal('${sys_msg.msgcontent}','${sys_msg.linkstring}','${i+1}')">${sys_msg.msgcontent}</button>
+							                        </td>
+					                    		</c:when>
+					                    		<c:otherwise>
+					                    			<td class="msgl_content msg_con">
+					                    				<button class="sysmsg_check_no sysnoCheck${i+1} sysmsg_button" onclick="sysopenModal('${sys_msg.msgcontent}','${sys_msg.linkstring}','${i+1}')">${sys_msg.msgcontent}</button>
+							                        </td>
+					                    		</c:otherwise>
+					                    	</c:choose>
+					                    	
+					                    	<!-- 시스템메세지 모달부분  -->
+					                    	<div id="sysmsg_Modal" class="sysmsg_modal">
+											    <div class="sysmsg_modal-content">
+											    	<h4>메세지 내용 : </h4>
+											    	<br>
+											        <p id="sysmsg_modalContent"></p>
+											        <a id="linkaddr">이동하기</a>
+											        <button type="button" class="sysmsg_close" onclick="sysmsg_closeModal()">닫기</button>
+											    </div>
+											</div>
+							                        
+					                        <td class="msg_con"><input class="sys_sendid${i+1}" type="hidden" name="sys_sendid${i+1}" value="${sys_msg.sendid}">${sys_msg.sendid}</td>
+					                        <input class="sys_sendnum${i+1}" type="hidden" name="sys_sendnum${i+1}" value="${sys_msg.messagenum}">
+					                        <td class="msg_con">${sys_msg.msregdate}</td>
+					                        <td class="msg_con">
+					                            -
+					                        </td>
+					                        <td class="msg_con">
+					                            <button type="button" class="msg_delete msg_button" onclick="sys_deleteMessage(${i+1})">삭제하기</button>
+					                        </td>
+					                    </tr>
+			                	</c:forEach>
+		                	</c:if>
 		                	
 		                	
 		                	<!-- 유저간의 메세지  -->
-		                	<c:forEach var="i" begin="0" end="${usermsglist.size() - 1}">
-		                		<c:set var="msg" value="${usermsglist[i]}"/>
-				                    <tr id="msgview${i}">
-				                    	<c:choose>
-				                    		<c:when test="${msg.msgcheck != 0}">
-						                        <td class="msgl_check msg_con">
-						                           	<img src="${cp}/images/msg_ok.png" class="msg_check_ok_img">
-						                        </td>
-				                    		</c:when>
-				                    		<c:otherwise>
-				                    			<td class="msgl_check msg_con">
-						                           	<img src="${cp}/images/msg_no.png" class="msg_check_no_img">
-						                        </td>
-				                    		</c:otherwise>
-				                    	</c:choose>
-				                    	<c:choose>
-				                    		<c:when test="${msg.msgcheck != 0}">
-						                        <td class="msgl_content msg_con" >
-						                        	<button class="usermsg_check_ok usermsg_button">${msg.msgcontent}</button>
-						                        </td>
-				                    		</c:when>
-				                    		<c:otherwise>
-				                    			<td class="msgl_content msg_con">
-				                    				<button class="usermsg_check_no usermsg_button">${msg.msgcontent}</button>
-						                        </td>
-				                    		</c:otherwise>
-				                    	</c:choose>
-						                        
-				                        <td class="msg_con"><input class="sendid${i+1}" type="hidden" name="sendid${i+1}" value="${msg.sendid}">${msg.sendid}</td>
-				                        <input class="sendnum${i+1}" type="hidden" name="sendnum${i+1}" value="${msg.messagenum}">
-				                        <td class="msg_con">${msg.msregdate}</td>
-				                        <td class="msg_con">
-				                            <button type="button" class="msg_send msg_button" onclick="sendMessage(${i+1})">답장하기</button>
-				                        </td>
-				                        <td class="msg_con">
-				                            <button type="button" class="msg_delete msg_button" onclick="deleteMessage(${i+1})">삭제하기</button>
-				                        </td>
-				                    </tr>
-		                	</c:forEach>
+		                	<c:if test="${usermsglist.size() > 0}">
+			                	<c:forEach var="i" begin="0" end="${usermsglist.size() - 1}">
+			                		<c:set var="msg" value="${usermsglist[i]}"/>
+					                    <tr id="msgview${i}">
+					                    	<c:choose>
+					                    		<c:when test="${msg.msgcheck != 0}">
+							                        <td class="msgl_check msg_con">
+							                        	<div class="msg_check_ok_img"></div>
+							                        </td>
+					                    		</c:when>
+					                    		<c:otherwise>
+					                    			<td class="msgl_check msg_con">
+					                    				<div class="msg_check_no_img usercheckImg${i+1}"></div>
+							                        </td>
+					                    		</c:otherwise>
+					                    	</c:choose>
+					                    	<c:choose>
+					                    		<c:when test="${msg.msgcheck != 0}">
+							                        <td class="msgl_content msg_con" >
+							                        	<button class="usermsg_check_ok usermsg_button" onclick="useropenModal('${msg.msgcontent}')">${msg.msgcontent}</button>
+							                        </td>
+					                    		</c:when>
+					                    		<c:otherwise>
+					                    			<td class="msgl_content msg_con">
+							                        	<button class="usermsg_check_no usernoCheck${i+1} usermsg_button" onclick="useropenModal('${msg.msgcontent}', '${i+1}')">${msg.msgcontent}</button>
+							                        </td>
+					                    		</c:otherwise>
+					                    	</c:choose>
+					                    	
+					                    	<!-- 유저메세지 모달부분  -->
+					                    	<div id="usermsg_Modal" class="usermsg_modal">
+											    <div class="usermsg_modal-content">
+											    	<h4>메세지 내용 : </h4>
+											    	<br>
+											        <p id="usermsg_modalContent"></p>
+											        <button type="button" class="usermsg_close" onclick="usermsg_closeModal()">닫기</button>
+											    </div>
+											</div>
+							                        
+					                        <td class="msg_con"><input class="sendid${i+1}" type="hidden" name="sendid${i+1}" value="${msg.sendid}">${msg.sendid}</td>
+					                        <input class="sendnum${i+1}" type="hidden" name="sendnum${i+1}" value="${msg.messagenum}">
+					                        <td class="msg_con">${msg.msregdate}</td>
+					                        <td class="msg_con">
+					                            <button type="button" class="msg_send msg_button" onclick="sendMessage(${i+1})">답장하기</button>
+					                        </td>
+					                        <td class="msg_con">
+					                            <button type="button" class="msg_delete msg_button" onclick="deleteMessage(${i+1})">삭제하기</button>
+					                        </td>
+					                    </tr>
+			                	</c:forEach>
+		                	</c:if>
 		            </table>
 		        </div>
 		    </div>
@@ -381,12 +447,43 @@
     
 
     /* 시스템이 보낸 메세지 확인 */
-    function openModal(content) {
+    function sysopenModal(content,linkstring,index) {
         var modal = document.getElementById('sysmsg_Modal');
+        var modal_link = document.getElementById('linkaddr');
         var modalContent = document.getElementById('sysmsg_modalContent');
+        let checkImg= document.getElementsByClassName("syscheckImg"+index)[0];
+        let checkCont= document.getElementsByClassName("sysnoCheck"+index)[0];
+        let targetnodenum= document.getElementsByClassName("sys_sendnum"+index)[0];
+        
         
         // 클릭된 버튼의 내용을 모달에 표시합니다.
         modalContent.textContent = content;
+        modal_link.href = linkstring;
+        
+        checkImg.classList.remove('msg_check_no_img');
+        checkImg.classList.add('msg_check_ok_img');
+        
+        checkCont.classList.remove('sysmsg_check_no');
+        checkCont.classList.add('sysmsg_check_ok');
+        
+        const xhr = new XMLHttpRequest();
+		if(targetnodenum != null){
+			xhr.onreadystatechange = function(){
+	    		if(xhr.readyState == 4){
+	    			if(xhr.status == 200){
+	    				let txt = xhr.responseText.trim();
+	    				if(txt == "O"){
+	    					console.log("메세지를 체크");
+	    				}
+	    				else{
+	    					console.log("메세지를 노체크");
+	    				}
+	    			}
+	    		}
+	    	}
+	    	xhr.open("GET", cp + "/checkmessage.ms?messagenum=" + targetnodenum.value);
+	    	xhr.send();
+    	}
         
         // 모달을 보이도록 설정합니다.
         modal.style.display = 'block';
@@ -394,6 +491,55 @@
     
     function sysmsg_closeModal() {
         var modal = document.getElementById('sysmsg_Modal');
+        
+        // 모달을 숨깁니다.
+        modal.style.display = 'none';
+    }
+    
+    /* user 보낸 메세지 확인 */
+    function useropenModal(content, index) {
+        var modal = document.getElementById('usermsg_Modal');
+        var modalContent = document.getElementById('usermsg_modalContent');
+        
+        let checkImg= document.getElementsByClassName("usercheckImg"+index)[0];
+        let checkCont= document.getElementsByClassName("usernoCheck"+index)[0];
+        let targetnodenum= document.getElementsByClassName("sendnum"+index)[0];
+        
+        
+     // 클릭된 버튼의 내용을 모달에 표시합니다.
+        modalContent.textContent = content;
+        
+        checkImg.classList.remove('msg_check_no_img');
+        checkImg.classList.add('msg_check_ok_img');
+        
+        checkCont.classList.remove('usermsg_check_no');
+        checkCont.classList.add('usermsg_check_ok');
+        
+        const xhr = new XMLHttpRequest();
+		if(targetnodenum != null){
+			xhr.onreadystatechange = function(){
+	    		if(xhr.readyState == 4){
+	    			if(xhr.status == 200){
+	    				let txt = xhr.responseText.trim();
+	    				if(txt == "O"){
+	    					console.log("메세지를 체크");
+	    				}
+	    				else{
+	    					console.log("메세지를 노체크");
+	    				}
+	    			}
+	    		}
+	    	}
+	    	xhr.open("GET", cp + "/checkmessage.ms?messagenum=" + targetnodenum.value);
+	    	xhr.send();
+    	}
+        
+        // 모달을 보이도록 설정합니다.
+        modal.style.display = 'block';
+    }
+    
+    function usermsg_closeModal() {
+        var modal = document.getElementById('usermsg_Modal');
         
         // 모달을 숨깁니다.
         modal.style.display = 'none';

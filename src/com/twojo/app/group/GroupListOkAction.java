@@ -45,6 +45,9 @@ public class GroupListOkAction implements Action {
 		
 		String[] hobby = user.getUserhobby().split("☆");
 		List<GroupDTO>[] hobbyLists = new List[hobby.length];
+		int hobbynum = hobby.length;
+		req.setAttribute("hobbynum", hobbynum);
+		
 		for(int i=0; i<hobby.length; i++) {
 			List<GroupDTO> hobbylist = gdao.getHobbyGroupList(user.getUseraddrgu(), hobby[i]);
 			

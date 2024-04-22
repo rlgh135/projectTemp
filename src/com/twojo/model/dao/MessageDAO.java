@@ -28,4 +28,7 @@ public class MessageDAO {
 	public void systemMessage(MessageDTO message) {
 		ss.insert("Message.systemMessage", message);
 	}
+	public boolean checkMSG(int messagenum) {
+		return ss.delete("Message.checkUpdate", messagenum) == 1;
+	}
 }

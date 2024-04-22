@@ -29,7 +29,7 @@
                                         <tr>
                                             <th>아이디</th>
                                             <td>
-                                                <input type="text" name="userid" value="${cookie.joinid.value}">
+                                                <input type="text" name="userid" value="">
                                             </td>
                                         </tr>
                                         <tr>

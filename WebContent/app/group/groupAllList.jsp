@@ -11,12 +11,8 @@
 </head>
 <header>
 	<jsp:include page="${cp}/app/header.jsp"></jsp:include>
-	<%-- <jsp:include page="${cp}/app/message/sendmessage.jsp"></jsp:include> --%>
 </header>
 <body>
-	<!-- <div class="cursor" style="z-index:-3;">
-    <img src="https://www.selecto.co.kr/assets/images/main/mouse-cursor.png">
-	</div> -->
 	    
     <!-- 본문 -->
     <div id="wrap">
@@ -107,7 +103,7 @@
         
         <!-- 유저의 취미 중 모임중 인기순으로 보여주기 -->
         <div id="REC_group">
-		    <c:forEach var="i" begin="0" end="3">
+		    <c:forEach var="i" begin="0" end="${hobbynum - 1}">
 		        <c:set var="hobbylistVar" value="hobbylist${i}" />
 		        <c:set var="groupHobbyImgVar" value="groupHobbyImg${i}" />
 		        <div class="HB_group_1">
@@ -164,6 +160,9 @@
     </a>
 </footer>
 <script>
+	const cp = '${cp}';
+</script>
+<script>
     function l_scroll() {
         // hobby 컨테이너 요소 가져오기
         let hobbyContainer = document.getElementById("hobby");
@@ -205,14 +204,5 @@
         window.scrollTo({top:0, behavior:"smooth"})
     })
     
-    
-    document.addEventListener('mousemove', (e) => {
-    let mouseX = e.pageX; // document의 x좌표값
-    let mouseY = e.pageY; // document의 y좌표값
-
-    let cursor = document.querySelector('.cursor');
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
-	})
 </script>
 </html>

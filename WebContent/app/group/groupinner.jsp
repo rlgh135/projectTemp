@@ -216,7 +216,7 @@
 							
 														<%--쪽지 보내기 --%>
 															<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
-															<button type="button" class="msg_send" onclick="sendMessage()" style="cursor: pointer;">쪽지보내기</button>
+															<button type="button" class="msg_send" onclick="sendMessage('${ingi.userid}')" style="cursor: pointer;">쪽지보내기</button>
 													</div>
 													<div class="profilemenu">
 														<img src="../../images/write.png" style="width: 18px; height: 18px;">
@@ -359,7 +359,7 @@
 													 
 													 <%--쪽지 보내기 --%>
 													 <img src="../../images/mail6.webp" style="width: 20px; height: 20px;">
-													 <button type="button" class="msg_send" onclick="sendMessage()">쪽지보내기</button>
+													 <button type="button" class="msg_send" onclick="sendMessage('${gpost.userid}')">쪽지보내기</button>
 												  </div>
 											 <div class="profilemenu">
 												<img src="../../images/write.png" style="width: 18px; height: 18px;">
@@ -687,7 +687,7 @@
                         '<div id="modalContainer'+gpost.gpostnum+'" class="modalContainer replyHide">' +
                         '<div id="modalContent'+gpost.gpostnum+'" class="modalContent">' +
                         '<div id="modalinner'+gpost.gpostnum+'" class="modalinner" style="width: 177px;">' +
-                        '<button id="modalCloseBtn'+gpost.gpostnum+'" class="modalCloseBtn" onclick="">' +
+                        '<button id="modalCloseBtn'+gpost.gpostnum+'" class="modalCloseBtn" onclick="modalClose('+gpost.gpostnum+')">' +
                         '<img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">' +
                         '</button>' +
                         '<div class="imgid">' +
@@ -702,7 +702,7 @@
                         '<div class="profilemenu">' +
 						'<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">' +
 						'<p>'+
-						'<button type="button" class="msg_send" onclick="sendMessage()" style="cursor: pointer;">쪽지보내기</button>'+
+						'<button type="button" class="msg_send" onclick="sendMessage(\'' + gpost.userid + '\')" style="cursor: pointer;">쪽지보내기</button>'+
 						'</p>'+
 						'</div>' +
 						'<div class="profilemenu">' +
@@ -1001,7 +1001,9 @@
 	function joinMoim(groupnum, loginUser) {
 		location.href="/joinmoim.gp?groupnum="+groupnum;
 	}
-	function sendMessage(){
+	function sendMessage(receiveid){
+		let realtarget = document.getElementsByClassName("rcvid")[0]; 
+    	realtarget.value = receiveid;
     	document.querySelector('.ms_modal_btn').click();
     }
 </script>

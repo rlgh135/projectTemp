@@ -7,7 +7,7 @@
         <div class="gnb">
             <div class="logo_box">
                 <a href="${cp}/myinfo.bo">
-                    <img class="logo">
+                    <img src="${cp}/images/logo.png" class="logo">
                 </a>
             </div>
             <nav class="gnb_menu">
@@ -39,7 +39,7 @@
                     		<img alt="" src="${cp}/images/msg_icon.png">
                     	</div>
                     </a>
-                    <a class="btn" href="${cp}/userlogout.us">
+                    <a class="btn" id="logoutBtn" href="" onclick="logout()">
                     	<div id="logout_gnb">
                     		<img alt="" src="${cp}/images/logout_icon.png">
                     	</div>
@@ -48,3 +48,16 @@
             </div>
         </div>
     </div>
+    
+<script>  
+	function logout(){
+			    			    	
+		const logoutOk = window.confirm("로그아웃을 하시겠습니까?");
+		var logoutBtnOk = document.getElementById('logoutBtn');		
+		
+		if(logoutOk){
+			logoutBtnOk.href = cp+"/userlogout.us";
+	   	}
+	}
+	
+</script>

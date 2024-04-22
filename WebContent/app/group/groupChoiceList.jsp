@@ -184,6 +184,9 @@
     </a>
 </footer>
 <script>
+	const cp = '${cp}';
+</script>
+<script>
     function l_scroll() {
         // hobby 컨테이너 요소 가져오기
         let hobbyContainer = document.getElementById("hobby");

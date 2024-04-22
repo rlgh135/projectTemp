@@ -58,6 +58,14 @@ public class MessageFrontController extends HttpServlet {
 				System.out.println("/MesaageDeleteOkAction : "+e);
 			}
 			break;
+		case "/checkmessage.ms":
+			try {
+				System.out.println("checkmessage.ms");
+				transfer = new MesaageCheckOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/MesaageCheckOkAction : "+e);
+			}
+			break;
 		}
 		
 		if(transfer != null) {

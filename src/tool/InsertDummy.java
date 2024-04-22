@@ -24,28 +24,28 @@ public class InsertDummy {
 		int hobbycnt = 0;
 		String hobby ="";
 		
-//		//user
-//		for(int i=0; i<100; i++) {
-//			UserDTO user = new UserDTO();
-//			hobby="";
-//			user.setUserid("abc"+(i+1));
-//			user.setUserpw("1234");
-//			user.setUsername("가명"+(i+1));
-//			regidx = (int)(Math.random()*5);
-//			user.setUseraddr(regions[regidx]);
-//			user.setUseraddrgu(regions[regidx]);
-//			hobbycnt = (int)(Math.random()*3)+1;
-//			System.out.println(hobbycnt);
-//			hobidx = (int)(Math.random()*4);
-//			for(int j=0; j<hobbycnt; j++) {
-//				hobby += hobbies[hobidx+2*j]+"☆";
-//				System.out.println(hobby);
-//			}
-//			user.setUserhobby(hobby);
-//			System.out.println(user.getUseraddr());
-//			System.out.println(user.getUserhobby());
-//			ss.insert("User.insert",user);
-//		}
+		//user
+		for(int i=0; i<100; i++) {
+			UserDTO user = new UserDTO();
+			hobby="";
+			user.setUserid("abc"+(i+1));
+			user.setUserpw("1234");
+			user.setUsername("가명"+(i+1));
+			regidx = (int)(Math.random()*5);
+			user.setUseraddr(regions[regidx]);
+			user.setUseraddrgu(regions[regidx]);
+			hobbycnt = (int)(Math.random()*3)+1;
+			System.out.println(hobbycnt);
+			hobidx = (int)(Math.random()*4);
+			for(int j=0; j<hobbycnt; j++) {
+				hobby += hobbies[hobidx+2*j]+"☆";
+				System.out.println(hobby);
+			}
+			user.setUserhobby(hobby);
+			System.out.println(user.getUseraddr());
+			System.out.println(user.getUserhobby());
+			ss.insert("User.insert",user);
+		}
 		
 //		//lboard
 //		for(int i=0; i<3000; i++) {
@@ -101,15 +101,15 @@ public class InsertDummy {
 //			}
 //		}
 		
-		//group_user
-		for(int i=0; i<1000; i++) {
-			GroupUserDTO gu = new GroupUserDTO();
-			int groupnum = (int)(Math.random() * 300 + 1);
-			gu.setGroupnum(groupnum);
-			gu.setUserid("abc"+(i+1));
-			
-			ss.insert("GroupUser.insert", gu);
-		}
+//		//group_user
+//		for(int i=0; i<1000; i++) {
+//			GroupUserDTO gu = new GroupUserDTO();
+//			int groupnum = (int)(Math.random() * 300 + 1);
+//			gu.setGroupnum(groupnum);
+//			gu.setUserid("abc"+(i+1));
+//			
+//			ss.insert("GroupUser.insert", gu);
+//		}
 		
 				
 //		//groupimg
