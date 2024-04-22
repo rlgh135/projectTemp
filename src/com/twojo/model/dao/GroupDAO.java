@@ -78,5 +78,13 @@ public class GroupDAO {
 	
 	public GroupDTO getGroupByMyinfoList(long groupnum){
 		return ss.selectOne("Group.getMyinfoList", groupnum);	
-	} 
+	}
+
+	public boolean createGroup(GroupDTO group) {
+		return ss.insert("Group.insert",group) ==1;
+	}
+	public long getLastGroupnum(String userid) {
+		return ss.selectOne("Group.getLastGroupnum", userid);
+	}
+
 }

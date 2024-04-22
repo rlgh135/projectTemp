@@ -34,8 +34,14 @@
 	<update id="addReplyCnt" parameterType="long">
 		update `gpost` set gprcnt = gprcnt+1 where gpostnum=#{gpostnum}
 	</update>
-	<update id="addLikdCnt" parameterType="long">
+	<update id="addLikeCnt" parameterType="long">
 		update `gpost` set gpostlike = gpostlike+1 where gpostnum=#{gpostnum}
+	</update>
+	<update id="removeLikeCnt" parameterType="long">
+		update `gpost` set gpostlike = gpostlike-1 where gpostnum=#{gpostnum}
+	</update>
+	<update id="updateGpost" parameterType="hashmap">
+		update `gpost` set gpostcontents = #{gpostcontents}, gpostregdate = now() where gpostnum=#{gpostnum}
 	</update>
 	<select id="getGongji" parameterType="long" resultType="gpostdto">
 		select * from `gpost` where groupnum=#{groupnum} and gpostgongji=1;

@@ -14,7 +14,7 @@ import com.twojo.model.dao.ReqListDAO;
 import com.twojo.model.dto.GroupDTO;
 import com.twojo.model.dto.ReqListDTO;
 
-public class joinMoimAction implements Action{
+public class JoinMoimAction implements Action{
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		long groupnum = Long.parseLong(req.getParameter("groupnum"));

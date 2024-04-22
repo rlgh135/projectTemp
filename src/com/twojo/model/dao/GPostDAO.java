@@ -64,8 +64,11 @@ public class GPostDAO {
 	public void addReplyCnt(long gpostnum) {
 		ss.update("GPost.addReplyCnt", gpostnum);
 	}
-	public void addLikeCnt(long gpostnum) {
-		ss.update("GPost.addLikeCnt", gpostnum);
+	public boolean addLikeCnt(long gpostnum) {
+		return ss.update("GPost.addLikeCnt", gpostnum)==1;
+	}
+	public boolean removeLikeCnt(long gpostnum) {
+		return ss.update("GPost.removeLikeCnt", gpostnum)==1;
 	}
 
 	public List<GPostDTO> getIngi(long groupnum) {
@@ -74,5 +77,13 @@ public class GPostDAO {
 
 	public GPostDTO getGongji(long groupnum) {
 		return ss.selectOne("GPost.getGongji", groupnum);
+	}
+
+	public boolean updateGpost(long gpostnum, String gpostcontents, String gpostregdate) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("gpostnum", gpostnum);
+		datas.put("gpostcontents", gpostcontents);
+		datas.put("gpostregdate", gpostregdate);
+		return ss.update("GPost.updateGpost", datas)==1;
 	}
 }

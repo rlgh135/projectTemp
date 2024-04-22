@@ -17,7 +17,7 @@ CREATE TABLE user (
 );
 
 select * from user;
-select * from user where userid='abc567';
+select * from user where userid='wanthome';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
 value('abc796', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;
@@ -83,7 +83,9 @@ CREATE TABLE `group` (
   `grouplikecnt` int default 0,
   `groupledaer` varchar(300) default null
 );
-select * from `group`;
+SELECT groupnum FROM `group` WHERE groupmaster='abc1'order by groupnum desc limit 1;
+select * from `group` where groupmaster='abc1';
+delete from `group` where groupnum>3001;
  SET SQL_SAFE_UPDATES = 0;
 select count(*) from `group`;
 select * from `group` where groupmaster='abc10';
@@ -133,18 +135,21 @@ CREATE TABLE `groupimg` (
   `imgorgname` varchar(1000),
   `imgsysname` varchar(1000)
 );
+select * from groupimg where groupnum>3001;
 select count(*) from `groupimg`;
 CREATE TABLE `gpost` (
   `gpostnum` bigint PRIMARY KEY AUTO_INCREMENT,
   `groupnum` bigint,
-  `gposttitle` varchar(1000),
   `userid` varchar(300),
   `gpostcontents` text,
+  `gposttitle` varchar(1000) default '없음',
   `gpostlike` int default 0,
   `gprcnt` int default 0,
   `gpostgongji` int default 0,
   `gpostregdate` datetime default now()
 );
+update `gpost` set gpostcontents = '내용이엥', gpostregdate = now() where gpostnum=46;
+drop table `gpost`;	
 select * from `gpost`;
 insert into gpost(groupnum, gposttitle, userid, gpostcontents) value(2, 'd', 'abc3', '그룹2내용');
 select * from `gpost` where groupnum=2 and gpostgongji=1;
@@ -157,7 +162,12 @@ select * from gpost where gpostcontents like "%내용%";
 select count(*) from gpost where groupnum = 1;
 select count(*) from gpost where gpostcontents = "%내용%";
 select count(*) from gpost where groupnum = 1 and gpostcontents like "%1%";
-
+select * from gpostlike;
+insert into gpostlike values(46, 'abc1');
+create table gpostlike(
+	gpostnum bigint,
+    userid varchar(300)
+);
 CREATE TABLE `gfile` (
   `gfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
   `gpostnum` bigint,

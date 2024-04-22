@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GPostLike">
+	<insert id="addLike" parameterType="gpostlikedto">
+		insert into gpostlike(gpostnum, userid) values(#{gpostnum}, #{userid})
+	</insert>
+	<delete id="removeLike" parameterType="gpostlikedto">
+		delete from gpostlike where gpostnum=#{gpostnum} and userid=#{userid}
+	</delete>
+	<select id="getLike" parameterType="gpostlikedto" resultType="gpostlikedto">
+		select * from gpostlike where gpostnum=#{gpostnum} and userid=#{userid}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

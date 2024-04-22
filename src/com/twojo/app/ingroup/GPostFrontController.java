@@ -85,6 +85,13 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/gpostdelete.gp : "+e);
 			}
 			break;
+		case "/modifygp.gp":
+			try {
+				transfer = new ModifyGPAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/modifygp.gp : "+e);
+			}
+			break;
 		case "/writegpreply.gp":
 			try {
 				transfer = new WriteGPReplyOKAction().execute(req,resp);
@@ -94,7 +101,7 @@ public class GPostFrontController extends HttpServlet{
 			break;
 		case "/joinmoim.gp":
 			try {
-				transfer = new joinMoimAction().execute(req,resp);
+				transfer = new JoinMoimAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println("/joinmoim.gp : "+e);
 			}
@@ -139,6 +146,14 @@ public class GPostFrontController extends HttpServlet{
 				transfer = new ChangeOkAction().execute(req,resp);
 			} catch (Exception e) {
 				System.out.println("/changeok.gp : "+e);
+			}
+			break;
+		case "/presslike.gp":
+			try {
+				transfer = new PressLike().execute(req, resp);
+				transfer = null;
+			} catch (Exception e) {
+				System.out.println("/getgfile.gp : "+e);
 			}
 			break;
 		}

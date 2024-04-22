@@ -15,6 +15,12 @@ public class GroupimgDAO {
 	public GroupimgDTO getGroupimgList(long groupnum) {
 		return ss.selectOne("Groupimg.getImgName", groupnum);
 	}
-	
-	
+
+	public boolean insertFile(GroupimgDTO gimg) {
+		return ss.insert("Groupimg.insert", gimg)==1;
+	}
+
+	public boolean deleteFile(String systemname) {
+		return ss.delete("Groupimg.deleteFile", systemname)==1;
+	}
 }
