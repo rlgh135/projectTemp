@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>joinMoim</title>
 <link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
+<link href="${cp}/css/moimstyle.css" rel="stylesheet">
 </head>
 <body>
 	<c:if test="${empty loginUser}">
@@ -65,7 +66,7 @@
 		                    					<input type="hidden" value="${group.groupname}" name="groupname">
 			                					<input type="hidden" value="${group.groupmaster}" name="groupmaster">
 			                				</div>			                				
-			                				<div><a href="javascript:sendit(1)"><input type="button" value="가입신청" style="cursor: pointer;"></a></div>
+			                				<div class="aWrap"><a href="javascript:sendit(1)">가입신청</a></div>
 			                			</c:when>
 			                			<c:otherwise>
 			                				<div>
@@ -79,16 +80,16 @@
 			                    					<li class="qList">
 			                    						<p>${i+1}. ${questionlist[i]}</p>
 			                    						<div>
-			                    							<textarea cols="" rows="3" name="answer${i}"></textarea>
+			                    							<textarea cols="70" rows="3" name="answer${i}"></textarea>
 			                    						</div>
 			                    					</li>
 			                    				</c:forEach>
 			                				</ul>			                				
-		                    				<div>
+		                    				<div class="aWrap">
 		                    					<input type="hidden" value="${index}" name="index">
 		                    					<input type="hidden" value="${group.groupmaster}" name="groupmaster">
 		                    					<input type="hidden" value="${group.groupname}" name="groupname">
-		                    					<a href="javascript:sendit(0)"><input type="button" value="가입신청" style="cursor: pointer;"></a>
+		                    					<a href="javascript:sendit(0)">가입신청</a>
 		                    				</div>
 			                			</c:otherwise>
 			                		</c:choose>

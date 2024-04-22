@@ -118,8 +118,21 @@ border-bottom: 2px solid #333333;
     border-radius: 5px;
 }
 
-.groupimg{
-    height: 150px;
+#file0name{
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+.filebtns > .fileselect,.filedelete{
+    display: inline-block;
+    width: 80px;
+    height: 25px;
+    background-color: #999;
+    margin-left: 16px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    line-height: 25px;
+    font-size: 14px;
 }
 
 li::marker{

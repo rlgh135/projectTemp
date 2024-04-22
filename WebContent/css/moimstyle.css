@@ -1,0 +1,55 @@
+@charset "EUC-KR";
+#gpostListwrap{
+	font-size:20px;
+	padding: 10px;
+}
+.gpostListwrap form{
+	font-size:20px;
+	padding: 10px;
+}
+.gpostListwrap form div:first-child p{
+	margin-top: 10px;
+}
+.gpostListwrap form div:first-child p:first-child{
+	margin-top: 0px;
+	height:40px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+/* .gpostListwrap form div:first-child p:first-child:after{
+	content: "";
+	border: 1px solid gray;
+} */
+.qListWrap{
+	font-size: 
+}
+.qList{
+	margin-top: 10px;
+}
+.qList p{
+	font-size: 20px;
+}
+.qList textarea{
+	margin-top: 10px;
+	border: 3px solid rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+}
+
+.qList textarea:hover {
+	border: 3px solid beige;
+}
+.aWrap{
+	margin-top: 20px;
+}
+.aWrap a{
+	background-color: bisque;
+}
+.aWrap a {
+	margin-left: auto;
+	display:block;
+	height: 40px;
+	width: 100px;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 10px;
+}
+

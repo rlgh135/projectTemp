@@ -16,6 +16,10 @@
 	.hide{
 		display: none;
 	}
+	.file0_cont img {
+		width: 204px;
+		height: 192px;
+	}
 </style>
 <body>
 <div id="wrap">
@@ -43,9 +47,9 @@
 	                        <input type="file" name="file0" id="file0" style="display:none">
 	                        <span id="file0name">선택된 파일 없음</span>
 	                     </div>
-	                     <div style="margin-right:100px;" class="childthree">
-	                        <a href="javascript:upload(0)">파일 선택</a>
-	                        <a href="javascript:cancelFile(0)">첨부 삭제</a>
+	                     <div style="margin-right:100px;" class="filebtns childthree">
+	                        <a href="javascript:upload(0)" class="fileselect">파일 선택</a>
+	                        <a href="javascript:cancelFile(0)" class="filedelete">첨부 삭제</a>
 	                     </div>
 	            	</div>
 	            </li>

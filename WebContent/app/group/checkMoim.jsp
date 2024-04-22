@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>checkMoim</title>
 <link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
+<link href="${cp}/css/checkmoim.css" rel="stylesheet">
 </head>
 <body>
 	<c:if test="${empty loginUser}">
@@ -66,7 +67,7 @@
 			                				</div>
 			                				<div>
 			                					<p>최근에 ${group.groupname}에 가입했어요</p>
-			                					<ul>
+			                					<ul class="qListWrap">
 			                						<c:if test="${not empty recentguser }">
 			                						<c:forEach var="i" begin="0" end="${recentguser.size()-1}">
 			                							<c:set var="recuser" value="${recentguser[i] }"/>
@@ -79,7 +80,7 @@
 			                						</c:if>
 			                					</ul>
 			                				</div>
-			                				<p><a href="javascript:changeAuto(1, ${group.groupnum})">가입 방식 변경하기</a></p>	                				
+			                				<p><a href="javascript:changeAuto(1, ${group.groupnum})" class="changemethod">가입 방식 변경하기</a></p>	                				
 			                			</c:when>
 			                			<c:otherwise>
 			                				<div>
@@ -93,9 +94,6 @@
 			                    					<c:set var="index" value="${i}"/>
 			                    					<li class="qList">
 			                    						<p>${i+1}. ${questionlist[i]}</p>
-			                    						<div>
-			                    							<textarea name="answer${i}"></textarea>
-			                    						</div>
 			                    					</li>
 			                    				</c:forEach>
 			                				</c:when>
@@ -118,13 +116,14 @@
 			                					<c:forEach var="i" begin="0" end="${ansbaselist.size() -1}">
 			                						<c:set var="ansbase" value="${ansbaselist[i]}"/>
 			                						<c:set var="answerlists" value="${answerlist[i]}"/>
-			                						<li>
+			                						<li id="answerLW${i}">
 			                							<p>
-				                							${ansbase.userid} 님의 답변 
+				                							${ansbase.userid} 님 
+				                							<input type="button" value="펼치기" style="cursor: pointer;" onclick="togglehide(${i})">
 				                							<input type="button" value="승인" onclick="acceptUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
 				                							<input type="button" value="거절" onclick="rejectUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
-				                							<input type="button" value="펼치기" style="cursor: pointer;">
 			                							</p>
+			                							<div id="answerWrap${i}">
 			                							<c:forEach var="j" begin="0" end="${answerlists.size() -1}">
 			                								<c:set var="answer" value="${answerlists[j]}"/>
 			                								<div>
@@ -132,12 +131,13 @@
 				                								<p>${answer}</p>
 			                								</div>
 			                							</c:forEach>
+			                							</div>
 			                						</li>
 			                					</c:forEach>
 			                				</c:otherwise>
 			                				</c:choose>
 			                				</ul>			                				
-		                    				<p><a href="javascript:changeAuto(0, ${group.groupnum})">자동 가입으로 변경하기</a></p>
+		                    				<p><a href="javascript:changeAuto(0, ${group.groupnum})" class="changemethod">자동 가입으로 변경하기</a></p>
 			                			</c:otherwise>
 			                		</c:choose>
 							</div>
@@ -177,6 +177,12 @@
 			}
 			
 		}
+	}
+	function togglehide(index) {
+		let targetnode = document.getElementById("answerWrap"+index);
+		targetnode.classList.toggle("hide");
+		let targetpnode = document.getElementById("answerLW"+index);
+		targetpnode.setAttribute("style", "border-radius: 20px; background-color: blanchedalmond; box-shadow: 5px 5px 5px;");
 	}
 </script>
 </html>

@@ -1,0 +1,48 @@
+.gpostListwrap{
+	padding: 10px;
+	font-size: 20px;
+}
+.gpostListwrap > div:first-child p{
+	font-size: 30px;
+	display: flex;
+	height: 50px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.gpostListwrap div:first-child p span:before{
+	content: "";
+	border: 1px solid rgba(0,0,0,0.1);
+	margin-left: 90px;
+	margin-right: 10px; 
+}
+.gpostListwrap > div:first-child p span {
+	font-size: 15px;
+	display: block;
+	line-height: 50px;
+}
+.qListWrap {
+	margin-top: 20px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.qListWrap li{
+	margin-top: 20px;
+}
+.qListWrap li:last-child {
+	margin-bottom: 10px;
+}
+.joinuserWrap{
+	margin-top: 20px;'
+}
+.joinuserWrap li {
+	margin-top: 20px;
+	font-size: 20px;
+}
+.joinuserWrap li p input:first-child{
+	margin-left: 10px;
+	font-size: 15px;
+}
+.hide{
+	display: none;
+}
+.joinuserWrap li > div {
+	margin-top: 20px;
+}
