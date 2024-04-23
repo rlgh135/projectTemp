@@ -86,4 +86,9 @@ private SqlSession ss;
 		return ss.update("LPost.setAddr", datas) == 1;
 	}
 
+
+	public List<LPostDTO> getQuickPost(String userAddrgu) {
+		return ss.selectList("LPost.getQuickPost", userAddrgu);
+	}
+
 }

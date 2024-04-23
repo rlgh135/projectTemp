@@ -35,9 +35,6 @@ public class BoardWriteOkAction implements Action {
 	Lpost_AddrDTO ladto = new Lpost_AddrDTO(); 
 	@Override	
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		
-		
-		
 		LPostDTO board = new LPostDTO();
 		String boardtitle = req.getParameter("boardtitle");
 		String boardcontents = req.getParameter("boardcontents");
@@ -56,13 +53,55 @@ public class BoardWriteOkAction implements Action {
         }
         
         System.out.println(boardcategory);
-		
+        
+        String notime = req.getParameter("notime");
+        if(notime==null) {
+        	String month = req.getParameter("month");
+        	String day = req.getParameter("day");
+        	String hour = req.getParameter("hour");
+        	String minute = req.getParameter("minute");
+        	
+        	if(month!=null) {
+        		if(Integer.parseInt(month)<10) {
+        			month = "0"+month;
+        		}
+        	} else {
+        		month="00";
+        	}
+        	if(day!=null) {
+        		if(Integer.parseInt(day)<10) {
+        			day = "0"+day;
+        		}
+        	} else {
+        		day ="00";
+        	}
+        	if(hour!=null) {
+        		if(Integer.parseInt(hour)<10) {
+        			hour = "0"+hour;
+        		}
+        	} else {
+        		hour = "00";
+        	}
+        	if(minute!=null) {
+        		if(Integer.parseInt(minute)<10) {
+        			minute = "0"+minute;
+        		}
+        	} else {
+        		minute = "00";
+        	}
+        	String deadline = "2024-"+month+"-"+day+" "+hour+":"+minute+":00";
+        	System.out.println("deadline: "+deadline);
+        	board.setDeadline(deadline);
+        } else {
+        	String deadline = "0000-00-00 00:00:00";
+        	board.setDeadline(deadline);
+        }
+        
 		board.setLposttitle(boardtitle);
 		board.setLpostcontents(boardcontents);
 		board.setUserid(userid);
 		board.setLpostcategory(boardcategory);
 		board.setLpostaddr("주소가 없습니다.");
-		
 		
 		System.out.println(boardtitle);
 		System.out.println(boardcontents);
@@ -70,13 +109,9 @@ public class BoardWriteOkAction implements Action {
 		System.out.println(boardaddr);
 		System.out.println("jsonData " + jsonDataInput);
 		
-		
-		
-		
 		LPostDAO bdao = new LPostDAO();
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(true);
-		
 		
 		if(bdao.insertBoard(board)) {
 			long boardnum = bdao.getLastNum(userid);
@@ -93,7 +128,7 @@ public class BoardWriteOkAction implements Action {
 				System.out.println(e+"BoardWritOkAction에러입니다.");
 			}
 			transfer.setPath(req.getContextPath()+"/boardview.bo?lpostnum="+boardnum);
-		}else {
+		} else {
 			//list
 			Cookie cookie = new Cookie("w","f");
 			cookie.setPath("/");

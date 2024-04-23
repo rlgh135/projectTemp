@@ -54,7 +54,14 @@ public class BoardViewOkAction implements Action{
       ludto.setUserid(loginUser);
       ludto.setBoardnum(boardnum);
       
-
+      String base = board.getDeadline();
+      String[] deadline = new String[4]; 
+      deadline[0] = base.split("-")[1];
+      deadline[1] = base.split("-")[2].split(" ")[0];
+      deadline[2] = base.split("-")[2].split(" ")[1].split(":")[0];
+      deadline[3] = base.split("-")[2].split(" ")[1].split(":")[1];
+      req.setAttribute("deadline", deadline);
+      
       req.setAttribute("board", board);
       req.setAttribute("replies", rdao.getReplies(boardnum));
       req.setAttribute("checkUser", ludao.checkUser(ludto));

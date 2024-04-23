@@ -55,6 +55,15 @@
 				</td>
 			</tr>
 			<tr>
+               <th>마감시간</th>
+               <td id="timetd">
+                	<input type='text' name="month" id="month" maxlength='2' value="${deadline[0]}" readonly/><span>월 </span>
+                	<input type='text' name="day" id="day" maxlength='2' value="${deadline[1]}" readonly/><span>일 </span>
+                	<input type='text' name="hour" id="hour" maxlength='2' value="${deadline[2]}" readonly/><span>시 </span>
+                	<input type='text' name="minute" id="minute" maxlength='2' value="${deadline[3]}" readonly/><span>분    </span>
+                </td>
+            </tr>
+			<tr>
 				<th class="lboard_contents">내용</th>
 				<td>
 					<input type="text" name="boardcontents" value="${board.lpostcontents}" readonly>

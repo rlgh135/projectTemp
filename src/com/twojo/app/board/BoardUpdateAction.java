@@ -6,9 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
+import com.twojo.model.dto.LPostDTO;
 //import com.twojo.model.dao.FileDAO;
 
-public class BoardUpdateAction implements Action{
+public class BoardUpdateAction implements Action {
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		long boardnum = Long.parseLong(req.getParameter("boardnum"));
@@ -16,7 +17,16 @@ public class BoardUpdateAction implements Action{
 		LPostDAO bdao = new LPostDAO();
 //		FileDAO fdao= new FileDAO();
 
-		req.setAttribute("board", bdao.getBoardByNum(boardnum));
+		LPostDTO board = bdao.getBoardByNum(boardnum);
+		req.setAttribute("board", board);
+
+		String base = board.getDeadline();
+		String[] deadline = new String[4];
+		deadline[0] = base.split("-")[1];
+		deadline[1] = base.split("-")[2].split(" ")[0];
+		deadline[2] = base.split("-")[2].split(" ")[1].split(":")[0];
+		deadline[3] = base.split("-")[2].split(" ")[1].split(":")[1];
+		req.setAttribute("deadline", deadline);
 //		req.setAttribute("files", fdao.getFiles(boardnum));
 
 		Transfer transfer = new Transfer();
@@ -25,10 +35,3 @@ public class BoardUpdateAction implements Action{
 		return transfer;
 	}
 }
-
-
-
-
-
-
-

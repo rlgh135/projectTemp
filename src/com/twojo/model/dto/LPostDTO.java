@@ -11,8 +11,15 @@ public class LPostDTO {
 	private int readcount;
 	private int imageCount;
 	private String lpostaddr;
+	private String deadline;
 	
 	
+	public String getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
 	public String getLpostaddr() {
 		return lpostaddr;
 	}

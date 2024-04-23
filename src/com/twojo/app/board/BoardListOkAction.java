@@ -31,37 +31,10 @@ public class BoardListOkAction implements Action{
 		req.setAttribute("useraddr", user.getUseraddrgu());
 		
 		LPostDAO lpdao = new LPostDAO();
-//		List<LPostDTO> LPlist = lpdao.getUserAddrList(userAddr)
-//		UserDAO udao = new UserDAO();
-//		LPostDAO lpdao = new LPostDAO(); 
-//		String LoginUser = (String)req.getSession().getAttribute("loginUser");
-//		
-//		String userAddr = udao.getUserById(LoginUser).getUseraddr();
-//		List<LPostDTO> LPlist = new ArrayList<>();
-//		for(LPostDTO lpost : lpdao.getUserAddrList(userAddr)) {
-//			LPlist.add(lpost);
-//		}
-//		
-//		String loginUserAddr = udao.getUserAddr(LoginUser);
-//		req.setAttribute("loginUser", userAddr);
-//		req.setAttribute("LPlist", LPlist);
-		
-		
-//		 public String yourHandlerMethod(Model model) {
-//		        // 여기서 roadAddress 변수를 어딘가에서 가져와서 설정합니다
-//		        String roadAddress = LoginUser; // 예시로 설정한 값입니다
-//		        // 모델에 roadAddress 변수를 추가합니다
-//		        model.addAttribute("roadAddress", roadAddress);
-//		        // 뷰 이름을 반환합니다
-//		        return "yourViewName";
-//		    }
-		
-		
-		
-
-		
 		LPostDAO bdao = new LPostDAO();
 		
+		List<LPostDTO> quickpost = lpdao.getQuickPost("주소"); 
+		req.setAttribute("quickpost", quickpost);
 		
 		//전체 게시글의 개수
 		long totalCnt = 0;

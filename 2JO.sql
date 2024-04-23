@@ -31,8 +31,10 @@ CREATE TABLE `lpost` (
   `lpostlikecnt` int default 0,
   `readcount` int default 0,
   `imageCount` int default 0,
-  `lpostaddr` varchar(1000)
+  `lpostaddr` varchar(1000),
+  `deadline` datetime default null
 );
+insert into lpost(lpostcategory, userid, lposttitle, lpostcontents, lpostaddr) values('수영', 'abc1', '제목입니다', '내용입니다', '강남구');
 select * from lpost;
 select count(*) from lpost where lpostaddr='관악구';
 drop table lpost;
@@ -58,6 +60,7 @@ CREATE TABLE lpost_addr(
     CONSTRAINT fk_lpostnum FOREIGN KEY (lpostnum) REFERENCES lpost(lpostnum)
 );
 select * from lpost_addr;
+drop table lpost_addr;
 CREATE TABLE `lfile` (
   `lfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
   `lpostnum` bigint,

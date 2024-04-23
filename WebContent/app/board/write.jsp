@@ -8,6 +8,7 @@
     <title>write</title>
    <link href="${cp}/css/wirte/mapApi.css" rel="stylesheet">
    <link href="${cp}/css/wirte/write.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body class="write">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
@@ -88,6 +89,18 @@
                     </td>
                 </tr>
                 <tr>
+                	<th>마감시간</th>
+                	<td id="timetd">
+                		<input type='text' name="month" id="month" maxlength='2' placeholder="MM"><span>월 </span>
+                		<input type='text' name="day" id="day" maxlength='2' placeholder="DD" value=""/><span>일 </span>
+                		<input type='text' name="hour" id="hour" maxlength='2' placeholder="HH" value=""/><span>시 </span>
+                		<input type='text' name="minute" id="minute" maxlength='2' placeholder="MM" value=""/><span>분    </span>
+                		<span id="alertnode" style="color: red"></span>
+                		
+                		<input type="checkbox" name="notime" value="yes"><span>없음</span>
+                	</td>
+                </tr>
+                <tr>
                     <th>내용</th>
                     <td>
                         <textarea name="boardcontents"></textarea>
@@ -156,12 +169,135 @@
 		        document.getElementById("boardForm").appendChild(hiddenInput);
 		    }
 		});
+		console.log($("#month").value);
 		//주소정보(lpost_addr정보) 전송하는 함수 호출 
 		/* sendDataToServer(htmlString); */
 		// 폼 전송
 		document.boardForm.submit();
 		
 	}
+	const alertnode = document.getElementById("alertnode");
+	var replaceNotInt = /[^0-9]/gi;
+	    
+	    $(document).ready(function(){
+	    	
+	    	/* $("#month").on("input", function() {
+	    	    var x = $(this).val();
+	    	    if (x.length > 0) {
+	    	        // 입력값에서 숫자만 추출하여 저장
+	    	        var numericValue = x.replace(replaceNotInt, "");
+	    	        // 12를 초과하는 경우 입력을 비움
+	    	        if (parseInt(numericValue) > 12) {
+	    	            $(this).val("");
+	    	        }
+	    	    }
+	    	}); */
+	    	
+	    	$("#month").on("focusout", function() {
+	            var month = $(this).val();
+	            if (month.length > 0) {
+	                if (month.match(replaceNotInt)) {
+	                	month = month.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(month) > 12) {
+	                	month = "";
+	                }
+	                $(this).val(month);
+	            }
+	        }).on("keyup", function() {
+	            var month = $(this).val();
+	            if (month.match(replaceNotInt)) {
+	            	month = month.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(month) > 12) {
+	            	month = "";
+	            }
+	            $(this).val(month);
+	        });
+
+	    	$("#day").on("focusout", function() {
+	            var day = $(this).val();
+	            var month = $("#month").val();
+
+	            if (day.length > 0) {
+	                if (day.match(replaceNotInt)) {
+	                   day = day.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(day) > 12 && parseInt(day) % 2 === 1) {
+	                    day = "";
+	                }
+	                $(this).val(day);
+	            }
+	        }).on("keyup", function() {
+	            var day = $(this).val();
+	            var month = $("#month").val();
+
+	            if (day.match(replaceNotInt)) {
+	               day = day.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(day) > 28){
+	            	if(parseInt(month)===2){
+	            		day="";
+	            	}
+	            	if(parseInt(day) > 30){
+	            		if(parseInt(month)===4 || parseInt(month)===6 || parseInt(month)===9 || parseInt(month)===11){
+	            			day="";
+	            		}
+	            	}
+	            	if(parseInt(day) > 31){
+	            		day="";
+	            	}
+	            } 
+	            $(this).val(day);
+	        });
+	    	
+	    	$("#hour").on("focusout", function() {
+	            var hour = $(this).val();
+	            if (hour.length > 0) {
+	                if (hour.match(replaceNotInt)) {
+	                	hour = hour.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(hour) > 12) {
+	                	hour = "";
+	                }
+	                $(this).val(hour);
+	            }
+	        }).on("keyup", function() {
+	            var hour = $(this).val();
+	            if (hour.match(replaceNotInt)) {
+	            	hour = hour.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(hour) > 24) {
+	            	hour = "";
+	            }
+	            $(this).val(hour);
+	        });
+	    	
+	    	$("#minute").on("focusout", function() {
+	            var minute = $(this).val();
+	            if (minute.length > 0) {
+	                if (minute.match(replaceNotInt)) {
+	                	minute = minute.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(minute) > 60) {
+	                	hour = "";
+	                }
+	                $(this).val(minute);
+	            }
+	        }).on("keyup", function() {
+	            var minute = $(this).val();
+	            if (minute.match(replaceNotInt)) {
+	            	minute = minute.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(minute) > 60) {
+	            	minute = "";
+	            }
+	            $(this).val(minute);
+	        });
+	    });
+	        
+	    
+	    
 </script>
 </html>
 

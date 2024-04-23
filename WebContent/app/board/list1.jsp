@@ -29,28 +29,28 @@
                 <div id="gather_box">글쓰기</div>
             </a>
         </div>
-		<h2 id="title">${useraddr}의 최근 게시글!</h2>
+		<h2 id="title">${useraddr}의 곧 마감되는 게시글이에요</h2>
 		<div class="firstpost">
-			<c:forEach var="i" begin="0" end="3">
-				<c:if test="${not empty LPlist and i < LPlist.size()}">
-				<c:set var="LPlisti" value="${LPlist[i]}"/>
+			<c:if test="${not empty quickpost}">
+			<c:forEach var="i" begin="0" end="${quickpost.size()-1}">
+				<c:set var="quickp" value="${quickpost[i]}"/>
 					<div class="postbox">
 						<div class="title">
-							<a class="ttitle" href="${cp}/boardview.bo?lpostnum=${LPlisti.getLpostnum()}&page=${page}&keyword=${keyword}">
-								${LPlisti.getLposttitle()}
+							<a class="ttitle" href="${cp}/boardview.bo?lpostnum=${quickp.getLpostnum()}&page=${page}&keyword=${keyword}">
+								${quickp.getLposttitle()}
 								<span id="reply_cnt">[${reply_cnt_list[i] != null ? reply_cnt_list[i] : ""}]</span>
 							</a>
 						</div>   
-						<div class="content">${LPlisti.getLpostcontents()}</div>
+						<div class="content">${quickp.getLpostcontents()}</div>
 						<div class="adgory">
 							<div class="addr">${loginUserAddr}</div>
-							<div class="category">${LPlisti.getLpostcategory()}</div>
+							<div class="category">${quickp.getLpostcategory()}</div>
 						</div>
 						<div class="img">
 						<c:choose>
-						<c:when test="${LPlisti.getImageCount()!=0}">
-						<p>${LPlisti.getImageCount()}</p>
-							<c:forEach var="j" begin="0" end="${LPlisti.getImageCount()-1}">
+						<c:when test="${quickp.getImageCount()!=0}">
+						<p>${quickp.getImageCount()}</p>
+							<c:forEach var="j" begin="0" end="${quickp.getImageCount()-1}">
 							        <img src="./images/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원"
 							             style="width: 25px; height: 25px;">
 							    </c:forEach>
@@ -62,11 +62,11 @@
 						</c:choose>
 						</div>
 						<div class="regcnt">
-							<div class="regdate">${LPlisti.getLpostregdate()}</div>
+							<div class="regdate">${quickp.getLpostregdate()}</div>
 						</div>
 					</div>
-				</c:if>
 			</c:forEach>
+			</c:if>
 		</div>        
 		
 		<div class="townboard">

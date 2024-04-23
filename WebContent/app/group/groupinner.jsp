@@ -598,7 +598,7 @@
 			                 '<img src="../../images/groupinnerfileimg.png">' +
 			                 '</div>' +
 			                 '<p style="color:red">파일이 없습니다</p>';
-	    				    
+	    				 
 	    				parentFnode.appendChild(newLi);
 	    			} else {
 	    				for(let gfile of datas){

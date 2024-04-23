@@ -43,6 +43,18 @@
 					</td>
 				</tr>
 				<tr>
+                	<th>마감시간</th>
+                	<td id="timetd">
+                		<input type='text' name="month" id="month" maxlength='2' value="${deadline[0]}"/><span>월 </span>
+                		<input type='text' name="day" id="day" maxlength='2' value="${deadline[1]}"/><span>일 </span>
+                		<input type='text' name="hour" id="hour" maxlength='2'value="${deadline[2]}"/><span>시 </span>
+                		<input type='text' name="minute" id="minute" maxlength='2' value="${deadline[3]}"/><span>분    </span>
+                		<span id="alertnode" style="color: red"></span>
+                		
+                		<input type="checkbox" name="notime" value="yes"><span>없음</span>
+                	</td>
+                </tr>
+				<tr>
 					<th>내용</th>
 					<td>
 						<textarea name="boardcontents">${board.lpostcontents}</textarea>
@@ -70,6 +82,113 @@
 		//유효성 검사
 		boardForm.submit();
 	}
+	
+	const alertnode = document.getElementById("alertnode");
+	var replaceNotInt = /[^0-9]/gi;
+	    
+	    $(document).ready(function(){
+	    	$("#month").on("focusout", function() {
+	            var x = $(this).val();
+	            if (x.length > 0) {
+	                if (x.match(replaceNotInt)) {
+	                   x = x.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(x) > 12) {
+	                    x = "";
+	                }
+	                $(this).val(x);
+	            }
+	        }).on("keyup", function() {
+	            var x = $(this).val();
+	            if (x.match(replaceNotInt)) {
+	               x = x.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(x) > 12) {
+	                x = "";
+	            }
+	            $(this).val(x);
+	        });
+
+	    	$("#day").on("focusout", function() {
+	            var day = $(this).val();
+	            var month = $("#month").val();
+
+	            if (day.length > 0) {
+	                if (day.match(replaceNotInt)) {
+	                   day = day.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(day) > 12 && parseInt(day) % 2 === 1) {
+	                    x = "";
+	                }
+	                $(this).val(x);
+	            }
+	        }).on("keyup", function() {
+	            var day = $(this).val();
+	            var month = $("#month").val();
+
+	            if (day.match(replaceNotInt)) {
+	               day = day.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(day) > 28){
+	            	if(parseInt(month)===2){
+	            		day="";
+	            	}
+	            	if(parseInt(day) > 30){
+	            		if(parseInt(month)===4 || parseInt(month)===6 || parseInt(month)===9 || parseInt(month)===11){
+	            			day="";
+	            		}
+	            	}
+	            	if(parseInt(day) > 31){
+	            		day="";
+	            	}
+	            } 
+	            $(this).val(day);
+	        });
+	    	
+	    	$("#hour").on("focusout", function() {
+	            var hour = $(this).val();
+	            if (hour.length > 0) {
+	                if (hour.match(replaceNotInt)) {
+	                	hour = hour.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(hour) > 12) {
+	                	hour = "";
+	                }
+	                $(this).val(hour);
+	            }
+	        }).on("keyup", function() {
+	            var hour = $(this).val();
+	            if (hour.match(replaceNotInt)) {
+	            	hour = hour.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(hour) > 24) {
+	            	hour = "";
+	            }
+	            $(this).val(hour);
+	        });
+	    	
+	    	$("#minute").on("focusout", function() {
+	            var minute = $(this).val();
+	            if (minute.length > 0) {
+	                if (minute.match(replaceNotInt)) {
+	                	minute = minute.replace(replaceNotInt, "");
+	                }
+	                if (parseInt(minute) > 60) {
+	                	hour = "";
+	                }
+	                $(this).val(minute);
+	            }
+	        }).on("keyup", function() {
+	            var minute = $(this).val();
+	            if (minute.match(replaceNotInt)) {
+	            	minute = minute.replace(replaceNotInt, "");
+	            }
+	            if (parseInt(minute) > 60) {
+	            	minute = "";
+	            }
+	            $(this).val(minute);
+	        });
+	    });
 </script>
 </html>
 
