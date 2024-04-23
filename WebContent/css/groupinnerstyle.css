@@ -30,10 +30,19 @@ body{
     background-size: 100%;
 }
 header{
+    
+    background-color: rgb(232, 218, 202);
+}
+
+/* 경고메시지 */
+.betaversion{
+    position: absolute;
+    top: 0px;
     width: 100%;
-    min-width: 1300px;
-    height: 60px;
-    background-color: bisque;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 30;
 }
 .groupinnernav{
     display: flex;
@@ -282,30 +291,36 @@ header{
     position: fixed;
 }
 #groupname{
+    font-size: 18px;
     font-weight: bold;
-    color: rgb(238, 206, 63); ;
+    color: black;
 }
 #groupinfo .gmem, .glead {
     font-size: 15px;
     margin-bottom: 10px;
 }
 #groupname{
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 15px;
 }
 #groupinfo{
     margin-bottom: 10px;
 }
+
+.groupcategoryinfo{
+margin-bottom: 20px;
+}
 .group-btn-box{
-width: 120px;
-height: 30px;
+width: 250px;
+height: 60px;
+line-height: 55px;
 border-radius: 10px;
 margin: 0 auto;
 text-align: center;
-background-color: rgb(238, 206, 63);
+background-color: rgb(232,218,202);
 font-weight: bold;
 padding: 3px;
-color: white;
+cursor: pointer;
 } 
 
 /*지역 그룹 소개 박스 */
@@ -395,6 +410,37 @@ color: white;
     color: #666;
 }
 
+/* 수정 스타일 */
+.sujung_body > form > ul> li > input[type="text"]{
+    font-size: 18px;
+   border:1px solid rgb(212, 190, 168);
+   border-radius: 5px;
+   margin-bottom: 30px;
+   width: 90%;
+   outline: none;
+  
+}
+.sujung_body > form > ul > li > textarea {
+    font-size: 15px;
+    font-style: normal;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 90%;
+    height: 375px;
+    border:1px solid rgb(212, 190, 168);
+    border-radius: 5px;
+    outline: none;
+}
+.sujung_body form div > a {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+    line-height: 50px;
+    background-color: rgb(232, 218, 202);
+    border-radius: 15px;
+}
 
 /* 좋아요  */
 
@@ -458,7 +504,7 @@ color: white;
   
   /* 제출 버튼 스타일 */
   .writeform #writesubmit {
-    background-color: rgb(238, 206, 63);
+    background-color: rgb(232,218,202);
     border: none;
     padding: 8px 17px;
     text-align: center;
@@ -472,7 +518,7 @@ color: white;
   
   /* 제출 버튼 호버 스타일 */
   .writeform #writesubmit:hover {
-    background-color: rgb(219, 190, 59);
+    background-color: rgb(212, 190, 168);
   }
   
   .profile_container input[type = button]{
@@ -520,7 +566,7 @@ color: white;
 
 .write_btn { 
     margin-left: auto;
-    background-color: rgb(238, 206, 63);
+    background-color:  rgb(232,218,202);
     border: none;
     padding: 1px 15px;
     text-align: center;
@@ -532,7 +578,7 @@ color: white;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
     height: 25px;
-    color: white;
+    line-height: 25px;
 }
 
 .writeform{
@@ -592,59 +638,3 @@ header{
 .ingiListWrap{
     margin-top: 0px;
 }
-/*
-<%-- <div class="summarytitle">
-                        <p><h2>이번 주 인기글</h2></p>
-                    </div>
-                    <div class="summaryinfo">
-                        <p>${ingi.userid}</p>
-                        <ul class="grouptaglist">
-                           <li class="groupaddrinfo circle-list-btn">
-                                <a href="#">${group.groupaddr}</a>
-                           </li>
-                           <li class="groupcategoryinfo circle-list-btn">
-                                <a href="">${group.groupcategory}</a>
-                           </li>
-						   <li>
-								<div class="gpostContents ingi">
-									<div>
-										<p>
-											<textarea class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}" style="width: 100%; height: 100%">${ingi.gpostcontents}
-											</textarea>
-										</p>
-										<div class="likereply">
-											<img id="likeButton" onclick="pressLike(${ingi.gpostnum})" class="like-button likeButton${ingi.gpostnum+10000}" src="${cp}/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">
-											<div class="point-area showreplyBtn">
-												<div style="display: inline-block;">
-													<p>인기글</p>
-												</div>
-												<div style="display: inline-block;">
-													<input type="button" class="showrpcnt${ingi.gpostnum+10000}" value="댓글 ${ingi.gprcnt}개"
-														onclick="showReply(${ingi.gpostnum}+10000)"
-														style="cursor: pointer;">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<li class="gpostListwrap ingiListWrap">
-									<div class="gpostReply${ingi.gpostnum+10000} replyHide">
-										<div class="repForm reply${ingi.gpostnum+10000}">
-											<Form method="post" class="inputGPR" action="writegpreply.gp?gpostnum=${ingi.gpostnum+10000}&?groupnum=${group.groupnum}" name="writeRPForm${ingi.gpostnum+10000}">
-												<div class="badgeimg"><img src=""></div>
-												<div class="badgeimg-right-info">
-													<p class="replywriter">${loginUser}HiImTester</p>
-													<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>
-												</div>
-												<div>
-													<input type="submit" value="등록">
-												</div>
-											</Form>
-										</div>
-										<ul class="greplyList${ingi.gpostnum+10000}"></ul>
-									</div>
-								</li>
-							</li>	
-                        </ul>
-                    </div> --%>
-                    */

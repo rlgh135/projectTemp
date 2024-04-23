@@ -35,7 +35,7 @@
 							</div>
 						</a>
 						<c:forEach var="lpost" items="${lpost}">
-							<div class="myinfo_card_list LPost"
+							<div class="myinfo_card_list LPost${i}"
 								onclick="javascript:goLPost(${lpost.lpostnum})">
 								<div>
 									<p id="lpost_title">${lpost.lposttitle}</p>

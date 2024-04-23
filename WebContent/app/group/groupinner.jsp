@@ -75,9 +75,17 @@
             transform:translateY(-50%);
 			z-index: 10;
         }
+        
+        #top_wrap{
+        	background-color: rgb(232, 218, 202);
+        	margin-top: 0px !important;
+        }
 </style>
 </head>
 <body>
+<div class="betaversion">
+		개발 중인 베타버전입니다. (It's a beta version that's being developed)
+	</div>
 	<c:if test="${empty isInGroup}"></c:if>
 	<c:if test="${empty loginUser}">
 		<c:set var="loginUser" value="${null}"/>
@@ -92,12 +100,26 @@
 				<img src="../../images/x.webp" alt="" onclick="clkSujungCBtn()" style="width: 30px; height: 30px; margin-left: auto; cursor: pointer;">
 			</div>
 			<Form method="post" action="/modifygp.gp?groupnum=${group.groupnum}" name="sujungForm">
-				<input type="text" name="userid" value="${loginUser}" readonly>
-				<input type="hidden" name="gposttitle" value="없음">
-				<input type="hidden" name="gpostnum" value="">
-				<input type="hidden" name="groupnum" value="">
-				<input type="hidden" name="gpostregdate" value="">
-				<textarea name="gpostcontents" id="sujungpost" cols="30" rows="10"></textarea>
+				<ul>
+					<li>
+					<input type="text" name="userid" value="${loginUser}" readonly>
+					</li>
+					<li>
+						<input type="hidden" name="gposttitle" value="없음">
+					</li>
+					<li>
+						<input type="hidden" name="gpostnum" value="">
+					</li>
+					<li>
+						<input type="hidden" name="groupnum" value="">
+					</li>
+					<li>
+						<input type="hidden" name="gpostregdate" value="">
+					</li>
+					<li>
+						<textarea name="gpostcontents" id="sujungpost" cols="30" rows="10" ></textarea>
+					</li>
+				</ul>
 				<div>
 					<a href="javascript:modifyOk()">수정완료</a>
 				</div>
@@ -119,6 +141,8 @@
 	</c:choose>
 	<div id="group_inner_wrap">
         <header>
+        <jsp:include page="${cp}/app/header.jsp"></jsp:include>
+        <%--
             <nav class="groupinnernav">
 				<div class="logoimg"><a href=""><img src="../../images/logo.png" alt="" style="background-repeat: no-repeat; display: block; width: auto; height: 40px;"></a></div>
 				<div class="widgetarea">
@@ -129,6 +153,7 @@
 					</ul>
 				</div>
             </nav>
+           --%>
         </header>
         <div class="group-inner contents" id="group_inner_container">
             <div id="groupinfobox" class="infobox">
@@ -397,7 +422,6 @@
 														<c:if test="${gpost.userid == loginUser}">
 															<div style="display:inline-block; margin-left:210px;">
 																<input type="button" class="replyHide modify${gpost.gpostnum}" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm(${gpost.gpostnum}, ${group.groupnum})">															
-					                                        	<input type="button"  value="수정완료" style="cursor: pointer; width:70px; text-align:right;" onclick="updateGPost()">
 					                                        	<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost(${gpost.gpostnum}, ${group.groupnum});">
 					                                        </div>
 														</c:if>
