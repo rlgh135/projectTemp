@@ -46,7 +46,7 @@ public class BoardWriteOkAction implements Action {
 		String[] mycheckBox = req.getParameterValues("selectedCategories");
 		String boardcategory = "";
 		String jsonDataInput = req.getParameter("jsonData"); 
-        
+		
 		
 		System.out.println("선택된 카테고리: ");
         if (mycheckBox != null) {
@@ -61,7 +61,7 @@ public class BoardWriteOkAction implements Action {
 		board.setLpostcontents(boardcontents);
 		board.setUserid(userid);
 		board.setLpostcategory(boardcategory);
-		board.setLpostaddr(boardaddr);
+		board.setLpostaddr("주소가 없습니다.");
 		
 		
 		System.out.println(boardtitle);
@@ -80,9 +80,18 @@ public class BoardWriteOkAction implements Action {
 		
 		if(bdao.insertBoard(board)) {
 			long boardnum = bdao.getLastNum(userid);
-			setAddr(jsonDataInput, boardnum);
-			req.setAttribute("placeName", ladto.getPlaceName());
-			req.setAttribute("roadAddress", ladto.getRoadAddress());
+			try {
+				if(jsonDataInput != null) {
+					setAddr(jsonDataInput, boardnum);
+					String roadAddress = ladto.getRoadAddress();
+					System.out.println("roadAddress: " + roadAddress);
+					System.out.println(userid);
+					if(roadAddress != null)
+						bdao.setAddr(roadAddress, boardnum);	
+				}
+			} catch (Exception e) {
+				System.out.println(e+"BoardWritOkAction에러입니다.");
+			}
 			transfer.setPath(req.getContextPath()+"/boardview.bo?lpostnum="+boardnum);
 		}else {
 			//list

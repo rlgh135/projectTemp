@@ -7,31 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>get</title>
-<%-- <link href="${cp}/css/style.css" rel="stylesheet"> --%>
-<link href="${cp}/css/wirte/get.css" rel="stylesheet">
+<link href="${cp}/css/get_re.css" rel="stylesheet">
 </head>
 <body class="get">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
 	<c:if test="${empty loginUser }">
 		<script>
 			alert("로그인 후 이용하세요!");
 			location.replace("${cp}/");
 		</script>
 	</c:if>
-	<div id="wrap" class="get">
-		<div></div>
-		<!-- 로그아웃 버튼 배치할 테이블 -->
-		<table class="header_area">
-			<tbody>
-				<tr>
-					<td>
-						<span>${loginUser}님 환영합니다.</span>
-						<a class="btn" href="${cp}/userlogout.us">로그아웃</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<header>
+		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
+	</header>
+	<div class="line_top"></div>
+	<div id="get_wrap" class="get">
 		<!-- 타이틀 띄워주는 테이블 -->
-		<table class="title">
+		<%-- <table class="title">
 			<tbody>
 				<tr>
 					<td>
@@ -41,36 +33,37 @@
 					</td>
 				</tr>
 			</tbody>
-		</table>
-		<table border="1" class="board_area">
+		</table> --%>
+		
+		<table border="0" class="board_area">
 			<tr>
-				<th>제목</th>
-				<td>
-					<input type="text" name="boardtitle" value="${board.lposttitle}" readonly>
-				</td>
+				<!-- <th class="lboard_tit">제목</th> -->
+				<th class="lboard_tit" colspan="2">
+					<input type="text" name="boardtitle" value="${board.lposttitle}" id="lboard_title" readonly>
+				</th>
 			</tr>
 			<tr>
-				<th>작성자</th>
+				<th class="lboard_master">작성자</th>
 				<td>
 					<input type="text" name="userid" value="${board.userid}" readonly>
 				</td>
 			</tr>
 			<tr>
-				<th>조회수</th>
-				<td>
-					<input type="text" name="readcount" value="${board.readcount}" readonly>
-				</td>
-			</tr>
-			<tr>
-				<th>카테고리</th>
+				<th class="lboard_category">카테고리</th>
 				<td>
 					<input type="text" name="boardcategory" value="${board.lpostcategory}" readonly>
 				</td>
 			</tr>
 			<tr>
-				<th>참여유저</th>
+				<th class="lboard_contents">내용</th>
+				<td>
+					<input type="text" name="boardcontents" value="${board.lpostcontents}" readonly>
+				</td>
+			</tr>
+			<tr>
+				<th class="lboard_joinuser">참여유저</th>
 				<c:if test="${lpost_user_list != ''}">
-					<td>
+					<td class="lpost_user_list">
 						<%-- <input type="text" name="lpost_user_list" value="${fn:escapeXml(lpost_user_list)}" readonly> --%>
 						${lpost_user_list}
 					</td>
@@ -82,15 +75,15 @@
 				</c:if>
 			</tr>
 			<tr>
-				<th>내용</th>
+				<th class="lboard_site">위치</th>
 				<td>
-					<textarea name="boardcontents" readonly>${board.lpostcontents}</textarea>
+				   <div id="map" class="lboard_site_box"></div>
 				</td>
 			</tr>
 			<tr>
-				<th>주소</th>
+				<th class="lboard_cnt">조회수</th>
 				<td>
-					<div id="map" style="width:100%;height:350px;"></div>
+					<input type="text" name="readcount" value="${board.readcount}" readonly>
 				</td>
 			</tr>
 		</table>
@@ -99,19 +92,19 @@
 				<tr>
 					<td>
 						<c:if test="${board.userid == loginUser}">
-							<a class="btn" href="${cp}/boardupdate.bo?boardnum=${board.lpostnum}&page=${param.page}&keyword=${param.keyword}">수정</a>
-							<a class="btn" href="${cp}/boarddelete.bo?boardnum=${board.lpostnum}&page=${param.page}&keyword=${param.keyword}">삭제</a>
+							<a class="btn" href="${cp}/boardupdate.bo?boardnum=${board.lpostnum}&page=${param.page}&keyword=${param.keyword}"><div class="lp_btn_box">수정</div></a>
+							<a class="btn" href="${cp}/boarddelete.bo?boardnum=${board.lpostnum}&page=${param.page}&keyword=${param.keyword}"><div class="lp_btn_box">삭제</div></a>
 						</c:if>
 						<c:choose>
 						    <c:when test="${checkUser == 1}">
-						        <a class="btn" href="#" onclick="delectAction()">취소하기</a>
+						        <a class="btn" href="#" onclick="delectAction()"><div class="lp_btn_box">취소하기</div></a>
 						    </c:when>
 						    <c:otherwise>
-						        <a class="btn" href="#" onclick="joinAction()">참여하기</a>
+						        <a class="btn" href="#" onclick="joinAction()"><div class="lp_btn_box">참여하기</div></a>
 						    </c:otherwise>
 						</c:choose>
 						
-						<a class="btn" href="${cp}/boardlist.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
+						<a class="btn" href="${cp}/boardlist.bo?page=${param.page}&keyword=${param.keyword}"><div class="lp_btn_box">목록</div></a>
 					</td>
 				</tr>
 			</tbody>
@@ -124,68 +117,65 @@
 				<table class="write_box">
 					<tbody>
 						<tr>
-							<td>댓글</td>
+							<th>댓글</th>
 							<td>
-								<textarea name="lreplycontents"></textarea>
-								<a class="btn" href="javascript:document.replyForm.submit();">등록</a>
+								<textarea id="lp_replycontents" name="lreplycontents" placeholder></textarea>
+								<a class="btn" href="javascript:document.replyForm.submit();"><p id="reply_btn">등록</p></a>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
+			
 			<form name="updateForm" method="post">
 				<input type="hidden" name="boardnum" value="${board.lpostnum}">
 				<input type="hidden" name="page" value="${param.page}">
 				<input type="hidden" name="keyword" value="${param.keyword}">
 				<input type="hidden" name="lreplynum" value="">
 				<input type="hidden" name="i" value="">
-				<table class="update_box">
 					<tbody>
-						<c:if test="${replies.size()>0}">
-							<c:forEach var="i" begin="0" end="${replies.size()-1}">
-								<c:set var="reply" value="${replies[i]}"/>
-								<tr>
-									<td>${reply.userid}</td>
-									<td>
-										<textarea readonly name="lreply${i}" id="reply${i}" class="replycontents">${reply.lreplycontents}</textarea>
-									</td>
-									<td>
-										${reply.lregdate}<c:if test="${reply.updatechk == 'o'}">(수정됨)</c:if>
-										<c:if test="${reply.userid == loginUser}">
-											<div class="btns">
-												<a class="btn" href="javascript:updateReply(${i})" id="start${i}">수정</a>
-												<a class="btn" href="javascript:updateReplyOk(${i},${reply.lreplynum})" style="display:none;" id="end${i}">수정완료</a>
-												<a class="btn" href="javascript:deleteReply(${reply.lreplynum})">삭제</a>
-											</div>
-										</c:if>
-									</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-						<c:if test="${replies.size() <= 0}">
-							<tr>
-								<td colspan="3">등록된 댓글이 없습니다</td>
-							</tr>
-						</c:if>
+						<c:choose>
+							<c:when test="${replies.size()>0}">
+								<c:forEach var="i" begin="0" end="${replies.size()-1}">
+									<c:set var="reply" value="${replies[i]}"/>
+										<table class="update_box" >
+											<tr>
+												<td id="reply_cont_line">
+													<textarea readonly name="lreply${i}" id="reply${i}" class="replycontents">${reply.lreplycontents}</textarea>
+												</td>
+												<td rowspan="2" id="lreply_sub_btn">
+													${reply.lregdate}<c:if test="${reply.updatechk == 'o'}">(수정됨)</c:if>
+													<c:if test="${reply.userid == loginUser}">
+														<div class="btns">
+															<a class="btn" href="javascript:updateReply(${i})" id="start${i}"><p class="lreply_sub_btn_box">수정</p></a>
+															<a class="btn" href="javascript:updateReplyOk(${i},${reply.lreplynum})" style="display:none;" id="end${i}"><p class="lreply_sub_btn_box">수정하기</p></a>
+															<a class="btn" href="javascript:deleteReply(${reply.lreplynum})"><p class="lreply_sub_btn_box">삭제</p></a>
+														</div>
+													</c:if>
+												</td>
+											</tr>
+											<tr>
+												<td id="reply_id_line">작성자 : ${reply.userid}</td>
+											</tr>
+										</table>
+									</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<p id="no_reply">"등록된 댓글이 없습니다"	</p>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
-				</table>
 			</form>
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b80d880bf487c48bfc24c5920bfb84f0&libraries=services"></script>
 <script>
-	const roadAddress = '${RoadAddress}';
-	console.log(roadAddress);
-	const PlaceName = '${PlaceName}';
-	console.log(placeName);
-	
-	
-	
+   const roadAddress = '${RoadAddress}';
+   const PlaceName = '${PlaceName}';
 </script>
 <script>
 	window.setTimeout(function(){
-		document.querySelector("#wrap>div:nth-child(1)").style.display="none";
+		document.querySelector("#get_wrap>div:nth-child(1)").style.display="none";
 	},1200)
 	const updateForm = document.updateForm;
 	let flag = false;
@@ -240,57 +230,62 @@
         return false;
 	}
 </script>
-
 <script>
-var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-var mapOption = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    level: 3 // 지도의 확대 레벨
-};  
-
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 지도의 크기를 부모 요소의 넓이에 맞게 조정합니다
-function resizeMap() {
-	    var mapParentWidth = mapContainer.parentElement.offsetWidth;
-	    mapContainer.style.width = mapParentWidth + 'px';
-	    map.relayout();
+	if(PlaceName === "null"){
+	   var newHTML = "<p>선택한 주소가 없습니다.</p>";
+	    document.getElementById("map").innerHTML = newHTML;
+	}else{
+	
+	var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+	var mapOption = {
+	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	};  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 지도의 크기를 부모 요소의 넓이에 맞게 조정합니다
+	function resizeMap() {
+	       var mapParentWidth = mapContainer.parentElement.offsetWidth;
+	       mapContainer.style.width = mapParentWidth + 'px';
+	       map.relayout();
+	   }
+	   
+	   // 창 크기가 변경될 때마다 지도의 크기를 다시 조정합니다
+	   window.addEventListener('resize', function() {
+	       resizeMap();
+	   });
+	   
+	   // 주소-좌표 변환 객체를 생성합니다
+	   var geocoder = new kakao.maps.services.Geocoder();
+	   
+	   // 주소로 좌표를 검색합니다
+	   geocoder.addressSearch(roadAddress, function(result, status) {
+	       // 정상적으로 검색이 완료됐으면 
+	       if (status === kakao.maps.services.Status.OK) {
+	           var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	   
+	           // 결과값으로 받은 위치를 마커로 표시합니다
+	           var marker = new kakao.maps.Marker({
+	               map: map,
+	               position: coords
+	           });
+	   
+	           // 인포윈도우로 장소에 대한 설명을 표시합니다
+	           var infowindow = new kakao.maps.InfoWindow({
+	               content: '<div style="width:150px;text-align:center;padding:6px 0;">'+PlaceName+'</div>'
+	           });
+	           infowindow.open(map, marker);
+	   
+	           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	           map.setCenter(coords);
+	       } 
+	   }); 
+	   
+	   // 초기에 한번 지도의 크기를 조정합니다
+	   resizeMap();  
 	}
-	
-	// 창 크기가 변경될 때마다 지도의 크기를 다시 조정합니다
-	window.addEventListener('resize', function() {
-	    resizeMap();
-	});
-	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(roadAddress, function(result, status) {
-	    // 정상적으로 검색이 완료됐으면 
-	    if (status === kakao.maps.services.Status.OK) {
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+PlaceName+'</div>'
-	        });
-	        infowindow.open(map, marker);
-	
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	}); 
-	
-	// 초기에 한번 지도의 크기를 조정합니다
-	resizeMap();  
 </script>
 </html>
 

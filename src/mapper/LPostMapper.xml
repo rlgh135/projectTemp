@@ -65,6 +65,11 @@
 	<select id="getUserAddrList" parameterType="String" resultType="lpostdto">
 		select * from lpost where lpostaddr = #{userAddr}
 	</select>
+	<update id="setAddr" parameterType="hashmap">
+	    UPDATE lpost
+	    SET lpostaddr = #{roadAddress}
+	    WHERE lpostnum = #{boardnum}
+	</update>
 </mapper>
 
 

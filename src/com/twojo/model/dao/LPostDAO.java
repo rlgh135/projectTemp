@@ -70,11 +70,20 @@ private SqlSession ss;
 	public List<LPostDTO> getListWithAddr(String loginUserAddr) {
 		return ss.selectList("LPost.getListWithAddr",loginUserAddr);
 	}
-	public List<LPostDTO> getUserAddrList(String userAddr) {
-		return ss.selectList("LPost.getUserAddrList", userAddr);
+	public List<LPostDTO> getUserAddrList(String userAddrgu) {
+		return ss.selectList("LPost.getUserAddrList", userAddrgu);
 	}
 
 	public List<LPostDTO> getboardinfoList(String userid) {
 		return ss.selectList("LPost.getUserList", userid);
 	}
+
+
+	public boolean setAddr(String roadAddress, long boardnum) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("roadAddress", roadAddress);
+		datas.put("boardnum", boardnum);
+		return ss.update("LPost.setAddr", datas) == 1;
+	}
+
 }

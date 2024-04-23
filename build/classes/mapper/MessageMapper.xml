@@ -9,12 +9,12 @@
 	</insert>
 		
 	<select id="getsysmsg" parameterType="String" resultType="messagedto">
-		select messagenum, sendid, receiveid, msgcontent, date_format(msregdate, '%Y-%m-%d %H:%i') as msregdate, msgcheck 
+		select messagenum, sendid, receiveid, msgcontent, date_format(msregdate, '%Y-%m-%d %H:%i') as msregdate, msgcheck, linkstring 
 		from message where receiveid = #{userid} and sendid = 'system' order by msregdate desc;
 	</select>
 	
 	<select id="getmsg" parameterType="String" resultType="messagedto">
-		select messagenum, sendid, receiveid, msgcontent, date_format(msregdate, '%Y-%m-%d %H:%i') as msregdate, msgcheck 
+		select messagenum, sendid, receiveid, msgcontent, date_format(msregdate, '%Y-%m-%d %H:%i') as msregdate, msgcheck
 		from message where receiveid = #{userid} and sendid != 'system' order by msregdate desc;
 	</select>
 	

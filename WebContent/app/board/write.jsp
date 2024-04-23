@@ -10,7 +10,7 @@
    <link href="${cp}/css/wirte/write.css" rel="stylesheet">
 </head>
 <body class="write">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b80d880bf487c48bfc24c5920bfb84f0&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
     <div id="wrap">
         <div></div>
         <table class="header_area">
@@ -162,10 +162,6 @@
 		document.boardForm.submit();
 		
 	}
-	
-	
-
-	   
 </script>
 </html>
 

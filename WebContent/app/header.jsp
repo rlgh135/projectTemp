@@ -29,7 +29,7 @@
             </nav>
             <div class="user_gnb">
                 <div>
-                    <a class="btn" href="${cp}/myinfolist.mc">
+                    <a class="btn" href="/myinfo.bo">
                     	<div id="userinfo_gnb">
                     		<img alt="" src="${cp}/images/myinfo_icon.png">
                     	</div>

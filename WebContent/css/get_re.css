@@ -1,0 +1,149 @@
+input[type="text"]{
+	font-size: 18px;
+	border:none;
+	margin-left:10px;
+}
+textarea {
+    resize: none;
+    border:none;
+}
+#get_wrap{
+	width: 1400px;
+	margin:50px auto;
+}
+.line_top{
+	margin:0 auto;
+	width: 1400px;
+	height:50px;
+	border-bottom: 3px solid rgb(253, 202, 6);
+}
+.board_area{
+	width: 1300px;
+	margin:30px auto;
+}
+.board_area th{
+	font-size:18px;
+	width: 300px;
+	height: 60px;
+	border-bottom: 0.5px solid rgb(230,230,230);
+}
+.board_area .lboard_tit{
+	height: 70px;
+}
+.lboard_tit input[type="text"]{
+	font-size:30px;
+	font-weight: bolder;
+	text-align:center;
+	
+}
+
+.board_area td{
+	border-bottom: 0.5px solid rgb(230,230,230);
+}
+
+.board_area .lboard_site{
+	height:500px;
+}
+.board_area .lpost_user_list{
+	font-size: 18px;
+	padding-left:10px;
+}
+.lboard_site_box{
+	width: 1000px;
+	height:500px;
+	background-color: beige;
+}
+
+.btn_area{
+	width:500px;
+	height:70px;
+	margin:30px auto;
+}
+.btn_area .lp_btn_box{
+	font-size:20px;
+	font-weight:bolder;
+	text-align:center;
+	line-height:50px;
+	width:200px;
+	height:50px;
+	margin:10px 25px;
+	background-color: rgb(253, 202, 6);
+	border-radius:10px;
+	float:left;
+	color: rgb(50,50,50);
+}
+.reply_line{
+	width: 1300px;
+	margin:100px auto;
+}
+.write_box{
+	margin-bottom: 30px;
+}
+.reply_line th{
+	font-size:18px;
+	width: 300px;
+	height: 60px;
+	/* border-bottom: 0.5px solid rgb(230,230,230); */
+}
+#lp_replycontents{
+	width: 900px;
+	height: 100px;
+	border: 1px solid gray;
+	border-radius:10px;
+	padding:20px;
+}
+
+#reply_btn{
+	width: 80px;
+	font-weight:bold;
+	height: 50px;
+	text-align:center;
+	line-height:50px;
+	float:right;
+	margin:25px 10px;
+	border-radius:10px;
+	background-color: lightgray;
+}
+
+#reply_cont_line .replycontents{
+	width: 900px;
+	height: 100px;
+	padding:20px;
+	background-color: rgb(235, 235, 215);
+}
+#reply_id_line{
+	font-weight:bold;
+	font-size:16px;
+	width: 900px;
+	height: 30px;
+	text-align: right;
+	padding-right: 20px;
+	border: none;
+	margin-bottom:20px;
+}
+.update_box{
+	margin-left: 300px;
+	margin-bottom:20px;
+}
+#lreply_sub_btn{
+	width: 100px;
+	text-align:center;
+	padding: 0 10px;
+}
+.lreply_sub_btn_box{
+	font-size:14px;
+	font-weight:bold;
+	width: 80px;
+	height: 30px;
+	text-align:center;
+	line-height:30px;
+	margin: 10px 0;
+	border-radius: 10px;
+	background-color: lightgray;
+}
+
+#no_reply{
+	width:1300px;
+	margin:0 auto;
+	text-align:center;
+}

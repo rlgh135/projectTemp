@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,11 +14,22 @@
 </head>
 
 <body>
-    <%-- <header>
+    <header>
 		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
-	</header> --%>
+	</header>
 	<div id="wrap">
-		<h2 id="title">${loginUser}의 최근 게시글!</h2>
+		<div id="lp_top_tit">
+            <h1>우리동네 새로운 이야기</h1>
+            <div id="lp_tit_img_box">
+                <div id="lp_tit_img"></div>
+            </div>
+        </div>
+        <div id="lp_gather">
+            <a class="write btn" href="javascript:boardwrite()">
+                <div id="gather_box">글쓰기</div>
+            </a>
+        </div>
+		<h2 id="title">${useraddr}의 최근 게시글!</h2>
 		<div class="firstpost">
 			<c:forEach var="i" begin="0" end="3">
 				<c:if test="${not empty LPlist and i < LPlist.size()}">
@@ -47,7 +56,7 @@
 							    </c:forEach>
 						</c:when>
 						<c:otherwise>
-							<p>아직 아무도 참여하지 않았어요</p>
+							아직 아무도 참여하지 않았어요
 						</c:otherwise>	
 	
 						</c:choose>
@@ -69,7 +78,7 @@
 					    <option value="lpostcategory">카테고리</option>
 					    <option value="userid">작성자</option>
 					</select> -->
-				<input type="text" placeholder="검색어 입력" id="keyword">
+				<input type="text" placeholder=" 검색어 입력" id="keyword">
 				<input class="search_btn" type="button" value="검색" onclick="search()"> 
 			</div>
 		</div>
@@ -82,7 +91,7 @@
 	               <c:set var="board" value="${list[i]}"/>
 	           			<div class="secondpost">
 	                         <div class="tpostbox">
-								<div>
+								<div class="ttitle_box">
 								    <a class="ttitle" href="${cp}/boardview.bo?lpostnum=${board.lpostnum}&page=${page}&keyword=${keyword}">
 								        ${board.lposttitle != null ? board.lposttitle : ""} 
 								        <span id="reply_cnt">[${reply_cnt_list[i] != null ? reply_cnt_list[i] : ""}]</span>
@@ -100,7 +109,7 @@
 					                	<c:choose>
 					                		<c:when test="${board.imageCount > 0}">
 											    <c:forEach var="j" begin="0" end="${board.imageCount-1}">
-											        <img src="./image/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원" style="width: 25px; height: 25px;">
+											        <img src="./images/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원" style="width: 25px; height: 25px;">
 											    </c:forEach>
 					                		</c:when>
 					                		<c:otherwise>
@@ -111,9 +120,8 @@
 	                             <div class="tregcnt">
 	                                 <div class="tregdate">${board.lpostregdate }</div>
 	                                 <div class="tlikecnt">
-	                                     <p class="tlike_cnt">${board.lpostaddr }</p>
-	                                     <!-- <img class="theart" src="./image/like.webp" alt="좋아요수" style="width: 15px; height: 15px;"> -->
-	
+	                                     <img class="theart" src="./images/like.webp" alt="좋아요수" style="width: 15px; height: 15px;">
+	                                     <p class="tlike_cnt">${board.lpostlikecnt }</p>
 	                                 </div>
 	                             </div>
 	                         </div>
@@ -124,40 +132,33 @@
         </div>
         
         <!-- 페이징 처리하는 테이블 -->
-		<table class="postpage">
-			<tbody>
-				<tr>
-					<td>
-						<c:if test="${startPage != 1}">
-							<a class="btnnum" href="${cp}/boardlist.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
-						</c:if>
-						<c:forEach begin="${startPage}" end="${endPage}" var="i">
-							<c:choose>
-								<c:when test="${page == i}">
-									<span class="nowPage">${i}</span>
-								</c:when>
-								<c:otherwise>
-									<a class="btnnum" href="${cp}/boardlist.bo?page=${i}&keyword=${keyword}&sessionId=${sessionScope.sessionId}">${i}</a>
-
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${endPage != totalPage}">
-							<a class="btnnum" href="${cp}/boardlist.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
-						</c:if>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="btn_table">
-			<tbody>
-				<tr>
-					<td>
-						<a class="write btn" href="javascript:boardwrite()">글쓰기</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+        <div class="postpage_box">
+			<table class="postpage">
+				<tbody>
+					<tr>
+						<td>
+							<c:if test="${startPage != 1}">
+								<a class="btnnum" href="${cp}/boardlist.bo?page=${startPage-1}&keyword=${keyword}">&lt;</a>
+							</c:if>
+							<c:forEach begin="${startPage}" end="${endPage}" var="i">
+								<c:choose>
+									<c:when test="${page == i}">
+										<span class="nowPage">${i}</span>
+									</c:when>
+									<c:otherwise>
+										<a class="btnnum" href="${cp}/boardlist.bo?page=${i}&keyword=${keyword}&sessionId=${sessionScope.sessionId}">${i}</a>
+	
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${endPage != totalPage}">
+								<a class="btnnum" href="${cp}/boardlist.bo?page=${endPage+1}&keyword=${keyword}">&gt;</a>
+							</c:if>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
     </div>
 </body>
 <script>

@@ -35,10 +35,11 @@ table, tr, th, td{
     float: left;
 }
 .logo{
+	padding-top:20px;
     width: 120px;
-    height: 80px;
-    background: url("../../images/logo.png") no-repeat center;
-    background-size: 100%;
+    height: 60px;
+    object-fit: cover;
+    background-size: 80%;
 }
 .gnb_menu{
     /* 위 메뉴 추가할때 너비 바꿔주기 */

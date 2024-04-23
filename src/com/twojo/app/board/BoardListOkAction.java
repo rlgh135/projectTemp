@@ -20,13 +20,18 @@ import com.twojo.model.dto.UserDTO;
 public class BoardListOkAction implements Action{
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
+		String loginUser = (String)req.getSession().getAttribute("loginUser");
 		String temp = req.getParameter("page");
 		int page = temp == null || temp.equals("") ? 1 : Integer.parseInt(temp);
 		String keyword = req.getParameter("keyword");
 		String searchMenu = req.getParameter("searchMenu");
 		
+		UserDAO udao = new UserDAO();
+		UserDTO user = udao.getUserById(loginUser);
+		req.setAttribute("useraddr", user.getUseraddrgu());
 		
+		LPostDAO lpdao = new LPostDAO();
+//		List<LPostDTO> LPlist = lpdao.getUserAddrList(userAddr)
 //		UserDAO udao = new UserDAO();
 //		LPostDAO lpdao = new LPostDAO(); 
 //		String LoginUser = (String)req.getSession().getAttribute("loginUser");
@@ -68,7 +73,7 @@ public class BoardListOkAction implements Action{
 		}
 		
 		//한 페이지에서 보여줄 게시글의 개수
-		int pageSize = 10;
+		int pageSize = 12;
 		
 		//페이징 처리 시 아래에 나올 페이지 번호의 개수
 		int pageCnt = 10;
