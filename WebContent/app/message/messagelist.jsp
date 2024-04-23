@@ -259,7 +259,7 @@
 					                    	<c:choose>
 					                    		<c:when test="${sys_msg.msgcheck != 0}">
 							                        <td class="msgl_check msg_con">
-							                           	<div class="msg_check_ok_img"></div>
+							                           	<div class="msg_check_ok_img syscheckImg${i+1}"></div>
 							                        </td>
 					                    		</c:when>
 					                    		<c:otherwise>
@@ -287,7 +287,7 @@
 											    	<h4>메세지 내용 : </h4>
 											    	<br>
 											        <p id="sysmsg_modalContent"></p>
-											        <a id="linkaddr">이동하기</a>
+											        <a id="linkaddr" herf="#">이동하기</a>
 											        <button type="button" class="sysmsg_close" onclick="sysmsg_closeModal()">닫기</button>
 											    </div>
 											</div>
@@ -314,7 +314,7 @@
 					                    	<c:choose>
 					                    		<c:when test="${msg.msgcheck != 0}">
 							                        <td class="msgl_check msg_con">
-							                        	<div class="msg_check_ok_img"></div>
+							                        	<div class="msg_check_ok_img usercheckImg${i+1}"></div>
 							                        </td>
 					                    		</c:when>
 					                    		<c:otherwise>
@@ -326,7 +326,7 @@
 					                    	<c:choose>
 					                    		<c:when test="${msg.msgcheck != 0}">
 							                        <td class="msgl_content msg_con" >
-							                        	<button class="usermsg_check_ok usermsg_button" onclick="useropenModal('${msg.msgcontent}')">${msg.msgcontent}</button>
+							                        	<button class="usermsg_check_ok usermsg_button" onclick="useropenModal('${msg.msgcontent}', '${i+1}')">${msg.msgcontent}</button>
 							                        </td>
 					                    		</c:when>
 					                    		<c:otherwise>
@@ -454,35 +454,50 @@
         let checkImg= document.getElementsByClassName("syscheckImg"+index)[0];
         let checkCont= document.getElementsByClassName("sysnoCheck"+index)[0];
         let targetnodenum= document.getElementsByClassName("sys_sendnum"+index)[0];
+        let msgconfirm = document.getElementById('msgCheck_box');
+		let msgconfirm_cnt = document.getElementsByClassName('msgCheckcnt')[0];
         
         
         // 클릭된 버튼의 내용을 모달에 표시합니다.
         modalContent.textContent = content;
         modal_link.href = linkstring;
         
-        checkImg.classList.remove('msg_check_no_img');
-        checkImg.classList.add('msg_check_ok_img');
+        if(checkImg.classList.contains('msg_check_no_img')){
+	        checkImg.classList.remove('msg_check_no_img');
+	        checkImg.classList.add('msg_check_ok_img');
+	        
+	        checkCont.classList.remove('sysmsg_check_no');
+	        checkCont.classList.add('sysmsg_check_ok');
+	        
+	        const xhr = new XMLHttpRequest();
+			if(targetnodenum != null){
+				xhr.onreadystatechange = function(){
+		    		if(xhr.readyState == 4){
+		    			if(xhr.status == 200){
+		    				const obj = JSON.parse(xhr.responseText);
+			    			const msgcnt = obj.msgcnt;
+			    			const result = obj.result;
+		    				if(result == "O"){
+		    					console.log("메세지를 체크");
+		    					if(msgcnt === 0){
+		    						msgconfirm.style.display = 'none';
+		    					}
+		    					else{
+		    						msgconfirm.style.display = 'block';
+		    	    				msgconfirm_cnt.innerHTML = msgcnt;
+		    					}
+		    				}
+		    				else{
+		    					console.log("메세지를 노체크");
+		    				}
+		    			}
+		    		}
+		    	}
+		    	xhr.open("GET", cp + "/checkmessage.ms?messagenum=" + targetnodenum.value);
+		    	xhr.send();
+        	}
         
-        checkCont.classList.remove('sysmsg_check_no');
-        checkCont.classList.add('sysmsg_check_ok');
-        
-        const xhr = new XMLHttpRequest();
-		if(targetnodenum != null){
-			xhr.onreadystatechange = function(){
-	    		if(xhr.readyState == 4){
-	    			if(xhr.status == 200){
-	    				let txt = xhr.responseText.trim();
-	    				if(txt == "O"){
-	    					console.log("메세지를 체크");
-	    				}
-	    				else{
-	    					console.log("메세지를 노체크");
-	    				}
-	    			}
-	    		}
-	    	}
-	    	xhr.open("GET", cp + "/checkmessage.ms?messagenum=" + targetnodenum.value);
-	    	xhr.send();
+			
     	}
         
         // 모달을 보이도록 설정합니다.
@@ -504,35 +519,47 @@
         let checkImg= document.getElementsByClassName("usercheckImg"+index)[0];
         let checkCont= document.getElementsByClassName("usernoCheck"+index)[0];
         let targetnodenum= document.getElementsByClassName("sendnum"+index)[0];
-        
+        let msgconfirm = document.getElementById('msgCheck_box');
+		let msgconfirm_cnt = document.getElementsByClassName('msgCheckcnt')[0];
         
      // 클릭된 버튼의 내용을 모달에 표시합니다.
         modalContent.textContent = content;
         
-        checkImg.classList.remove('msg_check_no_img');
-        checkImg.classList.add('msg_check_ok_img');
-        
-        checkCont.classList.remove('usermsg_check_no');
-        checkCont.classList.add('usermsg_check_ok');
-        
-        const xhr = new XMLHttpRequest();
-		if(targetnodenum != null){
-			xhr.onreadystatechange = function(){
-	    		if(xhr.readyState == 4){
-	    			if(xhr.status == 200){
-	    				let txt = xhr.responseText.trim();
-	    				if(txt == "O"){
-	    					console.log("메세지를 체크");
-	    				}
-	    				else{
-	    					console.log("메세지를 노체크");
-	    				}
-	    			}
-	    		}
+        if(checkImg.classList.contains('msg_check_no_img')){
+	        checkImg.classList.remove('msg_check_no_img');
+	        checkImg.classList.add('msg_check_ok_img');
+	        
+	        checkCont.classList.remove('usermsg_check_no');
+	        checkCont.classList.add('usermsg_check_ok');
+	        
+	        const xhr = new XMLHttpRequest();
+			if(targetnodenum != null){
+				xhr.onreadystatechange = function(){
+		    		if(xhr.readyState == 4){
+		    			if(xhr.status == 200){
+		    				const obj = JSON.parse(xhr.responseText);
+			    			const msgcnt = obj.msgcnt;
+			    			const result = obj.result;
+		    				if(result == "O"){
+		    					console.log("메세지를 체크");
+		    					if(msgcnt === 0){
+		    						msgconfirm.style.display = 'none';
+		    					}
+		    					else{
+		    						msgconfirm.style.display = 'block';
+		    	    				msgconfirm_cnt.innerHTML = msgcnt;
+		    					}
+		    				}
+		    				else{
+		    					console.log("메세지를 노체크");
+		    				}
+		    			}
+		    		}
+		    	}
+		    	xhr.open("GET", cp + "/checkmessage.ms?messagenum=" + targetnodenum.value);
+		    	xhr.send();
 	    	}
-	    	xhr.open("GET", cp + "/checkmessage.ms?messagenum=" + targetnodenum.value);
-	    	xhr.send();
-    	}
+        }
         
         // 모달을 보이도록 설정합니다.
         modal.style.display = 'block';

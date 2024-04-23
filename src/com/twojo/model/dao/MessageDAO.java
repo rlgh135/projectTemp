@@ -31,4 +31,7 @@ public class MessageDAO {
 	public boolean checkMSG(int messagenum) {
 		return ss.delete("Message.checkUpdate", messagenum) == 1;
 	}
+	public int getMsgConfirmCnt(String userid) {
+		return ss.selectOne("Message.confirmcnt", userid);
+	}
 }

@@ -28,6 +28,10 @@
 	<update id="checkUpdate" parameterType="int">
 		update message set msgcheck = 1 where messagenum = #{messagenum}
 	</update>
+	
+	<select id="confirmcnt" parameterType="String" resultType="int">
+		select count(*) from message where receiveid = #{userid} and msgcheck = 0
+	</select>
 </mapper>
 
 

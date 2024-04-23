@@ -9,32 +9,28 @@ import com.google.gson.JsonObject;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.MessageDAO;
-import com.twojo.model.dto.MessageDTO;
 
-public class MesaageCheckOkAction implements Action {
+public class MesaageConfirmOkAction implements Action {
 	@Override
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		int messagenum = Integer.parseInt(req.getParameter("messagenum"));
 		String userid = (String)req.getSession().getAttribute("loginUser");
+		
 		
 		MessageDAO mdao = new MessageDAO();
 		
+		int confirmcnt = mdao.getMsgConfirmCnt(userid);
 		
 		JsonObject json = new JsonObject();
 		
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		
+		json.addProperty("msgcnt", confirmcnt);
+		
 		PrintWriter out = resp.getWriter();
-		if(mdao.checkMSG(messagenum)) {
-			json.addProperty("result", "O");
-			int confirmcnt = mdao.getMsgConfirmCnt(userid);
-			json.addProperty("msgcnt", confirmcnt);
-			out.print(json.toString());
-		}
-		else {
-			out.print("X");
-		}
+		out.print(json.toString());
+		out.flush();
+		
 		return null;
 	}
 }

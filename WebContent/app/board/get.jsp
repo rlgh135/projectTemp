@@ -178,14 +178,13 @@
 		</div>
 	</div>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
    const roadAddress = '${RoadAddress}';
    const PlaceName = '${PlaceName}';
+   const cp = '${cp}';
 </script>
 <script>
-	window.setTimeout(function(){
-		document.querySelector("#get_wrap>div:nth-child(1)").style.display="none";
-	},1200)
 	const updateForm = document.updateForm;
 	let flag = false;
 	function deleteReply(lreplynum){

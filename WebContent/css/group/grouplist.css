@@ -70,10 +70,11 @@ table, tr, th, td{
 }
 
 .user_gnb{
-    margin-top: 25px;
+    margin-top: 17.5px;
     width: 190px;
     height: 50px;
     float: right;
+    position:relative;
 }
 
 #userinfo_gnb, #usermsg_gnb, #logout_gnb{
@@ -102,8 +103,29 @@ table, tr, th, td{
 	height: 45px;
 }
 
-.user_gnb a:hover #userinfo_gnb, .user_gnb a:hover #usermsg_gnb, .user_gnb a:hover #logout_gnb{
+.user_gnb a:hover #userinfo_gnb, .user_gnb a:hover #usermsg_gnb img, .user_gnb a:hover #logout_gnb{
 	filter: invert(53%) sepia(67%) saturate(3188%) hue-rotate(347deg) brightness(102%) contrast(101%);
+}
+.user_gnb a:hover #usermsg_gnb #msgCheck_box{
+	box-shadow: 0 0 5px gray;
+}
+#msgCheck_box{
+	display:none;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: rgb(255, 32, 32);
+	position: absolute;
+	top: -8px; right: 58px;
+	z-index: 2000;
+}
+
+.msgCheckcnt{
+	font-weight:bolder;
+	font-size:18px;
+	text-align:center;
+	line-height:30px;
+	color: white;
 }
 
 

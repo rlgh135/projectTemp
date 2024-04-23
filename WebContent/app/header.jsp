@@ -37,6 +37,7 @@
                     <a class="btn" href="${cp}/getmessage.ms">
                     	<div id="usermsg_gnb">
                     		<img alt="" src="${cp}/images/msg_icon.png">
+                    		<div id="msgCheck_box"><p class="msgCheckcnt"></p></div>
                     	</div>
                     </a>
                     <a class="btn" id="logoutBtn" href="" onclick="logout()">
@@ -60,4 +61,29 @@
 	   	}
 	}
 	
+	window.addEventListener('load', function() {
+		let msgconfirm = document.getElementById('msgCheck_box');
+		let msgconfirm_cnt = document.getElementsByClassName('msgCheckcnt')[0];
+		
+		
+		const xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+	    	if(xhr.readyState == 4){
+	    		if(xhr.status == 200){
+	    			const obj = JSON.parse(xhr.responseText);
+	    			const msgcnt = obj.msgcnt;
+	    			console.log(msgcnt);
+	    			if(msgcnt === 0){
+	    				msgconfirm.style.display = 'none';
+	    			}
+	    			else{
+	    				msgconfirm.style.display = 'block';
+	    				msgconfirm_cnt.innerHTML = msgcnt;
+	    			}
+	    		}
+	    	}
+	    }
+	    xhr.open("GET", cp + "/confirmmessage.ms");
+	    xhr.send();
+	});
 </script>
