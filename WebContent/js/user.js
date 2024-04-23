@@ -51,11 +51,6 @@ function sendit(){
     	alert("성별을 선택하세요!");
     	return;
     }
-    const foreigner = joinForm.foreigner;
-    if(!foreigner[0].checked && !foreigner[1].checked){
-    	alert("국적을 선택하세요!");
-    	return;
-    }
     
     const zipcode = joinForm.zipcode;
     if(zipcode.value == ""){
@@ -76,8 +71,10 @@ function sendit(){
     	return;
     }
     const hobbyTag = joinForm.userhobby;
-    hobbyTag.value = arHobby.join("\\");// "축구\농구\영화";
+    hobbyTag.value = arHobby.join("☆");// "축구\농구\영화";
     
+
+    alert("회원가입에 성공했어요!");
     joinForm.submit();
 }
 function pwcheck(){
@@ -85,6 +82,7 @@ function pwcheck(){
     const userpw_re = document.joinForm.userpw_re;
     //아래쪽에 있는 귀여운 span 태그들 가져오기
     const c = document.querySelectorAll(".pw_check span");
+    const suc = document.querySelector(".pw_check");
     //영어 대문자, 영어 소문자, 숫자, 특수문자를 한 글자씩 포함하는지 확인하는 정규식
     const reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~?!@-]).{4,}$/;
     
@@ -92,6 +90,7 @@ function pwcheck(){
     	for(let i=0;i<5;i++){
     		pwTest[i] = false;
     		c[i].classList = "";
+    		c[i].style.display = ""; // display를 초기화
     	}
     	return;
     }
@@ -137,6 +136,26 @@ function pwcheck(){
     	c[4].classList = "pct";
     	pwTest[4] = true;
     }
+    
+    const previousSuccessText = suc.querySelector('.success-text');
+    if (previousSuccessText) {
+        previousSuccessText.remove();
+    }
+    
+    for (let i = 0; i < 5; i++) {
+        if (pwTest[i]) {
+            c[i].style.display = "none";
+        } else {
+            c[i].style.display = "block"; // span 태그를 보이게 함
+        }
+    }
+
+    if (pwTest.slice(0, 5).every(valid => valid)) {
+        const successText = document.createElement('span');
+        successText.textContent = "완벽한 비밀번호예요!";
+        successText.classList.add('success-text');
+        suc.appendChild(successText);
+    }
 }
 function findAddr() {
     new daum.Postcode({
@@ -177,7 +196,7 @@ function findAddr() {
                 
                 // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만듭니다.
                 if(addrgu !== ''){
-                    addrgu = ' (' + addrgu + ')';
+                    addrgu = addrgu;
                 }
             } else {
                 // 주소가 도로명 타입이 아닐 때는 '없어요'라는 값을 할당합니다.
@@ -223,7 +242,6 @@ function checkId(){
 			}
 		}
 	}
-	
 	xhr.open("GET",cp+"/checkidok.us?userid="+userid.value);
 	xhr.send();
 }

@@ -1,14 +1,62 @@
 *{
 	box-sizing: border-box;
-	background: url(/images/background.PNG);
+	font-family: 'GmarketSansMedium';
 }
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+/* 시원한 설레임체  */
+/* @font-face {
+    font-family: 'seolleimcool-SemiBo	ld';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+서울남산체
+@font-face {
+    font-family: 'SeoulNamsanM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+Gmarket Sans
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
 #wrap{
     width:1000px;
     margin: 0 auto;
     position: relative;
+	padding: 30px 0 0 ;
 }
 body{
     background-color:rgb(245,246,247);
+}
+.logo {
+    width: 120px;
+    height: 80px;
+    background: url(../../images/logo.png) no-repeat center;
+    background-size: 100%;
+	margin: 0 auto;
+}
+
+
+
+form table tr:last-child [type=button] {
+    padding: 10px 10px;
+    margin: 30px;
+    background-color: rgb(255 248 67);
+    color: black;
+    font-size: 15px;
+    /* font-weight: bold; */
+    border: none;
+    border-radius: 5px;
+    width: 300px;
 }
 input{
     cursor:pointer;
@@ -21,6 +69,11 @@ a{
 	text-decoration: none;
 }style.css
 .hdd{ display: none !important; visibility: hidden !important; }
+.join_header{
+	width: 100%;
+	height: 50px;
+}
+
 .btn_area{
 	margin:0 auto;
 	display:flex;
@@ -58,16 +111,15 @@ a{
 }
 input:focus{
     outline:none;
-    border:1px solid rgb(0,200,80);
+    border:1px solid rgb(255 248 67);
 }
 
 .join td > input[type=text]+input[type=button]{
     margin-left:10px;
     padding:0px 10px;
-    background-color:rgb(0,200,80);
+    background-color:rgb(255 248 67);
     color:#000;
     font-size:14px;
-    font-weight:bold;
     border:none;
     border-radius:5px;
     width:80px; height: 40px; line-height: 40px;
@@ -76,14 +128,13 @@ input:focus{
 .join #result {
     box-sizing: border-box;
     color:#e91e63;
-    font-weight: bold;
     height: 35px;
 }
 .pw_check{
 	padding:10px 15px;
 	margin:10px 0 0 0;
-	border:1px solid rgb(0,200,80);
-	background-color: #fff !important;
+	/* border:1px solid rgb(255 248 67); */
+	/* background-color: #fff !important; */
 	font-size: 80%;
 	font-weight: bold;
 	width:530px;
@@ -109,7 +160,7 @@ input:focus{
 	left:-5px;
 }
 .pct{
-	color:rgb(0,200,80);
+	color:rgb(255 248 67);
 }
 .pcf{
 	color:red;
@@ -165,8 +216,8 @@ input:focus{
 	cursor:pointer;
 }
 .gender_area li > input[type=radio]:checked+label{
-	border:1px solid rgb(0,200,80);
-	color:rgb(0,200,80);
+	border:1px solid rgb(217 141 51);
+	color:rgb(217 141 51);
 }
 .zipcode_area > td > input[type=text]{
     width:200px;
@@ -192,9 +243,9 @@ input:focus{
 .hobby_input > input[type=button]{
 	margin-left:20px;
 	padding:10px 10px;
-	background-color: rgb(0,200,80);
+	background-color: rgb(255 248 67);
 	color:#000;
-	font-size:14px; font-weight: bold;
+	font-size:14px; 
 	border:none; border-radius: 5px;
 	width:70px;
 }
@@ -216,6 +267,7 @@ input:focus{
 	padding:3px 10px;
 	cursor:pointer;
 	align-items: center;
+	font-size:14px;
 }
 .xBox{
 	border:1px solid #ccc;
@@ -224,17 +276,17 @@ input:focus{
 	margin-left: 5px;
 	background:url("/images/xBox2.png") 3px 50% / 60% no-repeat;
 }
-form table tr:last-child [type=button]{
+ /* [type=button]{
     padding:10px 10px;
     margin:30px;
-    background-color:rgb(0,200,80);
-    color:#fff;
+    background-color:rgb(255 248 67);
+    color:black;
     font-size:20px;
     font-weight:bold;
     border:none;
     border-radius:5px;
     width:300px;
-}
+} */
 body.login{
 	animation: loginBg 1.5s 1;
 }
@@ -319,7 +371,7 @@ body.login{
 	background-color: #424242;
 	border-radius: 5px;
 	color: #8080ff;
-	font-weight:bold;
+	/* font-weight:bold; */
 	font-size:18px;
 	text-decoration: none;
 	z-index: 20;
@@ -915,7 +967,7 @@ img.thumbnail{
 .board_area a{
 	background-color: transparent;
 	margin-left: 20px;
-	color:rgb(0,200,80);
+	color:rgb(255 248 67);
 }
 .board_area a:hover{
 	transform:scale(1.1);
@@ -986,4 +1038,12 @@ img.thumbnail{
 	width:70px; height:30px; line-height: 30px;
 	text-align: center; vertical-align: middle;
 	margin-top:15px;
+}
+footer > .foot_area{
+	position: relative;
+	padding-bottom: 40px;
+}
+.box_inner{
+	width: 1050px;
+	margin: 0 auto;
 }

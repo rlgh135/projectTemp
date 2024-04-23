@@ -46,6 +46,11 @@ public class GroupFrontController extends HttpServlet {
 				System.out.println("/groupHobbyList.gr : "+e);
 			}
 			break;
+		case "/creategroup.gr":
+			transfer = new Transfer();
+			transfer.setRedirect(false);
+			transfer.setPath(req.getContextPath()+"/app/group/createGroup.jsp");
+			break;
 		case "/groupcreateok.gr":
 			try {
 				transfer = new CreateGroupOkAction().execute(req, resp);

@@ -67,7 +67,7 @@
 	</select>
 	
 	<select id="getMyinfoList" parameterType="long" resultType="groupdto">
-		 select groupname, groupcategory, groupmaster, grouplikecnt
+		select *
 		from `group`
 		where groupnum = #{groupnum};		
 		

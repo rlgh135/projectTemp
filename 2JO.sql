@@ -17,7 +17,7 @@ CREATE TABLE user (
 );
 
 select * from user;
-select * from user where userid='wanthome';
+select * from user where userid='cherry';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
 value('abc796', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;

@@ -1,9 +1,20 @@
 @charset "UTF-8";
 
 /* Reset default margin and padding */
+/* @font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
 *{
     text-decoration: none;
+    margin: 0 auto;
+    background-color:rgb(245, 246, 248);
+    border:none;
+    font-family: 'GmarketSansMedium';
 }
+
 
 body, html {
     margin: 0;
@@ -22,29 +33,37 @@ body, html {
 #top_tit h1 {
     margin: 0;
 }
+.User_moreframe{
+    margin: 0 auto;
+    width: 1400px;
+}
+
 
 /* Style card container */
 .User_more {
     /* display: flex; */
     flex-wrap: wrap;
     justify-content: center;
+    height: fit-content;
+    padding: 0 0 70px 0;
 }
 .group_body, .lpost_body{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 25px 26px;
-    height: 210px;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 .banner_link{
     text-decoration-line: none;
 }
 .lpost_banner, .group_banner {
-    text-align: center;
     color: coral;
     height: 70px;
-
-
-
+    margin:0 auto;
+    width: 1300px;
+	padding: 22px 0 0;
+	font-size:20px;
 }
 .banner_frame{
     width: 100%; height: 50px;
@@ -54,16 +73,68 @@ body, html {
 }
 .banner{
     margin: 10px; padding: 10px;
+}
+.myinfo_card_list:hover{
+    transform: scale(1.1);
+}
+.GPost p{
+     display: flex; 
+     flex-direction: column;
+     align-items: center;
+     padding: 10px 0;
+	 width:100px;
+
+    }
+/* .myinfo_card_list:nth-child(3){
+    font-size: 10px;
+    
+} */
+.GPost{
+    display: flex;
 
 }
-
 /* Style individual card */
 .myinfo_card_list {
     border: 1px solid #ccc;
     margin: 10px;
     padding: 10px;
-    width: 180px;
-    height: 180px;
+    width: 300px;
+    height: 200px;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.myinfo_card_list img {
+    width: 164px; /* 이미지의 너비 조정 */
+    height: auto; /* 이미지의 높이 자동 조정 */
+    margin-right: 10px; /* 이미지와 텍스트 사이의 간격 설정 */
+    border-right: 1px solid gray ;
+}
+.myinfo_card_list p:nth-child(3){
+    width: 50px;
+    margin: 0;
+}
+.like img{
+float: left;
+}
+.myinfo_card_list .like p{
+    width: 50px;
+    margin: 0;
+    padding: 0;
+}
+.GPost p{
+    width: 100px;
+}
+
+.like{
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+}
+.coverout {
+	height: 100px;
+    padding: 46px;
 }
 
 /* Style card content */
@@ -72,11 +143,6 @@ body, html {
 }
 
 /* Style image inside card */
-.myinfo_card_list img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
 
 /* Style text inside card */
 .myinfo_card_list p {
@@ -89,15 +155,21 @@ body, html {
     color: #333;
 }
 .coverin {
-    background-color: #ccc;
-    color: #fff;
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
+    background-color:rgb(231 231 231);
+    color: #ccc;
+    font-size: 39px;
+    width: 50px;    
+    height: 50px;
     border-radius: 50%;
     text-align: center;
-    line-height: 40px;
+    line-height: 56px;
     cursor: pointer;
+    margin: 0 auto;
+    
+
+}
+#lpost_title{
+    padding: 60px 0;
 }
 
 /* Hover effect on create button */

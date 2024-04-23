@@ -3,26 +3,29 @@
  .main_hobby_wrap{
 	flex-wrap: wrap;
 }
-.main_contents_title{
+.main_contents_title:hover{
 
+}
+.main_contents_title{
 	display: flex;
 	height: 40px;
 	flex-direction: column;
 	float: left;
 	margin: 0;
-	font-size: 20px;
+	font-size: 15px;
 	text-align: center;
 	align-items: center;
 	cursor: pointer;
-	background-color: antiquewhite;
+	/* Background-color: antiquewhite; */
 	bottom: 0;
-
+	color: #384d75;
 }
 .main_h_title p{
 	width: 100%; height: 30px;
 	text-align: center;	
 	font-size: 15px;
-	border: 1px solid rgb(99, 53, 53);
+	font-weight: bold;
+	/* border: 1px solid rgb(99, 53, 53); */
 	color: #384d75;
 }
 
@@ -32,6 +35,8 @@
 .main_h_contents a{
 	text-decoration: none;
 	font-size: 10px;
+	display: flex;
+	justify-content: center;
 }
 .set{
 	width: 100%; height: 200px;

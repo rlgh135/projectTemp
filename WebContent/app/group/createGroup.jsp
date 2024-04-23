@@ -20,6 +20,9 @@
 		width: 204px;
 		height: 192px;
 	}
+	nav ul li {
+		border-bottom: none;
+	}
 </style>
 <body>
 <div id="wrap">

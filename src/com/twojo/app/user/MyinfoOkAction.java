@@ -57,6 +57,7 @@ public class MyinfoOkAction implements Action {
 					// GroupDTO 가져오기
 					GroupDTO gboard = gdao.getGroupByMyinfoList(groupnum);
 					if (gboard != null) {
+						System.out.println(gboard.getGroupnum());
 						gboardList.add(gboard);
 						
 					}
