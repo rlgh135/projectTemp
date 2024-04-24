@@ -86,4 +86,13 @@ public class GPostDAO {
 		datas.put("gpostregdate", gpostregdate);
 		return ss.update("GPost.updateGpost", datas)==1;
 	}
+
+	public List<GPostDTO> getListByUser(long groupnum, int startRow, int pageSize, String userid) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("groupnum", groupnum);
+		datas.put("startRow", startRow);
+		datas.put("pageSize", pageSize);
+		datas.put("userid", userid);
+		return ss.selectList("GPost.getListByUser", datas);
+	}
 }

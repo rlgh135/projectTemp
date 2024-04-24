@@ -20,6 +20,10 @@
 		select * from gpost where groupnum = #{groupnum}
 		order by gpostnum desc limit #{startRow},#{pageSize}
 	</select>
+	<select id="getListByUser" resultType="gpostdto" parameterType="hashmap">
+		select * from gpost where groupnum = #{groupnum} and userid = #{userid}
+		order by gpostnum desc limit #{startRow},#{pageSize}
+	</select>
 	<select id="getListWithKeyword" resultType="gpostdto" parameterType="hashmap">
 		select * from gpost where groupnum = #{groupnum} and
 		gpostcontents like "%${keyword}%"

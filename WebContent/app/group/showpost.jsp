@@ -165,345 +165,21 @@ button {
 					</ul>
 					<div>
 						<div class="group-btn-box btnBox">
-							<c:choose>
-								<c:when test="${usertype eq 'foreigner'} ">
-									<input type="button" value="모임 가입하기" class="joinMoim"
-										onclick="joinMoim(${group.groupnum})">
-								</c:when>
-								<c:otherwise>
-									<c:choose>
-										<c:when test="">
-											<input type="button" value="모임 탈퇴하기" class="joinMoim"
-												onclick="quitMoim(${group.groupnum}, 0)">
-										</c:when>
-										<c:otherwise>
-											<input type="button" value="모임 탈퇴하기" class="joinMoim"
-												onclick="quitMoim(${group.groupnum}, 1)">
-										</c:otherwise>
-									</c:choose>
-								</c:otherwise>
-							</c:choose>
+							<input type="button" value="돌아가기" class="joinMoim" onclick="backToMoim(${group.groupnum})">
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="gpostsection">
-				<c:choose>
-					<c:when test="${empty ingi}">
-						<div class="summary" style="border: none; background: none;">
-							<div style="margin: 10px 0px 10px 10px;">
-								<p>
-								<h2>인기글이 없어요</h2>
-								</p>
-							</div>
-							<ul class="gpostList">
-								<li class="gpostListwrap">
-									<div class="gpostHead default-group-Head"></div>
-								</li>
-							</ul>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="summary" style="border: none; background: none;">
-							<div style="margin: 10px 0px 10px 10px;">
-								<p>
-								<h2>${group.groupname}이번 주 인기글</h2>
-								</p>
-							</div>
-							<ul class="gpostList">
-								<li class="gpostListwrap">
-									<div class="gpostHead default-group-Head">
-										<%-- 프로필 펼치기 --%>
-										<button class="badgeimg modalOpenBtn"
-											id="modalOpenBtn${ingi.gpostnum+10000}"
-											onclick="modalClk(${ingi.gpostnum+10000})">★</button>
-										<div id="modalContainer${ingi.gpostnum+10000}"
-											class="modalContainer replyHide">
-											<div id="modalContent${ingi.gpostnum+10000}"
-												class="modalContent">
-												<div id="modalinner${ingi.gpostnum+10000}"
-													class="modalinner" style="width: 177px;">
-													<button id="modalCloseBtn${ingi.gpostnum+10000}"
-														class="modalCloseBtn"
-														onclick="modalClose(${ingi.gpostnum+10000})">
-														<img src="../../images/x.webp"
-															style="width: 10px; height: 10px; border: none;">
-													</button>
-													<div class="imgid">
-														<div class="mbadgeimg">
-															<img src="" alt="">
-														</div>
-														<p>${ingi.userid}</p>
-													</div>
-
-													<div class="profilemenu">
-
-														<%--쪽지 보내기 --%>
-														<img src="../../images/mail6.webp"
-															style="width: 20px; height: 20px;">
-														<button type="button" class="msg_send"
-															onclick="sendMessage('${ingi.userid}')"
-															style="cursor: pointer;">쪽지보내기</button>
-													</div>
-													<div class="profilemenu">
-														<img src="../../images/write.png"
-															style="width: 18px; height: 18px;">
-														<button type="button" class="msg_send" onclick="showPost('${ingi.userid}')"
-															style="cursor: pointer;">작성글보기</button>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="writerinfo badgeimg-right-info">
-											<p>
-												<a href="" class="usernamelink">${ingi.userid}</a> <span>인기쟁이에요</span>
-											</p>
-											<p class="regtime">${ingi.gpostregdate}</p>
-										</div>
-									</div>
-
-									<div class="gpostContents">
-										<div>
-											<p>
-												<textarea
-													class="GPCIN gpostConetentsIn${ingi.gpostnum+10000}"
-													style="width: 100%; height: 100%">${ingi.gpostcontents}</textarea>
-											</p>
-											<div>
-												<input type="button" style="cursor: pointer;" value="첨부파일"
-													onclick="showFiles(${ingi.gpostnum+10000})">
-											</div>
-											<div class="gpostfile${ingi.gpostnum+10000} replyHide">
-												<ul class="gfileList${ingi.gpostnum+10000}"></ul>
-											</div>
-											<div class="likereply">
-												<img id="likeButton"
-													onclick="pressLike(${ingi.gpostnum+10000})"
-													class="like-button likeButton${ingi.gpostnum+10000}"
-													src="${cp}/images/redheart.webp" alt="좋아요"
-													style="width: 15px; height: 15px;">
-												<div class="point-area showreplyBtn">
-													<div style="display: inline-block;">
-														<input type="button" value="좋아요 i개">
-													</div>
-													<div style="display: inline-block;">
-														<input type="button"
-															class="showrpcnt${ingi.gpostnum+10000}"
-															value="댓글 ${ingi.gprcnt}개"
-															onclick="showReply(${ingi.gpostnum+10000})"
-															style="cursor: pointer;">
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="gpostReply${ingi.gpostnum+10000} replyHide">
-										<div class="repForm reply${ingi.gpostnum+10000}">
-											<Form method="post" class="inputGPR"
-												action="writegpreply.gp?gpostnum=${ingi.gpostnum}&?groupnum=${group.groupnum}"
-												name="writeRPForm${ingi.gpostnum}">
-												<div class="badgeimg">
-													<img src="">
-												</div>
-												<div class="badgeimg-right-info">
-													<p class="replywriter">${loginUser}HiImTester</p>
-													<textarea name="gprcontents" id="" cols="50" rows="3"
-														placeholder="새로운 댓글을 남겨보세요"></textarea>
-												</div>
-												<div>
-													<input type="submit" value="등록">
-												</div>
-											</Form>
-										</div>
-										<ul class="greplyList${ingi.gpostnum+10000}"></ul>
-									</div>
-								</li>
-
-							</ul>
-						</div>
-					</c:otherwise>
-				</c:choose>
-				<div class="groupsearch searchArea">
-					<div class="searchBox"
-						style="margin-bottom: 2px; margin-left: 5px;">
-						<div>
-							<input type="text" name="groupsearch" id="gpsearch"
-								style="border: none; outline: none; background-color: transparent;">
-						</div>
-						<div class="searchBtnBox">
-							<input type="button" value="" onclick="makeDOMKeyword()"
-								style="cursor: pointer; display: block; width: 28px; height: 28px;">
-						</div>
-					</div>
-					<div class="write_btn">
-						<input type="button" value="글쓰기"
-							onclick="showWrite(${gpost.gpostnum})">
+				<div class="summary">
+					<div style="margin: 10px 0px 10px 10px;">
+						<p>
+						<h2>${showuser}님의 게시글</h2>
+						</p>
 					</div>
 				</div>
 				<div id="gpost" class="postsection">
-					<div class="write_wrap">
-						<div class="writeform" id="writeForm" style="display: none;">
-							<form id="writeform" method="post" action="/gpwrite.gp"
-								enctype="multipart/form-data">
-								<ul>
-									<li>
-										<h3>글쓰기</h3> <input type="hidden" name="userid"
-										value="${loginUser}"> <input type="hidden"
-										name="groupnum" value="${group.groupnum}">
-									</li>
-									<li><label for="writetit"></label> <input type="text"
-										name="gptitle" id="writetit" placeholder="제목을 입력해주세요.">
-									</li>
-									<li><label for="writebox"></label> <textarea
-											name="gpcontents" id="writebox" cols="30" rows="10"
-											placeholder="새로운 소식을 남겨보세요"></textarea></li>
-									<li class="uploadarea0"
-										style="display: flex; padding-left: 10px"><a
-										href="javascript:upload(0)" class="cFile"
-										style="margin-left: -10px;">파일 선택</a> <input type="file"
-										name="writefile0" id="writefile0" style="display: none">
-										<span id="writefile0name" style="margin-left: 10px;">선택된
-											파일 없음</span> <a href="javascript:cancelFile(0)" class="dFile"
-										style="margin-left: auto;">첨부 삭제</a></li>
-									<li><input type="submit" id="writesubmit" value="제출하기">
-									</li>
-								</ul>
-							</form>
-						</div>
-					</div>
-					<ul class="gpostList" id="gpList">
-						<c:choose>
-							<c:when test="${list != null and list.size()>0}">
-								<c:forEach var="i" begin="0" end="${list.size() -1}">
-									<c:set var="gpost" value="${list[i]}" />
-									<li class="gpostListwrap">
-										<div class="gpostHead default-group-Head">
-
-											<%-- 프로필 펼치기 --%>
-											<button class="badgeimg modalOpenBtn"
-												id="modalOpenBtn${gpost.gpostnum}"
-												onclick="modalClk(${gpost.gpostnum})">★</button>
-											<div id="modalContainer${gpost.gpostnum}"
-												class="modalContainer replyHide">
-												<div id="modalContent${gpost.gpostnum}" class="modalContent">
-													<div id="modalinner${gpost.gpostnum}" class="modalinner"
-														style="width: 177px;">
-														<button id="modalCloseBtn${gpost.gpostnum}"
-															class="modalCloseBtn"
-															onclick="modalClose(${gpost.gpostnum})">
-															<img src="../../images/x.webp"
-																style="width: 10px; height: 10px; border: none;">
-														</button>
-														<div class="imgid">
-															<div class="mbadgeimg">
-																<img src="" alt="">
-															</div>
-															<p id="gpostuserid">${gpost.userid}</p>
-														</div>
-														<div class="profilemenu">
-
-															<%--쪽지 보내기 --%>
-															<img src="../../images/mail6.webp"
-																style="width: 20px; height: 20px;">
-															<button type="button" class="msg_send"
-																onclick="sendMessage('${gpost.userid}')">쪽지보내기</button>
-														</div>
-														<div class="profilemenu">
-															<img src="../../images/write.png"
-																style="width: 18px; height: 18px;">
-															<button type="button" class="msg_send"
-																onclick="showPost('${ingi.userid}')" style="cursor: pointer;">작성글보기</button>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="writerinfo badgeimg-right-info">
-												<p>
-													<a href="" class="usernamelink">${gpost.userid}</a>
-												</p>
-												<p class="regtime">${gpost.gpostregdate}</p>
-											</div>
-										</div>
-
-										<div class="gpostContents">
-											<div>
-												<p>
-													<textarea class="GPCIN gpostConetentsIn${gpost.gpostnum}"
-														style="width: 100%; height: 100%">${gpost.gpostcontents}
-				                                    	</textarea>
-												</p>
-												<div>
-													<input type="button" style="cursor: pointer;" value="첨부파일"
-														onclick="showFiles(${gpost.gpostnum})">
-												</div>
-												<div class="gpostfile${gpost.gpostnum} replyHide">
-													<ul class="gfileList${gpost.gpostnum}"></ul>
-												</div>
-												<div class="likereply">
-													<img id="likeButton"
-														onclick="pressLike(${gpost.gpostnum}, '${loginUser}')"
-														class="like-button likeButton${gpost.gpostnum}"
-														src="${cp}/images/redheart.webp" alt="좋아요"
-														style="width: 15px; height: 15px;">
-													<div class="point-area showreplyBtn">
-														<div style="display: inline-block;">
-															<input type="button" value="좋아요 i개">
-														</div>
-														<div style="display: inline-block;">
-															<input type="button" class="showrpcnt${gpost.gpostnum}"
-																value="댓글 ${gpost.gprcnt}개"
-																onclick="showReply(${gpost.gpostnum})"
-																style="cursor: pointer;">
-														</div>
-														<c:if test="${gpost.userid == loginUser}">
-															<div style="display: inline-block; margin-left: 210px;">
-																<input type="button"
-																	class="replyHide modify${gpost.gpostnum}" value="수정"
-																	style="cursor: pointer; width: 70px; text-align: right;"
-																	onclick="showUpdateForm(${gpost.gpostnum}, ${group.groupnum})">
-																<input type="button" value="삭제"
-																	style="cursor: pointer; width: 50px; text-align: right;"
-																	onclick="deleteGPost(${gpost.gpostnum}, ${group.groupnum});">
-															</div>
-														</c:if>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="gpostReply${gpost.gpostnum} replyHide">
-											<div class="repForm reply${gpost.gpostnum}">
-												<Form method="post" class="inputGPR"
-													action="writegpreply.gp?gpostnum=${gpost.gpostnum}&groupnum=${group.groupnum}"
-													name="writeRPForm${gpost.gpostnum}">
-													<div class="badgeimg">
-														<img src="">
-													</div>
-													<div class="badgeimg-right-info">
-														<p class="replywriter">${loginUser}HiImTester</p>
-														<textarea name="gprcontents" id="" cols="50" rows="3"
-															placeholder="새로운 댓글을 남겨보세요"></textarea>
-													</div>
-													<div>
-														<input type="hidden" name="userid" value="${loginUser}">
-														<input type="submit" value="등록">
-													</div>
-												</Form>
-											</div>
-											<ul class="greplyList${gpost.gpostnum}"></ul>
-										</div>
-									</li>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<li>
-									<p>등록된 게시글이 없습니다</p>
-								</li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
+					<ul class="gpostList" id="gpList"></ul>
 				</div>
 			</div>
 			<div id="grouprightsection">
@@ -606,21 +282,21 @@ button {
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	const cp = '${cp}';
-    let page = '${page}';
-    let keyword = '${keyword}';
-	const groupnum = '${gpost.groupnum}';
+	const groupnum = '${group.groupnum}';
 	const loginUser = '${loginUser}';	
+	const showuser = '${showuser}';
 </script>
 <script>
     let lastScroll = 0;
-    var curPage = ${page};
-    let searchFlag = false;
-    const sec = document.getElementById("gpsearch");
-    let searchkeyword = sec.value;
+    var curPage = 0;
 	
-    function showPost(userid) {
-		location.href=cp+"/showpost.gp?groupnum="+groupnum+"&showuser="+userid;
+    function backToMoim(groupnum){
+		location.href = cp+"/groupinner.gp?groupnum="+groupnum;
 	}
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        makeDOM();
+    });
     
     function showFiles(gpostnum){
     	console.log("호출");
@@ -769,11 +445,11 @@ button {
     }
     
     function makeDOM(){
+    	curPage++;
     	console.log("불러오는 페이지: "+curPage);
         let orgnode = document.getElementsByClassName("gpostListwrap")[0];
 		const xhr = new XMLHttpRequest();
 		const parentnode = document.getElementById("gpList");
-		searchkeyword = sec.value;
 		
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
@@ -803,18 +479,15 @@ button {
                         '</div>' +
                         '<p id="gpostuserid">'+gpost.userid+'</p>' +
                         '</div>' +
+                        '<div class="profilemenu"><p>${user.userhobby}</p></div>' +
+                        '<div class="profilemenu"><p>${user.gender}</p></div>' +
+                        '<div class="profilemenu"><p>${user.userpoint}</p></div>' +
                         '<div class="profilemenu">' +
 						'<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">' +
 						'<p>'+
 						'<button type="button" class="msg_send" onclick="sendMessage(\'' + gpost.userid + '\')" style="cursor: pointer;">쪽지보내기</button>'+
 						'</p>'+
 						'</div>' +
-						'<div class="profilemenu">' +
-						'<img src="../../images/write.png" style="width: 20px; height: 20px;">' +
-						'<p>'+
-						'<button type="button" class="msg_send" onclick="showPost(\''+gpost.userid+'\')" style="cursor: pointer;">작성글보기</button>' +
-						'</p>'+
-                     	'</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +
@@ -884,23 +557,8 @@ button {
 				}
 			}
 		}
-		if(searchFlag === true){
-			console.log(searchkeyword);
-			parentnode.innerHTML = "";
-			xhr.open("GET", cp+"/groupinnerMore.gp?groupnum="+groupnum+"&page="+curPage+"&keyword="+searchkeyword);		
-		} else {
-			xhr.open("GET", cp+"/groupinnerMore.gp?groupnum="+groupnum+"&page="+curPage+"&keyword="+searchkeyword);
-		}
+		xhr.open("GET", cp+"/showpostmore.gp?groupnum="+groupnum+"&showuser="+showuser+"&page="+curPage);
         xhr.send();
-    }
-    
-    function makeDOMKeyword(){
-    	console.log("낼름");
-    	curPage = 1;
-    	searchFlag = true;
-    	console.log("search: "+searchFlag);
-    	makeDOM();
-    	searchFlag = false;
     }
     
     //무한스크롤 구현
@@ -911,7 +569,7 @@ button {
 
         if (currentScroll > lastScroll) {
             if (documentHeight < (nowHeight + (documentHeight * 0.1))) {
-                curPage++;
+                
                 makeDOM();
             }
         }
@@ -989,16 +647,6 @@ button {
 		
 	}
 
-    //글쓰기 폼 나오는 기능 
-
-    function showWrite() {
-        var writeForm = document.getElementById("writeForm");
-        if (writeForm.style.display === "none") {
-            writeForm.style.display = "block"; // 보이게 함
-        } else {
-            writeForm.style.display = "none"; // 감춤
-        }
-    }
 </script>
 
 <script>
@@ -1115,9 +763,6 @@ button {
 	function modifyOk() {
 		const sujung = document.sujungForm;
 		sujung.submit();
-	}
-	function joinMoim(groupnum, loginUser) {
-		location.href="/joinmoim.gp?groupnum="+groupnum;
 	}
 	function sendMessage(receiveid){
 		let realtarget = document.getElementsByClassName("rcvid")[0]; 

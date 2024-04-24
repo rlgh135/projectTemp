@@ -156,6 +156,20 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/getgfile.gp : "+e);
 			}
 			break;
+		case "/showpost.gp":
+			try {
+				transfer = new ShowPostAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("/showpost.gp : "+e);
+			}
+			break;
+		case "/showpostmore.gp":
+			try {
+				transfer = new ShowPostMoreAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("/showpostmore.gp : "+e);
+			}
+			break;
 		}
 		
 		if (transfer != null) {

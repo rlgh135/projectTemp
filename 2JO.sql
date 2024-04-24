@@ -34,8 +34,8 @@ CREATE TABLE `lpost` (
   `lpostaddr` varchar(1000),
   `deadline` datetime default null
 );
-SELECT lpostnum
-FROM lpost_addr
+SELECT *
+FROM lpost
 WHERE deadline > NOW() and lpostaddr like '%송파구%'
 ORDER BY deadline ASC
 LIMIT 4;
