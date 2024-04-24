@@ -21,6 +21,9 @@
 	<select id="userInGroup" parameterType="hashmap" resultType="groupuserdto">
 		select * from `group_user` where (groupnum=#{groupnum} and userid=#{userid})
 	</select>
+	<select id="getGroupnumList" parameterType="hashmap" resultType="long">
+		select groupnum from `group_user` where userid=#{userid} order by groupnum asc limit #{startRow},#{pageSize}
+	</select>
 </mapper>
 
 

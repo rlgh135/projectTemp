@@ -23,4 +23,8 @@ public class GroupimgDAO {
 	public boolean deleteFile(String systemname) {
 		return ss.delete("Groupimg.deleteFile", systemname)==1;
 	}
+
+	public String getGroupimg(Long groupnum) {
+		return ss.selectOne("Groupimg.getGroupimg", groupnum);
+	}
 }

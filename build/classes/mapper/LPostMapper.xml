@@ -94,6 +94,11 @@
 		ORDER BY deadline ASC
 		LIMIT 4;
 	</select>
+	<select id="getListByUser" resultType="lpostdto"
+		parameterType="hashmap">
+		select * from lpost where userid=#{userid} order by lpostnum desc limit
+		#{startRow},#{pageSize}
+	</select>
 </mapper>
 
 

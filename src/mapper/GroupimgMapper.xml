@@ -14,6 +14,9 @@
 	<delete id="deleteFile" parameterType="string">
 		delete from groupimg where imgsysname = #{systemname}
 	</delete>
+	<select id="getGroupimg" parameterType="long" resultType="string">
+    	select imgsysname from groupimg where groupnum = #{groupnum}
+	</select>
 </mapper>
 
 

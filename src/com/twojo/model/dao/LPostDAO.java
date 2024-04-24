@@ -91,4 +91,13 @@ private SqlSession ss;
 		return ss.selectList("LPost.getQuickPost", userAddrgu);
 	}
 
+
+	public List<LPostDTO> getListByUser(String userid, int startRow, int pageSize) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("userid", userid);
+		datas.put("startRow", startRow);
+		datas.put("pageSize", pageSize);
+		return ss.selectList("LPost.getListByUser", datas);
+	}
+
 }

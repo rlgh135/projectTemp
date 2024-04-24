@@ -39,4 +39,12 @@ public class GroupUserDAO {
 		datas.put("userid", userid);
 		return ss.selectOne("GroupUser.userInGroup", datas);
 	}
+
+	public List<Long> getGroupnumList(String userid, int startRow, int pageSize) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("userid", userid);
+		datas.put("startRow", startRow);
+		datas.put("pageSize", pageSize);
+		return ss.selectList("GroupUser.getGroupnumList", datas);
+	}
 }

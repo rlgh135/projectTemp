@@ -74,6 +74,20 @@ public class UserFrontController extends HttpServlet {
 			transfer.setRedirect(false);
 			transfer.setPath("/");
 			break;
+		case "/myboard.us":
+			try {
+				transfer = new MyBoardLoadAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/myboard.us : "+e);
+			}
+			break;
+		case "/mygroup.us":
+			try {
+				transfer = new MyGroupLoadAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/mygroup.us : "+e);
+			}
+			break;
 		}
 		
 		if(transfer != null) {
