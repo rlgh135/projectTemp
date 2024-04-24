@@ -414,7 +414,7 @@ button {
 															<img src="../../images/write.png"
 																style="width: 18px; height: 18px;">
 															<button type="button" class="msg_send"
-																onclick="showPost('${ingi.userid}')" style="cursor: pointer;">작성글보기</button>
+																onclick="showPost('${gpost.userid}')" style="cursor: pointer;">작성글보기</button>
 														</div>
 													</div>
 												</div>

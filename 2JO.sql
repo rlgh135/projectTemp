@@ -168,7 +168,7 @@ CREATE TABLE `gpost` (
 );
 update `gpost` set gpostcontents = '내용이엥', gpostregdate = now() where gpostnum=46;
 drop table `gpost`;	
-select * from `gpost`;
+select * from `gpost` where userid='abc1';
 insert into gpost(groupnum, gposttitle, userid, gpostcontents) value(2, 'd', 'abc3', '그룹2내용');
 select * from `gpost` where groupnum=2 and gpostgongji=1;
 update gpost set gpostgongji=1 where gpostnum=2;
