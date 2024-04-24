@@ -13,7 +13,9 @@ import com.google.gson.JsonObject;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.GPostDAO;
+import com.twojo.model.dao.GPostLikeDAO;
 import com.twojo.model.dto.GPostDTO;
+import com.twojo.model.dto.GPostLikeDTO;
 
 public class GPostInnerMokreOkAction implements Action{
 	@Override
@@ -23,6 +25,7 @@ public class GPostInnerMokreOkAction implements Action{
 		String keyword = req.getParameter("keyword");
 		System.out.println(keyword);
 		long groupnum =Long.parseLong(req.getParameter("groupnum"));
+		String userid = (String)req.getSession().getAttribute("loginUser");
 		
 		//4페이지 찾아오기
 		GPostDAO gpdao = new GPostDAO();
@@ -40,8 +43,26 @@ public class GPostInnerMokreOkAction implements Action{
 		
 		//JSON에 담기 위한 준비
 		ArrayList<GPostDTO> list = new ArrayList<GPostDTO>();
+		ArrayList<Long> gpnumlist = new ArrayList<Long>();
 		for (GPostDTO gpost : findlist) {
 			list.add(gpost);
+			gpnumlist.add(gpost.getGpostnum());
+		}
+		
+		GPostLikeDAO gpldao = new GPostLikeDAO();
+		int[] likelist = new int[gpnumlist.size()];
+		int i = 0;
+		for(long gpnum : gpnumlist) {
+			GPostLikeDTO gpostlike = new GPostLikeDTO();
+			gpostlike.setGpostnum(gpnum);
+			gpostlike.setUserid(userid);
+			if (gpldao.getLike(gpostlike) == null) {
+				likelist[i] = 0;
+			} else {
+				likelist[i] = 1;
+			}
+			System.out.println(likelist[i]);
+			i++;
 		}
 		
 		Gson gson = new Gson();
@@ -53,6 +74,7 @@ public class GPostInnerMokreOkAction implements Action{
 		
 		json.add("datas", gson.toJsonTree(list));
 		System.out.println(json.get("datas"));
+		json.add("likelist", gson.toJsonTree(likelist));
 		PrintWriter out = resp.getWriter();
 		out.print(json.toString());
 		out.flush();

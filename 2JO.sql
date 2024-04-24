@@ -181,11 +181,13 @@ select count(*) from gpost where groupnum = 1;
 select count(*) from gpost where gpostcontents = "%내용%";
 select count(*) from gpost where groupnum = 1 and gpostcontents like "%1%";
 select * from gpostlike;
-insert into gpostlike values(46, 'abc1');
+delete from gpostlike where gpostnum='46';
+insert into gpostlike values(40, 'abc1');
 create table gpostlike(
 	gpostnum bigint,
     userid varchar(300)
 );
+select * from gpostlike where userid='abc1';
 CREATE TABLE `gfile` (
   `gfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
   `gpostnum` bigint,
