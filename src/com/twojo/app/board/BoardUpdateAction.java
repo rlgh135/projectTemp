@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
+import com.twojo.model.dao.Lpost_AddrDAO;
 import com.twojo.model.dto.LPostDTO;
 //import com.twojo.model.dao.FileDAO;
 
@@ -15,7 +16,6 @@ public class BoardUpdateAction implements Action {
 		long boardnum = Long.parseLong(req.getParameter("boardnum"));
 
 		LPostDAO bdao = new LPostDAO();
-//		FileDAO fdao= new FileDAO();
 
 		LPostDTO board = bdao.getBoardByNum(boardnum);
 		req.setAttribute("board", board);
@@ -27,8 +27,10 @@ public class BoardUpdateAction implements Action {
 		deadline[2] = base.split("-")[2].split(" ")[1].split(":")[0];
 		deadline[3] = base.split("-")[2].split(" ")[1].split(":")[1];
 		req.setAttribute("deadline", deadline);
-//		req.setAttribute("files", fdao.getFiles(boardnum));
 
+		Lpost_AddrDAO ladao = new Lpost_AddrDAO(); 
+		req.setAttribute("addr", ladao.getAddr(boardnum));
+		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);
 		transfer.setPath("/app/board/modify.jsp?boardnum");

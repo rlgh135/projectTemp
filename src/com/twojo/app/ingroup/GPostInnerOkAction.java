@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.GPostDAO;
 import com.twojo.model.dao.GroupDAO;
+import com.twojo.model.dao.GroupUserDAO;
 import com.twojo.model.dto.GPostDTO;
 import com.twojo.model.dto.GroupDTO;
 
@@ -17,6 +18,7 @@ public class GPostInnerOkAction {
 		int page = temp == null || temp.equals("") ? 1 : Integer.parseInt(temp);
 		String keyword = req.getParameter("keyword");
 		long groupnum = Long.parseLong(req.getParameter("groupnum"));
+		String loginuser = (String)req.getSession().getAttribute("loginUser");
 		
 		//그룹 데이터 세팅
 		GroupDAO gdao = new GroupDAO();
@@ -24,6 +26,19 @@ public class GPostInnerOkAction {
 		
 		req.setAttribute("group", group);
 		req.setAttribute("usercnt", gdao.getUserCntInGroup(groupnum));
+	
+		GroupUserDAO gudao = new GroupUserDAO();
+		
+		if(gudao.userInGroup(group.getGroupnum(), loginuser)==null) {
+			req.setAttribute("usertype", "foreigner");
+		} else {
+			if (loginuser.equals(group.getGroupmaster())) {
+				req.setAttribute("usertype", "common");
+			} else {
+				req.setAttribute("usertype", "groupmaster");
+			}
+		}
+		
 		
 		//그룹 포스트 데이터 세팅
 		GPostDAO gpdao = new GPostDAO();

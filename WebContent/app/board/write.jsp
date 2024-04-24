@@ -267,7 +267,7 @@
 	                if (hour.match(replaceNotInt)) {
 	                	hour = hour.replace(replaceNotInt, "");
 	                }
-	                if (parseInt(hour) > 12) {
+	                if (parseInt(hour) > 24) {
 	                	hour = "";
 	                }
 	                $(this).val(hour);

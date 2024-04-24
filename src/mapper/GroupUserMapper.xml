@@ -18,6 +18,9 @@
 	<select id="selectRecentList" parameterType="long" resultType="groupuserdto">
 		select * from `group_user` where (groupnum=#{groupnum}) order by joindate desc limit 4;
 	</select>
+	<select id="userInGroup" parameterType="hashmap" resultType="groupuserdto">
+		select * from `group_user` where (groupnum=#{groupnum} and userid=#{userid})
+	</select>
 </mapper>
 
 

@@ -1,5 +1,6 @@
 package com.twojo.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -30,5 +31,12 @@ public class GroupUserDAO {
 
 	public List<GroupUserDTO> selectRecentList(long groupnum) {
 		return ss.selectList("GroupUser.selectRecentList", groupnum);
+	}
+
+	public GroupUserDTO userInGroup(long groupnum, String userid) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("groupnum", groupnum);
+		datas.put("userid", userid);
+		return ss.selectOne("GroupUser.userInGroup", datas);
 	}
 }

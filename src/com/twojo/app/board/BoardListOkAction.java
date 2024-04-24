@@ -33,7 +33,7 @@ public class BoardListOkAction implements Action{
 		LPostDAO lpdao = new LPostDAO();
 		LPostDAO bdao = new LPostDAO();
 		
-		List<LPostDTO> quickpost = lpdao.getQuickPost("주소"); 
+		List<LPostDTO> quickpost = lpdao.getQuickPost(user.getUseraddrgu());
 		req.setAttribute("quickpost", quickpost);
 		
 		//전체 게시글의 개수

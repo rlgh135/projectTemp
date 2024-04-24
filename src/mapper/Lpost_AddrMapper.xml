@@ -16,8 +16,12 @@
 	
 	<delete id="delete" parameterType="long">
 		delete from Lpost_Addr where lpostnum = #{boardnum};
-		
 	</delete>
 
-	
+	<update id="update" parameterType="lpostdto">
+		update Lpost_Addr
+		set placeName=#{placeName}, roadAddress=#{roadAddress}, address=#{address},
+		phone=#{phone}
+		where lpostnum=#{lpostnum}
+	</update>
 </mapper>

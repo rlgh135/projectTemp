@@ -185,7 +185,21 @@
 					 </ul>
                     <div>
                         <div class="group-btn-box btnBox">
-                                <input type="button" value="모임 가입하기" class="joinMoim" onclick="joinMoim(${group.groupnum})">
+                        	<c:choose>
+                        		<c:when test="${usertype eq 'foreigner'} ">
+	                                <input type="button" value="모임 가입하기" class="joinMoim" onclick="joinMoim(${group.groupnum})">
+                        		</c:when>
+                        		<c:otherwise>
+                        			<c:choose>
+                        				<c:when test="">
+			                                <input type="button" value="모임 탈퇴하기" class="joinMoim" onclick="quitMoim(${group.groupnum}, 0)">
+                        				</c:when>
+                        				<c:otherwise>
+			                                <input type="button" value="모임 탈퇴하기" class="joinMoim" onclick="quitMoim(${group.groupnum}, 1)">
+                        				</c:otherwise>
+                        			</c:choose>
+                        		</c:otherwise>
+                        	</c:choose>
                         </div>
                     </div>
                 </div>
@@ -459,7 +473,40 @@
             </div>
             <div id="grouprightsection">
                 <div id="gannounce">
-                    <p><h2>최신 공지사항</h2></p>
+                    <div id="gin">
+                    	<span><h2>최신 공지사항</h2></span>
+                    	
+                    	<%--챗 --%>
+                    	<div>
+		                <div id="chat-circle" class="btn btn-raised">
+							<div id="chat-overlay"></div>
+							<span class="material-symbols-outlined">그룹채팅+</span>
+						</div>
+						<div class="chat-box">
+							<div class="chat-box-header">
+								${group.groupname }  <div class="chat-box-toggle"><img src="/images/closechat.svg"><span
+									class="material-symbols-outlined"></span></div>
+							</div>
+							<div class="chat-box-body">
+								<div class="chat-box-overlay"></div>
+								<div class="chat-logs"></div>
+								<!--chat-log -->
+							</div>
+							<div class="chat-input">
+								<form>
+									<input type="hidden" id="userid" name="userid" value="${loginUser}">
+									<span class="echo-receiver"></span> <input type="text"
+										id="chat-input" placeholder="Send a message..."
+										onkeyup="sendEcho();" />
+									<button type="submit" class="chat-submit" id="chat-submit">
+										<img src="/images/sendchat.svg">
+									</button>
+								</form>
+							</div>
+						</div>
+						<%--챗 --%>
+						</div>
+                    </div>
                     <ul class="gpostList" id="gpGongji" style="margin-top: 10px;">
                     	<c:choose>
                     		<c:when test="${empty gongji}">
@@ -513,34 +560,7 @@
                     	</c:choose>
                     </ul>
                 </div>
-                <%--챗 --%>
-                <div id="chat-circle" class="btn btn-raised">
-					<div id="chat-overlay"></div>
-					<span class="material-symbols-outlined">speaker_phone</span>
-				</div>
-				<div class="chat-box">
-					<div class="chat-box-header">
-						사용자 채팅 <span class="chat-box-toggle"><span
-							class="material-symbols-outlined">close</span></span>
-					</div>
-					<div class="chat-box-body">
-						<div class="chat-box-overlay"></div>
-						<div class="chat-logs"></div>
-						<!--chat-log -->
-					</div>
-					<div class="chat-input">
-						<form>
-							<input type="hidden" id="userid" name="userid" value="${loginUser}">
-							<span class="echo-receiver"></span> <input type="text"
-								id="chat-input" placeholder="Send a message..."
-								onkeyup="sendEcho();" />
-							<button type="submit" class="chat-submit" id="chat-submit">
-								<span class="material-symbols-outlined">send</span>
-							</button>
-						</form>
-					</div>
-				</div>
-				<%--챗 --%>
+                
             </div>
         </div>
     </div>
@@ -1096,7 +1116,7 @@
 		socket.onclose = function(e){
 			$(".chat-logs").html("");
 		}
-	})
+	});
 	//닫기 버튼을 클릭했을 때 호출될 이벤트, 창 닫기, 소켓 접속 종료
 	$(".chat-box-toggle").click(function(){
 		socket.send('out : '+$("#userid").val());
@@ -1329,6 +1349,10 @@
 			}
 			arMsg[i].innerHTML = newContent.trim();
 		}
+	}
+	
+	function quitMoim(groupnum, usertype){
+		
 	}
 </script>
 </html>

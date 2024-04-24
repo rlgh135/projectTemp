@@ -27,7 +27,11 @@ public class Lpost_AddrDAO {
 		return ss.delete("Lpost_Addr.delete",boardnum) == 1;
 	}
 
+	public Lpost_AddrDTO getAllByNum(long boardnum) {
+		return ss.selectOne("Lpost_Addr.getAllByNum", boardnum);
+	}
 	
-	
-
+	public boolean updateAddr(Lpost_AddrDTO ladto) {
+		return ss.update("Lpost_Addr.update",ladto) == 1;
+	}
 }

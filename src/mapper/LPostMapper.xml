@@ -49,9 +49,8 @@
 
 	<update id="update" parameterType="lpostdto">
 		update lpost
-		set
-		lposttitle=#{lposttitle}, lpostcontents=#{lpostcontents},
-		lpostregdate=now(), deadline=#{deadline}
+		set lposttitle=#{lposttitle}, lpostcontents=#{lpostcontents}, lpostregdate=now(),
+		lpostcategory=#{lpostcategory}, lpostaddr=#{lpostaddr}
 		where lpostnum=#{lpostnum}
 	</update>
 

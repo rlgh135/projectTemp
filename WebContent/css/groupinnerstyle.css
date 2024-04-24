@@ -637,3 +637,6 @@ header{
 .ingiListWrap{
     margin-top: 0px;
 }
+#gin{
+	display: flex;
+}

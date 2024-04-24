@@ -34,9 +34,15 @@ CREATE TABLE `lpost` (
   `lpostaddr` varchar(1000),
   `deadline` datetime default null
 );
+SELECT lpostnum
+FROM lpost_addr
+WHERE deadline > NOW() and lpostaddr like '%송파구%'
+ORDER BY deadline ASC
+LIMIT 4;
 insert into lpost(lpostcategory, userid, lposttitle, lpostcontents, lpostaddr) values('수영', 'abc1', '제목입니다', '내용입니다', '강남구');
 select * from lpost;
 select count(*) from lpost where lpostaddr='관악구';
+delete from lpost where deadline = '없음';
 drop table lpost;
 delete from lpost
 where lpostaddr='강남구';
@@ -103,8 +109,8 @@ select count(*) from `group`;
 select * from `group` where groupmaster='abc10';
 delete from `group` where groupmaster='abc10' and groupnum>1;
 update `group` 
-set groupmaster='abc10'
-where groupmaster='abc567';
+set groupmaster='abc3'
+where groupnum=2;
 create table board_user(
 	boardnum bigint,
     userid varchar(300)
@@ -129,7 +135,7 @@ create table `group_user`(
 );
 select * from `group_user`;
 drop table group_user;
-insert into group_user(groupnum, userid) value(2, 'abc231');
+insert into group_user(groupnum, userid) value(2, 'abc3');
 delete from group_user where userid='abc1' and groupnum=2;
 select * from group_user where userid='abc1';
 select * from group_user where groupnum=2;
@@ -246,7 +252,7 @@ linkstring varchar(3000) default null,
 msgcheck int
 );
 insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
-		values('system','abc567','가입',0,'/groupinner.gp?groupnum=1');
+		values('system','abc1','가입',0,'/groupinner.gp?groupnum=1');
         insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
 		values('abc100','abc1','가입',0,'/groupinner.gp?groupnum=1');
 select * from message;
