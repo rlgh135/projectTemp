@@ -8,6 +8,15 @@
 <title>checkMoim</title>
 <link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
 <link href="${cp}/css/checkmoim.css" rel="stylesheet">
+<style>
+	.open{
+		/* background-color: rgb(255,255,255,0.4); */
+	
+		border-bottom: 1px solid #c5bdb6;
+	}
+	
+	
+</style>
 </head>
 <body>
 	<c:if test="${empty loginUser}">
@@ -84,25 +93,10 @@
 			                			</c:when>
 			                			<c:otherwise>
 			                				<div>
-			                					<p>${group.groupname}의 가입 양식이에요<span><a href="${cp}/setq.gp?groupnum=${group.groupnum}" style="cursor: pointer">편집</a></span></p>
+			                					<p>${group.groupname}에 가입 신청이 있어요<span><a href="${cp}/setq.gp?groupnum=${group.groupnum}" style="cursor: pointer">편집</a></span></p>
 			                					<input type="hidden" name="auto" value="no">
 			                				</div>
 			                				<ul class="qListWrap">
-			                				<c:choose>
-			                				<c:when test="${not empty questionlist && questionlist.size() != 0}">
-				                				<c:forEach var="i" begin="0" end="${questionlist.size() -1}">
-			                    					<c:set var="index" value="${i}"/>
-			                    					<li class="qList">
-			                    						<p>${i+1}. ${questionlist[i]}</p>
-			                    					</li>
-			                    				</c:forEach>
-			                				</c:when>
-			                				<c:otherwise>
-			                					<li>
-			                						<p>등록된 질문이 없습니다</p>
-			                					</li>
-			                				</c:otherwise>
-			                				</c:choose>
 			                				</ul>
 			                				<%--가입신청 유저 리스트 --%>
 			                				<ul class="joinuserWrap">
@@ -117,16 +111,18 @@
 			                						<c:set var="ansbase" value="${ansbaselist[i]}"/>
 			                						<c:set var="answerlists" value="${answerlist[i]}"/>
 			                						<li id="answerLW${i}">
-			                							<p>
-				                							${ansbase.userid} 님 
-				                							<input type="button" value="펼치기" style="cursor: pointer;" onclick="togglehide(${i})">
-				                							<input type="button" value="승인" onclick="acceptUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
-				                							<input type="button" value="거절" onclick="rejectUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
-			                							</p>
-			                							<div id="answerWrap${i}">
+				                						<div class="answerLW">
+				                							<p>
+					                							${ansbase.userid} 님 
+					                							<input type="button" value="펼치기" style="cursor: pointer;" onclick="togglehide(${i})">
+					                							<input type="button" value="승인" onclick="acceptUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
+					                							<input type="button" value="거절" onclick="rejectUser('${ansbase.userid}', ${group.groupnum})" style="cursor: pointer;">
+				                							</p>
+				                						</div>
+			                							<div id="answerWrap${i}" class="hide">
 			                							<c:forEach var="j" begin="0" end="${answerlists.size() -1}">
 			                								<c:set var="answer" value="${answerlists[j]}"/>
-			                								<div>
+			                								<div class="answerwrap">
 				                								<p>${questionlist[j]}</p>
 				                								<p>${answer}</p>
 			                								</div>
@@ -182,7 +178,8 @@
 		let targetnode = document.getElementById("answerWrap"+index);
 		targetnode.classList.toggle("hide");
 		let targetpnode = document.getElementById("answerLW"+index);
-		targetpnode.setAttribute("style", "border-radius: 20px; background-color: blanchedalmond; box-shadow: 5px 5px 5px;");
+		targetnode.classList.toggle("open");
+		
 	}
 </script>
 </html>

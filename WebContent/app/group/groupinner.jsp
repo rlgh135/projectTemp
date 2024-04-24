@@ -852,9 +852,9 @@ button {
 					    imgTag.onclick = function() { pressLike(datas[i].gpostnum, datas[i].userid); };
 					    imgTag.className = 'like-button likeButton' + datas[i].gpostnum;
 					    if(likelist[i]===0){
-						    imgTag.src = '/noon/images/whiteheart.webp';
+						    imgTag.src = '/images/whiteheart.webp';
 					    } else {
-						    imgTag.src = '/noon/images/redheart.webp';
+						    imgTag.src = '/images/redheart.webp';
 					    }
 					    imgTag.alt = '좋아요';
 					    imgTag.style.width = '15px';

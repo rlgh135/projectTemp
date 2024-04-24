@@ -7,9 +7,83 @@
 <meta charset="UTF-8">
 <title>setq</title>
 <link href="${cp}/css/groupinnerstyle.css" rel="stylesheet">
+<link href="${cp}/css/checkmoim.css" rel="stylesheet">
 <style>
 	.qlorig{
 		display: none;
+	}
+	/* 가입 관리 스타일 */
+	.gpostListwrap{
+	    background-color: rgb(232, 218, 202);
+	}
+	.qList > p{
+	 background-color:  rgba(255, 255, 255,0.2);
+	 border-radius: 5px;
+	}
+	
+	/* 편집 가입관리  스타일 */
+	.jointxt {
+	    font-size: 18px;
+	    padding: 10px;
+	    border-bottom: 1px solid rgba(51, 39, 29,0.2);
+	    margin-bottom: 20px;
+	    }
+	    .jointxt span > a{
+	    width: 40px;
+	    display: inline-block;
+	    border-radius: 10px;
+	    border: 1px solid rgb(51, 39, 29);
+	    margin-left: 290px;
+	    text-align: center;
+	    }
+	.qList span{
+	    padding: 10px;
+	    font-size: 18px;
+	}
+	.qList > p input[type="button"]{
+	    border: 1px solid rgb(51, 39, 29);
+	    border-radius: 10px;
+	    width: 40px;
+	    text-align: center;
+	    margin-left: 410px;
+	}
+	
+	
+	.questionarea textarea {
+	background-color: rgb(232, 218, 202);
+	font-size: 20px;
+	padding: 8px;
+	width: 540px;
+	outline: none;
+	}
+	
+	.addbtn  p  a{
+	    width: 45px;
+	    display: inline-block;
+	    background-color: rgba(255, 255, 255,0.4);
+	    border-radius: 5px;
+	    border: rgb(51, 39, 29);
+	    text-align: center;
+	    margin-left: 10px;
+	}
+	.adddone p  a{
+	    width: 60px;
+	    display: inline-block;
+	    background-color: rgba(255, 255, 255,0.4);
+	    border-radius: 5px;
+	    border: rgb(51, 39, 29);
+	    text-align: center;
+	    margin-left: 10px;
+	    margin: 10px 0px 10px 10px;
+	}
+	
+	.qList p span{
+	    margin-right: 10px;
+	}
+	.deletebtn{
+	    border-radius: 5px;
+	    border: rgb(51, 39, 29);
+	    z-index: 22;
 	}
 </style>
 </head>

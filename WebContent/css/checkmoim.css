@@ -1,4 +1,4 @@
-.gpostListwrap{
+/* .gpostListwrap{
 	padding: 10px;
 	font-size: 20px;
 }
@@ -45,4 +45,131 @@
 }
 .joinuserWrap li > div {
 	margin-top: 20px;
+} */
+.gpostListwrap{
+	padding: 10px;
+	font-size: 20px;
+}
+.gpostListwrap > div:first-child p{
+	font-size: 30px;
+	display: flex;
+	height: 50px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.gpostListwrap div:first-child p span:before{
+	content: "";
+	border: 1px solid rgba(0,0,0,0.1);
+	margin-left: 60px;
+	margin-right: 10px; 
+}
+.gpostListwrap > div:first-child p span {
+	font-size: 15px;
+	display: block;
+	line-height: 50px;
+}
+.qListWrap {
+	margin-top: 20px;
+	/* border-bottom: 1px solid rgba(0,0,0,0.1); */
+}
+.qListWrap li{
+	margin-top: 20px;
+}
+.qListWrap li:last-child {
+	margin-bottom: 10px;
+}
+.joinuserWrap{
+	margin-top: 20px;'
+}
+.joinuserWrap li {
+	margin-top: 20px;
+	font-size: 20px;
+}
+.joinuserWrap li p input:first-child{
+	margin-left: 10px;
+	font-size: 15px;
+}
+.hide{
+	display: none;
+}
+.joinuserWrap li > div {
+	margin-top: 20px;
+}
+
+/* 가입 승인 스타일 */
+.group-btn-box{
+width: 250px;
+height: 60px;
+line-height: 55px;
+border-radius: 10px;
+margin: 0 auto;
+text-align: center;
+background-color: rgb(232,218,202);
+font-weight: bold;
+padding: 3px;
+cursor: pointer;
+}
+
+.changemethod {
+	border: 1px solid rgb(51, 39, 29);
+	width: 200px;
+	height: 80px;
+	border-radius: 10px;
+	font-size: 18px;
+	padding: 0px 15px;
+}
+
+.noinone{
+	font-size: 17px;
+	margin-bottom: 20px;
+}
+
+.answerLW{
+border-radius: 5px;
+background-color: rgba(255,255,255,0.4);
+line-height: 40px;
+height: 40px;
+margin-bottom: 15px;
+}
+.answerLW:hover{
+	border: 1px solid white;
+	margin-bottom: 15px;
+}
+
+.answerLW input[type="button"]:nth-child(2){
+height: 22px;
+line-height: 22px;
+margin-left: 270px;
+border: 1px solid rgb(51, 39, 29);
+border-radius: 10px;
+width: 40px;
+text-align: center;
+font-size: 17px;
+}
+.answerLW input[type="button"]:nth-child(3){
+	height: 22px;
+	line-height: 22px;
+	margin-left: 10px;
+	border: 1px solid rgb(51, 39, 29);
+	border-radius: 10px;
+	width: 40px;
+	text-align: center;
+	font-size: 17px;
+}
+.answerLW input[type="button"]:hover{
+	box-shadow: 2px;
+}
+
+.answerwrap{
+	padding: 10px;
+}
+.answerwrap p:nth-child(1){
+font-size: 19px;
+
+
+}
+.answerwrap p:nth-child(2){
+font-size: 16px;
+margin: 10px 0px;
+background-color: rgba(255,255,255,0.4);
+border-radius: 5px;
 }
