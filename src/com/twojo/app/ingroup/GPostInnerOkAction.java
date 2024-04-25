@@ -10,15 +10,16 @@ import com.twojo.model.dao.GPostDAO;
 import com.twojo.model.dao.GroupDAO;
 import com.twojo.model.dao.GroupUserDAO;
 import com.twojo.model.dao.GroupimgDAO;
+import com.twojo.model.dao.UserimgDAO;
 import com.twojo.model.dto.GPostDTO;
 import com.twojo.model.dto.GroupDTO;
 import com.twojo.model.dto.GroupimgDTO;
 
 public class GPostInnerOkAction {
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		String temp = req.getParameter("page");
-		int page = temp == null || temp.equals("") ? 1 : Integer.parseInt(temp);
-		String keyword = req.getParameter("keyword");
+//		String temp = req.getParameter("page");
+//		int page = temp == null || temp.equals("") ? 1 : Integer.parseInt(temp);
+//		String keyword = req.getParameter("keyword");
 		long groupnum = Long.parseLong(req.getParameter("groupnum"));
 		String loginuser = (String)req.getSession().getAttribute("loginUser");
 		
@@ -42,36 +43,47 @@ public class GPostInnerOkAction {
 		}
 		
 		
-		//그룹 포스트 데이터 세팅
 		GPostDAO gpdao = new GPostDAO();
-		int pageSize = 4;
-		
-		//4개씩 불러오기
-		int startRow = (page-1)*pageSize;
-		List<GPostDTO> list = null;
-		if(keyword == null || keyword.equals("")) {
-			list = gpdao.getList(groupnum, startRow, pageSize);
-		}
-		else {
-			list = gpdao.getListWithKeyword(groupnum,startRow,pageSize,keyword);
-		}
-		
-		req.setAttribute("list", list);
-		req.setAttribute("page", page);
-		req.setAttribute("keyword", keyword);
+//		//그룹 포스트 데이터 세팅
+//		int pageSize = 4;
+//		
+//		//4개씩 불러오기
+//		int startRow = (page-1)*pageSize;
+//		List<GPostDTO> list = null;
+//		if(keyword == null || keyword.equals("")) {
+//			list = gpdao.getList(groupnum, startRow, pageSize);
+//		}
+//		else {
+//			list = gpdao.getListWithKeyword(groupnum,startRow,pageSize,keyword);
+//		}
+//		
+//		req.setAttribute("list", list);
+//		req.setAttribute("page", page);
+//		req.setAttribute("keyword", keyword);
 		
 		GPostDTO gongji = gpdao.getGongji(groupnum);
+		UserimgDAO uidao = new UserimgDAO();
+		String gongjithumbnail = "defaultuserbadge.png";
+		
+		if(gongji!=null) {
+			gongjithumbnail = uidao.getImgName(gongji.getUserid()).getUserimgsysname();
+		}
+		
 		List<GPostDTO> ingiList = gpdao.getIngi(groupnum);
 		GPostDTO ingi;
+		String ingithumbnail = "defaultuserbadge.png";
 		
 		try {
 			ingi = ingiList.get(0);
+			ingithumbnail = uidao.getImgName(ingi.getUserid()).getUserimgsysname();
 		} catch (IndexOutOfBoundsException e) {
 			ingi = null;
 		}
 		
 		req.setAttribute("gongji", gongji);
+		req.setAttribute("gongjithumbnail", gongjithumbnail);
 		req.setAttribute("ingi", ingi);
+		req.setAttribute("ingithumbnail", ingithumbnail);
 		
 		GroupimgDAO gido = new GroupimgDAO();
 		String thumbnail = gido.getGroupimg(groupnum);

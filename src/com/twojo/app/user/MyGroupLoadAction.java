@@ -23,7 +23,6 @@ public class MyGroupLoadAction implements Action{
 		int page = Integer.parseInt(req.getParameter("page"));
 		int pageSize = 3;
 		int startRow = (page-1)*pageSize;
-		System.out.println("그룹: "+userid);
 		GroupUserDAO gudao = new GroupUserDAO();
 		List<Long> groupnums = gudao.getGroupnumList(userid, startRow, pageSize);
 		GroupDAO gdao = new GroupDAO();

@@ -20,7 +20,6 @@ public class MyBoardLoadAction implements Action{
 		int page = Integer.parseInt(req.getParameter("page"));
 		int pageSize = 3;
 		int startRow = (page-1)*pageSize;
-		System.out.println("보드: "+userid);
 		LPostDAO lpdao = new LPostDAO();
 		List<LPostDTO> lplist = lpdao.getListByUser(userid, startRow, pageSize);
 		

@@ -14,6 +14,7 @@ import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.GPostDAO;
 import com.twojo.model.dao.GPostLikeDAO;
+import com.twojo.model.dao.UserimgDAO;
 import com.twojo.model.dto.GPostDTO;
 import com.twojo.model.dto.GPostLikeDTO;
 
@@ -32,6 +33,8 @@ public class GPostInnerMokreOkAction implements Action{
 		int pageSize = 4;
 		int startRow = (page-1)*pageSize;
 		List<GPostDTO> findlist = null;
+		
+		
 		if(keyword == null || keyword.equals("")) {
 			System.out.println("here?");
 			findlist = gpdao.getList(groupnum, startRow, pageSize);
@@ -44,8 +47,14 @@ public class GPostInnerMokreOkAction implements Action{
 		//JSON에 담기 위한 준비
 		ArrayList<GPostDTO> list = new ArrayList<GPostDTO>();
 		ArrayList<Long> gpnumlist = new ArrayList<Long>();
+		ArrayList<String> useridlist = new ArrayList<String>();
+		ArrayList<String> userthumbnaillist = new ArrayList<String>();
+		UserimgDAO uidao = new UserimgDAO();
+		
 		for (GPostDTO gpost : findlist) {
 			list.add(gpost);
+			useridlist.add(gpost.getUserid());
+			userthumbnaillist.add(uidao.getImgName(gpost.getUserid()).getUserimgsysname());
 			gpnumlist.add(gpost.getGpostnum());
 		}
 		
@@ -75,6 +84,7 @@ public class GPostInnerMokreOkAction implements Action{
 		json.add("datas", gson.toJsonTree(list));
 		System.out.println(json.get("datas"));
 		json.add("likelist", gson.toJsonTree(likelist));
+		json.add("userthumbnaillist", gson.toJsonTree(userthumbnaillist));
 		PrintWriter out = resp.getWriter();
 		out.print(json.toString());
 		out.flush();

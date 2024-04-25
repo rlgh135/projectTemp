@@ -210,9 +210,19 @@
 	                if (day.match(replaceNotInt)) {
 	                   day = day.replace(replaceNotInt, "");
 	                }
-	                if (parseInt(day) > 12 && parseInt(day) % 2 === 1) {
-	                    x = "";
-	                }
+	                if (parseInt(day) > 28){
+		            	if(parseInt(month)===2){
+		            		day="";
+		            	}
+		            	if(parseInt(day) > 30){
+		            		if(parseInt(month)===4 || parseInt(month)===6 || parseInt(month)===9 || parseInt(month)===11){
+		            			day="";
+		            		}
+		            	}
+		            	if(parseInt(day) > 31){
+		            		day="";
+		            	}
+		            } 
 	                $(this).val(x);
 	            }
 	        }).on("keyup", function() {
@@ -244,7 +254,7 @@
 	                if (hour.match(replaceNotInt)) {
 	                	hour = hour.replace(replaceNotInt, "");
 	                }
-	                if (parseInt(hour) > 12) {
+	                if (parseInt(hour) > 24) {
 	                	hour = "";
 	                }
 	                $(this).val(hour);

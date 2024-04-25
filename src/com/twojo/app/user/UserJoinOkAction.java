@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.UserDAO;
+import com.twojo.model.dao.UserimgDAO;
 import com.twojo.model.dto.UserDTO;
+import com.twojo.model.dto.UserimgDTO;
 
 public class UserJoinOkAction implements Action{
 	@Override
@@ -24,6 +26,13 @@ public class UserJoinOkAction implements Action{
 		user.setUseraddrdetail(req.getParameter("addrdetail"));
 		user.setUseraddretc(req.getParameter("addretc"));
 		user.setUserhobby(req.getParameter("userhobby"));
+		
+		UserimgDAO uidao = new UserimgDAO();
+		UserimgDTO userimage = new UserimgDTO();
+		userimage.setUserid(userid);
+		userimage.setUserimgorgname("defaultuserbadge.png");
+		userimage.setUserimgsysname("defaultuserbadge.png");
+		uidao.insertFile(userimage);
 		
 		UserDAO udao = new UserDAO();
 		if(udao.insertUser(user)) {
