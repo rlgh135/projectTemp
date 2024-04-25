@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReqList">
+	<insert id="createQuestion" parameterType="reqlistdto">
+		insert into reqlist(`groupnum`, `leaderid`, `question`, `autoreg`) 
+		values(#{groupnum},#{leaderid},#{question},#{autoreg})
+	</insert>
 	<insert id="makeQuestion" parameterType="reqlistdto">
 		insert into reqlist(`groupnum`, `leaderid`, `question`) 
 		values(#{groupnum},#{leaderid},#{question})

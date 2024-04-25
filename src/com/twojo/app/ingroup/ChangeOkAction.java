@@ -12,6 +12,8 @@ public class ChangeOkAction implements Action{
 	public Transfer execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		long groupnum = Long.parseLong(req.getParameter("groupnum"));
 		int autoreg = Integer.parseInt(req.getParameter("auto"));
+		System.out.println("groupnum:"+groupnum);
+		System.out.println("autoreg:"+autoreg);
 		
 		ReqListDAO reqdao = new ReqListDAO();
 		

@@ -7,6 +7,7 @@ import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.GPostDAO;
 import com.twojo.model.dao.GroupDAO;
+import com.twojo.model.dao.GroupimgDAO;
 import com.twojo.model.dto.GPostDTO;
 import com.twojo.model.dto.GroupDTO;
 
@@ -25,6 +26,14 @@ public class ShowPostAction implements Action{
 		GPostDTO gongji = gpdao.getGongji(groupnum);
 	
 		req.setAttribute("gongji", gongji);
+		
+		GroupimgDAO gido = new GroupimgDAO();
+		String thumbnail = gido.getGroupimg(groupnum);
+		if(thumbnail!=null) {
+			req.setAttribute("thumbnail", thumbnail);
+		} else {
+			req.setAttribute("thumbnail", "abcd25.jpg");
+		}
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);

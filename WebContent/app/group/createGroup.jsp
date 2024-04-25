@@ -98,15 +98,15 @@
 	            <li>
 	                <div class="groupselect">ㆍ가입 신청 방법</div>
                         <div class="toggles">
-                            <div class="toggletxt">
+                            <div class="toggletxt" style="width: 200px;">
                                 <strong>가입 신청 받기</strong>
-                                <p>멤버 가입 시 리더의 승인이 필요합니다.</p>
+                                <p id="toggleok">자동 가입이에요</p>
                             </div>
-                            <div class="toggleimg">
+                            <div class="toggleimg" style="margin-left: 81px;">
                             	<input type="hidden" name="autoreg" id="auto" value="1">
                             	<input type="hidden" name="groupmaster" value="${loginUser}">
-                                <img src="${cp}/images/toggleleft.png" name="img1" id="img1" style="width: 35px; height: 35px;" onclick="toggleImg()">
-                                <img src="${cp}/images/toggleright.png" name="img1" id="img2" style="display:none; width: 35px; height: 35px;" onclick="toggleImg()">
+                                <img src="${cp}/images/toff.png" name="img1" id="img1" style="width: 35px; height: 35px;" onclick="toggleImg()">
+                                <img src="${cp}/images/ton.png" name="img1" id="img2" style="display:none; width: 35px; height: 35px;" onclick="toggleImg()">
                             </div>
                         </div>
 	            </li>
@@ -123,22 +123,6 @@
 	                    * 모임 생성 후 15일이 경과 될때까지 참여자가 없을 경우 모임은 자동 삭제 처리 됩니다.
 	                                </span>
 	            </li>
-	            <!-- <li>
-	                <div class="subject">ㆍ 모집인원</div>
-	                <select name="it_stock_qty" id="it_stock_qty" class="width-100" value="" onchange="familyurl(this.form)">
-	                <option value="0">본인제외</option>
-	                <option value="0">0</option>
-	                <option value="1">1</option>
-	                <option value="2">2</option>
-	                <option value="3">3</option>
-	                <option value="4">4</option>
-	                <option value="5">5</option>
-	                <option value="6">6</option>
-	                <option value="7">7</option>
-	                <option value="8">8</option>
-	                </select>
-	                명
-	            </li> -->
 	        </ul>
         </div>
     </div>
@@ -261,15 +245,19 @@
 	 var img2 = document.getElementById("img2");
 	 
 	 let targetnode = document.getElementById("auto");
+	 let explainnode = document.getElementById("toggleok");
 	 
 	 if (img1.style.display !== 'none') {
 	   img1.style.display = 'none';
 	   img2.style.display = 'block';
+	   img2.style.background = 'block';
 	   targetnode.value = "0";
+	   explainnode.innerHTML = "승인 후 가입할 수 있어요";
 	 } else {
 	   img1.style.display = 'block';
 	   img2.style.display = 'none';
 	   targetnode.value = "1";
+	   explainnode.innerHTML = "자동 가입이에요";
 	 }
 	}
    </script>

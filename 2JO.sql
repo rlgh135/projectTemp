@@ -18,7 +18,7 @@ CREATE TABLE user (
 select * from user;
 select * from user where userid='cherry';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
-value('abc796', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
+value('abc1', '1234', '김셩억', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;
 
 CREATE TABLE userimg (
@@ -107,10 +107,7 @@ delete from `group` where groupmaster='abc10' and groupnum>1;
 update `group` 
 set groupmaster='abc3'
 where groupnum=2;
-create table board_user(
-	boardnum bigint,
-    userid varchar(300)
-);
+
 select count(*) from `group_user`;
 
 select g.*, top_groups.groupusercnt from `group` g 

@@ -41,7 +41,7 @@
         <div class="group-inner contents" id="group_inner_container">
             <div id="groupinfobox" class="infobox">
                 <div class="groupimg imgbox">
-                    <img src="../../file/groupimg/abcd25.jpg" style="background-size: cover; width: 100%; height: auto;">
+                    <img src="../../file/groupimg/${thumbnail}" style="background-size: cover; width: 100%; height: auto;">
                 </div>
                 <div class="groupinfobox-inner">
                     <p id="groupname">${group.groupname}</p>
@@ -162,7 +162,7 @@
 		if(autonum===1){
 			//수동으로 변경
 			if(confirm("가입 방식을 변경하시겠어요?")){
-				alert("변경되었어요");
+				alert("가입 양식을 작성해 주세요");
 				location.href = cp+"/setq.gp?groupnum="+groupnum;
 			}
 		} else if (autonum===0){

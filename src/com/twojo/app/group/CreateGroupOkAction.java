@@ -17,11 +17,13 @@ import com.twojo.model.dao.GFileDAO;
 import com.twojo.model.dao.GroupDAO;
 import com.twojo.model.dao.GroupUserDAO;
 import com.twojo.model.dao.GroupimgDAO;
+import com.twojo.model.dao.ReqListDAO;
 import com.twojo.model.dto.GFileDTO;
 import com.twojo.model.dto.GImgDTO;
 import com.twojo.model.dto.GroupDTO;
 import com.twojo.model.dto.GroupUserDTO;
 import com.twojo.model.dto.GroupimgDTO;
+import com.twojo.model.dto.ReqListDTO;
 
 public class CreateGroupOkAction implements Action {
 	@Override
@@ -59,6 +61,7 @@ public class CreateGroupOkAction implements Action {
 		String groupaddr = multi.getParameter("it_region");
 		String groupcategory = multi.getParameter("ca_id_s");
 		String groupcontents = multi.getParameter("it_info");
+		int autoreg = Integer.parseInt(multi.getParameter("autoreg"));
 		
 		GroupDTO group = new GroupDTO();
 		group.setGroupmaster(groupmaster);
@@ -71,9 +74,9 @@ public class CreateGroupOkAction implements Action {
 		boolean insertok = gdao.createGroup(group);
 		if(insertok) {
 			System.out.println("성공");
+			
 		}
 		
-		int autoreg = Integer.parseInt(multi.getParameter("autoreg"));
 	
 		Transfer transfer = new Transfer();
 		//파일 데이터 삽입 성공 여부
@@ -83,6 +86,19 @@ public class CreateGroupOkAction implements Action {
 		System.out.println(gdao.getLastGroupnum(groupmaster));
 		if(insertok) {
 			long groupnum = gdao.getLastGroupnum(groupmaster);
+			
+			ReqListDAO reqdao = new ReqListDAO();
+			ReqListDTO question = new ReqListDTO();
+			question.setAutoreg(autoreg);
+			question.setGroupnum(groupnum);
+			question.setLeaderid(groupmaster);
+			if(autoreg==0) {
+				question.setQuestion("모임에 가입하시겠어요?§");
+			} else {
+				question.setQuestion("§");
+			}
+			reqdao.createQuestion(question);
+			
 			GroupimgDAO gidao = new GroupimgDAO();
 			
 			GroupUserDTO groupuser = new GroupUserDTO();

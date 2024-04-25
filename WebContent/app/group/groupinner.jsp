@@ -139,7 +139,7 @@ button {
 		<div class="group-inner contents" id="group_inner_container">
 			<div id="groupinfobox" class="infobox">
 				<div class="groupimg imgbox">
-					<img src="../../file/groupimg/abcd25.jpg"
+					<img src="../../file/groupimg/${thumbnail}"
 						style="background-size: cover; width: 100%; height: auto;">
 				</div>
 				<div class="groupinfobox-inner">

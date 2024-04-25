@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.GroupDAO;
+import com.twojo.model.dao.GroupimgDAO;
 import com.twojo.model.dao.ReqListDAO;
 import com.twojo.model.dto.GroupDTO;
 import com.twojo.model.dto.ReqListDTO;
@@ -35,6 +36,14 @@ public class SetQAction implements Action{
 			}
 			
 			req.setAttribute("questionlist", questionlist);
+		}
+		
+		GroupimgDAO gido = new GroupimgDAO();
+		String thumbnail = gido.getGroupimg(groupnum);
+		if(thumbnail!=null) {
+			req.setAttribute("thumbnail", thumbnail);
+		} else {
+			req.setAttribute("thumbnail", "abcd25.jpg");
 		}
 		
 		Transfer transfer = new Transfer();

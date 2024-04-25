@@ -40,12 +40,14 @@ public class ReqListDAO {
 	public boolean deleteQuestion(long groupnum) {
 		return ss.delete("ReqList.deleteQuestionByNum", groupnum)==1;
 	}
-
+	public boolean createQuestion(ReqListDTO reqlist) {
+		return ss.insert("ReqList.createQuestion", reqlist)==1;
+	}
 	public boolean changeAuto(int autoreg, long groupnum) {
 		HashMap<String, Object> datas = new HashMap<String, Object>();
 		datas.put("groupnum", groupnum);
 		datas.put("autoreg", autoreg);
-		return ss.update("ReqList.changeAuto", groupnum)==1;
+		return ss.update("ReqList.changeAuto", datas)==1;
 	}
 
 }
