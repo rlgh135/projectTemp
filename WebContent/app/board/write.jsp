@@ -6,51 +6,40 @@
 <head>
     <meta charset="UTF-8">
     <title>write</title>
-   <link href="${cp}/css/wirte/mapApi.css" rel="stylesheet">
-   <link href="${cp}/css/wirte/write.css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link href="${cp}/css/write/mapApi.css" rel="stylesheet">
+    <link href="${cp}/css/write/write.css" rel="stylesheet">
 </head>
 <body class="write">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
+    <header>
+        <jsp:include page="${cp}/app/header.jsp"></jsp:include>
+    </header>
     <div id="wrap">
         <div></div>
-        <table class="header_area">
-            <tbody>
-                <tr>
-                    <td>
+        <div class="header_area" style="display: none;">
                         <span>${loginUser}님 환영합니다.</span>
                         <a class="btn" href="${cp}/userlogout.us">로그아웃</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="title">
-            <tbody>
-                <tr>
-                    <td>
-                        <h3>
-                            <img src="${cp}/images/타이틀.png" class="tit_img">
-                        </h3>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        </div>      
+        <div class="title">
+                        <p><strong>게시판</strong>글쓰기</p>
+        </div>         
+     
         <form id="boardForm" method="post" name="boardForm" action="${cp}/boardwriteok.bo">
-            <table border="1">
+            <table>
                 <tr>
-                    <th>제목</th>
+                    <th>ㆍ제목</th>
                     <td>
                         <input type="text" name="boardtitle" maxlength="50" placeholder="제목을 입력하세요">
                     </td>
                 </tr>
                 <tr>
-                    <th>작성자</th>
+                    <th>ㆍ작성자</th>
                     <td>
                         <input type="text" name="userid" maxlength="50" value="${loginUser}" readonly>
                     </td>
                 </tr>
                 <tr>
-                    <th>카테고리</th>
+                    <th>ㆍ카테고리</th>
                     <td>
                         <input type="checkbox" id="myCheckbox01" name="myCheckbox" value="#스포츠/레저">
                         <label for="myCheckbox01">스포츠/레저</label>
@@ -101,7 +90,7 @@
                 	</td>
                 </tr>
                 <tr>
-                    <th>내용</th>
+                    <th>ㆍ내용</th>
                     <td>
                         <textarea name="boardcontents"></textarea>
                     </td>
@@ -129,7 +118,7 @@
                     </td>
                 </tr>
                 <tr>
-                	<th>상세주소</th>
+                	<th></th>
                 	<td id="map2">
                 		<!-- 장소 정보를 표시할 요소 -->
 					    <div id="placeInfo"></div>
@@ -138,20 +127,17 @@
                 </tr>
             </table>
         </form>
-        <table class="btn_area">
-            <tbody>
-                <tr>
-                    <td>
-                        <a class="btn" href="javascript:sendit();">등록</a>
-                        <a class="btn" href="${cp}/boardlist.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="btn_area">
+                        <a class="subbtn" href="javascript:sendit();">등록</a>
+                        <a class="subbtn" href="${cp}/boardlist.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
+        </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>    
 <script src="${cp}/js/board_write/writeAddr.js"></script>
+<script>
+	const cp = '${cp}';
+</script>
 <script>
 	window.setTimeout(function(){
 	    document.querySelector("#wrap>div:nth-child(1)").style.display="none";
@@ -180,19 +166,6 @@
 	var replaceNotInt = /[^0-9]/gi;
 	    
 	    $(document).ready(function(){
-	    	
-	    	/* $("#month").on("input", function() {
-	    	    var x = $(this).val();
-	    	    if (x.length > 0) {
-	    	        // 입력값에서 숫자만 추출하여 저장
-	    	        var numericValue = x.replace(replaceNotInt, "");
-	    	        // 12를 초과하는 경우 입력을 비움
-	    	        if (parseInt(numericValue) > 12) {
-	    	            $(this).val("");
-	    	        }
-	    	    }
-	    	}); */
-	    	
 	    	$("#month").on("focusout", function() {
 	            var month = $(this).val();
 	            if (month.length > 0) {

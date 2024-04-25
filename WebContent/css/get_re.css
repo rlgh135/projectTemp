@@ -1,12 +1,55 @@
-input[type="text"]{
+input[type="text"],
+#placeInfo *,
+#jsonDataInput *{
 	font-size: 18px;
 	border:none;
 	margin-left:10px;
+	margin: 40px 0px;
+	
+		
+	/* display: inline-block; */
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* ���� �� �ڸ��� �߰� ��Ÿ�� */
+    white-space: normal;
 }
+/* �ּ� �Է�ĭ  */
+#keyword{
+	margin: 0;
+	size: 20px;
+}
+
+/* get ī�װ��� ������ ���� */
+#boardcategory{
+	width: 100%;		
+}
+
+/* Firefox�� ���� ��Ÿ�� */
 textarea {
-    resize: none;
-    border:none;
+    resize: both; /* ����� ũ�� ���� �����ϵ��� ���� */
+    height: auto; /* �ڵ����� �þ���� ���� */
+    font-size: 18px;
+    border: none;
+    overflow: auto; /* Firefox���� ��ũ���� ������ �ʵ��� ���� */
+    font-weight: bold; /* ��Ʈ�� ���⸦ bold�� ���� */
+    background-color: #f9f9f9;
+    padding: 20px 0;
 }
+
+.lboard_category{
+	padding: 25px;
+}
+/* modify ī�°��� ���� */
+.lboard_category_body p{
+    font-size: 18px !important;
+    border: none !important;
+    margin-left: 10px !important;
+    display: inline-block;
+}
+
 #get_wrap{
 	width: 1400px;
 	margin:50px auto;
@@ -146,4 +189,10 @@ textarea {
 	width:1300px;
 	margin:0 auto;
 	text-align:center;
+}
+
+.addr_serve{
+    display: inline-block;
+    font-size: 18px;
+    margin: 2px 0px;
 }

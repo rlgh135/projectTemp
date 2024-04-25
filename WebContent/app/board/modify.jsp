@@ -1,42 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>modify</title>
-<link href="${cp}/css/style.css" rel="stylesheet">
-<link href="${cp}/css/wirte/mapApi.css" rel="stylesheet">
+<link href="${cp}/css/write/mapApi.css" rel="stylesheet">
+<link href="${cp}/css/get_re.css" rel="stylesheet">
 </head>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
 <body class="modify">
 	<header>
 		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
 	</header>
+	<div class="line_top"></div>
 	<div id="wrap" class="modify">
-		<!-- 타이틀 띄워주는 테이블 -->
-		<table class="title">
-			<tbody>
-				<tr>
-					<td>
-						<h3>
-							<img src="${cp}/images/타이틀.png" class="tit_img">
-						</h3>
-					</td>
-				</tr>
-			</tbody>
-		</table>																			<!-- 파일 데이터를 전송하기 위한 형식 -->
-		<form id="boardForm" method="post" name="boardForm" action="${cp}/boardupdateok.bo"> <!-- enctype="multipart/form-data" -->
+		<div></div>
+		<form id="boardForm" method="post" name="boardForm" action="${cp}/boardupdateok.bo">
 			<input type="hidden" name="boardnum" value="${board.lpostnum }">
 			<input type="hidden" name="page" value="${param.page}">
 			<input type="hidden" name="keyword" value="${param.keyword}">
-			<table border="1">
+			<table border="0" class="board_area">
 				<tr>
-					<th>제목</th>
-					<td>
+					<th class = "lboard_tit" colspan="2">
 						<input type="text" name="boardtitle" maxlength="50" value="${board.lposttitle}">
-					</td>
+					</th>
 				</tr>
 				<tr>
 					<th>작성자</th>
@@ -45,66 +33,59 @@
 					</td>
 				</tr>
 				<tr>
+                    <th class="lboard_category">카테고리 수정</th>
+                    <td class="lboard_category_body">
+                        <p><input type="checkbox" id="myCheckbox01" name="myCheckbox" value="#스포츠/레저">
+                        <label for="myCheckbox01">스포츠/레저</label></p>
+						<p><input type="checkbox" id="myCheckbox02" name="myCheckbox" value="#취미">
+						<label for="myCheckbox02">취미</label></p>
+						<p><input type="checkbox" id="myCheckbox03" name="myCheckbox" value="#친목/모임">
+						<label for="myCheckbox03">친목/모임</label></p>
+						<p><input type="checkbox" id="myCheckbox04" name="myCheckbox" value="#음악">
+						<label for="myCheckbox04">음악</label></p>
+						<p><input type="checkbox" id="myCheckbox05" name="myCheckbox" value="#문화/예술">
+						<label for="myCheckbox05">문화/예술</label></p>
+						<p><input type="checkbox" id="myCheckbox06" name="myCheckbox" value="#여행/캠핑">
+						<label for="myCheckbox06">여행/캠핑</label></p>
+						<p><input type="checkbox" id="myCheckbox07" name="myCheckbox" value="#맛집/요리">
+						<label for="myCheckbox07">맛집/요리</label></p>
+						<p><input type="checkbox" id="myCheckbox08" name="myCheckbox" value="#어학/외국어">
+						<label for="myCheckbox08">어학/외국어</label></p>
+						<p><input type="checkbox" id="myCheckbox09" name="myCheckbox" value="#교육/공부">
+						<label for="myCheckbox09">교육/공부</label></p>
+						<p><input type="checkbox" id="myCheckbox10" name="myCheckbox" value="#인문/과학">
+						<label for="myCheckbox10">인문/과학</label></p>
+						<p><input type="checkbox" id="myCheckbox11" name="myCheckbox" value="#종교/봉사">
+						<label for="myCheckbox11">종교/봉사</label></p>
+						<p><input type="checkbox" id="myCheckbox12" name="myCheckbox" value="#반려동물/동물">
+						<label for="myCheckbox12">반려동물/동물</label></p>
+						<p><input type="checkbox" id="myCheckbox13" name="myCheckbox" value="#자연/귀농">
+						<label for="myCheckbox">자연/귀농</label></p>
+						<p><input type="checkbox" id="myCheckbox14" name="myCheckbox" value="#게임">
+						<label for="myCheckbox14">게임</label></p>
+						<p><input type="checkbox" id="myCheckbox15" name="myCheckbox" value="#IT/컴퓨터">
+						<label for="myCheckbox15">IT/컴퓨터</label></p>
+						<p><input type="checkbox" id="myCheckbox16" name="myCheckbox" value="#팬클럽">
+						<label for="myCheckbox16">팬클럽</label></p>
+						<p><input type="checkbox" id="myCheckbox17" name="myCheckbox" value="#애니메이션">
+						<label for="myCheckbox17">애니메이션</label></p>
+                    </td>
+                </tr>
+				<tr id="timetr">
                 	<th>마감시간</th>
                 	<td id="timetd">
-                		<input type='text' name="month" id="month" maxlength='2' value="${deadline[0]}"/><span>월 </span>
-                		<input type='text' name="day" id="day" maxlength='2' value="${deadline[1]}"/><span>일 </span>
-                		<input type='text' name="hour" id="hour" maxlength='2'value="${deadline[2]}"/><span>시 </span>
-                		<input type='text' name="minute" id="minute" maxlength='2' value="${deadline[3]}"/><span>분    </span>
-                		<span id="alertnode" style="color: red"></span>
-                		
+                		<input type='text' name="month" id="month" maxlength='2' value="${deadline[0]}" style="width: 50px;"/><span>월</span>
+                		<input type='text' name="day" id="day" maxlength='2' value="${deadline[1]}" style="width: 50px;"/><span>일</span>
+                		<input type='text' name="hour" id="hour" maxlength='2'value="${deadline[2]}" style="width: 50px;"/><span>시</span>
+                		<input type='text' name="minute" id="minute" maxlength='2' value="${deadline[3]}" style="width: 50px;"/><span>분</span>
+                		<span id="alertnode" style="color: red" ></span>
                 		<input type="checkbox" name="notime" value="yes"><span>없음</span>
                 	</td>
                 </tr>
                 <tr>
-					<th>기존 카테고리</th>
-					<td>
-						<input type="text" maxlength="50" value="${board.lpostcategory}" readonly>
-					</td>
-				</tr>
-				<tr>
-                    <th>수정할 카테고리</th>
-                    <td>
-                        <input type="checkbox" id="myCheckbox01" name="myCheckbox" value="#스포츠/레저">
-                        <label for="myCheckbox01">스포츠/레저</label>
-						<input type="checkbox" id="myCheckbox02" name="myCheckbox" value="#취미">
-						<label for="myCheckbox02">취미</label>
-						<input type="checkbox" id="myCheckbox03" name="myCheckbox" value="#친목/모임">
-						<label for="myCheckbox03">친목/모임</label>
-						<input type="checkbox" id="myCheckbox04" name="myCheckbox" value="#음악">
-						<label for="myCheckbox04">음악</label>
-						<input type="checkbox" id="myCheckbox05" name="myCheckbox" value="#문화/예술">
-						<label for="myCheckbox05">문화/예술</label>
-						<input type="checkbox" id="myCheckbox06" name="myCheckbox" value="#여행/캠핑">
-						<label for="myCheckbox06">여행/캠핑</label>
-						<input type="checkbox" id="myCheckbox07" name="myCheckbox" value="#맛집/요리">
-						<label for="myCheckbox07">맛집/요리</label>
-						<input type="checkbox" id="myCheckbox08" name="myCheckbox" value="#어학/외국어">
-						<label for="myCheckbox08">어학/외국어</label>
-						<input type="checkbox" id="myCheckbox09" name="myCheckbox" value="#교육/공부">
-						<label for="myCheckbox09">교육/공부</label>
-						<input type="checkbox" id="myCheckbox10" name="myCheckbox" value="#인문/과학">
-						<label for="myCheckbox10">인문/과학</label>
-						<input type="checkbox" id="myCheckbox11" name="myCheckbox" value="#종교/봉사">
-						<label for="myCheckbox11">종교/봉사</label>
-						<input type="checkbox" id="myCheckbox12" name="myCheckbox" value="#반려동물/동물">
-						<label for="myCheckbox12">반려동물/동물</label>
-						<input type="checkbox" id="myCheckbox13" name="myCheckbox" value="#자연/귀농">
-						<label for="myCheckbox">자연/귀농</label>
-						<input type="checkbox" id="myCheckbox14" name="myCheckbox" value="#게임">
-						<label for="myCheckbox14">게임</label>
-						<input type="checkbox" id="myCheckbox15" name="myCheckbox" value="#IT/컴퓨터">
-						<label for="myCheckbox15">IT/컴퓨터</label>
-						<input type="checkbox" id="myCheckbox16" name="myCheckbox" value="#팬클럽">
-						<label for="myCheckbox16">팬클럽</label>
-						<input type="checkbox" id="myCheckbox17" name="myCheckbox" value="#애니메이션">
-						<label for="myCheckbox17">애니메이션</label>
-                    </td>
-                </tr>
-				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="boardcontents">${board.lpostcontents}</textarea>
+						<textarea name="boardcontents" rows="20" cols="100">${board.lpostcontents}</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +97,7 @@
 						        <div class="option">
 						            <div>
 						                <div class="search-form" onsubmit="searchPlaces(); return false;" style="display:inline">
-											<span>키워드</span><input type="text" value="${addr.placeName}" id="keyword" size="25" onkeydown="if(event.keyCode==13){mapApi(); return false;}"> 
+											<span>키워드</span><input type="text" value="${addr.placeName}" id="keyword" onkeydown="if(event.keyCode==13){mapApi(); return false;}"> 
 											<button type="button" onclick="mapApi()">검색</button> 
 										</div>
 						            </div>
@@ -143,8 +124,8 @@
 			<tbody>
 				<tr>
 					<td>
-						<a class="btn" href="javascript:sendit();">수정완료</a>
-						<a class="btn" href="${cp}/boardlist.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
+						<a class="lp_btn_box" href="javascript:sendit();">수정완료</a>
+						<a class="lp_btn_box" href="${cp}/boardlist.bo?page=${param.page}&keyword=${param.keyword}">목록</a>
 					</td>
 				</tr>
 			</tbody>
@@ -317,9 +298,7 @@
 	    }
 
 	    window.onload = function() {
-	        // 예시로 '#교육/공부 #인문/과학' 값을 받았다고 가정
-	        
-	        var values = "${board.lpostcategory}";
+	    	var values = "${board.lpostcategory}";
 	        console.log(values);
 
 	        // 체크박스 선택 함수 호출

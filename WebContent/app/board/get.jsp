@@ -1,3 +1,4 @@
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -10,7 +11,7 @@
 <link href="${cp}/css/get_re.css" rel="stylesheet">
 </head>
 <body class="get">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6ad5c905a822d4c391e596dfbc9acc6&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b80d880bf487c48bfc24c5920bfb84f0&libraries=services"></script>
 	<c:if test="${empty loginUser }">
 		<script>
 			alert("로그인 후 이용하세요!");
@@ -51,7 +52,7 @@
 			<tr>
 				<th class="lboard_category">카테고리</th>
 				<td>
-					<input type="text" name="boardcategory" value="${board.lpostcategory}" readonly>
+					<input type="text" name="boardcategory"  id="boardcategory" value="${board.lpostcategory}" readonly>
 				</td>
 			</tr>
 			<tr>
@@ -64,11 +65,11 @@
                 </td>
             </tr>
 			<tr>
-				<th class="lboard_contents">내용</th>
-				<td>
-					<input type="text" name="boardcontents" value="${board.lpostcontents}" readonly>
-				</td>
-			</tr>
+				<th>내용</th>
+					<td>
+						<textarea name="message" rows="20" cols="100">${board.lpostcontents}</textarea>
+					</td>
+				</tr>
 			<tr>
 				<th class="lboard_joinuser">참여유저</th>
 				<c:if test="${lpost_user_list != ''}">
@@ -87,6 +88,13 @@
 				<th class="lboard_site">위치</th>
 				<td>
 				   <div id="map" class="lboard_site_box"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>상세주소</th>
+				<td>
+					<div class="addr_serve">도로명주소: ${RoadAddress}</div><br/>
+					<div class="addr_serve">전화번호: ${Phone}</div>
 				</td>
 			</tr>
 			<tr>
@@ -296,6 +304,16 @@
 	}
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,5 @@
 package com.twojo.app.board;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,14 +7,10 @@ import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.LPostDAO;
 import com.twojo.model.dao.Lpost_AddrDAO;
-//import com.twojo.model.dao.FileDAO;
 import com.twojo.model.dto.LPostDTO;
 import com.twojo.model.dto.Lpost_AddrDTO;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-//import com.twojo.model.dto.FileDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class BoardUpdateOkAction implements Action {
 	Lpost_AddrDTO ladto = new Lpost_AddrDTO();
