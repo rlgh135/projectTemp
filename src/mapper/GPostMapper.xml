@@ -35,6 +35,9 @@
 	<delete id="deleteGPost" parameterType="long">
 		delete from gpost where gpostnum=#{gpostnum}
 	</delete>
+	<delete id="deleteUserGPost" parameterType="hashmap">
+		delete from gpost where groupnum=#{groupnum} and userid=#{userid}
+	</delete>
 	<update id="addReplyCnt" parameterType="long">
 		update `gpost` set gprcnt = gprcnt+1 where gpostnum=#{gpostnum}
 	</update>

@@ -6,6 +6,13 @@
 <head>
 <link rel="stylesheet" href="${cp}/css/myinfo.css">
 <meta charset="UTF-8">
+<style>
+<!--
+ .arrowhide{
+ 	display: none;
+ }
+-->
+</style>
 </head>
 <body>
 	<header>
@@ -102,14 +109,20 @@
 	<footer>
 		<jsp:include page="${cp}/app/footer.jsp"></jsp:include>
 	</footer>
-</body>	
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>	
 <script>
 	const cp = '${cp}';
 	const userid = '${loginUser}';
 </script>
 <script>
 	var lpage = 0;
+	var beforelpage = 0;
 	var gpage = 0;
+	var beforegpage = 0;
+	const targetdivnodelon = document.getElementById("LPost0");
+	const targetdivnodeltw = document.getElementById("LPost1");
+	const targetdivnodeltr = document.getElementById("LPost2");
 	
 	document.addEventListener("DOMContentLoaded", function() {
         loadLp(1);
@@ -128,21 +141,34 @@
 		console.log("불러오는 lpage: "+lpage);
 	    const xhr = new XMLHttpRequest();
 	    	
+	    const leftarrownode = document.getElementById("left-Lpost-Btn");
+	    const rightarrownode = document.getElementById("right-Lpost-Btn");
 	    xhr.onreadystatechange = function(){
 	    	if(xhr.readyState == 4){
 	    		if(xhr.status==200){
-	    			//let targetnode = id="LPost${i}";
 	    			console.log(xhr.responseText);
 	    			const obj = JSON.parse(xhr.responseText);
 					//console.log(obj);
 					const lplist = obj.lplist;
 					console.log(lplist);
 					
+					if (lpage === 1){
+						leftarrownode.className="arrowhide";
+					} else {
+						leftarrownode.className="seek";
+					}
+					if (lplist.length === 0 || lplist.length === 1 || lplist.length === 2){
+						rightarrownode.className="arrowhide";
+					} else {
+						rightarrownode.className="seek";
+					}
+					
 					var idx = 0;
 					
 					for (var i in lplist) {
 						var targetdivnode = document.getElementById("LPost"+i);
 						targetdivnode.setAttribute("onclick","javascript:goLPost("+lplist[i].lpostnum+")");
+						$('#LPost'+i).css({"border": "1px solid #ccc;"});
 						
 						var targetpnode = document.getElementById("lpost_title"+i);
 						targetpnode.innerHTML = lplist[i].lposttitle;
@@ -152,7 +178,20 @@
 						idx++;
 					}
 					
-					//리스트 마지막일때 로직 추가
+					if(idx<3){
+						for (var j = idx; j < 3; j++) {
+							var targetdivnode = document.getElementById("LPost"+j);
+							targetdivnode.setAttribute("onclick","");
+							$('#LPost'+j).css({"border":"none"});
+							
+							var targetpnode = document.getElementById("lpost_title"+j);
+							targetpnode.innerHTML = "";
+							
+							var targetppnode = document.getElementById("lpost_likecnt"+j);
+							targetppnode.innerHTML = "";
+						}
+					}
+					
 	    		}
 	    	}
 	    }
@@ -164,6 +203,9 @@
 		console.log("불러오는 gpage: "+gpage);
 		const xhr = new XMLHttpRequest();
     	
+		const leftarrownode = document.getElementById("left-Group-Btn");
+	    const rightarrownode = document.getElementById("right-Group-Btn");
+		
 	    xhr.onreadystatechange = function(){
 	    	if(xhr.readyState == 4){
 	    		if(xhr.status==200){
@@ -175,11 +217,23 @@
 					const sysnamelist = obj.sysnamelist;
 					console.log(sysnamelist);
 					
+					if (gpage === 1){
+						leftarrownode.className="arrowhide";
+					} else {
+						leftarrownode.className="seek";
+					}
+					if (grouplist.length === 0 || grouplist.length === 1 || grouplist.length === 2){
+						rightarrownode.className="arrowhide";
+					} else {
+						rightarrownode.className="seek";
+					}
+					
 					var idx = 0;
 					
 					for (var i in grouplist) {
 						var targetdivnode = document.getElementById("myGroup"+i);
 						targetdivnode.setAttribute("onclick","javascript:goGPost("+grouplist[i].groupnum+")");
+						$('#myGroup'+i).css({"border": "1px solid #ccc;"});
 						
 						var targetimgnode = document.getElementById("gthumbnail"+i);
 						if(sysnamelist[i] !== "main_img.jpg"){
@@ -200,6 +254,23 @@
 						idx++;
 					}
 	    		}
+	    		
+	    		if(idx<3){
+					for (var j = idx; j < 3; j++) {
+						var targetdivnode = document.getElementById("myGroup"+j);
+						targetdivnode.setAttribute("onclick","");
+						$('#myGroup'+j).css({"border":"none"});
+						
+						var targetpnode = document.getElementById("gcategory"+j);
+						targetpnode.innerHTML = "";
+						
+						var targetppnode = document.getElementById("gname"+j);
+						targetppnode.innerHTML = "";
+
+						var targetppnode = document.getElementById("gmaster"+j);
+						targetppnode.innerHTML = "";
+					}
+				}
 	    	}
 	    }
 	    xhr.open("GET", cp+"/mygroup.us?userid="+userid+"&page="+gpage);

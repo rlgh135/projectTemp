@@ -136,7 +136,6 @@ body, html {
     width: 164px; /* 이미지의 너비 조정 */
     height: auto; /* 이미지의 높이 자동 조정 */
     margin-right: 10px; /* 이미지와 텍스트 사이의 간격 설정 */
-    border-right: 1px solid gray ;
 }
 .myinfo_card_list p:nth-child(3){
     width: 50px;

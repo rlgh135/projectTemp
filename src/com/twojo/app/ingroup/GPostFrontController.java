@@ -170,6 +170,13 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/showpostmore.gp : "+e);
 			}
 			break;
+		case "/quitmoim.gp":
+			try {
+				transfer = new QuitMoimAction().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("/quitmoim.gp : "+e);
+			}
+			break;
 		}
 		
 		if (transfer != null) {

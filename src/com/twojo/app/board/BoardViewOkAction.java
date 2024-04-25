@@ -60,7 +60,9 @@ public class BoardViewOkAction implements Action{
       deadline[1] = base.split("-")[2].split(" ")[0];
       deadline[2] = base.split("-")[2].split(" ")[1].split(":")[0];
       deadline[3] = base.split("-")[2].split(" ")[1].split(":")[1];
-      req.setAttribute("deadline", deadline);
+      if(!(base.split("-")[0].equals("1000"))){
+    	  req.setAttribute("deadline", deadline);
+      }
       
       req.setAttribute("board", board);
       req.setAttribute("replies", rdao.getReplies(boardnum));

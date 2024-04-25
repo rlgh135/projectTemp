@@ -93,7 +93,7 @@ public class BoardWriteOkAction implements Action {
         	System.out.println("deadline: "+deadline);
         	board.setDeadline(deadline);
         } else {
-        	String deadline = "0000-00-00 00:00:00";
+        	String deadline = "1000-01-01 00:00:00";
         	board.setDeadline(deadline);
         }
         

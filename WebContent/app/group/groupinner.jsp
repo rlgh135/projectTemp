@@ -1578,7 +1578,9 @@ button {
 	}
 	
 	function quitMoim(groupnum, usertype){
-		
+		if(confirm("모임에서 탈퇴하시겠어요?")){
+			location.href=cp+"/quitmoim.gp?groupnum="+groupnum;
+		}
 	}
 </script>
 </html>

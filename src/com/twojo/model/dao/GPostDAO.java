@@ -95,4 +95,11 @@ public class GPostDAO {
 		datas.put("userid", userid);
 		return ss.selectList("GPost.getListByUser", datas);
 	}
+
+	public boolean deleteUserGPost(String userid, long groupnum) {
+		HashMap<String, Object> datas = new HashMap<String, Object>();
+		datas.put("userid", userid);
+		datas.put("groupnum", groupnum);
+		return ss.delete("GPost.deleteUserGPost", datas)==1;
+	}
 }

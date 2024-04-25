@@ -14,11 +14,13 @@ CREATE TABLE user (
   userzipcode varchar(1000),
   joinregdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 select * from user;
 select * from user where userid='cherry';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
 value('abc1', '1234', '김셩억', '강남구', '강남구', '강남구', '스포츠/레저');
+update user
+set useraddrgu = '강남구'
+where userid='apple';
 drop table user;
 
 CREATE TABLE userimg (
@@ -127,7 +129,7 @@ create table `group_user`(
     userid varchar(300),
     joindate datetime default now()
 );
-select * from `group_user` where userid='abc1';
+select * from `group_user`;
 drop table group_user;
 insert into group_user(groupnum, userid) value(2, 'abc3');
 delete from group_user where userid='abc1' and groupnum=2;
@@ -162,7 +164,7 @@ CREATE TABLE `gpost` (
 );
 update `gpost` set gpostcontents = '내용이엥', gpostregdate = now() where gpostnum=46;
 drop table `gpost`;	
-select * from `gpost` where userid='abc1';
+select * from `gpost` where groupnum=1;
 insert into gpost(groupnum, gposttitle, userid, gpostcontents) value(2, 'd', 'abc3', '그룹2내용');
 select * from `gpost` where groupnum=2 and gpostgongji=1;
 update gpost set gpostgongji=1 where gpostnum=2;
@@ -225,8 +227,8 @@ delete from reqlist where leaderid='abc320';
 select * from reqlist;
 select * from reqlist where (groupnum=1 and leaderid is null);
 select * from reqlist where (groupnum=2 and autoreg=1);
-insert into reqlist(groupnum, leaderid, question) value(1, 'abc320', '1번 질문 입니다§2번 질문 입니다§3번 질문 입니다§4번 질문 입니다§');
-insert into reqlist(groupnum, leaderid, autoreg) value(2, 'abc772', 1);
+insert into reqlist(groupnum, leaderid, question) value(1, 'abc1', '1번 질문 입니다§2번 질문 입니다§3번 질문 입니다§4번 질문 입니다§');
+insert into reqlist(groupnum, leaderid, question, autoreg) value(1, 'abc1', '모임에 가입하시겠어요?§' , 1);
 insert into reqlist(groupnum, userid, answer) value(1, 'abc1', '답1-1§답2-1§답3-1§답4-1§');
 /*0417 추가*/
 

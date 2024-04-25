@@ -3,20 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-	<link href="${cp}/css/list1.css" rel="stylesheet">
-	<style>
-		.img{
-			width: 200px;
-			margin-right: 20px;
-		}
-	</style>
+<link href="${cp}/css/list1.css" rel="stylesheet">
 </head>
+
 <body>
     <header>
 		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
@@ -33,7 +29,7 @@
                 <div id="gather_box">글쓰기</div>
             </a>
         </div>
-		<h2 id="title"><span style="color: rgb(0, 83, 151); font-size: 30px;">${useraddr}</span>의 곧 마감되는 게시글이에요</h2>
+		<h2 id="title">${useraddr}의 곧 마감되는 게시글이에요</h2>
 		<div class="firstpost">
 			<c:if test="${not empty quickpost}">
 			<c:forEach var="i" begin="0" end="${quickpost.size()-1}">
@@ -47,20 +43,20 @@
 						</div>   
 						<div class="content">${quickp.getLpostcontents()}</div>
 						<div class="adgory">
-							<div class="addr">${quickp.lpostaddr}</div>
+							<div class="addr">${quickp.getLpostaddr()}</div>
 							<div class="category">${quickp.getLpostcategory()}</div>
 						</div>
 						<div class="img">
 						<c:choose>
 						<c:when test="${quickp.getImageCount()!=0}">
-						<p>${quickp.getImageCount()}</p>
+						<%-- <p>${quickp.getImageCount()}</p> --%>
 							<c:forEach var="j" begin="0" end="${quickp.getImageCount()-1}">
 							        <img src="./images/User_Avatar_Human_Profile_Face_Circle-256.webp" alt="모집인원"
-							             style="width: 25px; height: 25px;">
+							             style="width: 35px; height: 35px; margin-top:10px;">
 							    </c:forEach>
 						</c:when>
 						<c:otherwise>
-							<p>아직 아무도 참여하지 않았어요</p>
+							아직 아무도 참여하지 않았어요
 						</c:otherwise>	
 	
 						</c:choose>
