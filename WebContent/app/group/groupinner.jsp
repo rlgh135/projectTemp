@@ -166,21 +166,21 @@ button {
 					<div>
 						<div class="group-btn-box btnBox">
 							<c:choose>
-								<c:when test="${usertype eq 'foreigner'} ">
-									<input type="button" value="모임 가입하기" class="joinMoim"
-										onclick="joinMoim(${group.groupnum})">
-								</c:when>
-								<c:otherwise>
+								<c:when test="${usertype eq 1}">
 									<c:choose>
-										<c:when test="">
+										<c:when test="${loginUser eq group.groupmaster}">
 											<input type="button" value="모임 탈퇴하기" class="joinMoim"
-												onclick="quitMoim(${group.groupnum}, 0)">
+												onclick="quitMoim(${group.groupnum}, 1)">
 										</c:when>
 										<c:otherwise>
 											<input type="button" value="모임 탈퇴하기" class="joinMoim"
-												onclick="quitMoim(${group.groupnum}, 1)">
+												onclick="quitMoim(${group.groupnum}, 0)">
 										</c:otherwise>
 									</c:choose>
+								</c:when>
+								<c:otherwise>
+										<input type="button" value="모임 가입하기" class="joinMoim"
+											onclick="joinMoim(${group.groupnum})">
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -1304,7 +1304,7 @@ button {
 		const sujung = document.sujungForm;
 		sujung.submit();
 	}
-	function joinMoim(groupnum, loginUser) {
+	function joinMoim(groupnum) {
 		location.href="/joinmoim.gp?groupnum="+groupnum;
 	}
 	function sendMessage(receiveid){

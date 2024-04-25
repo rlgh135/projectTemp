@@ -45,42 +45,22 @@ public class BoardListOkAction implements Action{
 			totalCnt = bdao.getBoardCnt(keyword);
 		}
 		
-		//한 페이지에서 보여줄 게시글의 개수
 		int pageSize = 12;
-		
-		//페이징 처리 시 아래에 나올 페이지 번호의 개수
 		int pageCnt = 10;
-		
-		//아래쪽 페이징 처리 부분에 보여질 첫 번째 페이지 번호
 		int startPage = (page-1)/pageCnt*pageCnt+1;
-		
-		//아래쪽 페이징 처리 부분에 보여질 마지막 페이지 번호
 		int endPage = startPage + (pageCnt-1);
-		
-		//전체 개시글의 개수를 기반으로 한 띄워질 수 있는 가장 마지막 페이지(실제로 존재할 수 있는 가장 마지막 페이지) 번호
 		int totalPage = (int)(totalCnt-1)/pageSize + 1;
-
-		//가장 마지막 페이지 번호(totalPage)보다 단순한 연산으로 구해진 endPage가 더 큰 경우가 있다.(허구의 페이지 번호가 존재할 수 있다)
-		//그 때는 endPage를 가장 마지막 페이지 번호(totalPage)로 바꿔주어야 한다.
+		
 		endPage = endPage > totalPage ? totalPage : endPage;
 		
 		int startRow = (page-1)*pageSize;
-		List<LPostDTO> list = null;
 		
-//		if((keyword == null || keyword.equals("")) && searchMenu.equals("") || searchMenu == null)
-//			list = bdao.getList(startRow,pageSize);
-//		else if(keyword != null && searchMenu.equals("") || searchMenu == null) 
-//			list = bdao.getList(startRow,pageSize,keyword);
-//		else
-//			list = bdao.getList(startRow,pageSize,keyword, searchMenu);
+		List<LPostDTO> list = null;
 		
 		if(keyword == null || keyword.equals(""))
 			list = bdao.getList(startRow,pageSize);
 		else
 			list = bdao.getList(startRow,pageSize,keyword);
-		
-		
-		
 		
 		req.setAttribute("list", list);
 		System.out.println(list.size());
@@ -92,9 +72,6 @@ public class BoardListOkAction implements Action{
 		req.setAttribute("keyword", keyword);
 		req.setAttribute("placeName", req.getAttribute("placeName"));
 		req.setAttribute("roadAddress", req.getAttribute("roadAddress"));
-		
-
-		
 		
 		LReplyDAO rdao = new LReplyDAO();
 		ArrayList<Integer> reply_cnt_list = new ArrayList<Integer>();

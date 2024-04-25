@@ -50,12 +50,12 @@ body{
 form table tr:last-child [type=button] {
     padding: 10px 10px;
     margin: 30px;
-    background-color: rgb(255 248 67);
-    color: black;
+    background-color: rgb(49 168 247);
+    color: white;
     font-size: 15px;
     /* font-weight: bold; */
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 300px;
 }
 input{
@@ -117,11 +117,11 @@ input:focus{
 .join td > input[type=text]+input[type=button]{
     margin-left:10px;
     padding:0px 10px;
-    background-color:rgb(255 248 67);
-    color:#000;
+    background-color:rgb(49 168 247);
+    color:white;
     font-size:14px;
     border:none;
-    border-radius:5px;
+    border-radius:15px;
     width:80px; height: 40px; line-height: 40px;
 }
 
@@ -243,10 +243,10 @@ input:focus{
 .hobby_input > input[type=button]{
 	margin-left:20px;
 	padding:10px 10px;
-	background-color: rgb(255 248 67);
-	color:#000;
+	background-color:rgb(49 168 247);
+	color:WHITE;
 	font-size:14px; 
-	border:none; border-radius: 5px;
+	border:none; border-radius: 15px;
 	width:70px;
 }
 .hobby_area + tr > th{

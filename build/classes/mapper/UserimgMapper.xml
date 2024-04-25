@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Userimg">
+	<insert id="insert" parameterType="userimgdto">
+		insert into userimg(userid, userimgorgname, userimgsysname) values (#{userid}, #{userimgorgname}, #{userimgsysname})
+	</insert>
+	
+	<delete id="delete" parameterType="string">
+		delete from userimg where userimgsysname = #{sysname}
+	</delete>
+
+	<delete id="deleteuserimg" parameterType="string">
+		delete from userimg where userid = #{userid}
+	</delete>
+	
+	<select id="imgselect" parameterType="string" resultType="userimgdto">
+		select * from userimg where userid = #{userid}
+	</select>
+	
+	<select id="imgcheck" parameterType="string" resultType="userimgdto">
+		select * from userimg where userid = #{userid}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

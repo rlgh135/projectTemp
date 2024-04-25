@@ -32,7 +32,7 @@
 						</a>
 						<div id="lpostListWrap">
 						<div id="left-Lpost-Btn">
-							<img alt="" src="${cp}/images/sendchat.svg" onclick="loadLp(-1)">
+							<img alt="" src="${cp}/images/arrow_left_icon.png" onclick="loadLp(-1)">
 						</div>
 						<c:forEach var="i" begin="${0}" end="${2}">
 							<div id="LPost${i}" class="myinfo_card_list LPost${i}"
@@ -44,7 +44,7 @@
 							</div>
 						</c:forEach>
 						<div id="right-Lpost-Btn">
-							<img alt="" src="${cp}/images/sendchat.svg" onclick="loadLp(1)">
+							<img alt="" src="${cp}/images/arrow_right_icon.png" onclick="loadLp(1)">
 						</div>
 						</div>
 			</div>
@@ -67,7 +67,7 @@
 						</a>
 						<div id="groupListWrap">
 						<div id="left-Group-Btn">
-							<img alt="" src="${cp}/images/sendchat.svg" onclick="loadGr(-1)">
+							<img alt="" src="${cp}/images/arrow_left_icon.png" onclick="loadGr(-1)">
 						</div>
 						<c:forEach var="i" begin="0" end="2">
 							<div id="myGroup${i}" class="myinfo_card_list GPost"
@@ -84,7 +84,7 @@
 							</div>
 						</c:forEach>
 						<div id="right-Group-Btn">
-							<img alt="" src="${cp}/images/sendchat.svg" onclick="loadGr(1)">
+							<img alt="" src="${cp}/images/arrow_right_icon.png" onclick="loadGr(1)">
 						</div>
 						</div>
 						

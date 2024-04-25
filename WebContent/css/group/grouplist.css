@@ -115,7 +115,8 @@ table, tr, th, td{
 }
 .user_gnb a:hover .userPfImg{
 	transform: scale(1.1);
-    box-shadow: 0 0 10px #ff6d1d;
+	border: 2px solid #ff6d1d;
+    box-shadow: 0 0 5px #ff6d1d;
 }
 #msgCheck_box{
 	display:none;

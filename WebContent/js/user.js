@@ -174,35 +174,35 @@ function findAddr() {
                 addr = data.jibunAddress;
             }
 
-            // 사용자가 선택한 주소가 도로명 타입일 때 참고항목을 조합합니다.
+            if(addr !== ''){
+            	const parts = addr.split(" ");
+            	for (const part of parts) {
+            		// '구'로 끝나는 부분을 찾으면 추출합니다.
+            		if (part.endsWith('구')) {
+            			addrgu = part;
+            			break; // '구'를 찾았으므로 루프를 종료합니다.
+            		}
+            	}
+            }
+            
+            // 건물명이 있고, 공동주택일 경우 추가합니다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+            	addrgu += (addrgu !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만듭니다.
+            if(addrgu !== ''){
+            	addrgu = addrgu;
+            }
+           /*// 사용자가 선택한 주소가 도로명 타입일 때 참고항목을 조합합니다.
             if(data.userSelectedType === 'R'){
                 // 법정동명이 있을 경우 추가합니다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝납니다.
-                if(addr !== ''){
-                    const parts = addr.split(" ");
-                    for (const part of parts) {
-                        // '구'로 끝나는 부분을 찾으면 추출합니다.
-                        if (part.endsWith('구')) {
-                            addrgu = part;
-                            break; // '구'를 찾았으므로 루프를 종료합니다.
-                        }
-                    }
-                }
-                
-                // 건물명이 있고, 공동주택일 경우 추가합니다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                    addrgu += (addrgu !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만듭니다.
-                if(addrgu !== ''){
-                    addrgu = addrgu;
-                }
             } else {
                 // 주소가 도로명 타입이 아닐 때는 '없어요'라는 값을 할당합니다.
                 addrgu = '없어요';
-            }
-
+            }*/
+            
             // 조합된 참고항목을 해당 필드에 넣습니다.
             document.getElementById("useraddrgu").value = addrgu;
 

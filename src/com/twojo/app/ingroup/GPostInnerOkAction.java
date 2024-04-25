@@ -33,12 +33,12 @@ public class GPostInnerOkAction {
 		GroupUserDAO gudao = new GroupUserDAO();
 		
 		if(gudao.userInGroup(group.getGroupnum(), loginuser)==null) {
-			req.setAttribute("usertype", "foreigner");
+			req.setAttribute("usertype", 0);
 		} else {
 			if (loginuser.equals(group.getGroupmaster())) {
-				req.setAttribute("usertype", "common");
+				req.setAttribute("usertype", 1);
 			} else {
-				req.setAttribute("usertype", "groupmaster");
+				req.setAttribute("usertype", 1);
 			}
 		}
 		

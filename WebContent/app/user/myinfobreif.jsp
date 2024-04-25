@@ -31,8 +31,8 @@
 }
 
 .profile_img img{
-    width: 300px;
-    height: 300px;
+    width: 296px;
+    height: 296px;
     border-radius: 50%;
     background-size: cover;
 }
@@ -61,6 +61,7 @@
 .addr_box p {
 	font-size: 20px;
 	font-weight:bolder;
+	min-width: 300px;
 }
 .addr_box{
 	margin-bottom: 30px;
@@ -90,7 +91,7 @@
     width: 700px;
     height: 50px;
     float: left;
-    background-color: #de892e;
+    background-color: #e6a236;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 6px rgb(150, 150, 150);
@@ -117,7 +118,7 @@
 #moa, #joinday{
     font-size: 30px;
     font-weight: bolder;
-    color: rgb(253, 202, 6);
+    color: #e6ac0e;
 
 }
 #joinday{

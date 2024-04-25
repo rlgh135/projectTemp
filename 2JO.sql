@@ -27,7 +27,8 @@ CREATE TABLE userimg (
   userimgorgname varchar(1000),
   userimgsysname varchar(1000)
 );
-
+select * from userimg where userid ='apple';
+update userimg set userimgorgname='defaultuserbadge.png', userimgsysname='defaultuserbadge.png' where userid='apple'; 
 CREATE TABLE `lpost` (
   lpostnum bigint PRIMARY KEY AUTO_INCREMENT,
   `lpostcategory` varchar(1000),

@@ -78,7 +78,8 @@ body, html {
     margin: 10px; padding: 10px;
 }
 .myinfo_card_list:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
+    border: 3px solid #ff6d1d;
 }
 .GPost p{
      display: flex; 
@@ -97,15 +98,39 @@ body, html {
 
 }
 /* Style individual card */
+#lpostListWrap{
+	width: 1050px;
+	height: 220px;
+}
 .myinfo_card_list {
+	float: left;
     border: 1px solid #ccc;
     margin: 10px;
     padding: 10px;
     width: 300px;
     height: 200px;
-    border-radius: 10%;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s linear;
+}
+#left-Lpost-Btn, #right-Lpost-Btn, #left-Group-Btn, #right-Group-Btn{
+	width:40px;
+	height:220px;
+	float:left;
+	padding: 97.5px 0;
+}
+#right-Lpost-Btn, #right-Group-Btn{
+	padding-left: 15px;
+}
+#left-Lpost-Btn img, #right-Lpost-Btn img, #left-Group-Btn img, #right-Group-Btn img{
+	width:25px;
+	height:25px;
+	background-size: cover;
+	cursor: pointer;
+}
+#left-Lpost-Btn img:hover, #right-Lpost-Btn img:hover, #left-Group-Btn img:hover, #right-Group-Btn img:hover{
+	transform: scale(1.5);
+	filter: invert(82%) sepia(9%) saturate(6693%) hue-rotate(1deg) brightness(103%) contrast(103%);
 }
 .myinfo_card_list img {
     width: 164px; /* 이미지의 너비 조정 */
@@ -161,11 +186,12 @@ float: left;
     background-color:rgb(231 231 231);
     color: #ccc;
     font-size: 39px;
+    font-weight:bold;
     width: 50px;    
     height: 50px;
     border-radius: 50%;
     text-align: center;
-    line-height: 56px;
+    line-height: 45px;
     cursor: pointer;
     margin: 0 auto;
     

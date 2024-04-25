@@ -86,6 +86,11 @@
     </div>
 
 </body>
+<footer>
+    <a href="#" class="btn_gotop" id="click">
+        <img src="${cp}/images/group/top_img.png" > 
+    </a>
+</footer>
 <script>
     const modal = document.querySelector('.modal');
     const modalOpen = document.querySelector('.modal_btn');
@@ -118,5 +123,21 @@
     observer.observe(ib[0])
     observer.observe(ib[1])
 
+    window.addEventListener('scroll', function(){
+        var btn_gotop = document.querySelector('.btn_gotop'); // btn_gotop 요소를 선택
+        if(this.scrollY > 200) {
+            btn_gotop.style.display = 'block'; // 스크롤 위치에 따라 보이게 설정
+        }
+        else{
+            btn_gotop.style.display = 'none'; // 스크롤 위치에 따라 숨김
+        }
+    })
+
+    var Top = document.getElementById('click'); // click 요소를 선택
+    Top.addEventListener('click', function(e){
+        e.preventDefault();
+
+        window.scrollTo({top:0, behavior:"smooth"})
+    })
 </script>
 </html>

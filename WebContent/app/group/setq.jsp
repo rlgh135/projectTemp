@@ -87,6 +87,11 @@
 	.gpostListwrap{
 		background-color: rgb(232, 218, 202);
 	}
+	#top_wrap {
+	background-color: rgb(232, 218, 202);
+	margin-top: 0px !important;
+	}
+	
 </style>
 </head>
 <body>
@@ -98,16 +103,7 @@
    </c:if>
    <div id="group_inner_wrap">
         <header>
-            <nav class="groupinnernav">
-            <div class="logoimg"><a href=""><img src="../../images/logo.png" alt="" style="background-repeat: no-repeat; display: block; width: auto; height: 40px;"></a></div>
-            <div class="widgetarea">
-               <ul class="widgetlist">
-                  <li class="widgetitem alert" style="padding-top: 6px; padding-left: 20px;"><a href=""><img src="../../images/group/bell-3913239.png" style="background-size: cover; display: block; width:25px; height: auto;"></a></li>
-                  <li class="widgetitem jjok" style="padding-top: 6px; padding-left: 20px;"><a href=""><img src="../../images/group/bubble-151798.png" style="background-size: cover; display: block; width:25px; height: auto;"></a></li>
-                  <li class="widgetitem profile-badge-btn"><a href=""><img src="../../images/group/basicuser-1946429.png" style="background-size: cover; display: block; width:auto; height: 35px;"></a></li>
-               </ul>
-            </div>
-            </nav>
+       	 	<jsp:include page="${cp}/app/header.jsp"></jsp:include>
         </header>
         <div class="group-inner contents" id="group_inner_container">
             <div id="groupinfobox" class="infobox">
