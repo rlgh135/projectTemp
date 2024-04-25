@@ -216,7 +216,7 @@ button {
 										<%-- 프로필 펼치기 --%>
 										<button class="badgeimg modalOpenBtn"
 											id="modalOpenBtn${ingi.gpostnum+10000}"
-											onclick="modalClk(${ingi.gpostnum+10000})">★</button>
+											onclick="modalClk(${ingi.gpostnum+10000})" style="background-image: url('${cp}/file/userimg/${ingithumbnail}'); background-size: cover;"></button>
 										<div id="modalContainer${ingi.gpostnum+10000}"
 											class="modalContainer replyHide">
 											<div id="modalContent${ingi.gpostnum+10000}"
@@ -231,7 +231,7 @@ button {
 													</button>
 													<div class="imgid">
 														<div class="mbadgeimg">
-															<img src="" alt="">
+															<img src="${cp}/file/userimg/${ingithumbnail}" alt="">
 														</div>
 														<p>${ingi.userid}</p>
 													</div>
@@ -421,7 +421,7 @@ button {
 								<li class="gpostListwrap">
 									<div class="gpostHead default-group-Head">
 										<div class="badgeimg">
-											<img src="">
+											<img src="${cp}/file/userimg/${gongjithumbnail}">
 										</div>
 										<div class="writerinfo badgeimg-right-info">
 											<p>
@@ -595,9 +595,9 @@ button {
 	    			console.log(xhr.responseText);
 	    			const obj = JSON.parse(xhr.responseText);
 	    			const datas = obj.datas;
+	    			const userthumbnaillist = obj.userthumbnaillist;
 	    			console.log(datas);
-	    			console.log(datas.length);
-	    			
+	    			console.log(userthumbnaillist);
 
 	    			if(datas.length===0){
 	    				if(curPage>1){
@@ -611,19 +611,19 @@ button {
 		    				parentRnode.appendChild(newLi);
 	    				}
 	    			} else {
-		    			for(let greply of datas){
+		    			for(let i in datas){
 		    				let newLi = document.createElement('li');
 							newLi.className = 'greplyListwrap default-group-Head';
 							    
-							newLi.innerHTML='<div class="gprnum' + greply.gprnum + '" style="display:none;"></div>' +
+							newLi.innerHTML='<div class="gprnum' + datas[i].gprnum + '" style="display:none;"></div>' +
 							'<div class="badgeimg">' +
-							'    <img src="">' +
+							'    <img src="${cp}/file/userimg/'+userthumbnaillist[i]+'">' +
 							'</div>' +
 							'<div class="badgeimg-right-info">' +
-							'    <p class="replywriter">'+greply.userid+'</p>' +
-							'    <p class="replycontents">' +greply.gprcontents+
+							'    <p class="replywriter">'+datas[i].userid+'</p>' +
+							'    <p class="replycontents">' +datas[i].gprcontents+
 							'    </p>' +
-							'    <p class="gprregdate">'+greply.gprregdate+'</p>' +
+							'    <p class="gprregdate">'+datas[i].gprregdate+'</p>' +
 							'</div>';
 							    
 							parentRnode.appendChild(newLi);	
@@ -660,6 +660,7 @@ button {
 					console.log(datas);
 					const likelist = obj.likelist;
 					console.log(likelist);
+					const userthumbnaillist = obj.userthumbnaillist;
 					
 					//돔돔
 					for(let i in datas){
@@ -675,7 +676,9 @@ button {
 					    modalOpenBtn.className = 'badgeimg modalOpenBtn';
 					    modalOpenBtn.id = 'modalOpenBtn' + datas[i].gpostnum;
 					    modalOpenBtn.onclick = function() { modalClk(datas[i].gpostnum); };
-					    modalOpenBtn.innerText = '★';
+					    modalOpenBtn.innerText = '';
+					    modalOpenBtn.style.backgroundImage = "url('${cp}/file/userimg/"+userthumbnaillist[i]+"')";
+					    modalOpenBtn.style.backgroundSize = "cover";
 					    gpostHeadDiv.appendChild(modalOpenBtn);
 
 					    // modalContainer 요소 생성 및 추가
@@ -724,7 +727,7 @@ button {
 
 					    // 이미지 요소 생성 및 추가
 					    var imgidImg = document.createElement('img');
-					    imgidImg.src = '';
+					    imgidImg.src = '${cp}/file/userimg/'+userthumbnaillist[i];
 					    imgidImg.alt = '';
 					    mbadgeimgDiv.appendChild(imgidImg);
 
@@ -789,7 +792,7 @@ button {
 
 					    // span 요소 생성 및 추가
 					    var spanTag = document.createElement('span');
-					    spanTag.innerText = '이런사람이에요';
+					    spanTag.innerText = '';
 					    pTag2.appendChild(spanTag);
 
 					    // p 요소 생성 및 추가
@@ -934,7 +937,7 @@ button {
 					    var formTag = document.createElement('form');
 					    formTag.method = 'post';
 					    formTag.className = 'inputGPR';
-					    formTag.action = 'writegpreply.gp?gpostnum=' + datas[i].gpostnum + '&amp;groupnum=${group.groupnum}';
+					    formTag.action = 'writegpreply.gp?gpostnum=' + datas[i].gpostnum + '&groupnum=${group.groupnum}';
 					    formTag.name = 'writeRPForm' + datas[i].gpostnum;
 					    repFormDiv.appendChild(formTag);
 
@@ -945,6 +948,8 @@ button {
 
 					    // img 요소 생성 및 추가
 					    var imgTag2 = document.createElement('img');
+					    imgTag2.src = '${cp}/file/userimg/'+userthumbnaillist[i];
+					    imgTag2.alt = '';
 					    divTag7.appendChild(imgTag2);
 
 					    // div 요소 생성 및 추가
@@ -955,7 +960,7 @@ button {
 					    // p 요소 생성 및 추가
 					    var pTag4 = document.createElement('p');
 					    pTag4.className = 'replywriter';
-					    pTag4.innerText = '${loginUser}';
+					    pTag4.innerText = loginUser;
 					    divTag8.appendChild(pTag4);
 
 					    // textarea 요소 생성 및 추가
@@ -988,84 +993,6 @@ button {
 					    var ulTag2 = document.createElement('ul');
 					    ulTag2.className = 'greplyList' + datas[i].gpostnum;
 					    gpostReplyDiv.appendChild(ulTag2);
-					    /* newLi.innerHTML = '<li class="gpostListwrap">' +
-					    '<div class="gpostHead default-group-Head">' +
-					    '<button class="badgeimg modalOpenBtn" id="modalOpenBtn'+datas[i].gpostnum+'" onclick="modalClk('+datas[i].gpostnum+')">★</button>' +
-					    '<div id="modalContainer'+datas[i].gpostnum+'" class="modalContainer replyHide">' +
-					    '<div id="modalContent'+datas[i].gpostnum+'" class="modalContent">' +
-					    '<div id="modalinner'+datas[i].gpostnum+'" class="modalinner" style="width: 177px;">' +
-					    '<button id="modalCloseBtn'+datas[i].gpostnum+'" class="modalCloseBtn" onclick="modalClose('+datas[i].gpostnum+')">' +
-					    '<img src="../../images/x.webp" style="width: 10px; height: 10px; border: none;">' +
-					    '</button>' +
-					    '<div class="imgid">' +
-					    '<div class="mbadgeimg">' +
-					    '<img src="" alt="">' +
-					    '</div>' +
-					    '<p id="gpostuserid">'+datas[i].userid+'</p>' +
-					    '</div>' +
-					    '<div class="profilemenu">' +
-					    '<img src="../../images/mail6.webp" style="width: 20px; height: 20px;">' +
-					    '<button type="button" class="msg_send" onclick="sendMessage(\''+datas[i].userid+'\')">쪽지보내기</button>' +
-					    '</div>' +
-					    '<div class="profilemenu">' +
-					    '<img src="../../images/write.png" style="width: 18px; height: 18px;">' +
-					    '<p>작성글보기</p>' +
-					    '</div>' +
-					    '</div>' +
-					    '</div>' +
-					    '</div>' +
-					    '<div class="writerinfo badgeimg-right-info">' +
-					    '<p>' +
-					    '<a href="" class="usernamelink">'+datas[i].userid+'</a>' +
-					    '</p>' +
-					    '<p class="regtime">'+datas[i].gpostregdate+'</p>' +
-					    '</div>' +
-					    '</div>' +
-					    '<div class="gpostContents">' +
-					    '<div>' +
-					    '<p>' +
-					    '<textarea class="GPCIN gpostConetentsIn'+datas[i].gpostnum+'" style="width: 100%; height: 100%">'+datas[i].gpostcontents+'</textarea>' +
-					    '</p>' +
-					    '<div>' +
-					    '<input type="button" style="cursor: pointer;" value="첨부파일" onclick="showFiles('+datas[i].gpostnum+')">' +
-					    '</div>' +
-					    '<div class="gpostfile'+datas[i].gpostnum+' replyHide">' +
-					    '<ul class="gfileList'+datas[i].gpostnum+'"></ul>' +
-					    '</div>' +
-					    '<div class="likereply">' +
-					    '<img id="likeButton" onclick="pressLike('+datas[i].gpostnum+', \''+datas[i].userid+'\')" class="like-button likeButton'+datas[i].gpostnum+'" src="/noon/images/redheart.webp" alt="좋아요" style="width: 15px; height: 15px;">' +
-					    '<div class="point-area showreplyBtn">' +
-					    '<div style="display: inline-block;">' +
-					    '<input type="button" value="좋아요 '+datas[i].gpostlike+'개">' +
-					    '</div>' +
-					    '<div style="display: inline-block;">' +
-					    '<input type="button" class="showrpcnt'+datas[i].gpostnum+'" value="댓글 '+datas[i].gprcnt+'개" onclick="showReply('+datas[i].gpostnum+')" style="cursor: pointer;">' +
-					    '</div>'+
-					    '<div style="display:inline-block; margin-left:210px;">'+
-					    '<input type="button" class="replyHide modify'+datas[i].gpostnum+'" value="수정" style="cursor: pointer; width:70px; text-align:right;" onclick="showUpdateForm('+datas[i].gpostnum+', ${group.groupnum})">' +
-					    '<input type="button" value="삭제" style="cursor: pointer; width:50px; text-align:right;" onclick="deleteGPost('+datas[i].gpostnum+', ${group.groupnum});">' +
-					    '</div>' +
-					    '</div>' +
-					    '</div>' +
-					    '</div>' +
-					    '</div>' +
-					    '<div class="gpostReply'+datas[i].gpostnum+' replyHide">' +
-					    '<div class="repForm reply'+datas[i].gpostnum+'">' +
-					    '<form method="post" class="inputGPR" action="writegpreply.gp?gpostnum='+datas[i].gpostnum+'&amp;groupnum=${group.groupnum}" name="writeRPForm'+datas[i].gpostnum+'">' +
-					    '<div class="badgeimg"><img src=""></div>' +
-					    '<div class="badgeimg-right-info">' +
-					    '<p class="replywriter">${loginUser}</p>' +
-					    '<textarea name="gprcontents" id="" cols="50" rows="3" placeholder="새로운 댓글을 남겨보세요"></textarea>' +
-					    '</div>' +
-					    '<div>' +
-					    '<input type="hidden" name="userid" value="${loginUser}">' +
-					    '<input type="submit" value="등록">' +
-					    '</div>' +
-					    '</form>' +
-					    '</div>' +
-					    '<ul class="greplyList'+datas[i].gpostnum+'"></ul>' +
-					    '</div>' +
-					    '</li>';  */
 
 						parentnode.appendChild(newLi);
 					}

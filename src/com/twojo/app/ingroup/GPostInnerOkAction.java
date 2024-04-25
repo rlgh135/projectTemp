@@ -44,23 +44,6 @@ public class GPostInnerOkAction {
 		
 		
 		GPostDAO gpdao = new GPostDAO();
-//		//그룹 포스트 데이터 세팅
-//		int pageSize = 4;
-//		
-//		//4개씩 불러오기
-//		int startRow = (page-1)*pageSize;
-//		List<GPostDTO> list = null;
-//		if(keyword == null || keyword.equals("")) {
-//			list = gpdao.getList(groupnum, startRow, pageSize);
-//		}
-//		else {
-//			list = gpdao.getListWithKeyword(groupnum,startRow,pageSize,keyword);
-//		}
-//		
-//		req.setAttribute("list", list);
-//		req.setAttribute("page", page);
-//		req.setAttribute("keyword", keyword);
-		
 		GPostDTO gongji = gpdao.getGongji(groupnum);
 		UserimgDAO uidao = new UserimgDAO();
 		String gongjithumbnail = "defaultuserbadge.png";

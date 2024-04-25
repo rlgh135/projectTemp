@@ -153,7 +153,9 @@ header{
     cursor: pointer;
     border: none;
   }
-  
+  .modalOpenBtn{
+  	border: none;
+  }
   .modalContainer {
     top: 0;
     left: 0;
@@ -261,10 +263,21 @@ header{
  .mbadgeimg{
     width: 50px;
     height: 50px;   
-    border: 1px dotted black;
     border-radius: 50%;
     margin-right: 30px;
  }
+ .mbadgeimg > img{
+	width: 50px;
+    height: 50px;   
+    border-radius: 50%;
+}
+.badgeimg > img{
+	width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 50px;
+}
 
 #grouprightsection{
     width: 400px;
@@ -600,9 +613,6 @@ header{
     position: sticky;
     top: 0;
     z-index: 2;
-}
-.badgeimg{
-    border: 1px solid red;
 }
 .inputGPR{
     display: flex;

@@ -1,6 +1,7 @@
 package com.twojo.app.ingroup;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.twojo.action.Action;
 import com.twojo.action.Transfer;
 import com.twojo.model.dao.GPReplyDAO;
+import com.twojo.model.dao.UserimgDAO;
 import com.twojo.model.dto.GPReplyDTO;
 
 public class GroupPostReplyOK implements Action{
@@ -24,8 +26,15 @@ public class GroupPostReplyOK implements Action{
 		int pageSize = 4;
 		int startRow = (page-1)*pageSize;
 		List<GPReplyDTO> findreplylist = null;
+		ArrayList<String> userthumbnaillist = new ArrayList<String>();
+		UserimgDAO uidao = new UserimgDAO();
 		
 		findreplylist = gprdao.getListByPage(gpostnum, startRow, pageSize);
+		if(findreplylist!=null) {
+			for (GPReplyDTO reply : findreplylist) {
+				userthumbnaillist.add(uidao.getImgName(reply.getUserid()).getUserimgsysname());
+			}
+		}
 		
 		Gson gson = new Gson();
 		JsonObject json = new JsonObject();
@@ -33,6 +42,7 @@ public class GroupPostReplyOK implements Action{
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		
+		json.add("userthumbnaillist", gson.toJsonTree(userthumbnaillist));
 		json.add("datas", gson.toJsonTree(findreplylist));
 		System.out.println(json);
 		PrintWriter out = resp.getWriter();
