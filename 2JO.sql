@@ -31,6 +31,7 @@ CREATE TABLE userimg (
 );
 select * from userimg;
 update userimg set userimgorgname='defaultuserbadge.png', userimgsysname='defaultuserbadge.png' where userid='apple'; 
+insert into userimg(userid, userimgorgname, userimgsysname) values('abc0','defaultuserbadge.png','defaultuserbadge.png');
 CREATE TABLE `lpost` (
   lpostnum bigint PRIMARY KEY AUTO_INCREMENT,
   `lpostcategory` varchar(1000),

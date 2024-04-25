@@ -23,7 +23,7 @@
             </div>
         </div>
         <div id="gather">
-            <a href="#">
+            <a href="${cp}/app/group/createGroup.jsp">
                 <div id="gather_box">모집하기</div>
             </a>
         </div>
@@ -117,6 +117,7 @@
 		                    <c:forEach var="group" items="${requestScope[hobbylistVar]}" varStatus="outerStatus">
 		                        <c:set var="groupHI" value="${requestScope[groupHobbyImgVar][outerStatus.index]}" />
 		                            <div class="HB_group_1_box">
+		                            <div>
 		                                <a href="${cp}/groupinner.gp?groupnum=${group.groupnum}">
 		                                    <c:choose>
 		                                        <c:when test="${not empty groupHI.imgsysname}">
@@ -136,6 +137,7 @@
 		                                    <div class="content">${group.groupcontents}</div>
 		                                    <div class="addr">#${group.groupaddr}</div>
 		                                    <div class="user_count">${group.groupusercnt}명</div>
+		                                </div>
 		                                </div>
 		                            </div>
 		                    </c:forEach>

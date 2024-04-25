@@ -768,11 +768,18 @@ button {
 					    profilemenuImg2.style.width = '18px';
 					    profilemenuImg2.style.height = '18px';
 					    profilemenuDiv2.appendChild(profilemenuImg2);
+					    
+					    var msg_sendButton2 = document.createElement('button');
+					    msg_sendButton2.type = 'button';
+					    msg_sendButton2.className = 'msg_send';
+					    msg_sendButton2.onclick = function() { showPost(datas[i].userid); };
+					    msg_sendButton2.innerText = '작성글보기';
+					    profilemenuDiv2.appendChild(msg_sendButton2);
 
-					    // p 요소 생성 및 추가
+					   /*  // p 요소 생성 및 추가
 					    var pTag = document.createElement('p');
 					    pTag.innerText = '작성글보기';
-					    profilemenuDiv2.appendChild(pTag);
+					    profilemenuDiv2.appendChild(pTag); */
 
 					    // writerinfo 요소 생성 및 추가
 					    var writerinfoDiv = document.createElement('div');

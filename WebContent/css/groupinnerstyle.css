@@ -146,6 +146,13 @@ header{
     min-height: 40px;
     border-radius: 50px;
 }
+.badgeimg > img{
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 50px;
+}
 
 
 /* 유저정보 팝업창 */

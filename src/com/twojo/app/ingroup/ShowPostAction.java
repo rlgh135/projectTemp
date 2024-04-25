@@ -8,6 +8,7 @@ import com.twojo.action.Transfer;
 import com.twojo.model.dao.GPostDAO;
 import com.twojo.model.dao.GroupDAO;
 import com.twojo.model.dao.GroupimgDAO;
+import com.twojo.model.dao.UserimgDAO;
 import com.twojo.model.dto.GPostDTO;
 import com.twojo.model.dto.GroupDTO;
 
@@ -34,6 +35,13 @@ public class ShowPostAction implements Action{
 		} else {
 			req.setAttribute("thumbnail", "abcd25.jpg");
 		}
+		
+		UserimgDAO uidao = new UserimgDAO();
+		String gongjithumbnail = "defaultuserbadge.png";
+		if(gongji!=null) {
+			gongjithumbnail = uidao.getImgName(gongji.getUserid()).getUserimgsysname();
+		}
+		req.setAttribute("gongjithumbnail", gongjithumbnail);
 		
 		Transfer transfer = new Transfer();
 		transfer.setRedirect(false);

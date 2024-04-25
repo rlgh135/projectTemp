@@ -466,7 +466,7 @@ button {
 					    newLi.className = 'gpostListwrap';
 					    
 					    newLi.innerHTML = '<div class="gpostHead default-group-Head">' +
-                        '<button class="badgeimg modalOpenBtn" id="modalOpenBtn'+gpost.gpostnum+'" onclick="modalClk('+gpost.gpostnum+')">★</button>' +
+                        '<button class="badgeimg modalOpenBtn" style="background-image: url('+'${cp}/file/userimg/defaultuserbadge.png'+'); background-size: cover;" id="modalOpenBtn'+gpost.gpostnum+'" onclick="modalClk('+gpost.gpostnum+')"></button>' +
                         '<div id="modalContainer'+gpost.gpostnum+'" class="modalContainer replyHide">' +
                         '<div id="modalContent'+gpost.gpostnum+'" class="modalContent">' +
                         '<div id="modalinner'+gpost.gpostnum+'" class="modalinner" style="width: 177px;">' +

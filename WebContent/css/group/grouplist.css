@@ -366,7 +366,7 @@ table, tr, th, td{
 
 #REC_group{
     width: 100%;
-    height: 1000px;
+    /* height: 1000px; */
     /* background-color: aqua; */
     padding-top: 50px;
     margin-bottom: 50px;
@@ -374,25 +374,30 @@ table, tr, th, td{
 
 .HB_group_1{
     width: 100%;
-    height: 420px;
+    min-width: 1400px;
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    /* height: 420px; */
     /* background-color: brown; */
 }
 
-.HB_group_1:last-child{
-    margin-bottom: 50px;
-}
+
 
 #HB_group_1_tit{
     width: 100%;
-    height: 70px;
+    min-width:1400px;
+    /* height: 70px; */
     line-height: 70px;
-    margin-top: 50px;
+   /*  margin-top: 50px; */
+    display: flex;
     /* background-color:blueviolet */
 }
 
 #HB_group_1_tit p{
     padding-left: 7.5px;
-    float: left;
+    width: 900px;
+    /* float: left; */
     font-size: 25px;
 }
 
@@ -400,7 +405,8 @@ table, tr, th, td{
     padding-top: 20px;
     padding-right: 10px;
     height: 50px;
-    float: right;
+    margin-left: auto;
+    /* float: right; */
     font-size: 14px;
     
 }
@@ -409,7 +415,9 @@ table, tr, th, td{
     width: 335px;
     height: 330px;
     /* background-color: blue; */
-    float: left;
+    /* float: left; */
+    display: flex;
+    flex-wrap: wrap;
     margin: 7.5px;
 }
 
