@@ -47,4 +47,7 @@ public class GroupUserDAO {
 		datas.put("pageSize", pageSize);
 		return ss.selectList("GroupUser.getGroupnumList", datas);
 	}
+	public int getMyGroupJoinCnt(String userid) {
+		return ss.selectOne("GroupUser.groupjoincnt", userid);
+	}
 }

@@ -24,6 +24,9 @@
 	<select id="getGroupnumList" parameterType="hashmap" resultType="long">
 		select groupnum from `group_user` where userid=#{userid} order by groupnum asc limit #{startRow},#{pageSize}
 	</select>
+	<select id="groupjoincnt" parameterType="string" resultType="int">
+		select count(*) from `group_user` where userid=#{userid}
+	</select>
 </mapper>
 
 

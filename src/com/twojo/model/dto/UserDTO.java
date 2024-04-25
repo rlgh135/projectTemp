@@ -1,5 +1,6 @@
 package com.twojo.model.dto;
 
+
 public class UserDTO {
 	private String userid;
 	private String userpw;
@@ -11,9 +12,14 @@ public class UserDTO {
 	private String useraddrgu;
 	private String userhobby;
 	private String gender;
-	private int userpoint;
-	private int warningcnt;
+	private String joinregdate;
 	
+	public String getJoinregdate() {
+		return joinregdate;
+	}
+	public void setJoinregdate(String joinregdate) {
+		this.joinregdate = joinregdate;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -74,17 +80,4 @@ public class UserDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getUserpoint() {
-		return userpoint;
-	}
-	public void setUserpoint(int userpoint) {
-		this.userpoint = userpoint;
-	}
-	public int getWarningcnt() {
-		return warningcnt;
-	}
-	public void setWarningcnt(int warningcnt) {
-		this.warningcnt = warningcnt;
-	}
-	
 }

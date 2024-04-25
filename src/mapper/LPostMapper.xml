@@ -99,6 +99,9 @@
 		select * from lpost where userid=#{userid} order by lpostnum desc limit
 		#{startRow},#{pageSize}
 	</select>
+	<select id="getmylpostcnt" parameterType="string" resultType="int">
+		select count(*) from lpost where userid = #{userid}
+	</select>
 </mapper>
 
 

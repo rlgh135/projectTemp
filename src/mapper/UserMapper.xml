@@ -13,6 +13,9 @@
 	<select id="select" parameterType="string" resultType="userdto">
 		select * from user where userid = #{userid}
 	</select>
+	<update id="updateaddr" parameterType="hashmap">
+		update user set useraddr = #{useraddr}, useraddrgu = #{useraddrgu} where userid = #{userid}
+	</update>
 </mapper>
 
 

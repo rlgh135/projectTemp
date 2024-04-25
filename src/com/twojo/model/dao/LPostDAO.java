@@ -99,5 +99,10 @@ private SqlSession ss;
 		datas.put("pageSize", pageSize);
 		return ss.selectList("LPost.getListByUser", datas);
 	}
+	
+	public int getMyLpostCnt(String userid) {
+		System.out.println(userid);
+		return ss.selectOne("LPost.getmylpostcnt", userid);
+	}
 
 }

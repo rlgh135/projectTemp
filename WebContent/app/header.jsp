@@ -7,7 +7,7 @@
         <div class="gnb">
             <div class="logo_box">
                 <a href="${cp}/myinfo.bo">
-                    <img src="${cp}/images/logo.png" class="logo">
+                    <img src="${cp}/images/logo.png" class="logo" id="logo_img">
                 </a>
             </div>
             <nav class="gnb_menu">
@@ -31,7 +31,7 @@
                 <div>
                     <a class="btn" href="/myinfo.bo">
                     	<div id="userinfo_gnb">
-                    		<img alt="" src="${cp}/images/myinfo_icon.png">
+                    		<img alt="" src="${cp}/images/myinfo_icon.png" id="userProfileImg" class="user_icon">
                     	</div>
                     </a>
                     <a class="btn" href="${cp}/getmessage.ms">
@@ -84,6 +84,31 @@
 	    	}
 	    }
 	    xhr.open("GET", cp + "/confirmmessage.ms");
+	    xhr.send();
+	});
+	
+	
+	window.addEventListener('load', function() {
+		let profileImg = document.getElementById('userProfileImg');
+		
+		const xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+	    	if(xhr.readyState == 4){
+	    		if(xhr.status == 200){
+	    			const img = JSON.parse(xhr.responseText);
+	    			const user_pfimg = img.userimg;
+	    			console.log(user_pfimg);
+	    			if(user_pfimg === null){
+	    			}
+	    			else{
+	    				profileImg.src = cp + '/file/userimg/' + user_pfimg;
+	    				profileImg.classList.remove('user_icon');
+	    				profileImg.classList.add('userPfImg');
+	    			}
+	    		}
+	    	}
+	    }
+	    xhr.open("GET", cp + "/profileImgCheck.us");
 	    xhr.send();
 	});
 </script>

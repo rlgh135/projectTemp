@@ -12,8 +12,7 @@ CREATE TABLE user (
   userhobby varchar(1000),
   gender varchar(300) default '남자',
   userzipcode varchar(1000),
-  userpoint int default 0,
-  warningcnt int default 0
+  joinregdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 select * from user;
@@ -21,6 +20,14 @@ select * from user where userid='cherry';
 insert into user(userid, userpw, username, useraddr, useraddretc, useraddrgu, userhobby) 
 value('abc796', '1234', 'name320', '강남구', '강남구', '강남구', '스포츠/레저');
 drop table user;
+
+CREATE TABLE userimg (
+  userimgnum bigint PRIMARY KEY AUTO_INCREMENT,
+  userid varchar(1000),
+  userimgorgname varchar(1000),
+  userimgsysname varchar(1000)
+);
+
 CREATE TABLE `lpost` (
   lpostnum bigint PRIMARY KEY AUTO_INCREMENT,
   `lpostcategory` varchar(1000),
@@ -46,7 +53,7 @@ delete from lpost where deadline = '없음';
 drop table lpost;
 delete from lpost
 where lpostaddr='강남구';
-select * from lpost limit 0, 3000;
+select * from lpost where userid='abc1';
 
 /*0415추가*/
 create table lpost_user(
@@ -67,12 +74,6 @@ CREATE TABLE lpost_addr(
 );
 select * from lpost_addr;
 drop table lpost_addr;
-CREATE TABLE `lfile` (
-  `lfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
-  `lpostnum` bigint,
-  `lorgname` varchar(1000),
-  `lsysname` varchar(1000)
-);
 
 CREATE TABLE `lreply` (
   `lreplynum` bigint PRIMARY KEY AUTO_INCREMENT,
@@ -83,12 +84,7 @@ CREATE TABLE `lreply` (
   `lpostregdate` datetime
 );
 select * from lreply;
-CREATE TABLE `lrfile` (
-  `lrfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
-  `lreplynum` bigint,
-  `lrorgname` varchar(1000),
-  `lrsysname` varchar(1000)
-);
+
 
 CREATE TABLE `group` (
   `groupnum` bigint PRIMARY KEY AUTO_INCREMENT,
@@ -133,12 +129,12 @@ create table `group_user`(
     userid varchar(300),
     joindate datetime default now()
 );
-select * from `group_user`;
+select * from `group_user` where userid='abc1';
 drop table group_user;
 insert into group_user(groupnum, userid) value(2, 'abc3');
 delete from group_user where userid='abc1' and groupnum=2;
 select * from group_user where userid='abc1';
-select * from group_user where groupnum=2;
+select * from group_user where groupnum=1;
 select * from group_user where groupnum=2 order by joindate desc limit 5;
 SELECT * FROM information_schema.INNODB_LOCKS;
 SELECT * FROM information_schema.INNODB_LOCK_WAITS;
@@ -216,13 +212,6 @@ CREATE TABLE `gpreply` (
 );
 select * from gpreply;
 
-CREATE TABLE `gprfile` (
-  `gprfilenum` bigint PRIMARY KEY AUTO_INCREMENT,
-  `gprnum` bigint,
-  `gprfileorgname` varchar(1000),
-  `gprfilesysname` varchar(1000)
-);
-
 create table reqlist(
 	groupnum bigint,
     userid varchar(300) default null,
@@ -259,12 +248,3 @@ insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
 		values('abc100','abc1','가입',0,'/groupinner.gp?groupnum=1');
 select * from message;
 drop table message;
-CREATE TABLE `warning` (
-  `warningnum` int PRIMARY KEY AUTO_INCREMENT,
-  `reason` text
-);
-
-CREATE TABLE `userwarning` (
-  `warningnum` int,
-  `userid` varchar(300)
-);

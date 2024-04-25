@@ -11,6 +11,7 @@
 	<header>
 		<jsp:include page="${cp}/app/header.jsp"></jsp:include>
 	</header>
+	<jsp:include page="${cp}/app/user/myinfobreif.jsp"></jsp:include>
 	<div class="User_more">
 		<!-- 내 모임 시작 -->
 		<div class="User_moreframe">

@@ -88,6 +88,22 @@ public class UserFrontController extends HttpServlet {
 				System.out.println("/mygroup.us : "+e);
 			}
 			break;
+		case "/usermodify.us":
+			try {
+				System.out.println("/usermodify.us");
+				transfer = new ModifyOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/ModifyOkAction : "+e);
+			}
+			break;
+		case "/profileImgCheck.us":
+			try {
+				System.out.println("/profileImgCheck.us");
+				transfer = new UserImgOkAction().execute(req,resp);
+			} catch (Exception e) {
+				System.out.println("/UserImgOkAction : "+e);
+			}
+			break;
 		}
 		
 		if(transfer != null) {

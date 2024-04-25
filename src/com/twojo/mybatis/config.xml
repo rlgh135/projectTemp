@@ -18,6 +18,7 @@
 	<typeAlias type="com.twojo.model.dto.ReqListDTO" alias="reqlistdto"/>  	
 	<typeAlias type="com.twojo.model.dto.GPostLikeDTO" alias="gpostlikedto"/>  	
 	<typeAlias type="com.twojo.model.dto.Lpost_AddrDTO" alias="ladto"/>
+	<typeAlias type="com.twojo.model.dto.UserimgDTO" alias="userimgdto"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -45,6 +46,7 @@
     <mapper resource="mapper/ReqListMapper.xml"/>
     <mapper resource="mapper/GPostLikeMapper.xml"/>
     <mapper resource="mapper/Lpost_AddrMapper.xml"/>
+    <mapper resource="mapper/UserimgMapper.xml"/>
   </mappers>
 </configuration>
 
