@@ -35,6 +35,7 @@ public class MesaageCheckOkAction implements Action {
 		else {
 			out.print("X");
 		}
+		out.flush();
 		return null;
 	}
 }
