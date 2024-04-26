@@ -421,7 +421,7 @@ button {
 								<li class="gpostListwrap">
 									<div class="gpostHead default-group-Head">
 										<div class="badgeimg">
-											<img src="${cp}/file/userimg/${gongjithumbnail}">
+											<img src="${cp}/file/userimg/defaultuserbadge.png">
 										</div>
 										<div class="writerinfo badgeimg-right-info">
 											<p>
@@ -445,7 +445,7 @@ button {
 								<li class="gpostListwrap">
 									<div class="gpostHead default-group-Head">
 										<div class="badgeimg">
-											<img src="">
+											<img src="${cp}/file/userimg/${gongjithumbnail}">
 										</div>
 										<div class="writerinfo badgeimg-right-info">
 											<p>
@@ -487,6 +487,8 @@ button {
     let searchFlag = false;
     const sec = document.getElementById("gpsearch");
     let searchkeyword = sec.value;
+	let ust = "defaultuserbadge.png";
+	let ott = "defaultuserbadge.png";
 	
     document.addEventListener("DOMContentLoaded", function() {
         makeDOM();
@@ -1248,6 +1250,33 @@ button {
     }
 </script>
 <script>
+	function findThu(tarid, type){
+		console.log(tarid)
+		let isLiked = false;
+		const xhr = new XMLHttpRequest();
+		var badge = "";
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status==200){
+					console.log(xhr.responseText);
+					const obj = JSON.parse(xhr.responseText);
+					console.log(obj);
+	    			const badgedata = obj.badge;
+	    			console.log(badgedata);
+	    			badge = badgedata;
+	    			
+					if(type===0){
+						ust = badge; 
+					} else {
+						ott = badge;
+					}
+					
+				}
+			}
+		}
+		xhr.open("GET", cp+"/findthu.gp?userid="+tarid);
+		xhr.send();
+	}
 	//채팅 구현
 	let socket = null;
 	let INDEX = 0;
@@ -1256,10 +1285,11 @@ button {
 	let echoFlag = "";
 	//채팅 버튼 클릭시 전체 채팅에 접속, 채팅창 열어주기
 	$("#chat-circle").click(function(){
+		findThu(loginUser, 0);
 		$("#chat-circle").toggle('scale');
 		$(".chat-box").toggle('scale');
 		socket = new WebSocket('ws://localhost:9090/chat/'+$('#userid').val());
-		
+		let ohhert = "defaultuserbadge.png";
 		//소켓 연결에 오류가 발생했을 때 수행할 이벤트
 		socket.onerror = function(e){
 			console.log("연결 실패");
@@ -1312,6 +1342,7 @@ button {
 		if(message.substring(0,4) == "in :"){
 			//5번 인덱스부터 잘라내면 접속한 사람의 아이디
 			let inId = message.substring(5);
+			findThu(inId, 1);
 			str = '<div class="inout-Msg">'+inId+'님이 들어오셨습니다.</div>';
 			$(".chat-logs").append(str);
 		}
@@ -1430,13 +1461,23 @@ button {
 			content = msg;
 		}
 		//										만약 내가 귓속말을 보낸 상태라면 self와 echo 클래스 둘 다 달려야 함
-		str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+(echoFlag!=""?" echo":"")+"\">";
-		str += "<span class=\"msg-avatar\">";
-		str += "<img src=\"${cp}/images/chat_bg2.jpeg\">";
-		str += "<\/span>";
-		str += "<div class=\"cm-msg-text\">";
-		str += content;
-		str += "<\/div>";
+		if(type == 'self'){
+			str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+(echoFlag!=""?" echo":"")+"\">";
+			str += "<span class=\"msg-avatar\">";
+			str += "<img src=\"${cp}/file/userimg/"+ust+"\">";
+			str += "<\/span>";
+			str += "<div class=\"cm-msg-text\">";
+			str += content;
+			str += "<\/div>";
+		} else {
+			str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+(echoFlag!=""?" echo":"")+"\">";
+			str += "<span class=\"msg-avatar\">";
+			str += "<img src=\"${cp}/file/userimg/"+ott+"\">";
+			str += "<\/span>";
+			str += "<div class=\"cm-msg-text\">";
+			str += content;
+			str += "<\/div>";
+		}
 		//남이 보낸 메세지를 로그로 찍을 때
 		if(sender){
 			//귓속말로 날라왔을 때

@@ -71,6 +71,7 @@ public class BoardViewOkAction implements Action{
       if(ladto != null) {
          req.setAttribute("RoadAddress", ladto.getRoadAddress());
          req.setAttribute("PlaceName", ladto.getPlaceName());
+         req.setAttribute("Phone", ladto.getPhone());
          System.out.println("PlaceName: " + ladto.getPlaceName());
          System.out.println("getRoadAddress: " + ladto.getRoadAddress());         
       }

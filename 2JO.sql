@@ -243,9 +243,10 @@ msregdate datetime default now(),
 linkstring varchar(3000) default null,
 msgcheck int
 );
+delete from message where messagenum = 1;
 insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
-		values('system','abc1','가입',0,'/groupinner.gp?groupnum=1');
+		values('system','apple','가입이 승인되었어요',0,'/groupinner.gp?groupnum=6');
         insert into message (sendid, receiveid, msgcontent, msgcheck, linkstring)
-		values('abc100','abc1','가입',0,'/groupinner.gp?groupnum=1');
+		values('abc100','apple','메시지6',0,'/groupinner.gp?groupnum=1');
 select * from message;
 drop table message;

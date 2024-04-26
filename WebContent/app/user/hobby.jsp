@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    < <div class="main_hobby_wrap">
+     <div class="main_hobby_wrap">
         <div class="main_h_title"><p>전체보기</p></div>
             <div class="main_h_contents">
 

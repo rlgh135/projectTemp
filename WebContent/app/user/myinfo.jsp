@@ -45,8 +45,8 @@
 							<div id="LPost${i}" class="myinfo_card_list LPost${i}"
 								onclick="javascript:goLPost(${lpost.lpostnum})">
 								<div>
-									<p id="lpost_title${i}">lpost.lpostitle</p>
-									<p id="lpost_likecnt${i}">lpost.lpostlikecnt 명이 좋아요를 눌렀어요!</p>
+									<p id="lpost_title${i}" style="padding:50px 0;"></p>
+									<p id="lpost_likecnt${i}"></p>
 								</div>
 							</div>
 						</c:forEach>
@@ -83,9 +83,9 @@
 											alt="">
 								<div class="gboard_list">
 									<div class="gboard_list_frame">
-										<p id="gcategory${i}">group.groupcategory</p>
-										<p id="gname${i}">group.groupname</p>
-										<p id="gmaster${i}" style="width:100px;">group.groupmaster</p>
+										<p id="gcategory${i}"></p>
+										<p id="gname${i}"></p>
+										<p id="gmaster${i}" style="width:100px;"></p>
 									</div>
 								</div>
 							</div>
@@ -174,7 +174,7 @@
 						targetpnode.innerHTML = lplist[i].lposttitle;
 						
 						var targetppnode = document.getElementById("lpost_likecnt"+i);
-						targetppnode.innerHTML = lplist[i].lpostlikecnt+"명이 좋아요를 눌렀어요!";
+						targetppnode.innerHTML = lplist[i].lpostcategory;
 						idx++;
 					}
 					

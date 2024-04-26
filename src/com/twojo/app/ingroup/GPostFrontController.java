@@ -177,6 +177,13 @@ public class GPostFrontController extends HttpServlet{
 				System.out.println("/quitmoim.gp : "+e);
 			}
 			break;
+		case "/findthu.gp":
+			try {
+				transfer = new FindThumbnail().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("/findthu.gp : "+e);
+			}
+			break;
 		}
 		
 		if (transfer != null) {
